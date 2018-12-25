@@ -1,0 +1,137 @@
+﻿@model JN.Data.AdminUser
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+
+
+    <div class="innerLR">
+        <!-- PAGE CONTENT BEGINS -->
+
+        @using (Ajax.BeginForm("Modify", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+        {
+            <div class="control-group">
+                <label class="control-label" for="adminname">管理员名称：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="hidden" id="ID" name="ID" value="@Model.ID" />
+                        <input type="text" name="adminname" class="form-control" value="@Model.AdminName" @(Model.ID > 0 ? "readonly" : "") />
+                    </div>
+                </div>
+            </div>
+            if (Model.ID == 0)
+            {
+                <div class="control-group">
+                    <label class="control-label" for="password">登录密码：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="password" name="password" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password2">二级密码：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="password" name="password2" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="control-group">
+                    <label class="control-label" for="resetpwd"></label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input name="resetpwd" type="checkbox" value="true" class="ace">
+                            <span class="lbl"> 重置密码（重置后密码为：111111,222222）</span>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="control-group">
+                <label class="control-label" for="realname">真实姓名：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="realname" class="form-control" value="@Model.RealName" />
+                    </div>
+                </div>
+            </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="phone">手机号码：</label>
+
+                    <div class="controls">
+                        <input type="text" name="phone" class="form-control" value="@Model.Phone" />
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="tel">角色：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            @if (Model.ID == 1)
+                            {
+                                <select name="roleid" class="form-control">
+                                    <option value="0">超级管理员</option>
+                                </select>
+                            }
+                            else
+                            {
+                                @Html.DropDownList("roleid", ViewData["AdminRoleList"] as SelectList, new { @class = "form-control" });
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <a href="javascript:history.go(-1);" class="btn btn-grey">
+                                <i class="icon-arrow-left"></i>
+                                返回
+                            </a>
+
+                            <button class="btn btn-primary" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                保存
+                            </button>
+                        </div>
+                    </div>
+                        </div>
+                        }
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function afterPost(data) {
+            if (data.Status == 200) {
+                alert("保存成功，即将为您跳转页面!");
+                location.href = document.referrer
+            } else {
+                alert("保存失败！错误信息：" + data.Message);
+            }
+        }
+    </script>
+}

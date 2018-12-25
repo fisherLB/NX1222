@@ -1,0 +1,34 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.Matching>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    JN.Data.User Umodel = JN.Services.UserLoginHelper.CurrentUser();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<script src="~/js/jquery.form.js"></script>
+<script src="~/theme/mmm/js/box.js"></script>
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <b>@T("匹配单管理") </b>
+           
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="">@T("匹配单管理")  </a>
+        </div>
+    </div>        
+        <div class="row">
+            <div class="mainoprate">
+                                
+                <div class="row" id="context">
+                    @Html.Partial("_PartialMatchList", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+

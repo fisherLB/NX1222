@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "操作成功";
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="glyphicons glyphicon-large ok_2">
+            <i></i>
+            <h3>操作成功！</h3>
+            <p>@ViewBag.SuccessMsg</p>
+        </div>
+        <div class="space"></div>
+    <hr />
+        <div class="center">
+            @{ 
+                string FormUrl = "";
+                if (Request.UrlReferrer != null)
+                {
+                    FormUrl = Request.UrlReferrer.ToString();
+                }
+
+                if (!string.IsNullOrEmpty(FormUrl))
+                {
+                    <a href="@FormUrl" class="btn btn-grey">
+                        <i class="icon-arrow-left"></i>
+                        返回
+                    </a>
+                }
+            }
+            <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                返回首面
+            </a>
+        </div>
+
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.page-content -->
+@section scripts{
+}

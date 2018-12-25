@@ -1,0 +1,32 @@
+﻿@model JN.Data.Notice
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<div class="mainarea">
+    <div class="mainoprate">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <h2 style="text-align:center">@Model.Title</h2>
+                <h6 style="text-align: center; color: #9CAFB7">@T("发布时间")：@Model.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</h6>
+                <hr />
+                
+                <p class="notice_cont">
+                    @MvcHtmlString.Create(Model.Content)
+                </p>
+
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div>
+</div>
+    
+
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->

@@ -1,0 +1,520 @@
+﻿@model JN.Data.SysSetting
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+
+            
+
+            <form class="form-horizontal" id="validation-form" method="post" enctype="multipart/form-data">
+                <div class="widget widget-tabs widget-tabs-double">
+
+                    <!-- Tabs Heading -->
+                    <div class="widget-head">
+                        <ul>
+                            <li class="active"><a href="#tab1-2" class="glyphicons dribbble" data-toggle="tab"><i></i><span class="strong">站点运行设置</span><span>开启关闭站点/名称及版权等</span></a></li>
+                            <li class=""><a href="#tab2-2" class="glyphicons pinboard " data-toggle="tab"><i></i><span class="strong">会员注册登录设置</span><span>会员注册选填/必填项,取回密码方式等</span></a></li>
+                            <li class=""><a href="#tab3-2" class="glyphicons e-mail" data-toggle="tab"><i></i><span class="strong">邮件短信接口设置</span><span>邮件及短信发送所需配置</span></a></li>
+                            <li class=""><a href="#tab4-2" class="glyphicons jolicloud" data-toggle="tab"><i></i><span class="strong">图片相关设置</span><span>图片上传及相关设置</span></a></li>
+                            <li class=""><a href="#tab5-2" class="glyphicons readability" data-toggle="tab"><i></i><span class="strong">安全设置</span><span>系统运行方面安全设置</span></a></li>
+
+                        </ul>
+                    </div>
+                    <!-- // Tabs Heading END -->
+
+                    <div class="widget-body">
+                        <div class="tab-content" style="padding-top:30px">
+
+                            <!-- Tab content -->
+                            <div class="tab-pane active" id="tab1-2">
+                                <div class="control-group">
+                                    <label class="control-label" for="closehint">关闭站点并提示：<br /><input name="isopenup" value="True" type="checkbox" @(Model.IsOpenUp ? "checked='checked'" : "")> 开启/关闭</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <textarea name="closehint" class="form-control" style="width:350px">@Model.CloseHint</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="closeregisterhint">关闭注册并提示：<br /><input name="isregisteropen" value="True" type="checkbox" @(Model.IsRegisterOpen ? "checked='checked'" : "")> 开启/关闭</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <textarea name="closeregisterhint" class="form-control" style="width:350px">@Model.CloseRegisterHint</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="sysname">网站名称：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="text" name="sysname" class="form-control" value="@Model.SysName" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="sitetitle">网站标题：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="text" name="sitetitle" class="form-control" style="width:350px" value="@Model.SiteTitle" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="sitekeywords">网站关键词：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="text" name="sitekeywords" class="form-control" style="width:350px" value="@Model.SiteKeywords" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">网站描述：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="text" name="sitedescription" class="form-control" style="width:350px" value="@Model.SiteDescription" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">网站网址：</label>
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="text" name="siteurl" class="form-control" style="width:350px" value="@Model.SiteUrl" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">网站底部版权文字</label>
+
+                                    <div class="controls">
+                                        <textarea name="copyinfo" class="form-control" style="width:350px">@Model.CopyInfo</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Tab content END -->
+                            <!-- Tab content -->
+                            <div class="tab-pane" id="tab2-2">
+                                <div class="form-group">
+                                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">注册显示项：</label>
+
+                                    <div class="col-xs-12 col-sm-5">
+                                        <div class="clearfix">
+                                            <label>
+                                                <div class="span4">
+                                                    <h4 style="margin-bottom: 10px;">选填项</h4>
+                                                    <input type="checkbox" name="ckxt" value="NickName" @(Model.RegistItems.Contains(",NickName,") ? "checked" : "")>昵称<br />
+                                                    <input type="checkbox" name="ckxt" value="RealName" @(Model.RegistItems.Contains(",RealName,") ? "checked" : "")>真实姓名<br />
+                                                    <input type="checkbox" name="ckxt" value="Mobile" @(Model.RegistItems.Contains(",Mobile,") ? "checked" : "")>手机号码<br />
+                                                    <input type="checkbox" name="ckxt" value="Email" @(Model.RegistItems.Contains(",Email,") ? "checked" : "")>邮箱地址<br />
+                                                    <input type="checkbox" name="ckxt" value="IDCard" @(Model.RegistItems.Contains(",IDCard,") ? "checked" : "")>身份证号码<br />
+                                                    <input type="checkbox" name="ckxt" value="Area" @(Model.RegistItems.Contains(",Area,") ? "checked" : "")>省市县<br />
+                                                    <input type="checkbox" name="ckxt" value="Address" @(Model.RegistItems.Contains(",Address,") ? "checked" : "")>联系地址<br />
+                                                    <hr />
+                                                    <input type="checkbox" name="ckxt" value="AliPay" @(Model.RegistItems.Contains(",AliPay,") ? "checked" : "")>支付宝帐号<br />
+                                                    <input type="checkbox" name="ckxt" value="WeiXin" @(Model.RegistItems.Contains(",WeiXin,") ? "checked" : "")>微信帐号<br />
+                                                    <input type="checkbox" name="ckxt" value="QQ" @(Model.RegistItems.Contains(",QQ,") ? "checked" : "")>QQ帐号<br />
+                                                    <input type="checkbox" name="ckxt" value="BitCoin" @(Model.RegistItems.Contains(",BitCoin,") ? "checked" : "")>比特币地址<br />
+                                                    <hr />
+                                                    <input type="checkbox" name="ckxt" value="BankName" @(Model.RegistItems.Contains(",BankName,") ? "checked" : "")>银行卡名称<br />
+                                                    <input type="checkbox" name="ckxt" value="BankCard" @(Model.RegistItems.Contains(",BankCard,") ? "checked" : "")>银行卡卡号<br />
+                                                    <input type="checkbox" name="ckxt" value="BankUser" @(Model.RegistItems.Contains(",BankUser,") ? "checked" : "")>银行卡户名<br />
+                                                    <input type="checkbox" name="ckxt" value="BankOfDeposit" @(Model.RegistItems.Contains(",BankOfDeposit,") ? "checked" : "")>银行卡开户行<br />
+                                                    <hr />
+                                                    <input type="checkbox" name="ckxt" value="Question" @(Model.RegistItems.Contains(",Question,") ? "checked" : "")>取回密码问题<br />
+                                                    <input type="checkbox" name="ckxt" value="Answer" @(Model.RegistItems.Contains(",Answer,") ? "checked" : "")>取回密码答案<br />
+                                                    <input type="text" style="display:none" name="RegistItems" value="@Model.RegistItems" />
+                                                </div>
+                                                <div class="span4">
+                                                    <h4 style="margin-bottom: 10px;">必填项</h4>
+                                                    <input type="checkbox" name="ckxt" value="NickName" @(Model.RegistItems.Contains(",NickName,") ? "checked" : "")>昵称<br />
+                                                    <input type="checkbox" name="ckxt" value="RealName" @(Model.RegistItems.Contains(",RealName,") ? "checked" : "")>真实姓名<br />
+                                                    <input type="checkbox" name="ckbt" value="Mobile" @(Model.RegistNotNullItems.Contains(",Mobile,") ? "checked" : "")>手机号码<br />
+                                                    <input type="checkbox" name="ckbt" value="Email" @(Model.RegistNotNullItems.Contains(",Email,") ? "checked" : "")>邮箱地址<br />
+                                                    <input type="checkbox" name="ckbt" value="IDCard" @(Model.RegistNotNullItems.Contains(",IDCard,") ? "checked" : "")>身份证号码<br />
+                                                    <hr />
+                                                    <input type="checkbox" name="ckbt" value="AliPay" @(Model.RegistNotNullItems.Contains(",AliPay,") ? "checked" : "")>支付宝帐号<br />
+                                                    <hr />
+                                                    <input type="checkbox" name="ckbt" value="BankName" @(Model.RegistNotNullItems.Contains(",BankName,") ? "checked" : "")>银行卡名称<br />
+                                                    <input type="checkbox" name="ckbt" value="BankCard" @(Model.RegistNotNullItems.Contains(",BankCard,") ? "checked" : "")>银行卡卡号<br />
+                                                    <input type="checkbox" name="ckbt" value="BankUser" @(Model.RegistNotNullItems.Contains(",BankUser,") ? "checked" : "")>银行卡户名<br />
+                                                    <input type="checkbox" name="ckbt" value="BankOfDeposit" @(Model.RegistNotNullItems.Contains(",BankOfDeposit,") ? "checked" : "")>银行卡开户行<br />
+                                                    <hr />
+                                                    <input type="checkbox" name="ckbt" value="Question" @(Model.RegistNotNullItems.Contains(",Question,") ? "checked" : "")>取回密码问题<br />
+                                                    <input type="checkbox" name="ckbt" value="Answer" @(Model.RegistNotNullItems.Contains(",Answer,") ? "checked" : "")>取回密码答案<br />
+                                                    <input type="text" style="display:none" name="RegistNotNullItems" value="@Model.RegistNotNullItems" />
+                                                </div>
+                                                <div class="span4">
+                                                    <h4 style="margin-bottom: 10px;">唯一项（如手机号只能使用一次）</h4>
+                                                    <input type="checkbox" name="ckxt" value="NickName" @(Model.RegistItems.Contains(",NickName,") ? "checked" : "")>昵称<br />
+                                                    <input type="checkbox" name="ckwy" value="Mobile" @(Model.RegistOnlyOneItems.Contains(",Mobile,") ? "checked" : "")>手机号码<br />
+                                                    <input type="checkbox" name="ckwy" value="Email" @(Model.RegistOnlyOneItems.Contains(",Email,") ? "checked" : "")>邮箱地址<br />
+                                                    <input type="checkbox" name="ckwy" value="IDCard" @(Model.RegistOnlyOneItems.Contains(",IDCard,") ? "checked" : "")>身份证号码<br />
+                                                    <hr />
+                                                    <input type="checkbox" name="ckwy" value="AliPay" @(Model.RegistOnlyOneItems.Contains(",AliPay,") ? "checked" : "")>支付宝帐号<br />
+                                                    <input type="checkbox" name="ckwy" value="WeiXin" @(Model.RegistOnlyOneItems.Contains(",WeiXin,") ? "checked" : "")>微信帐号<br />
+                                                    <hr />
+                                                    <input type="checkbox" nname="ckwy" value="BankCard" @(Model.RegistOnlyOneItems.Contains(",BankCard,") ? "checked" : "")>银行卡卡号<br />
+                                                    <input type="text" style="display:none" name="RegistOnlyOneItems" value="@Model.RegistOnlyOneItems" />
+
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="isregbankinfo">注册是否需要手机验证：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <label>
+                                                <input name="RegistNeedSMSVerification" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @((Model.RegistNeedSMSVerification ?? false) ? "checked='checked'" : "")>
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="control-group">
+                                    <label class="control-label" for="isregbankinfo">输错5次密码冻结：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <label>
+                                                <input name="iswrongpwdlock" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(Model.IsWrongPwdLock ? "checked='checked'" : "")>
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="isregbankinfo">取回密码方式：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <select name="RetrievePasswordType">
+                                                @*<option value="Email" @(Model.RetrievePasswordType=="Email" ? "selected" : "")>通过邮箱取回密码（邮箱必填）</option>*@
+                                                <option value="SMS" @(Model.RetrievePasswordType == "SMS" ? "selected" : "")>通过短信取回密码（手机必填）</option>
+                                                @*<option value="Security" @(Model.RetrievePasswordType== "Security" ? "selected" : "")>通过密保取回密码（密保必填）</option>*@
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="isregbankinfo">图形验证码方案：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input name="VerificationCodeType" type="radio" value="001" @(Model.VerificationCodeType == "001" ? "checked='checked'" : "")> <img src="~/common/theme/images/code1.png" style="height:30px" />
+                                            <input name="VerificationCodeType" type="radio" value="002" @(Model.VerificationCodeType == "002" ? "checked='checked'" : "")> <img src="~/common/theme/images/code2.jpg" style="height:30px" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="sitetitle">图形验证码长度：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="text" name="VerificationCodeLength" class="form-control" style="width:50px" value="@(Model.VerificationCodeLength ?? 0)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Tab content END -->
+                            <!-- Tab content -->
+                            <div class="tab-pane" id="tab3-2">
+                                <div class="control-group">
+                                    <label class="control-label" for="isregbankinfo">邮箱发送配置：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix" style="line-height:35px">
+                                            发送服务器(SmtpServer)：<input type="text" name="SmtpServer" class="form-control" value="@Model.SmtpServer" /><br />
+                                            发件邮箱(EmailAddress)：<input type="text" name="SmtpEmailAddress" class="form-control" value="@Model.SmtpEmailAddress" /><br />
+                                            用户名　(SmtpUserName)：<input type="text" name="SmtpUserName" class="form-control" value="@Model.SmtpUserName" /><br />
+                                            密　码　(SmtpPassword)：<input type="text" name="SmtpPassword" class="form-control" value="@Model.SmtpPassword" /><br />
+                                            端口号　(SmtpPort)：　　<input type="text" name="SmtpPort" class="form-control" value="@Model.SmtpPort" /><br />
+                                            是否开启SSL ：　　　　　<input type="text" name="SmtpSSL" class="form-control" value="@Model.SmtpSSL" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="control-group">
+                                    <label class="control-label" for="isregbankinfo">短信发送配置：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix" style="line-height:35px">
+                                            服务商：<select name="SMSSerivce">
+                                                <option value="中国网建" @(Model.SMSSerivce == "中国网建" ? "selected" : "")>中国网建</option>
+                                                <option value="C123" @(Model.SMSSerivce == "C123" ? "selected" : "")>C123</option>
+                                            </select><br />
+                                            用户名：<input type="text" name="SMSUid" class="form-control" value="@Model.SMSUid" /><br />
+                                            密　钥：<input type="text" name="SMSKey" class="form-control" value="@Model.SMSKey" /><br />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- // Tab content END -->
+                            <!-- Tab content -->
+                            <div class="tab-pane" id="tab4-2">
+                                <div class="control-group">
+                                    <label class="control-label">更换LOGO：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="file" name="LogoImage" id="id-input-file-1" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">更换BANNER图片：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input type="file" name="LoginBackgroundImage" id="id-input-file-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="controls">
+                                    <div class="clearfix" style="line-height:35px">
+                                        图片上传到又拍云：
+                                        <input name="isuploadyu" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(Model.IsWrongPwdLock ? "checked='checked'" : "")><br />
+                                        又拍云用户名：<input type="text" name="SMSUid" class="form-control" value="" /><br />
+                                        又拍云密　钥：<input type="text" name="SMSKey" class="form-control" value="" /><br />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Tab content END -->
+                            <!-- Tab content -->
+                            <div class="tab-pane" id="tab5-2">
+                                <div class="control-group">
+                                    <label class="control-label">接收信息手机号：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            @Model.SysMobile (不可修改)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">是否接收预警短信：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            <input name="IsWarnningSMS" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @((Model.IsWarnningSMS ?? false) ? "checked='checked'" : "")>
+                                            <span class="lbl"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">常登录的城市：</label>
+
+                                    <div class="controls">
+                                        <div class="clearfix">
+                                            @Model.MostUseCity (注：如果在此城市之外的地方登录，可能会需要输入经理密码)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // Tab content END -->
+                        </div>
+
+                    </div>
+                    <span class="btn btn-toggle-code btn-mini btn-primary btn-icon glyphicons embed_close" data-toggle="hide" data-target="#code-3"><i></i> Source</span>
+                </div>
+
+
+
+                @*<div class="control-group">
+                <label class="control-label">管理员是否独占登录：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <label>
+                            <input name="adminoneself" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(Model.AdminOneSelf ? "checked='checked'" : "")>
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>*@
+
+
+                @*
+                <div class="hr hr-dotted"></div>
+
+                <div class="control-group">
+                    <label class="control-label">开启QQ客服：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <label>
+                                <input name="isopenkefu" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(Model.IsOpenKefu ? "checked='checked'" : "")>
+                                <span class="lbl"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">QQ客服1：</label>
+
+                    <div class="controls form-inline">
+                        <div class="clearfix">
+                            <input type="text" name="kefuurl1" class="form-control" style="width:150px" placeholder="这里输入QQ号码" value="@Model.KefuUrl1" />
+                            <input type="text" name="kefuname1" class="form-control" style="width:150px" placeholder="这里输入QQ客服名称" value="@Model.KefuName1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">QQ客服2：</label>
+
+                    <div class="controls form-inline">
+                        <div class="clearfix">
+                            <input type="text" name="kefuurl2" class="form-control" style="width:150px" placeholder="这里输入QQ号码" value="@Model.KefuUrl2" />
+                            <input type="text" name="kefuname2" class="form-control" style="width:150px" placeholder="这里输入QQ客服名称" value="@Model.KefuName2" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">QQ客服3：</label>
+
+                    <div class="controls form-inline">
+                        <div class="clearfix">
+                            <input type="text" name="kefuurl3" class="form-control" style="width:150px" placeholder="这里输入QQ号码" value="@Model.KefuUrl3" />
+                            <input type="text" name="kefuname3" class="form-control" style="width:150px" placeholder="这里输入QQ客服名称" value="@Model.KefuName3" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">QQ客服4：</label>
+
+                    <div class="controls form-inline">
+                        <div class="clearfix">
+                            <input type="text" name="kefuurl4" class="form-control" style="width:150px" placeholder="这里输入QQ号码" value="@Model.KefuUrl4" />
+                            <input type="text" name="kefuname4" class="form-control" style="width:150px" placeholder="这里输入QQ客服名称" value="@Model.KefuName4" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">QQ客服5：</label>
+
+                    <div class="controls form-inline">
+                        <div class="clearfix">
+                            <input type="text" name="kefuurl5" class="form-control" style="width:150px" placeholder="这里输入QQ号码" value="@Model.KefuUrl5" />
+                            <input type="text" name="kefuname5" class="form-control" style="width:150px" placeholder="这里输入QQ客服名称" value="@Model.KefuName5" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">QQ客服电话：</label>
+
+                    <div class="col-xs-12 col-sm-8 form-inline">
+                        <div class="clearfix">
+                            <input type="text" name="kefutel1" class="form-control" style="width:150px" placeholder="这里输入电话号码" value="@Model.KefuTel1" />
+                            <input type="text" name="kefutel2" class="form-control" style="width:150px" placeholder="这里输入电话号码" value="@Model.KefuTel2" />
+                            <input type="text" name="kefutel3" class="form-control" style="width:150px" placeholder="这里输入电话号码" value="@Model.KefuTel3" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+            <div class="hr hr-dotted"></div>
+            <div class="control-group">
+                <label class="control-label">结算时间禁止用户操作：</label>
+
+                <div class="controls form-inline">
+                    <div class="clearfix">
+
+                        <input type="text" name="kefuurl5" class="form-control" style="width:150px" placeholder="这里输入QQ号码" value="23:59:59" />至
+                        <input type="text" name="kefuname5" class="form-control" style="width:150px" placeholder="这里输入QQ客服名称" value="0:04:59" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="closehint">禁止用户操作时提示：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <textarea name="closehint" class="form-control">@Model.CloseHint</textarea>
+                    </div>
+                </div>
+            </div>
+                *@
+                <div class="hr hr-dotted"></div>
+
+
+
+                <div class="hr hr-dotted"></div>
+                <div class="control-group">
+                    <label class="control-label">&nbsp;</label>
+                    <div class="controls">
+                        <button class="btn btn-primary" type="submit">
+                            保 存
+                        </button>
+                        <a href="javascript:history.go(-1);" class="btn btn-grey">
+                            <i class="icon-arrow-left"></i>
+                            返 回
+                        </a>
+                    </div>
+                </div>
+            </form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+@section scripts{
+    <script>
+        $('.btn-primary').on('click', function (e) {
+            var ids = ",";
+            $("input[name='ckxt']").each(function () {
+                if (this.checked == true) {
+                    ids += $(this).val() + ",";
+                }
+            });
+            $("input[name='RegistItems']").val(ids);
+
+            var ids2 = ",";
+            $("input[name='ckbt']").each(function () {
+                if (this.checked == true) {
+                    ids2 += $(this).val() + ",";
+                }
+            });
+            $("input[name='RegistNotNullItems']").val(ids2);
+
+            var ids3 = ",";
+            $("input[name='ckwy']").each(function () {
+                if (this.checked == true) {
+                    ids3 += $(this).val() + ",";
+                }
+            });
+            $("input[name='RegistOnlyOneItems']").val(ids3);
+        });
+</script>
+}

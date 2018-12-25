@@ -1,0 +1,186 @@
+﻿@model JN.Data.ShopProduct
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<link href="~/Theme/metronic/css/profile-old.css" rel="stylesheet" />
+<link href="~/Theme/071701/shop.css" rel="stylesheet" />
+<script>
+    //修改商品的数量
+    function changeNumber(operation) {
+        var $control = $("#txtCount");//得到文本框
+        var stock = $("#goodsStock").text();
+        var stockCount = parseInt(stock);
+        var count = $control.val();
+        if (operation == "1") {
+            count = parseInt(count) - 1;
+            if (count <= 0) {
+                $control.val(1);
+                return;
+            }
+        } else if (operation == "2") {
+            count = parseInt(count) + 1;
+            if (count > stockCount) {
+                $control.val(stockCount);
+                return;
+            }
+        }
+        $control.val(count);
+    }
+</script>
+<!-- page specific plugin styles -->
+            <!-- BEGIN PAGE CONTENT-->
+
+
+    <div class="row">
+        <div class="col-md-12 bg-fff">
+            <div class="tab-pane">
+                <div class="col-md-4">
+                    <ul class="list-unstyled profile-nav">
+                        <li>
+                            <img src="@Model.ImageUrl" class="img-responsive" alt="" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-8 profile-info">
+                            <form action="@Url.Action("Buy")" class="form-horizontal" method="post">
+                                <h4>@Model.ProductName</h4>
+                                <p>
+                                    规格：@Model.Spec
+                                </p>
+                                <div class="price_a">
+                                    <p>
+                                        价格：<span style="font-size: 36px;color: #f65602; font-weight: bold;">@Model.RealPrice</span>
+                                    </p>
+                                    <p>
+                                        运费：@((Model.FreightPrice ?? 0) == 0 ? "免运费" : (Model.FreightPrice ?? 0).ToString("F2"))
+                                    </p>
+                                </div>
+                                @*<p>
+                                    <a href="#">
+                                        www.mywebsite.com
+                                    </a>
+                                </p>
+                                <ul class="list-inline">
+                                    <li>
+                                        <i class="fa fa-map-marker"></i> Spain
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-calendar"></i> 18 Jan 1982
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-briefcase"></i> Design
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-star"></i> Top Seller
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-heart"></i> BASE Jumping
+                                    </li>
+                                </ul>*@
+
+                                <p>购买数量：</p>
+                                <div class="input-group" style="width:120px">
+                                    <span class="input-group-btn">
+                                        <button class="btn blue" type="button" onclick="changeNumber(1)">-</button>
+                                    </span>
+                                    <input type="text" id="txtCount" name="txtCount" class="form-control" value="1">
+                                    <span class="input-group-btn">
+                                        <button class="btn blue" type="button" onclick="changeNumber(2)">+</button>
+                                    </span>
+                                </div>
+                                <br />
+                                库存<span id="goodsStock">@Model.Stock</span>件
+                                <br /><br />
+                                <input type="hidden" id="goodsId" name="goodsId" value="@Model.ID" />
+                                <p class="info-btn">
+                                    <button type="submit" class="btn btn-primary btn-sm red BuyB">&nbsp;<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;立即购买&nbsp;</button>
+                                </p>
+                            </form>
+                        </div>
+                        <!--end col-md-8-->
+                        @*<div class="col-md-4">
+                            <div class="portlet sale-summary">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        Sales Summary
+                                    </div>
+                                    <div class="tools">
+                                        <a class="reload" href="javascript:;">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <ul class="list-unstyled">
+                                        <li>
+                                            <span class="sale-info">
+                                                TODAY SOLD <i class="fa fa-img-up"></i>
+                                            </span>
+                                            <span class="sale-num">
+                                                23
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                WEEKLY SALES <i class="fa fa-img-down"></i>
+                                            </span>
+                                            <span class="sale-num">
+                                                87
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                TOTAL SOLD
+                                            </span>
+                                            <span class="sale-num">
+                                                2377
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="sale-info">
+                                                EARNS
+                                            </span>
+                                            <span class="sale-num">
+                                                $37.990
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>*@
+                        <!--end col-md-4-->
+                    </div>
+                    <!--end row-->
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+<div class="tabbable tabbable-custom tabbable-custom-profile">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tab_1_11" data-toggle="tab">
+                详细介绍
+            </a>
+        </li>
+        @*<li>
+            <a href="#tab_1_22" data-toggle="tab">
+                Feeds
+            </a>
+        </li>*@
+    </ul>
+    <div class="tab-content">
+        
+        <!--tab-pane-->
+        @*<div class="tab-pane" id="tab_1_11">*@
+            @MvcHtmlString.Create(Model.Content)
+        @*</div>*@
+        <!--tab-pane-->
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+

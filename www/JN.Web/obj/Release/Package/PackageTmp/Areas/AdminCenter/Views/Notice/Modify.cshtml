@@ -1,0 +1,100 @@
+﻿@model JN.Data.Notice
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            @using (Ajax.BeginForm("Modify", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "validation-form", @class = "form-horizontal" }))
+            {
+                <div class="control-group">
+                    <label class="control-label" for="pagetype"> 单页类型：</label>
+                    <input type="hidden" id="id" name="id" value="@Model.ID" />
+                    <div class="controls">
+                        <select name="platform">
+                            <option value="会员平台" @(Model.Platform == "会员平台" ? "selected" : "")>会员平台</option>
+                            @*<option value="商务中心" @(Model.Platform == "商务中心" ? "selected" : "")>商务中心</option>*@
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="title" class="control-label">公告标题：</label>
+
+                    <div class="controls">
+                        <span class="block input-icon input-icon-right">
+                            <input type="text" name="title" class="span9" value="@Model.Title" />
+                        </span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="content">公告内容：</label>
+
+                    <div class="controls">
+                        <textarea id="doccontent" name="content" class="wysihtml5 span9" rows="15">@Model.Content</textarea>
+                    </div>
+                </div>
+
+                <div class="clearfix form-actions">
+                    <label class="control-label" for="content"></label>
+                    <div class="controls">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            保存
+                        </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            返回
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hr hr-24"></div>
+
+            }
+            <div style="clear:both"></div>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+@section scripts{
+    <!-- page specific plugin styles -->
+    <script type="text/javascript" src="~/Plugin/xhEditor/xheditor.js"></script>
+    <script type="text/javascript" src="~/Plugin/xhEditor/xheditor_lang/zh-cn.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+    $(pageInit);
+    function pageInit() {
+        $.extend(XHEDITOR.settings, { shortcuts: { 'ctrl+enter': submitForm } });
+        $('#doccontent').xheditor({ upLinkUrl: "/PicUpload/Upload?ASPSESSID=" + "@Session.SessionID", upLinkExt: "zip,rar,txt", upImgUrl: "/PicUpload/Upload?ASPSESSID==" + "@Session.SessionID", upImgExt: "jpg,jpeg,gif,png", onUpload: insertUpload });
+    }
+    function insertUpload(arrMsg) {
+    }
+    function submitForm() { $('#validation-form').submit(); }
+    function afterPost(data) {
+        if (data.Status == 200) {
+            alert("保存成功，即将为您跳转页面!");
+            location.href = "@(Url.Action("Index"))"
+        } else {
+            alert("保存失败！错误信息：" + data.Message);
+        }
+    }
+    </script>
+}

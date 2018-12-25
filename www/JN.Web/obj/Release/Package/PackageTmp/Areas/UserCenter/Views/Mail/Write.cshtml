@@ -1,0 +1,152 @@
+﻿
+@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.Message>
+@{
+    
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<!-- page specific plugin styles -->
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@{Html.RegisterMvcPagerScriptResource();}
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <b>@T("意见反馈")</b>
+            <br>
+            <span>@T("在这里，你可以提交你所面对的意见建议，这将被发送到管理员，您的请求我们将会尽快的处理。我们的服务时间是在周一至周五，北京/香港时间 9:00 到 17:00")。 </span>
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T("意见反馈") </a>
+        </div>
+    </div>
+    <div class="mainoprate">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="sample-table-1_wrapper" class="dataTables_wrapper" role="grid" style="padding:10px;">
+        @*<form class="form-search form-inline" method="get">*@
+        @using (Ajax.BeginForm("Write", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "Write", InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }, new RouteValueDictionary { { "id", "searchForm" } }))
+                {
+            <div class="row" style="margin-bottom:20px">
+                <div class="col-md-5">
+                    <div class="col-xs-4 no-padding-right no-padding-left">
+                        <select name="df" class="form-control">
+                            <option value="CreateTime" @(Request["df"] == "CreateTime" ? "selected" : "")>@T("创建时间")</option>
+                        </select>
+                    </div>
+                    <div class="input-group col-sm-7 no-padding-left">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar bigger-110"></i>
+                        </span>
+                        <input class="form-control no-margin-left daterange add-ranges" type="text" name="dr" value="@Request["dr"]" />
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="col-xs-4 no-padding-right" style="width:130px">
+                        <select name="kf" class="form-control">
+                            <option value="Title" @(Request["kf"] == "Title" ? "selected" : "")>@T("标题")</option>
+                        </select>
+                    </div>
+                    <div class="input-group col-sm-8 no-padding-left">
+                        <input type="text" name="kv" value="@Request["kv"]" class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                        <span class="input-group-btn">
+                            <input type="hidden" name="IsAsc" value="0" />
+                            <input type="hidden" name="OrderFiled" value="ID" />
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                @T("查询")
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+                }
+        <div>
+            <div id="Write">
+                @Html.Partial("_Write", Model)
+            </div>
+        </div>
+        <div class="mainlist">
+
+            <form id="frmMail" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="userAlias">@T("标题"):</label>
+                    <input type="hidden" name="recipient" value="@ViewBag.recipient" />
+                    <input type="text" name="subject" id="subject" class="form-control" placeholder="@T("请输入你要表达的事情的标题")" btvd-type="required">
+                </div>
+                <div class="form-group">
+                    <label for="userAlias">@T("留言类型"):</label>
+                    <select id="messagetype" name="messagetype" style="width:130px;height:35px;">
+                        @{
+                                    var typelist = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 5100 && x.IsUse).OrderByDescending(x => x.ID).ToList();
+                                    foreach (var param in typelist)
+                                    {
+                                        <option value="@param.Name">@(param.Name)</option>
+                                    }
+                        }
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="userMobile">@T("内容"):</label>
+                    <textarea rows="5" name="content" id="content" class="form-control" placeholder="@T("请输入你要表达的事情的内容")" btvd-type="required"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="userMobile">@T("截图"):</label>
+                    <input type="file" name="imgurl" class="col-xs-6" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-success" id="btnSubmit">&nbsp;&nbsp;@T("提交")&nbsp;&nbsp;</button>
+                    <button type="reset" class="btn btn-default">&nbsp;&nbsp;@T("重填")&nbsp;&nbsp;</button>
+                </div>
+            </form>
+
+        </div>
+
+
+
+
+    </div>
+</div>
+        </div>
+    </div>
+
+
+                </div>
+                <script src="~/js/jquery.form.js"></script>
+
+                @*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+                <script type="text/javascript">
+                    $("#btnSubmit").click(function () {
+                        $("#frmMail").ajaxSubmit({
+                            url: "@Url.Action("Write")",
+                            type: "post",
+                            success: function (data) {
+                                if (data.Status == 200) {
+                                    alert("您已成功发送邮件，即将为您跳转页面！");
+                                    location.href = "@(Url.Action("Write"))";
+                                } else {
+                                    alert("发送失败：" + data.Message);
+                                }
+                            },
+                            error: function (aa) {
+                                alert(aa);
+                            }
+                        });
+                    });
+
+                  
+                </script>

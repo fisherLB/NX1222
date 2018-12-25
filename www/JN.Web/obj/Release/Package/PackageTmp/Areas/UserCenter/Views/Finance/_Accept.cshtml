@@ -1,0 +1,53 @@
+﻿@using System.Web.Optimization
+@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.AcceptHelp>
+<link href="~/Content/pagerstyles.css" rel="stylesheet" />
+<table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+    <thead>
+        <tr>
+            <th>@T("订单编号")</th>
+            <th>@T("用户")</th>
+            <th>@T("金额")</th>
+            <th>@T("下单时间")</th>
+            <th>@T("下单天数")</th>
+            <th>@T("状态")</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+
+                <tr>
+                                        <td>@item.AcceptNo</td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.ExchangeAmount</td>
+                                        <td>@item.CreateTime</td>
+                                        <td>@((DateTime.Now - item.CreateTime).Days)</td>
+                                        <td><font color="#7CCD7C">@typeof(JN.Data.Enum.HelpStatus).GetEnumDesc(item.Status)</font></td>
+                                        <td>
+                                            @*@if (item.Status == (int)JN.Data.Enum.HelpStatus.NoMatching)
+                                            {
+                                                <a href="/usercenter/home/CancelAcceptQueuing/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                            }*@
+                                    </td>
+                                    </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<div>
+    @*<div style="float:left;width:50%">Page @Model.CurrentPageIndex of @Model.TotalPageCount, @Model.TotalItemCount items</div>*@
+    <div class="pagination pagination-small pull-right">
+        @Ajax.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions { PageIndexParameterName = "page", FirstPageText = "<<", LastPageText = ">>", NextPageText = ">", PrevPageText = "<", ContainerTagName = "ul", NumericPagerItemCount = 5, CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox2", GoToButtonId = "goToBtn2" }, new MvcAjaxOptions { UpdateTargetId = "AcceptList", HttpMethod = "Post", DataFormId = "searchForm" })
+    </div>
+
+</div>
+
+<div class="clearfix"></div>
+
+

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "操作失败，发现一个或多个问题";
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="error-container">
+                <div class="well">
+                    <h1 class="red lighter smaller">
+                        <span class="red bigger-125">
+                            <i class="icon-bug"></i>
+                            @T("很抱歉")！
+                        </span>
+                        @T("信息有误")！
+                    </h1>
+
+                    <hr />
+                    <h3 class="lighter smaller green">@T("提示")：@T(ViewBag.ErrorMsg)
+                        <i class="icon-wrench icon-animated-wrench bigger-125"></i>
+                    </h3>
+                    <div>
+                        @*<form class="form-search">
+                            <span class="input-icon align-middle">
+                                <i class="icon-search"></i>
+
+                                <input type="text" class="search-query" placeholder="Give it a search..." />
+                            </span>
+                            <button class="btn btn-sm" onclick="return false;">Go!</button>
+                        </form>*@
+
+                        <div class="space"></div>
+                        <h4 class="smaller">@T("您可以尝试以下操作"):</h4>
+
+                        <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                            <li>
+                                <i class="icon-hand-right blue"></i>
+                                <a href="javascript:history.go(-1);">@T("返回刚才操作的页面")</a></li>
+
+                            <li>
+                                <i class="icon-hand-right blue"></i>
+                                <a href="/User/Mail/Write">@T("把问题反馈给我们")</a>
+</li>
+                        </ul>
+                    </div>
+
+                    <hr />
+                    <div class="space"></div>
+
+                    <div class="center">
+                        <a href="javascript:history.go(-1);" class="btn btn-danger">
+                            <i class="icon-arrow-left"></i>
+                            @T("返回")
+                        </a>
+
+                        <a href="/usercenter/home" class="btn btn-primary">
+                            <i class="icon-dashboard"></i>
+                            @T("返回主界面")
+                        </a>
+                    </div>
+                </div>
+            </div><!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->

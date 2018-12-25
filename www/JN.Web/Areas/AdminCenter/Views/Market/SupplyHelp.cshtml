@@ -1,0 +1,169 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model  Webdiyer.WebControls.Mvc.PagedList<JN.Data.SupplyHelp>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@{Html.RegisterMvcPagerScriptResource();}
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="@(action == "supplyhelp" ? "active" : "")">
+                    <a href="@Url.Action("SupplyHelp")">
+                        提供帮助
+                    </a>
+                </li>
+                <li class="@(action == "accepthelp" ? "active" : "")">
+                    <a href="@Url.Action("AcceptHelp")">
+                        接受帮助
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?ac=all").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?ac=all">
+                        已匹配数据
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?ac=overduepayment").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?ac=overduepayment">
+                        超期未付款订单
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?ac=overdueverified").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?ac=overdueverified">
+                        超期未验证付款单
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?st=-2").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?st=-2">
+                        虚假订单
+                    </a>
+                </li>
+            </ul>
+            <div class="filter-bar margin-bottom-none">
+          @using (Ajax.BeginForm("SupplyHelp", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_SupplyHelp", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_Form_SupplyHelp" } }))
+                        {
+
+
+                    <!-- Filter -->
+                    <div>
+                        <select name="datefiled" style="width: 80px;">
+                            <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                            <option value="EndTime" @(Request["datefiled"] == "EndTime" ? "selected" : "")>截止时间</option>
+                            <option value="RepeatQueuingTime" @(Request["datefiled"] == "RepeatQueuingTime" ? "selected" : "")>重排时间</option>
+                            <option value="CancelTime" @(Request["datefiled"] == "CancelTime" ? "selected" : "")>取消时间</option>
+                            <option value="AllDealTime" @(Request["datefiled"] == "AllDealTime" ? "selected" : "")>完成时间</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="numberfiled" style="width: 80px;">
+                            <option value="SupplyAmount" @(Request["numberfiled"] == "SupplyAmount" ? "selected" : "")>金额</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberform" class="input-mini" style="width: 30px;" value="@Request["numberform"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberto" class="input-mini" style="width: 30px;" value="@Request["numberto"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="keyfiled" style="width: 80px;">
+                            <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>会员编号</option>
+                            <option value="SupplyNo" @(Request["keyfiled"] == "SupplyNo" ? "selected" : "")>单号</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="input-append">
+                            <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <input type="hidden" name="IsAsc" value="0" />
+                        <input type="hidden" name="OrderFiled" value="ID" />
+                        <input type="submit" value="查询" />
+                        <input type="button" onclick="location.href='@(Request.Url.PathAndQuery.Replace(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString() +"Export"))'" value="导出" />
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- // Filter END -->
+
+          }
+
+            </div>
+            <div id="_SupplyHelp">
+                @Html.Partial("_SupplyHelp", Model)
+            </div>
+
+
+    
+        </div><!-- /span -->
+    </div><!-- /row -->
+</div><!-- /.page-content -->
+
+@section scripts{
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('[data-rel=tooltip]').tooltip({ container: 'body' });
+    })
+    function ontop(sid) {
+        bootbox.confirm('你确定要置顶条记录么？', function (result) {
+            if (result)
+                window.location.href = '@(Url.Action("SupplyHelpCommand"))?id=' + sid + "&commandtype=ontop";
+        });
+    }
+    function tuichu(sid) {
+        bootbox.confirm('您确定要退出这条记录的队列么？', function (result) {
+            if (result)
+                window.location.href = '@(Url.Action("CancelSupplyQueuing"))?id=' + sid;
+        });
+    }
+    function huifu(sid) {
+        bootbox.confirm('您确定要恢复这条记录的队列么？', function (result) {
+            if (result)
+                window.location.href = '@(Url.Action("RecoverySupplyQueuing"))?id=' + sid;
+        });
+    }
+</script>
+}

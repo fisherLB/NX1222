@@ -1,0 +1,203 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.WarningLog>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="@(action == "syslog" ? "active" : "")">
+                    <a href="@Url.Action("syslog")">
+                        系统日志
+                    </a>
+                </li>
+                <li class="@(action == "useractlog" ? "active" : "")">
+                    <a href="@Url.Action("useractlog")">
+                        用户行为日志
+                    </a>
+                </li>
+                <li class="@(action == "adminactlog" ? "active" : "")">
+                    <a href="@Url.Action("adminactlog")">
+                        管理员行为日志
+                    </a>
+                </li>
+                <li class="@(action == "warninglog" ? "active" : "")">
+                    <a href="@Url.Action("warninglog")">
+                        预警日志
+                    </a>
+                </li>
+                <li class="@(action == "smslog" ? "active" : "")">
+                    <a href="@Url.Action("smslog")">
+                        短信日志
+                    </a>
+                </li>
+                <li class="@(action == "timingplanlog" ? "active" : "")">
+                    <a href="@Url.Action("timingplanlog")">
+                        作业计划日志
+                    </a>
+                </li>
+            </ul>
+            <div class="filter-bar margin-bottom-none">
+                <form method="get">
+
+                    <!-- Filter -->
+                    <div>
+                        <select name="datefiled" style="width: 80px;">
+                            <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="numberfiled" style="width: 80px;">
+                            <option value="ID" @(Request["numberfiled"] == "ID" ? "selected" : "")>ID</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberform" class="input-mini datepicker" style="width: 30px;" value="@Request["numberform"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberto" class="input-mini datepicker" style="width: 30px;" value="@Request["numberto"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="keyfiled" style="width: 80px;">
+                            <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>会员编号</option>
+                            <option value="Location" @(Request["keyfiled"] == "Location" ? "selected" : "")>访问地址</option>
+                            <option value="ActContent" @(Request["keyfiled"] == "ActContent" ? "selected" : "")>操作描述</option>
+                            <option value="IP" @(Request["keyfiled"] == "IP" ? "selected" : "")>IP地址</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="input-append">
+                            <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <input type="hidden" name="IsAsc" value="0" />
+                        <input type="hidden" name="OrderFiled" value="ID" />
+                        <input type="submit" value="查询" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- // Filter END -->
+
+                </form>
+
+
+            </div>
+
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                        </th>
+                        <th>预警级别</th>
+                        <th>帐号</th>
+                        <th>来路</th>
+                        <th>地址</th>
+                        <th>描述</th>
+                        <th>预警内容</th>
+                        <th>处理结果</th>
+                        <th>IP</th>
+                        <th style="width:145px">
+                            <i class="icon-time bigger-110 hidden-480"></i>
+                            操作时间
+                        </th>
+                    </tr>
+                </thead>
+                @if (Model.Count > 0)
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                        <tbody>
+                            <tr>
+                                <td class="center text-muted">
+                                    @(i + 1)
+                                </td>
+                                <td>
+                                    @Model[i].WarningLevel
+                                </td>
+                                <td>
+                                    @Model[i].UserName
+                                </td>
+                                <td>
+                                    @Model[i].Platform
+                                </td>
+                                <td>
+                                    @Model[i].Location
+                                </td>
+                                <td>
+                                    @Model[i].WarningMsg
+                                </td>
+                                <td>
+                                    @Model[i].ResultMsg
+                                </td>
+                                <td>
+                                    @Model[i].IP
+                                </td>
+                                <td class="hidden-480">@Model[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            </tr>
+                        </tbody>
+                    }
+                }
+            </table>
+
+            <!-- Options -->
+            <div class="separator top form-inline small">
+                <!-- Pagination -->
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+                <div class="clearfix"></div>
+                <!-- // Pagination END -->
+
+            </div>
+            <!-- // Options END -->
+        </div><!-- /.table-responsive -->
+    </div>
+</div><!-- /.page-content -->
+@section scripts{
+}

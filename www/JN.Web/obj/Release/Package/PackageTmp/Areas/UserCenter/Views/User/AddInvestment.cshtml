@@ -1,0 +1,110 @@
+﻿@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<script src="~/Scripts/jquery.validate.min.js"></script>
+    <div class="row">
+        <div class="col-xs-12">
+        @{
+        float PARAM_ZT1 = JN.Services.Tool.ConfigHelper.StrToFloat(JN.BLL.sysparams.GetModel(1001).Value);
+        float PARAM_ZT2 = JN.Services.Tool.ConfigHelper.StrToFloat(JN.BLL.sysparams.GetModel(1002).Value);
+        float PARAM_ZT3 = JN.Services.Tool.ConfigHelper.StrToFloat(JN.BLL.sysparams.GetModel(1003).Value);
+        if (JN.BLL.users.IsLogin().Investment >= (decimal)PARAM_ZT2)
+        { 
+            <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" id="validation-form" method="post">
+               
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankuser">@T("投资类型"):</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <select name="investment" class="form-control">
+                                @if (JN.BLL.users.IsLogin().UserLevel == 2)
+                                { 
+                                <option value="@PARAM_ZT2">@PARAM_ZT2</option>
+                                }
+                                else
+                                {
+                                  <option value="@PARAM_ZT3">@PARAM_ZT3</option>  
+                                }
+                            </select>
+                            </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">@T("投资倍数"):</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            @*<input type="text" name="beisu" value="1" class="form-control" />*@
+                        @{
+                            decimal ZJJTZ = Convert.ToDecimal(JN.BLL.users.GetRecordCount("IsSubAccount=1 and ReserveStr2='追加投资' and MainAccountID=" + JN.BLL.users.IsLogin().ID));
+                        }
+                            <select name="beisu" class="form-control">
+                            @{
+                            for (int i = 1; i <= 9 - ZJJTZ; i++)
+                            { 
+                            <option value="@i">@i</option>
+                            }
+                            }
+                            </select></div>
+                    </div>
+                </div>
+                
+                <div class="hr hr-dotted"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            @T("确认")
+                        </button>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        { 
+            <form action="/User/User/UpInvestment" class="form-horizontal" id="validation-form" method="post">
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankuser"></label>
+                    <p style="color:#f00">您当前级别无法追加投资，请先升级会员类型再进行追投！</p>
+                </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankuser">@T("升级投资"):</label>
+
+                        <div class="col-xs-12 col-sm-2">
+                            <div class="clearfix">
+                                <select name="upinvestment" class="form-control">
+                                    <option value="@((decimal)PARAM_ZT2 - JN.BLL.users.IsLogin().Investment)">@((decimal)PARAM_ZT2 - JN.BLL.users.IsLogin().Investment)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hr hr-dotted"></div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                @T("确认")
+                            </button>
+                        </div>
+                    </div>
+</form>
+        }
+        }
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+   //
+</script>

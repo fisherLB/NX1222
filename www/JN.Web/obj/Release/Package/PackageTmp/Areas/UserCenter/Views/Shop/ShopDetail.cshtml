@@ -1,0 +1,97 @@
+﻿@model JN.Entity.TShopInfo
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<link href="~/Theme/071701/shop.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-12 blog-page">
+        <div class="row">
+            <div class="col-md-12 col-sm-8 article-block">
+                <div class="row">
+                    <div class="col-md-2 blog-img blog-tag-data">
+                        <img src="@Model.LogoImg" alt="" class="img-responsive" style="height: 120px; width: 120px">
+                        @*<ul class="list-inline">
+                <li>
+                    <i class="fa fa-calendar"></i>
+                    <a href="#">
+                        @Model.CreateTime.ToString("yyyy-MM-dd")
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-comments"></i>
+                    <a href="#">
+                        38 个商品
+                    </a>
+                </li>
+            </ul>
+            <ul class="list-inline blog-tags">
+                <li>
+                    <i class="fa fa-tags"></i>
+                    <a href="#">
+                        主营： Technology
+                    </a>
+                </li>
+            </ul>*@
+
+                    </div>
+                    <div class="col-md-10 blog-article">
+                        <h3>
+                            <a href="page_blog_item.html">
+                                @Model.ShopName
+                            </a>
+                        </h3>
+                        <p>
+                            @Model.ShopIntro
+                        </p>
+                    </div>
+                </div>
+                <div class="page-bar" style="margin-top:20px">
+
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="#">所有商品</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="row thumbnails">
+                    @{
+                        List<JN.Entity.TShopProduct> productLst = JN.BLL.shopproducts.GetModelList("IsSales=1 and IsLock=0 and Passed=1 and ShopID=" + Model.ID + " order by istop, SaleCount, hits desc");
+                        if (productLst.Count > 0)
+                        {
+                            foreach (JN.Entity.TShopProduct product in productLst)
+                            {
+                             <div class="col-md-3 col-sm-6 mix category_1" style="width:250px; height:300px; display:block; overflow:hidden">
+                                <div class="mix-inner">
+                                    <a href="/User/Mall/Detail/@product.ID"><img class="img-responsive" src="@product.ImageUrl" style="width:250px; height:180px"></a>
+                                    <div class="mix-details">
+                                        <h5>@product.ProductName</h5>
+                                        <p>
+                                            会员价：<span style="color:#f00; font-size:22px">@product.RealPrice.ToString("F2")</span>
+                                            <a href="/User/Mall/Detail/@product.ID" class="btn btn-primary btn-sm red" data-rel="tooltip" title="@T("编辑商品")">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                @T("立即购买")
+                                            </a>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    }
+                </div>
+            </div>
+            <!--end col-md-9-->
+            
+            <!--end col-md-3-->
+        </div>
+        
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+

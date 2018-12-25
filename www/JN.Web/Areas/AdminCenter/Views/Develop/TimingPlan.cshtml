@@ -1,0 +1,226 @@
+﻿@model List<JN.Data.TimingPlan>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="@(action == "timingplan" ? "active" : "")">
+                    <a href="@Url.Action("timingplan", "Develop")">
+                        定时作业计划
+                    </a>
+                </li>
+                <li class="@(action == "timingplanlog" ? "active" : "")">
+                    <a href="@Url.Action("timingplanlog","log")">
+                        作业计划日志
+                    </a>
+                </li>
+                <li><a href="#">服务器时间：@DateTime.Now</a></li>
+            </ul>
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                        </th>
+                        <th>计划作业周期</th>
+                        <th><i class="icon-time bigger-110 hidden-480"></i>计划作业时间</th>
+                        <th>执行过程</th>
+                        <th>状态</th>
+                        <th>描述</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count > 0)
+                    {
+                        for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td class="center text-muted">
+                                    @(i + 1)
+                                </td>
+                                <td>
+                                    @(Model[i].CycleType == 1 ? "每周" : Model[i].CycleType == 2 ? "每月" : "每天") @(Model[i].CycleValue)
+                                </td>
+                                <td>
+                                    @(Model[i].PlanTime)
+                                </td>
+                                <td>
+                                    @Model[i].PlanName
+                                </td>
+                                <td>
+                                    <a href="@(Url.Action("SetPlanStatus"))/@Model[i].ID" data-rel="tooltip" title="@(Model[i].Status == 1 ? "关闭" : "开启")">
+                                        <i class="@(Model[i].Status == 1 ? "icon-ok-circle" : "icon-ban-circle") bigger-120"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    @Model[i].Remark
+                                </td>
+                                <td>
+                                    <a href="#modal-form" class="btn btn-xs btn-info" onclick="clearform();$('#theid').val(@Model[i].ID);" data-toggle="modal" data-rel="tooltip" title="编辑" data-placement="top">
+                                        <i class="icon-edit bigger-120"></i>
+                                    </a>
+
+                                    <a href="###" data-value="@Model[i].ID" class="btn btn-xs btn-danger qstx" data-rel="tooltip" title="删除" data-placement="top">
+                                        <i class="icon-trash bigger-120"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <br />
+            <a href="#modal-form" onclick="clearform();$('#theid').val(0)" data-toggle="modal" class="btn btn-primary">添加新计划</a>
+
+        </div>
+    </div>
+    <!-- PAGE CONTENT ENDS -->
+    <div id="modal-form" class="modal hide" tabindex="-1">
+        <form class="form-horizontal" id="validation-form" method="post">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="blue bigger">创建定时计划作业</h4>
+                    </div>
+                    <div class="modal-body overflow-visible">
+
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">作业周期:</label>
+
+                            <div class="col-xs-12 col-sm-8 form-inline">
+                                <div class="clearfix">
+                                    <select name="CycleType" class="form-control" style="width:80px">
+                                        <option value="0">每天</option>
+                                        <option value="1">每周</option>
+                                        <option value="2">每月</option>
+                                    </select>
+                                    <select name="CycleValue" class="form-control" style="width:70px">
+                                        @for (int i = 1; i <= 31; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                    <input type="hidden" name="theid" id="theid" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">作业时间:</label>
+
+                            <div class="col-xs-12 col-sm-8 form-inline">
+                                <div class="clearfix">
+                                    <div class="input-group bootstrap-timepicker">
+                                        <input id="paramtime" name="PlanTime" type="text" style="width:100px" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">执行任务:</label>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="clearfix">
+                                    <select name="PlanName" class="form-control">
+                                        <option value="plan1">分红与结算</option>
+                                        <option value="plan2">空任务</option>
+                                        <option value="plan3">空任务</option>
+                                        <option value="plan4">空任务</option>
+                                        <option value="plan5">空任务</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">描述:</label>
+
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="clearfix">
+                                    <textarea name="Remark" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-sm" data-dismiss="modal">
+                            <i class="icon-remove"></i>
+                            取消
+                        </button>
+
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="icon-ok"></i>
+                            保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div><!-- /.page-content -->
+@section scripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#paramtime').timepicker({
+                minuteStep: 1,
+                showSeconds: true,
+                showMeridian: false
+            }).next().on(ace.click_event, function () {
+                $(this).prev().focus();
+            });
+            $(".qstx").on(ace.click_event, function () {
+                var id = $(this).attr("data-value");
+                bootbox.confirm('您确定要删除该信息吗?', function (result) {
+                    if (result) {
+                        location = '@(Url.Action("DeletePlan"))/' + id;
+                    }
+                });
+            });
+        })
+        $('#modal-form').on('shown.bs.modal', function () {
+            $.ajax({
+                url: "@(Url.Action("ModifyPlan"))/",
+                data: 'id=' + $("#theid").val(),
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.result == "ok") {
+                        $("select[name='CycleType']").val(response.data.CycleType);
+                        $("select[name='CycleValue']").val(response.data.CycleValue);
+                        $("input[name='PlanTime']").val(response.data.PlanTime);
+                        $("select[name='PlanName']").val(response.data.PlanName);
+                        $("textarea[name='Remark']").val(response.data.Remark);
+                    }
+                    //else
+                    //alert(response.result);
+                },
+                error: function (response) {
+                    //console.log(response);
+                }
+            });
+        });
+        function clearform() {
+            $("input[name='theid']").val("");
+            $("select[name='paramtype']").val("");
+            $("select[name='paramvalue']").val("");
+            $("input[name='paramtime']").val("");
+            $("select[name='paramname']").val("");
+            $("textarea[name='paramreamrk']").val("");
+        }
+    </script>
+}

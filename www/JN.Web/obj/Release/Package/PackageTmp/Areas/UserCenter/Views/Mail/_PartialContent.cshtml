@@ -1,0 +1,93 @@
+﻿@model JN.Data.Message
+@{
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = null;
+}
+          <style>
+              .tabbable img {max-width:600px}
+          </style>
+<div class="modal-body" style="width:700px; height:400px; overflow:auto">
+    <div class=" panel-body">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="tabbable">
+                    <div class="breadcrumb" data-ng-show="breadcrumbs.length">
+                        @if (Model.UID == Umodel.ID && Model.ToUID == Umodel.ID)
+{
+    <span>@T("来自") @(Model.FormUserName) @T("的邮件") </span>
+}
+                        else
+                        {
+                            <span>@T("发给") @(Model.ToUserName) @T("的邮件") </span>
+                        }
+                        @T("发送时间")：@(Model.CreateTime) <span>&nbsp;</span>
+                        @*@{
+        if (Model.UID == Model.ToUID)
+        {
+
+            <a class="label arrowed-in-right arrowed label-success" href="/User/Mail/Write?r=@Model.ID &sid=@(Request["sid"] == null ? ViewBag.sid : Request["sid"])">
+                回复
+            </a>
+            <span>&nbsp;</span>
+            <a class="label arrowed-in-right arrowed label-success" href="/User/Mail/Write?f=@Model.ID&sid=@(Request["sid"] == null ? ViewBag.sid : Request["sid"])">
+                秒送
+            </a> <span>&nbsp;</span>
+        }
+    }
+                            <a class="label arrowed-in-right arrowed label-success del" data-value="@Model.ID" href="#">
+                                删除
+                            </a>*@
+                    </div>
+                    <span>
+
+
+
+                    </span>
+
+                    <p>
+                        @MvcHtmlString.Create(Model.Content)
+                    </p>
+                    @if (!string.IsNullOrEmpty(Model.Attachment))
+                    {
+                        <p>
+                            <div class="breadcrumb" data-ng-show="breadcrumbs.length">
+                                @T("附件")：
+                            </div>
+                            <img src="@Model.Attachment" />
+                        </p>
+                    }
+                </div><!-- /.row -->
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<div class="modal-footer">
+    <button type="button" class="btn-primary" data-dismiss="modal">@T("关闭")</button>
+</div>
+<!-- page specific plugin scripts -->
+<script type="text/javascript">
+    jQuery(function ($) {
+        $(".del").on("click", function () {
+            var id = $(this).attr("data-value");
+            bootbox.confirm('@T("您确定要删除该邮件吗")?', function (result) {
+                if (result) {
+                    location = '@(Url.Action("Delete"))?id=' + id+'&sid='+@(Request["sid"] == null ? ViewBag.sid : Request["sid"]);
+                }
+            });
+        });
+    })
+</script>

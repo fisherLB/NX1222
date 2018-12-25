@@ -1,0 +1,31 @@
+﻿@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    JN.Data.User Umodel = JN.Services.UserLoginHelper.CurrentUser();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="mainoprate" style="margin-top:10px">
+                <p style="font-weight:bold;color:#ff0000; font-size:18px">@T("我的推广链接")</p>
+                    <div class="form-group">
+                        <label for="pinUser">@(T("推广链接"))：</label>
+                        <input type="text" name="mylink" id="mylink" style="width:500px" class="form-control" value="http://@(HttpContext.Current.Request.Url.Host + "/UserCenter/Reg?r=" + Umodel.UserName)">
+                    </div>
+                    <button type="button" class="btn btn-success" id="d_clip_button">@T("复制")</button>
+            </div>
+
+                
+
+            </div>
+        </div>
+<script src="~/js/ZeroClipboard.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                          var clip = new ZeroClipboard($("#d_clip_button"));
+                          clip.setText($("#mylink").val());
+                      });
+        </script>

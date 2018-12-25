@@ -1,0 +1,108 @@
+﻿@model JN.Data.User
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<!-- page specific plugin styles -->
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="mainarea">
+            <div class="mainoprate">
+                <!-- PAGE CONTENT BEGINS -->
+                @using (Ajax.BeginForm("ApplyAgent", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("您当前的级别"):</label>
+                        <div class="col-xs-12 col-sm-2">
+                            <span style="margin-top: 5px;float: left;">@(Model.IsAgent == true ? "经理" : "会员")@*@(Model.AgentLevel == 1 ? "经理" : Model.AgentLevel == 2 ? "高级经理": "普通会员")*@</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="realname">@T("申请等级"):</label>
+                        <div class="col-xs-12 col-sm-2">
+                            <div class="clearfix">
+                                <select name="type" class="form-control">
+                                    <option value="1">@T("经理")</option>
+                                    @*@if((Model.AgentLevel ?? 0) == 0)
+                                        {
+                                        <option value="1">@T("经理")</option>
+                                        <option value="2">@T("高级经理")</option>
+                                        }else if(Model.AgentLevel==1)
+                                        {
+                                         <option value="2">@T("高级经理")</option>
+                                        }*@
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">@T("申请会员编号"):</label>
+                            <div class="col-xs-12 col-sm-2">
+                                <div class="clearfix">
+                                    <input type="text" name="username" class="form-control" value="" />
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("新商务中心编号"):</label>
+                        <div class="col-xs-12 col-sm-2">
+                            <input type="text" name="agentname" class="form-control" value="@ViewBag.CurrentUser" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("申请备注"):</label>
+                        <div class="col-xs-12 col-sm-5">
+                            <textarea name="agentremark" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="hr hr-dotted"></div>
+                        <label style="color: red; padding: 0px 20% 0px 20%; ">经理人政策：直推10人以上（需真实直推）团队100人以上，享受平台周奖励。经理人周奖金为1000元，月奖金为3000元（每月为6000元），季度奖金为20000元。达到条件的会员申请经后台审核通过后将会发放相应奖金。</label>
+                    <div class="hr hr-dotted"></div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-danger" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                @T("申请升级")
+                            </button>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn btn-info" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                @T("重置")
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                <!-- PAGE CONTENT ENDS -->
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    
+</div>
+    <!-- /.row -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    function afterPost(data) {
+        if (data.Status == 200) {
+            alert("您已成功申请升级经理");
+            location.href = "@(Url.Action("applyagent"))";
+        } else {
+            alert("升级失败！错误信息：" + data.Message);
+        }
+    }
+</script>

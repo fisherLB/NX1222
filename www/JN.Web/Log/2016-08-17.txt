@@ -1,0 +1,382 @@
+﻿---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=1a
+发生时间：2016/8/17 9:16:25
+异常对像：System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode
+错误追踪：   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   在 System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：代码 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=1
+发生时间：2016/8/17 14:23:27
+异常对像：MvcCore.Extensions.QRCodeExtensions.ToQRCode
+错误追踪：   在 MvcCore.Extensions.QRCodeExtensions.ToQRCode(String comment, Int16 version, Int16 size)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 261
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未能加载文件或程序集“ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/AcceptHelp
+发生时间：2016/8/17 14:40:49
+异常对像：System.Decimal.FCallDivide
+错误追踪：   在 System.Decimal.FCallDivide(Decimal& d1, Decimal& d2)
+   在 System.Decimal.Remainder(Decimal d1, Decimal d2)
+   在 System.Decimal.op_Modulus(Decimal d1, Decimal d2)
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.AcceptHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 404
+错误提示：尝试除以零。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/AcceptHelp
+发生时间：2016/8/17 14:40:58
+异常对像：System.Decimal.FCallDivide
+错误追踪：   在 System.Decimal.FCallDivide(Decimal& d1, Decimal& d2)
+   在 System.Decimal.Remainder(Decimal d1, Decimal d2)
+   在 System.Decimal.op_Modulus(Decimal d1, Decimal d2)
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.AcceptHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 404
+错误提示：尝试除以零。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=2a
+发生时间：2016/8/17 16:30:22
+异常对像：MvcCore.Extensions.QRCodeExtensions.ToQRCode
+错误追踪：   在 MvcCore.Extensions.QRCodeExtensions.ToQRCode(String comment, Int16 version, Int16 size)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 261
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未能加载文件或程序集“ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=2a
+发生时间：2016/8/17 16:30:56
+异常对像：MvcCore.Extensions.QRCodeExtensions.ToQRCode
+错误追踪：   在 MvcCore.Extensions.QRCodeExtensions.ToQRCode(String comment, Int16 version, Int16 size)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 261
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未能加载文件或程序集“ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=2a
+发生时间：2016/8/17 16:31:06
+异常对像：MvcCore.Extensions.QRCodeExtensions.ToQRCode
+错误追踪：   在 MvcCore.Extensions.QRCodeExtensions.ToQRCode(String comment, Int16 version, Int16 size)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 261
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未能加载文件或程序集“ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 16:39:00
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 527
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 16:46:16
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 529
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 16:48:51
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 529
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:01:38
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:05:08
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:10:34
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 494
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:17:04
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:19:36
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:21:43
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:24:12
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:32:08
+异常对像：System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd
+错误追踪：   在 System.Data.Entity.Core.Objects.ObjectContext.VerifyRootForAdd(Boolean doAttach, String entitySetName, IEntityWrapper wrappedEntity, EntityEntry existingEntry, EntitySet& entitySet, Boolean& isNoOperation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.AttachTo(String entitySetName, Object entity)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.<>c__DisplayClassa.<Attach>b__9()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.ActOnSet(Action action, EntityState newState, Object entity, String methodName)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Attach(Object entity)
+   在 System.Data.Entity.DbSet`1.Attach(TEntity entity)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：附加类型“JN.Data.SupplyHelp”的实体失败，因为相同类型的其他实体已具有相同的主键值。在使用 "Attach" 方法或者将实体的状态设置为 "Unchanged" 或 "Modified" 时如果图形中的任何实体具有冲突键值，则可能会发生上述行为。这可能是因为某些实体是新的并且尚未接收数据库生成的键值。在此情况下，使用 "Add" 方法或者 "Added" 实体状态跟踪该图形，然后将非新实体的状态相应设置为 "Unchanged" 或 "Modified"。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/FinshPay
+发生时间：2016/8/17 17:36:52
+异常对像：System.Data.SqlClient.SqlConnection.OnError
+错误追踪：   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean asyncWrite)
+   在 System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   在 System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.<NonQuery>b__0(DbCommand t, DbCommandInterceptionContext`1 c)
+   在 System.Data.Entity.Infrastructure.Interception.InternalDispatcher`1.Dispatch[TTarget,TInterceptionContext,TResult](TTarget target, Func`3 operation, TInterceptionContext interceptionContext, Action`3 executing, Action`3 executed)
+   在 System.Data.Entity.Infrastructure.Interception.DbCommandDispatcher.NonQuery(DbCommand command, DbCommandInterceptionContext interceptionContext)
+   在 System.Data.Entity.Internal.InterceptableDbCommand.ExecuteNonQuery()
+   在 System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass59.<ExecuteStoreCommand>b__58()
+   在 System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   在 System.Data.Entity.Core.Objects.ObjectContext.<>c__DisplayClass59.<ExecuteStoreCommand>b__57()
+   在 System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   在 System.Data.Entity.Core.Objects.ObjectContext.ExecuteStoreCommand(TransactionalBehavior transactionalBehavior, String commandText, Object[] parameters)
+   在 System.Data.Entity.Internal.InternalContext.ExecuteSqlCommand(TransactionalBehavior transactionalBehavior, String sql, Object[] parameters)
+   在 System.Data.Entity.Database.ExecuteSqlCommand(TransactionalBehavior transactionalBehavior, String sql, Object[] parameters)
+   在 System.Data.Entity.Database.ExecuteSqlCommand(String sql, Object[] parameters)
+   在 MvcCore.Infrastructure.ServiceBase`1.Update(T entity, Dictionary`2 updateKey, String where)
+   在 JN.Services.Manager.Bonus.Settlement(Matching mModel) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 497
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.FinshPay(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 817
+错误提示：字符串 'S0010011' 后的引号不完整。
+'S0010011' 附近有语法错误。
+---------------------------------------------------
+来自页面：http://localhost:4160/usercenter/mail/write
+发生时间：2016/8/17 17:49:37
+异常对像：System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode
+错误追踪：   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(String virtualPath, Type requiredBaseType)
+   在 System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：遇到的结束标记“li”没有匹配的起始标记。您的起始标记/结束标记是否匹配?
+

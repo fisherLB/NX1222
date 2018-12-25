@@ -1,0 +1,291 @@
+﻿---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:18:19
+异常对像：JN.Services.Manager.Bonus.Bonus1103
+错误追踪：   在 JN.Services.Manager.Bonus.Bonus1103(String SupplyNo) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 90
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 277
+错误提示：未将对象引用设置到对象的实例。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:18:35
+异常对像：JN.Services.Manager.Bonus.Bonus1103
+错误追踪：   在 JN.Services.Manager.Bonus.Bonus1103(String SupplyNo) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 90
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 277
+错误提示：未将对象引用设置到对象的实例。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:21:02
+异常对像：JN.Services.Manager.Bonus.Bonus1103
+错误追踪：   在 JN.Services.Manager.Bonus.Bonus1103(String SupplyNo) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 90
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 277
+错误提示：未将对象引用设置到对象的实例。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:22:02
+异常对像：JN.Services.Manager.Bonus.Bonus1103
+错误追踪：   在 JN.Services.Manager.Bonus.Bonus1103(String SupplyNo) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 90
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 277
+错误提示：未将对象引用设置到对象的实例。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:23:01
+异常对像：JN.Services.Manager.Bonus.Bonus1103
+错误追踪：   在 JN.Services.Manager.Bonus.Bonus1103(String SupplyNo) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 90
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 277
+错误提示：未将对象引用设置到对象的实例。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:23:25
+异常对像：JN.Services.Manager.Bonus.Bonus1103
+错误追踪：   在 JN.Services.Manager.Bonus.Bonus1103(String SupplyNo) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 90
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 277
+错误提示：未将对象引用设置到对象的实例。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:24:58
+异常对像：JN.Services.Manager.Bonus.Bonus1103
+错误追踪：   在 JN.Services.Manager.Bonus.Bonus1103(String SupplyNo) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Services\Manager\Bonus.cs:行号 90
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 277
+错误提示：未将对象引用设置到对象的实例。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:25:34
+异常对像：MvcCore.Service.DBTool.Commit
+错误追踪：   在 MvcCore.Service.DBTool.Commit()
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 275
+错误提示：更新条目时出错。有关详细信息，请参阅内部异常。
+事务(进程 ID 51)与另一个进程被死锁在 锁 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:25:34
+异常对像：MvcCore.Service.DBTool.Commit
+错误追踪：   在 MvcCore.Service.DBTool.Commit()
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 275
+错误提示：更新条目时出错。有关详细信息，请参阅内部异常。
+事务(进程 ID 56)与另一个进程被死锁在 锁 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:25:34
+异常对像：MvcCore.Service.DBTool.Commit
+错误追踪：   在 MvcCore.Service.DBTool.Commit()
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 275
+错误提示：更新条目时出错。有关详细信息，请参阅内部异常。
+事务(进程 ID 60)与另一个进程被死锁在 锁 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/SupplyHelp
+发生时间：2016/8/15 11:25:34
+异常对像：MvcCore.Service.DBTool.Commit
+错误追踪：   在 MvcCore.Service.DBTool.Commit()
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.SupplyHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 275
+错误提示：更新条目时出错。有关详细信息，请参阅内部异常。
+事务(进程 ID 57)与另一个进程被死锁在 锁 资源上，并且已被选作死锁牺牲品。请重新运行该事务。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home
+发生时间：2016/8/15 11:37:28
+异常对像：MvcCore.Extensions.QRCodeExtensions.ToQRCode
+错误追踪：   在 MvcCore.Extensions.QRCodeExtensions.ToQRCode(String comment, Int16 version, Int16 size)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 260
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未能加载文件或程序集“ThoughtWorks.QRCode, Version=1.0.3990.25764, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/Index?adminloginname=123
+发生时间：2016/8/15 14:30:44
+异常对像：System.Web.Compilation.AssemblyBuilder.Compile
+错误追踪：   在 System.Web.Compilation.AssemblyBuilder.Compile()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(String virtualPath, Type requiredBaseType)
+   在 System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml(373): error CS0117: “JN.Data.Extensions.CellOrders”并不包含“OrderSign”的定义
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/Index?adminloginname=123
+发生时间：2016/8/15 14:31:16
+异常对像：System.Web.Compilation.AssemblyBuilder.Compile
+错误追踪：   在 System.Web.Compilation.AssemblyBuilder.Compile()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp)
+   在 System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(String virtualPath, Type requiredBaseType)
+   在 System.Web.WebPages.BuildManagerWrapper.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryManager.CreateInstanceOfType[T](String virtualPath)
+   在 System.Web.WebPages.VirtualPathFactoryExtensions.CreateInstance[T](IVirtualPathFactory factory, String virtualPath)
+   在 System.Web.WebPages.WebPageBase.CreatePageFromVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, DisplayModeProvider displayModeProvider, IDisplayMode displayMode)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageExecutingBase.WriteTo(TextWriter writer, HelperResult content)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml(373): error CS0117: “JN.Data.Extensions.CellOrders”并不包含“OrderSign”的定义
+---------------------------------------------------
+来自页面：http://localhost:41520/AdminCenter/Market/PPList2
+发生时间：2016/8/15 15:10:02
+异常对像：System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode
+错误追踪：   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Compilation.BuildManager.GetCompiledType(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetCompiledType(String virtualPath)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.GetCompiledType(String virtualPath)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model)
+   在 ASP._Page_Areas_AdminCenter_Views_Market_PPList2_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\AdminCenter\Views\Market\PPList2.cshtml:行号 105
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：代码 块缺少结束字符“}”。请确保此块内的所有“{”都有匹配的“}”字符，并且任何“}”都不会解释为标记。
+
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/Index?adminloginname=12
+发生时间：2016/8/15 17:07:16
+异常对像：System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode
+错误追踪：   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Compilation.BuildManager.GetCompiledType(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetCompiledType(String virtualPath)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.GetCompiledType(String virtualPath)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 355
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：“" class="”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/Index?adminloginname=12
+发生时间：2016/8/15 17:08:38
+异常对像：System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode
+错误追踪：   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Compilation.BuildManager.GetCompiledType(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetCompiledType(String virtualPath)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.GetCompiledType(String virtualPath)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 355
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：“" class="”在代码块开头无效。只有标识符、关键字、注释、“(”和“{”才有效。
+

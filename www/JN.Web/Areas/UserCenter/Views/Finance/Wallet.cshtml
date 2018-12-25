@@ -1,0 +1,149 @@
+﻿@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    JN.Data.User Umodel = JN.Services.UserLoginHelper.CurrentUser();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+
+@using Webdiyer.WebControls.Mvc
+@model JN.Web.Areas.UserCenter.Models.CompositeWalletLog
+@{Html.RegisterMvcPagerScriptResource();}
+<link href="~/Content/pagerstyles.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <h4>@T("奖金明细") </h4>
+        </div>
+        <div class="maintitleright">
+            <a href="/user/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T("奖金明细")</a>
+        </div>
+    </div>    
+        <div class="mainlist">
+            <div class="bodylist">
+                <p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2001).Value + "钱包记录")</p>
+                @using (Ajax.BeginForm("Wallet", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_Wallet2001", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_WalletForm2001" } }))
+                {
+                    <div class="input-group col-sm-8 no-padding-left" style="width:2%;float:right;margin-bottom:5px;padding-right:10px;">
+                        <input type="text" id="wallet2001s" name="wallet2001s" style="width:250px" class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                        <input type="hidden" name="target" value="Wallet2001" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                @T("查询")
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                        </span>
+                    </div>
+                }
+                <div id="_Wallet2001">
+
+                    @Html.Partial("_Wallet2001", Model.Wallet2001)
+                </div>
+            </div>
+
+            <div class="bodylist">
+
+                <p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2002).Value + "钱包记录")</p>
+                @using (Ajax.BeginForm("Wallet", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_Wallet2002", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_WalletForm2002" } }))
+                {
+                    <div class="input-group col-sm-8 no-padding-left" style="width:2%;float:right;margin-bottom:5px;">
+                        <input type="text" id="wallet2002s" name="wallet2002s" style="width:250px" class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                        <input type="hidden" name="target" value="Wallet2002" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                @T("查询")
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                        </span>
+                    </div>
+                }
+                <div id="_Wallet2002">
+                    @Html.Partial("_Wallet2002", Model.Wallet2002)
+                </div>
+            </div>
+
+
+                <div class="bodylist">
+
+                    <p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2003).Value + "钱包记录")</p>
+                    @using (Ajax.BeginForm("Wallet", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_Wallet2003", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_WalletForm2003" } }))
+                    {
+                        <div class="input-group col-sm-8 no-padding-left" style="width:2%;float:right;margin-bottom:5px; padding-right:10px;">
+                            <input type="text" id="wallet2003s" name="wallet2003s" style="width:250px" class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                            <input type="hidden" name="target" value="Wallet2003" />
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-purple btn-sm">
+                                    @T("查询")
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                    }
+                    <div id="_Wallet2003">
+                        <div id="loadingDiv" style="display:none">
+                            <img src="~/img/loading.gif" /><h3>正在加载数据，请稍候...</h3>
+                        </div>
+                        @Html.Partial("_Wallet2003", Model.Wallet2003)
+                    </div>
+                </div>
+
+
+            <div class="bodylist">
+
+                <p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2004).Value + "钱包记录")</p>
+                @using (Ajax.BeginForm("Wallet", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_Wallet2004", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_WalletForm2004" } }))
+                {
+                    <div class="input-group col-sm-8 no-padding-left" style="width:2%;float:right;margin-bottom:5px; padding-right:10px;">
+                        <input type="text" id="wallet2004s" name="wallet2004s" style="width:250px" class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                        <input type="hidden" name="target" value="Wallet2004" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-purple btn-sm">
+                                @T("查询")
+                                <i class="icon-search icon-on-right bigger-110"></i>
+                            </button>
+                        </span>
+                    </div>
+                }
+                <div id="_Wallet2003">
+                    <div id="loadingDiv" style="display:none">
+                        <img src="~/img/loading.gif" /><h3>正在加载数据，请稍候...</h3>
+                    </div>
+                    @Html.Partial("_Wallet2004", Model.Wallet2004)
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+                <div class="bodylist">
+                    <p>@T("待结算记录")</p>
+                    @using (Ajax.BeginForm("Wallet", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_PendBonus", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_PendBonusForm" } }))
+                    {
+                        <div class="input-group col-sm-8 no-padding-left" style="width:2%;float:right;margin-bottom:5px;padding-right:10px;">
+                            <input type="text" id="PendBonuss" name="PendBonuss" style="width:250px" class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                            <input type="hidden" name="target" value="PendBonus" />
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-purple btn-sm">
+                                    @T("查询")
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                    }
+                    <div id="_PendBonus">
+                        @Html.Partial("_PendBonus", Model.BonusDetailList)
+                    </div>
+                </div>
+
+
+            </div>
+</div>
+    

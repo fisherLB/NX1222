@@ -1,0 +1,63 @@
+﻿---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/AcceptHelp
+发生时间：2016/9/2 11:19:36
+异常对像：MvcCore.Service.DBTool.Commit
+错误追踪：   在 MvcCore.Service.DBTool.Commit()
+   在 JN.Web.Areas.UserCenter.Controllers.HomeController.AcceptHelp(FormCollection fc) 位置 f:\覃明健\项目管理\WP2016082801\www\JN.Web\Areas\UserCenter\Controllers\HomeController.cs:行号 415
+错误提示：更新条目时出错。有关详细信息，请参阅内部异常。
+不能将值 NULL 插入列 'BankName'，表 'WP16082801.dbo.AcceptHelp'；列不允许有 Null 值。INSERT 失败。
+语句已终止。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=1
+发生时间：2016/9/2 11:20:18
+异常对像：System.Web.HttpResponse.Redirect
+错误追踪：   在 System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   在 System.Web.HttpResponseWrapper.Redirect(String url)
+   在 JN.Web.Areas.UserCenter.Controllers.BaseController.OnActionExecuting(ActionExecutingContext filterContext) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\BaseController.cs:行号 121
+   在 System.Web.Mvc.Controller.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+错误提示：无法在发送 HTTP 标头之后进行重定向。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=1
+发生时间：2016/9/2 11:20:19
+异常对像：System.Web.HttpResponse.Redirect
+错误追踪：   在 System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   在 System.Web.HttpResponseWrapper.Redirect(String url, Boolean endResponse)
+   在 System.Web.Mvc.RedirectResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2d.<BeginInvokeAction>b__1d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：无法在发送 HTTP 标头之后进行重定向。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=1
+发生时间：2016/9/2 11:20:57
+异常对像：System.Web.HttpResponse.Redirect
+错误追踪：   在 System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   在 System.Web.HttpResponseWrapper.Redirect(String url)
+   在 JN.Web.Areas.UserCenter.Controllers.BaseController.OnActionExecuting(ActionExecutingContext filterContext) 位置 f:\覃明健\项目管理\WL16081201\www\JN.Web\Areas\UserCenter\Controllers\BaseController.cs:行号 121
+   在 System.Web.Mvc.Controller.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.Begin[TResult](AsyncCallback callback, Object state, BeginInvokeDelegate beginDelegate, EndInvokeDelegate`1 endDelegate, Object tag, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+错误提示：无法在发送 HTTP 标头之后进行重定向。
+---------------------------------------------------
+来自页面：http://localhost:4160/UserCenter/Home/Index?adminloginname=1
+发生时间：2016/9/2 11:20:57
+异常对像：System.Web.HttpResponse.Redirect
+错误追踪：   在 System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   在 System.Web.HttpResponseWrapper.Redirect(String url, Boolean endResponse)
+   在 System.Web.Mvc.RedirectResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2d.<BeginInvokeAction>b__1d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：无法在发送 HTTP 标头之后进行重定向。

@@ -1,0 +1,427 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>@(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName)</title>
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/theme/mmm/css/font-awesome.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/metisMenu.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/animate.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/bootstrap.css" />
+    <!-- App styles -->
+    <link rel="stylesheet" href="/theme/mmm/css/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/helper.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/style.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css" />
+    
+    <style type="text/css">
+        .jqstooltip {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            visibility: hidden;
+            background: rgb(0, 0, 0) transparent;
+            background-color: rgba(0,0,0,0.6);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+            -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+            white-space: nowrap;
+            padding: 5px;
+            border: 1px solid white;
+            z-index: 10000;
+        }
+
+        .jqsfield {
+            color: white;
+            font: 10px arial, san serif;
+            text-align: left;
+        }
+
+        .container-box {
+            width: 354px;
+            height: auto;
+            margin: 0 auto;
+            height: auto;
+            overflow: hidden;
+            
+        }
+
+         .login-container {
+            width: 400px;
+            float: left;
+            margin-left: 20%;
+            padding-top: 6%;
+        }
+
+        .liuyan {
+            float: right;
+            margin-top: 200px;
+            height: 320px;
+            width: 400px;
+            background: #fff;
+            border: 1px solid #dbdbdb;
+            padding: 10px;
+        }
+
+        .pczt_pingfen_jhxs_news1 {
+            width: 397px;
+            background: #fff;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin: 0 auto;
+        }
+
+        .pczt_pingfen_jhxs_xian {
+            width: 382px;
+            margin: 0 auto;
+            border: 1px dashed #a8d1dd;
+            border-left: none;
+            border-right: none;
+        }
+
+        .pczt_pingfen_jhxs_noxian {
+            width: 382px;
+            margin: 0 auto;
+            border: none;
+        }
+
+        .pczt_pingfen_jhxs_wenzi {
+            color: #185881;
+            text-align: center;
+            line-height: 30px;
+        }
+
+        .pczt_pingfen_jhxs_wenzi2 {
+            line-height: 22px;
+            font-size: 12px;
+            text-indent: 2em;
+            color: #525252;
+        }
+
+        .roud-list {
+            padding: 5px;
+        }
+
+            .roud-list li {
+                border-bottom: 1px solid #a8d1dd;
+                padding-bottom: 20px;
+            }
+
+        .viedo-slider {
+            background: #fff;
+            width: 100%;
+            height: 180px;
+            float: left;
+            margin-top: 10%;
+            position: relative;
+            padding: 10 20px;
+            box-sizing: border-size;
+            border: 1px solid #dbdbdb;
+        }
+
+        .viedo {
+            width: 1200px;
+            height: auto;
+            margin: 0 auto;
+            height: auto;
+            overflow: hidden;
+            min-height: 300px;
+        } 
+        
+        body, ul, li {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        img {
+            border: none;
+        }
+
+        a {
+            color: #6cf;
+        }
+
+            a:hover {
+                color: #84B263;
+            }
+        /*.box{ width:980px; margin:0 auto; position:relative; overflow:hidden; _height:100%;}*/
+        .logo_box {
+            width: 100%;         
+            padding-top:150px;
+            text-align: center;
+            }
+
+
+        .logo_box img{
+            width:100%;
+        }
+            .picbox; {
+            width: 980px;
+            height: 143px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 17px;
+        }
+
+        .login_box {
+            background: rgba(0,0,0,.8);
+            color: #fff;
+            padding: 10px;
+        }
+
+            .login_box .input_group {
+                margin-bottom: 20px;
+                overflow: hidden;
+            }
+            
+            
+             .login_box .input_group input {
+                display: block;
+                float:left;
+                width: 100%;
+                height: 44px;
+                padding: 6px 12px;
+                font-size: 14px;
+                line-height: 1.42857143;
+                padding: 11px;
+                border: 1px solid rgba(255,255,255,.15);
+                background-color: rgba(45,45,45,.15);
+                border-radius: 2px;
+                color: #fff;
+                padding: 0px 10px;
+            }
+
+            .login_box .btng input {
+                width: 60%;
+            }
+
+            .login_box .btng a {
+                display: block;
+                float: right;
+                width: 30%;
+                height: 40px;
+                cursor: pointer;
+                margin-right: 2%;
+                border: none;
+                outline: none;
+            }
+
+            .login_box .btng a img{
+                border:none;
+                width:100%;
+                height:100%;
+            }
+
+
+        .btn-block {
+            background-color: #322da2;
+            border: 1px solid #bddaf3;
+        }
+
+        .btn-block:hover{
+            background-color: #0f73ea;
+            border: 1px solid #7ec3ff;
+        }
+
+        .forgot {
+            background-color: #af40d6;
+            border: 1px solid #e1a7f5;
+            color: #fff;
+        }
+
+            .forgot:hover {
+                background-color: #d164f7;
+                border: 1px solid #e9aaff;
+                color: #fff;
+            }
+        
+        
+         .piclist; {
+            height: 143px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+            .piclist li {
+                background: #eee;
+                margin-right: 20px;
+                padding: 5px;
+                float: left;
+            }
+
+        .swaplist {
+            position: absolute;
+            left: -3000px;
+            top: 0px;
+        }
+
+        .og_prev, .og_next {
+            width: 30px;
+            height: 50px;
+            background: url(/theme/mmm/images/icon.png) no-repeat;
+            background: url(/theme/mmm/images/icon_ie6.png) no-repeat\9;
+            position: absolute;
+            top: 33px;
+            z-index: 99;
+            cursor: pointer;
+            filter: alpha(opacity=70);
+            opacity: 0.7;
+        }
+
+        .og_prev {
+            background-position: 0 -60px;
+            left: 20px;
+            top: 50px;
+        }
+
+        .og_next {
+            background-position: 0 0;
+            right: 20px;
+            top: 50px;
+        }
+
+        .mainlist .swaplist li a dd {
+            text-align: center;
+            line-height: 25px;
+            color: #000;
+            margin-top: 5px;
+        }
+    </style>
+
+    <!-- 市场购买实况 Scripts -->
+</head>
+
+<body class="blank" style="background: url(/Upload/login/index_bg.jpg) 50% 0% no-repeat">
+    <div class="color-line"></div>
+    <div class="pull-left m">
+        <!-- <a href="" class="btn btn-primary">规则</a>-->
+    </div>
+    <div class="container">
+        <div cass="login-container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-12 col-md-4">
+                    <div class="logo_box"><img src="@(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).LogoImage)" /></div>
+                    <div class="login_box">
+                        <div class="panel-body">
+                            <form action="/user/login/logins" method="post" id="frmLogin">
+                                <!--<strong style="color:red">抱歉，现在系统暂停维护中，稍后开放，谢谢您的等待</strong>-->
+                                <div class="input_group">
+                                    @*<label class="control-label" for="username">@T("用户名")</label>*@
+                                    <input type="text" required="" value="" name="username" placeholder="用户名" />
+
+                                </div>
+                                <div class="input_group">
+                                    @*<label class="control-label" for="password">@T("密码")</label>*@
+                                    <input type="password" required="" value="" name="password" placeholder="密码" />
+
+                                </div>
+                                <div class="input_group btng">
+                                    @*<label class="control-label" for="password">@T("密码")</label>*@
+                                    <input type="text" required="" value="" name="code" placeholder="验证码" />
+                                    <img id="imgCode" src="/UserCenter/Login/GetCodeImage?id=1" onclick="ChangeCheckCode();return false;" style="width: 80px; cursor:pointer; margin-left: 16px; height: 28px; margin-top: 1px;" />
+
+                                </div>
+
+                                <input class="btn btn-success btn-block" value="@T("登录")" type="button" id="btnlogin" />
+                                <a class="btn btn-default btn-block forgot" href="/UserCenter/Login/GetPwd">@T("忘记密码？")</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/theme/mmm/js/roud.js"></script>
+    <script type="text/javascript" src="/theme/mmm/js/roud1.js"></script>
+
+
+
+    <!-- Vendor scripts -->
+
+    <script type="text/javascript" async="" src="/theme/mmm/js/_Incapsula_Resource"></script>
+
+
+
+    <script src="/theme/mmm/js/jquery-ui.min.js"></script>
+
+    <script src="/theme/mmm/js/jquery.slimscroll.min.js"></script>
+
+    <script src="/theme/mmm/js/bootstrap.min.js"></script>
+
+    <script src="/theme/mmm/js/metisMenu.min.js"></script>
+
+    <script src="/theme/mmm/js/icheck.min.js"></script>
+
+    <script src="/theme/mmm/js/index.js"></script>
+
+    <script src="/theme/mmm/js/toastr.min.js"></script>
+
+    <script src="/theme/mmm/js/alert.js"></script>
+    <!-- App scripts -->
+
+    <script src="/theme/mmm/js/homer.js"></script>
+
+    <script src="~/js/jquery.form.js"></script>
+    <script type="text/javascript">
+    function ChangeCheckCode() {
+        var oldUrl = $('#imgCode').attr("src");
+        $('#imgCode').attr("src", oldUrl + '1');
+    }
+
+    jQuery(function ($) {
+        $("#btnlogin").click(function () {
+            $("#frmLogin").ajaxSubmit({
+                url: "@Url.Action("Index")",
+                type: "post",
+            success: function (data) {
+                if (data.Status == 200) {
+                    alert("登录成功，即将为您跳转！");
+                    location.href = data.Message;
+                } else {
+                    alert("登录失败：" + data.Message);
+                    ChangeCheckCode();
+                }
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    });
+    });
+
+    </script>
+
+    <!-- 市场购买实况 scripts -->
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/scroll.js"></script>
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $('.list_lh li:even').addClass('lieven');
+        //})
+        $(function () {
+            $("div.list_lh").myScroll({
+                speed: 40, //数值越大，速度越慢
+                rowHeight: 100 //li的高度
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

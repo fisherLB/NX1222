@@ -1,0 +1,75 @@
+﻿@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<link href="~/Theme/071701/shop.css" rel="stylesheet" />
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<div class="row">
+    <div class="col-xs-12">
+        <div class="tab-pane" id="tab_2">
+            <!-- BEGIN FILTER -->
+            <div class="filter-v1 margin-top-10">
+                @*<ul class="mix-filter">
+    @{
+        var ggLst = JN.BLL.sysparams.GetModelList("PID=6000 and IsUse=1 order by sort");
+        if (ggLst.Count > 0)
+        {
+            foreach (JN.Entity.TSysParam param in ggLst)
+            {
+                        <li class="filter" data-filter="all">
+                            <a href="/user/mall/index?c=@param.ID">@param.Name</a>
+                        </li>
+            }
+        }
+    }
+                </ul>*@
+                <div class="page-bar" style="margin-top:20px">
+
+                    <ul class="page-breadcrumb">
+                        <li>
+                            <a href="#">推荐商品</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="row thumbnails">
+@{
+    var pList = MvcCore.Unity.Get<JN.Data.Service.IShopProductService>().List(x => x.IsSales).OrderByDescending(x => x.IsTop).ThenBy(x => x.Hits).ToList();
+    if (pList.Count > 0)
+    {
+        
+        foreach (var product in pList)
+        {
+            
+                <div class="col-md-3 col-sm-6 mix category_1" >
+                    <div class="mix-inner">
+                        <a href="@(Url.Action("Detail", new {  ID = product.ID}))"><img class="img-responsive" src="@product.ImageUrl" ></a>
+                        <div class="mix-details">
+                            <h5>@product.ProductName</h5>
+                            <p>
+                                售价：<span >@product.RealPrice.ToString("F2")</span><br />
+                                <a href="@(Url.Action("Detail", new {  ID = product.ID}))" class="btn btn-primary btn-sm red" data-rel="tooltip" title="@T("编辑商品")">
+                                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                                    @T("立即购买")
+                                </a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            
+        }
+        
+    }
+}
+                </div>
+
+            </div>
+            <!-- END FILTER -->
+        </div>
+        
+    </div><!-- /.col -->
+</div><!-- /.row -->
+

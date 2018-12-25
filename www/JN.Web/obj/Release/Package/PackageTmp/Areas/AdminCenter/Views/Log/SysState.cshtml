@@ -1,0 +1,63 @@
+﻿@model JN.Entity.TNotice
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<link href="/Plugin/kindeditor-4.1.9/themes/default/default.css" rel="stylesheet" />
+<link href="/Plugin/kindeditor-4.1.9/plugins/code/prettify.css" rel="stylesheet" />
+<script src="/Plugin/kindeditor-4.1.9/kindeditor.js"></script>
+<script src="/Plugin/kindeditor-4.1.9/lang/zh_CN.js"></script>
+<script src="/Plugin/kindeditor-4.1.9/plugins/code/prettify.js"></script>
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+            @if (!string.IsNullOrEmpty(ViewBag.Brief))
+            {
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    @ViewBag.Brief
+                </small>
+            }  
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-4">
+            <!-- PAGE CONTENT BEGINS -->
+            <table class="table table-bordered table-hover no-margin-bottom">
+                <tr>
+                    <td>系统运行天数：</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>上次结算用时：</td>
+                    <td>0.555秒</td>
+                </tr>
+                <tr>
+                    <td>有效会员：</td>
+                    <td>@JN.BLL.users.GetRecordCount("1=1")</td>
+                </tr>
+                <tr>
+                    <td>激活会员时轮询数据库：</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>分红时预计数据库：</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>数据库大小：</td>
+                    <td>--</td>
+                </tr>
+            </table>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+@section scripts{}

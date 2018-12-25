@@ -1,0 +1,185 @@
+﻿@model JN.Data.ShopProduct
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<link href="~/Theme/metronic/css/invoice.css" rel="stylesheet" />
+
+<link href="~/Theme/071701/shop.css" rel="stylesheet" />
+<script src="/scripts/jq_area.js"></script>
+<script src="/scripts/region.js"></script>
+<!-- PAGE CONTENT BEGINS -->
+<div class="row">
+    <div class="col-xs-12">
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="invoice">
+            @*<div class="row invoice-logo">
+                <div class="col-xs-6 invoice-logo-space">
+                </div>
+                <div class="col-xs-6">
+                    <p>
+                        #5652256 / 28 Feb 2013 <span class="muted">
+                            Consectetuer adipiscing elit
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <hr />*@
+            <form action="@Url.Action("Pay")" class="form-horizontal" method="post">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        产品名称
+                                    </th>
+                                    <th class="hidden-480">
+                                        产品规格
+                                    </th>
+                                    <th class="hidden-480">
+                                        数量
+                                    </th>
+                                    <th class="hidden-480">
+                                        单价
+                                    </th>
+                                    <th>
+                                        小计
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="@Model.ImageUrl" height="60" />
+                                    </td>
+                                    <td>
+                                        @Model.ProductName
+                                    </td>
+                                    <td class="hidden-480">
+                                        @Model.Spec
+                                    </td>
+                                    <td class="hidden-480">
+                                        @ViewBag.BuyNumber
+                                    </td>
+                                    <td class="hidden-480 cf90">
+                                        @Model.RealPrice.ToString("F2")
+                                    </td>
+                                    <td>
+                                        @ViewBag.TotalPrice
+                                        <input type="hidden" name="GoodsId" value="@Model.ID" />
+                                        <input type="hidden" name="BuyNumber" value="@ViewBag.BuyNumber" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 bg-fff">
+                        <div class="col-xs-7">
+                            <h3>收货地址:</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label">支付方式：</label>
+                                        @*<input type="text" name="RecPhone" value="@ViewBag.RecPhone" style="width:200px" class="form-control" />*@
+                                        <select class="form-control" style="width:150px" name="coinid">
+                                            <option value="2001">@T(cacheSysParam.SingleAndInit(x => x.ID == 2001).Value)</option>
+                                            <option value="2002"> @T(cacheSysParam.SingleAndInit(x => x.ID == 2002).Value)</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            所在地区：
+                                        </label>
+                                        <div id="area" class="input-group">
+                                            <select id="province" name="province" style="width:100px" class="form-control"></select>
+                                            <select id="city" name="city" style="width: 150px" class="form-control"></select>
+                                            <select id="county" name="county" style="width: 150px" class="form-control"></select>
+                                            <input type="hidden" name="hidprovince" id="hidprovince" />
+                                            <input type="hidden" name="hidcity" id="hidcity" />
+                                            <input type="hidden" name="hidcounty" id="hidcounty" />
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label">街道地址：</label><input type="text" name="RecAddress" value="@ViewBag.RecAddress" style="width:400px" class="form-control" />
+                                    </div>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label">联 系 人：</label><input type="text" name="RecLinkMan" value="@ViewBag.RecLinkMan" style="width:150px" class="form-control" />
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="control-label">联系电话：</label><input type="text" name="RecPhone" value="@ViewBag.RecPhone" style="width:200px" class="form-control" />
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-5">
+                            <h3>发货说明:</h3>
+                            <ul class="list-unstyled">
+                                <li style="height:140px">
+                                    @ViewBag.Fhsm
+                                </li>
+                            </ul>
+                            <div class="invoice-block b-dash">
+                                <ul class="list-unstyled amounts">
+                                    <li>
+                                        <strong>商品金额:</strong> @ViewBag.TotalPrice
+                                    </li>
+                                    <li>
+                                        <strong>运费:</strong> @((Model.FreightPrice ?? 0) > 0 ? Model.FreightPrice.ToString() : "免运费")
+                                    </li>
+                                    @*<li>
+                            <strong>VAT:</strong> -----
+                        </li>*@
+                                    <li>
+                                        <strong>总金额:</strong> @(ViewBag.TotalPrice + (Model.FreightPrice ?? 0))
+                                    </li>
+                                </ul>
+
+                                @*<a class="btn btn-lg blue hidden-print margin-bottom-5" onclick="javascript:window.print();">
+                        打印 <i class="fa fa-print"></i>
+                    </a>*@
+
+                            </div>
+                            <br />
+                            <button type="button" class="btn btn-lg green hidden-print margin-bottom-5 BuyB" onclick="SubAjax()" style=" margin-bottom: 20px;">
+                                确订支付 <i class="fa fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+</div>
+        <!-- END PAGE CONTENT-->
+    </div><!-- /span -->
+</div><!-- /row -->
+<!-- PAGE CONTENT ENDS -->
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#area").area({ cache: region });
+        $("#province option[text='@ViewBag.Province']").attr("selected", true);
+        $("#city option[text='@ViewBag.City']").attr("selected", true);
+        $("#county option[text='@ViewBag.County']").attr("selected", true);
+    });
+
+    function SubAjax() {
+        var province = $("#province").find("option:selected").text();
+        var city = $("#city").find("option:selected").text();
+        var county = $("#county").find("option:selected").text();
+        $("#hidprovince").val(province);
+        $("#hidcity").val(city);
+        $("#hidcounty").val(county);
+        $(".form-horizontal").submit();
+    }
+</script>

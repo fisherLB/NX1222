@@ -1,0 +1,267 @@
+﻿@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<script src="/assets/js/jquery.validate.min.js"></script>
+<script src="/scripts/jq_area.js"></script>
+<script src="/scripts/region.js"></script>
+<link href="/Plugin/kindeditor-4.1.9/themes/default/default.css" rel="stylesheet" />
+<link href="/Plugin/kindeditor-4.1.9/plugins/code/prettify.css" rel="stylesheet" />
+<script src="/Plugin/kindeditor-4.1.9/kindeditor-min.js"></script>
+<script src="/Plugin/kindeditor-4.1.9/lang/zh_CN.js"></script>
+<script src="/Plugin/kindeditor-4.1.9/plugins/code/prettify.js"></script>
+<script>
+    //上传主图
+    KindEditor.ready(function (K) {
+        var editor = K.editor({
+            uploadJson: '/PicUpload/UpLoadPic/?dirName=Product&ASPSESSID=' + "@Session.SessionID",
+            allowFileManager: true
+        });
+        K('#btnUpManiPic').click(function () {
+            editor.loadPlugin('image', function () {
+                editor.plugin.imageDialog({
+                    showRemote: false,
+                    imageUrl: K('#UrlMainPic').val(),
+                    clickFn: function (url, title, width, height, border, align) {
+                        $('#logoimg').attr("src", url);
+                        $('#shoplogo').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+</script>
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+            @if (!string.IsNullOrEmpty(ViewBag.Brief))
+            {
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    @ViewBag.Brief
+                </small>
+            }
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" id="validation-form" method="post">
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right"></label>
+
+                    @*<div class="col-xs-12 col-sm-2">
+                            <div class="clearfix">
+                                <a class="btn btn-primary addnew">填充一个随机数据（测试用，密码6个1，6个2，6个3）</a>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="mainwallet">指定店铺的会员编号:</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <input type="text" name="username" class="form-control" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">店铺名称:</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="clearfix">
+                            <input type="text" name="shopname" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">店铺级别:</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <select name="shoplevel" class="form-control">
+                                <option value="3001">县级店铺</option>
+                                <option value="3002">市级店铺</option>
+                                <option value="3003">省级店铺</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">@T("店铺类型"):</label>
+
+                        <div class="col-xs-12 col-sm-2">
+                            <div class="clearfix">
+                                @Html.DropDownList("shopclass", new SelectList(JN.BLL.sysparams.GetModelList("PID=1000 and IsUse=1 order by sort"), "Value", "Name"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>*@
+
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="realname">店铺LOGO:</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <img src="" id="logoimg" height="120" />
+                            <input type="hidden" id="shoplogo" name="ShopLogo" />
+                            <input type="button" id="btnUpManiPic" value="本地上传图片" class="" />
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("手机号码"):</label>
+
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-phone"></i>
+                                </span>
+
+                                <input type="text" name="phone" class="form-control" />
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tel">电话:</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="clearfix">
+                            <input type="tel" name="tel" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">@T("邮箱"):</label>
+
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon-envelope"></i>
+                                </span>
+
+                                <input type="email" name="email" class="form-control" />
+                            </div>
+                        </div>
+                    </div>*@
+
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="idcard">客服QQ:</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="clearfix">
+                            <input type="text" name="qq" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="url">@T("所在地区"):</label>
+
+                        <div class="col-xs-12 col-sm-9" id="area">
+                            <select id="province" name="province"></select>
+                            <select id="city" name="city"></select>
+                            <select id="county" name="county"></select>
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="address">联系地址:</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <input type="text" name="address" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankcard">店铺简介:</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <textarea name="shopintro" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankcard">发货说明:</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <textarea name="reservestr1" class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-dangger" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            保存
+                        </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn btn-info" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="/assets/js/excanvas.min.js"></script>
+    <![endif]-->
+    @section scripts{
+    <script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#area").area({ cache: region });
+
+            $(".addnew").on('click', function () {
+                eval("var word=" + '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16) + '"');
+                eval("var word2=" + '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16) + '"');
+
+                $("input[name='realname']").val("李" + word + word2);
+                $("input[name='password']").val("111111");
+                $("input[name='passwordconfirm']").val("111111");
+                $("input[name='password2']").val("222222");
+                $("input[name='password3']").val("333333");
+                $("input[name='username']").val("L" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()));
+                $("input[name='gender']").attr("checked", '男');
+                $("input[name='phone']").val("186456" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()));
+                $("input[name='email']").val("oemsys" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + "@@163.com");
+                $("select[name='bankname']").val("中国银行");
+                $("input[name='bankcard']").val("6217 0033 9700 " + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + " 918");
+                $("input[name='bankofdeposit']").val("广西南宁北郊支行");
+                $("input[name='bankuser']").val($("input[name='realname']").val());
+            });
+
+        });
+    </script>
+</div>
+}

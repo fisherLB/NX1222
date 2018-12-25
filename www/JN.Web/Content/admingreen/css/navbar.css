@@ -1,0 +1,91 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+body,ol,ul,li,p,strong,span,h1,h2,h3,h4,h5,h6{
+		margin:0;
+		list-style:none;
+}
+
+.list{
+	font-size: 12px;
+	color: #002280;
+	text-align:left;
+	padding:10px 10px;
+	voice-family:"\"}\"";
+	voice-family:inherit;
+	overflow:hidden;
+	width:140px;
+}
+.list ul{
+padding-left:5px;
+}
+.list li{padding-left:5px;}
+/*============
+菜单链接的样式
+==============*/
+
+.list a{
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color:#000;
+    display: block;
+    font-size: 13px;
+    font-weight: 300;
+    margin:0;
+    padding-bottom:3px;
+    padding-left:10px !important;
+    padding-right: 0;
+    padding-top:3px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    
+}
+.list_menu>a{position:relative;text-indent:10px;}
+.list_menu>a span{
+	display:inline-block;
+	position:absolute;
+	top:5px;
+	left:5px;
+    width:12px;
+    height:12px;
+    margin:0px 5px 0 0;
+	 background:url(./images/admin.gif) no-repeat left center;
+}
+
+.tree,.tree ul,.tree li{list-style:none;margin:0;padding:0;zoom: 1;}
+.tree ul{margin-left:8px;}
+.tree li a{color:#555;padding:.1em 7px .1em 27px;display:block;text-decoration:none;border:1px dashed #fff;background:url(images/icon-file.gif) 5px 50% no-repeat;}
+.tree li a.tree-parent{background:url(images/icon-folder-open.gif) 5px 50% no-repeat;}
+.tree li a.tree-parent-collapsed{background:url(images/icon-folder.gif) 5px 50% no-repeat;}
+.tree li a:hover,.tree li a.tree-parent:hover,.tree li a:focus,.tree li a.tree-parent:focus,.tree li a.tree-item-active{color:#000;border:1px solid#eee;background-color:#fafafa;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;}
+.tree li a:focus,.tree li a.tree-parent:focus,.tree li a.tree-item-active{border:1px solid #e2f3fb;background-color:#f2fafd;}
+.tree ul.tree-group-collapsed{display:none;}
+.tree-parent,.tree-parent-collapsed,.tree-item-active{
+	 border:none;
+	 background:none;
+}
+.STYLE1 {
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.STYLE2 {
+	font-size: 12px;
+	color: #333333;
+}
+
+a:link {font-size:12px; color:#000000; text-decoration:none;}
+a:visited {font-size:12px; color:#000000; text-decoration:none;}
+a:hover {font-size:12px; color:#00CCFF;text-decoration:none;}
+.STYLE4 {font-size: 12px}
+
+.menu_title SPAN {FONT-WEIGHT: bold; LEFT: 3px; COLOR: #ffffff; POSITION: relative; TOP: 2px 
+}
+.menu_title2 SPAN {
+	FONT-WEIGHT: bold; LEFT: 3px; COLOR: #FFCC00; POSITION: relative; TOP: 2px
+}
+.td_bord{border:1px solid #a0e448;border-top:none;}
+td.td_bord td{cursor:pointer;}
+.left_subbtn{cursor:pointer;}
+
+
+

@@ -1,0 +1,87 @@
+﻿<!-- 完成付款 -->
+
+    <section id="confirmpay_setp1">
+        <div class="modal-body" style="height:350px;">
+            @{
+                var mModel = MvcCore.Unity.Get<JN.Data.Service.IMatchingService>().Single(Request["id"].ToInt());
+                if (mModel != null)
+                {
+                    <input type="radio" class="comfir2" value="1" name="confirmtype">@T("我完成打款")<br />
+                    @*if (mModel.Status < 2)
+                    {
+                        <input type="radio" class="comfir2" value="2" name="confirmtype">@T("延迟24小时打款")<br />
+                    }*@
+                    @*<input type="radio" class="comfir2" value="-1" name="confirmtype">@T("拒绝打款")<br />*@
+                }
+            }
+        </div>
+        <div class="modal-footer">
+            <!--
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            -->
+            <button type="button" class="btn-primary" id="btnConfirmNext">@T("确认")</button>
+        </div>
+    </section>
+    <section id="confirmpay_setp2" style="display:none">
+        <form id="frmConfirmPay" method="post" enctype="multipart/form-data">
+            <div class="modal-body" style="height:350px;">
+                <p>@T("上传付款凭证图片")</p>
+                <input type="file" name="imgurl" class="form-control" />
+                <p style="clear:both;">@T("留言")</p>
+                <input type="hidden" name="id" id="id" value="@Request["id"]">
+                <textarea rows="4" class="form-control" name="content" id="tjcon" style="width: 100%;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnConfirmPay" class="btn-primary">@T("确认")</button>
+            </div>
+        </form>
+    </section>
+    <script>
+        $("#btnConfirmPay").click(function () {
+            $("#frmConfirmPay").ajaxSubmit({
+                url: "@Url.Action("ConfirmPay")",
+                type: "post",
+                success: function (data) {
+                    if (data.Status == 200) {
+                        alert("提交成功，即将为您跳转！");
+                        location.href = "@(Url.Action("Index", "Home"))";
+                    } else {
+                        alert("提交失败：" + data.Message);
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        });
+        $("#btnConfirmNext").click(function () {
+            var id = $("#id").val();
+            var status = $('.comfir2:checked').val();
+            if (status == 1) {
+                $("#confirmpay_setp1").css("display", "none");
+                $("#confirmpay_setp2").css("display", "block");
+            }
+            else if (status == 2) {
+                $.post('@(Url.Action("DelayedPay"))', { id: id}, function (data) {
+                    if (data.Status == 200) {
+                        alert("提交成功，即将为您跳转！");
+                        location.href = "@(Url.Action("Index", "Home"))";
+                    } else {
+                        alert("提交失败：" + data.Message);
+                    }
+                });
+            }
+            else if (status == -1) {
+                if(confirm("@T("拒绝付款您的帐号可能会被冻结，请确定是否要这么做?")")){
+                    $.post('@(Url.Action("RefusePay"))', { id: id}, function (data) {
+                        if (data.Status == 200) {
+                            alert("提交成功，即将为您跳转！");
+                            location.href = "@(Url.Action("Index", "Home"))";
+                        } else {
+                            alert("提交失败：" + data.Message);
+                        }
+                    });
+                }
+            }
+        });
+    </script>

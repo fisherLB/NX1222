@@ -1,0 +1,265 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Neon Admin Panel" />
+    <meta name="author" content="" />
+
+    <title>@(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName) | Login</title>
+
+
+    <link rel="stylesheet" href="/theme/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css" />
+    <link rel="stylesheet" href="/theme/neon/assets/css/font-icons/entypo/css/entypo.css" />
+    <!--link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic"-->
+    <link rel="stylesheet" href="/theme/neon/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-core.css" />
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-theme.css" />
+    <link rel="stylesheet" href="/theme/neon/assets/css/custom.css" />
+    <link href="~/Theme/neon/assets/css/neon-forms.css" rel="stylesheet" />
+    <!--[if !IE]> -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="/assets/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]><script src="/assets1/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <style>
+        .file-input-wrapper {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+            .file-input-wrapper input[type=file], .file-input-wrapper input[type=file]:focus, .file-input-wrapper input[type=file]:hover {
+                position: absolute;
+                top: 0;
+                left: 0;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+                z-index: 99;
+                outline: 0;
+            }
+
+        .file-input-name {
+            margin-left: 8px;
+        }
+    </style>
+
+</head>
+<body class="page-body login-page login-form-fall loaded login-form-fall-init">
+    <!--[if lt IE 9]>
+    <div style="color:#fff; width:100%; height:100%; line-height:100px; font-size:20px; text-align:center">
+        您目前使用的是旧版浏览器，为更加安全使用请下载最新浏览器<a style="color:red" href="http://browsehappy.com/" target="_blank">点此下载</a>
+    </div>
+    <![endif]-->
+    <!-- This is needed when you send requests via Ajax -->
+    <script type="text/javascript">
+        var baseurl = '';
+    </script>
+
+    <div class="login-container">
+
+        <div class="login-header login-caret">
+
+            <div class="login-content">
+
+                <a class="logo" style="font-size:60px; color:#fff;">
+                    <img src="~/Images/login_logo.png" style="width:330px" />
+                </a>
+                <!-- progress bar indicator -->
+                <div class="login-progressbar-indicator">
+                    <h3>0%</h3>
+                    <span>logging in...</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="login-progressbar">
+            <div></div>
+        </div>
+
+        <div class="login-form">
+
+            <div class="login-content">
+
+                <div class="form-login-error">
+                    <h3>登陆错误</h3>
+                    <p>请输入正确的用户名，密码</p>
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="entypo-user"></i>
+                        </div>
+
+                        <input type="text" class="form-control" name="username" placeholder="Please enter a username" autocomplete="off" style="border: 0 !important;" />
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="entypo-key"></i>
+                        </div>
+
+                        <input type="password" class="form-control" name="password" placeholder="Please enter the password" autocomplete="off" style="border: 0 !important;"/>
+                    </div>
+
+                </div>
+
+                <div class="form-group" style="display:none">
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="entypo-key"></i>
+                        </div>
+
+                        <select class="form-control" name="lang" style="background: #373e4a">
+                            @{
+                                var langlist = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 4000 && x.IsUse).OrderBy(x => x.Sort).ToList();
+                                if (langlist.Any() && langlist.Count > 0)
+                                {
+                                    foreach (var param in langlist)
+                                    {
+                                        <option value="@param.Value2" @(param.Value2 == "zh-TW" ? "selected" : "")>@param.Value</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="entypo-key"></i>
+                        </div>
+                        <input type="text" class="form-control" style="width:100px;border: 0 !important;" name="code" placeholder="" autocomplete="off" />
+                        <img id="imgCode" src="/UserCenter/Login/GetCodeImage?id=1" onclick="ChangeCheckCode();return false;" style="border:none; height:35px" />
+                    </div>
+                </div>
+                @*<div class="form-group">
+
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="entypo-key"></i>
+                            </div>
+
+                            <select class="form-control" name="lang" style="background: #373e4a">
+                                @{
+                                    IList<JN.Entity.TSysParam> langlist = JN.BLL.sysparams.GetModelList("PID=4000 order by sort");
+                                    if (langlist.Any() && langlist.Count > 0)
+                                    {
+                                        foreach (JN.Entity.TSysParam param in langlist)
+                                        {
+                                            <option value="@param.Value2">@param.Value</option>
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                    </div>*@
+
+                <div class="form-group">
+                    <button id="btnlogin" class="btn btn-primary btn-block btn-login" onclick="loginSubmit()">
+                        <i class="entypo-login"></i>
+                        Login
+                    </button>
+                </div>
+
+                <div class="login-bottom-links">
+
+                        <a href="/UserCenter/Login/GetPwd" class="link">忘记密码? <i class="entypo-right-open"></i></a>
+
+                    </div>
+
+                <div class="login-bottom-links">
+
+                    @MvcHtmlString.Create(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).CopyInfo)
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bottom Scripts -->
+    <script src="/theme/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+    <script src="/theme/neon/assets/js/bootstrap.js"></script>
+    <script src="/theme/neon/assets/js/joinable.js"></script>
+    <script src="/theme/neon/assets/js/neon-api.js"></script>
+    <script src="/theme/neon/assets/js/jquery.validate.min.js"></script>
+    <script src="/theme/neon/assets/js/neon-login.js"></script>
+    <script src="/theme/neon/assets/js/neon-custom.js"></script>
+    <script type="text/javascript">
+        function ChangeCheckCode() {
+            var oldUrl = $('#imgCode').attr("src");
+            $('#imgCode').attr("src", oldUrl + '1');
+        }
+
+        jQuery(function ($) {
+            $('#btnlogin').on('click', function () {
+                loginSubmit();
+            });
+        });
+
+        function loginSubmit() {
+            var name = $("input[name='username']").val();
+            var pwd = $("input[name='password']").val();
+            var lang = $("select[name='lang']").val();
+            var code = $("input[name='code']").val();
+            var gourl = "/UserCenter/Login";
+            $.post(gourl, { username: name, password: pwd, lang: lang, code: code }, function (response) {
+                if (response.Status == 200) {
+                    window.location.href = response.Message;
+                } else {
+                    ChangeCheckCode();
+                    alert(response.Message);
+                }
+            });
+        }
+
+        if (document.addEventListener) {//如果是Firefox
+            document.addEventListener("keypress", fireFoxHandler, true);
+        } else {
+            document.attachEvent("onkeypress", ieHandler);
+        }
+        function fireFoxHandler(evt) {
+            //alert("firefox");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+        function ieHandler(evt) {
+            //alert("IE");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+.turntable-bg {
+  width: 650px;
+  height: 600px;
+  /*margin: 0 auto;*/
+  position: relative;
+ /* background: url("../images/turntable-bg.jpg");*/
+}
+.turntable-bg .mask {
+  width: 454px;
+  height: 451px;
+  position: absolute;
+  left: 116px;
+  top: 60px;
+  /*z-index:9;*/
+}
+.turntable-bg .pointer {
+  width: 174px;
+  height: 228px;
+  position: absolute;
+left: 46%;
+    top: 52%;
+  margin-left: -67px;
+  margin-top: -144px;
+  z-index: 8;
+}
+.turntable-bg .rotate {
+/*	border:8px solid #fff;*/
+	border-radius:225px;
+	box-shadow:5px 8px 16px #d0c4c0;
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  left: 116px;
+  top: 60px;
+}
+
+
+
+
+.m-title h3 {
+    width: 100px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    color: #ffb820;
+    /* background: #D82828; */
+    margin: 0 auto;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+.turntable-bg {
+  width: 800px;
+  height: 450px;
+
+  position: relative;
+  background:url(../images/s3_bg.png);
+}
+.turntable-bg .mask {
+  width: 454px;
+  height: 451px;
+  position: absolute;
+  left: 116px;
+  top: 60px;
+  /*z-index:9;*/
+}
+.turntable-bg .pointer {
+  width: 174px;
+  height: 228px;
+  position: absolute;
+  left: 23%;
+  top: 52%;
+  margin-left: -67px;
+  margin-top: -144px;
+  z-index: 8;
+}
+.turntable-bg .rotate {/* border:8px solid #fff; *//* border-radius:225px; *//* box-shadow:5px 8px 16px #d0c4c0; */width: 450px;height: 450px;position: absolute;left: -2px;top: -1px;}
+.list {float: right;width: 320px;padding-top: 24px;position: absolute;left: 420px;overflow: hidden;}
+.list strong { position: relative; left: -45px; display: block; height: 65px; line-height: 65px; font-size: 32px; color: #ffe63c;}
+.list h4 {height: 35px;margin: 10px 0 10px;line-height: 35px;font-size: 24px;color: #fff;}
+.list ul {line-height: 36px;list-style-type: none;font-size: 12px;/* background: #BB1C1C; */color: #fff;width: 240px;margin: 0 auto;height: 228px;border-radius: 4px;}
+.list ul li{border-bottom: 1px dashed #FCAB20;}
+.list span { display: inline-block; width: 94px;}

@@ -1,0 +1,185 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.Matching>
+@{
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+
+    ViewBag.Title = "首页";
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+<script src="~/theme/mmm/js/box.js"></script>
+<div class="row">
+    <div class="col-md-12">
+        <img src="/theme/mmm/images/MMM-banner.jpg" width="100%" style="margin-bottom: 10px;">
+    </div>
+</div>
+<div class="row">
+    <div class=" col-xs-12 col-sm-12 col-md-6">
+        <div class="hpanel">
+            <div class="panel-body" style="background: url(/theme/mmm/images/button-img1.jpg) no-repeat right bottom #fff; color: #fff; background-size: cover;">
+                <div class="text-center">
+                    <h2 class="m-b-xs" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("我要帮助其他人")</h2>
+                    <p class="font-bold text-success" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("购买" + cacheSysParam.SingleAndInit(x => x.ID == 2001).Value)</p>
+                    <div class="m" style="height: 40px;">
+                    </div>
+                    <p class="small" style="height: 60px;">
+                    </p>
+                    <button class="btn btn-success btn-lg" onclick="javascript: winopen('提供帮助', '@(Url.Action("_PartialSubmitSupplyHelp"))');">@("提供帮助")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6">
+        <div class="hpanel">
+            <div class="panel-body" style="background: url(/theme/mmm/images/button-img2.jpg) no-repeat center bottom #fff; color: #fff; background-size: cover; ">
+                <div class="text-center">
+                    <h2 class="m-b-xs" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("我需要别人帮助")</h2>
+                    <p class="font-bold text-warning" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("出售" + cacheSysParam.SingleAndInit(x => x.ID == 2001).Value)</p>
+                    <div class="m" style="height: 40px;">
+                    </div>
+                    <p class="small" style="height: 60px;">
+                    </p>
+                    <button class="btn btn-warning btn-lg" onclick="javascript: winopen('接受帮助', '@(Url.Action("_PartialSubmitAcceptHelp"))');">@("接受帮助")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 hide">
+        <div class="hpanel" id="ad">
+            <div class="panel-body">
+                <div class="text-center" style="overflow:auto" id="bd">
+                    <h2 class="m-b-xs" id="total">0</h2>
+                    <div>
+                        <div class="small" id="show">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="context">
+    <div id="ListContent">
+        @Html.Partial("_PartialMatchList", Model)
+    </div>
+    <div class="col-md-3">
+        <div id="notice" class="notice">
+            <div id="notice-tit" class="notice-tit">
+                <ul>
+                    <li onmouseover="js()" id="js" class="select">
+                        <a href="#">@T("申请提供帮助")</a>
+                    </li>
+                    <li onmouseover="tg()" id="tg">
+                        <a href="#">@T("申请接受帮助 ")</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="notice-con" class="notice-con">
+                <div class="mod2" style="display:block">
+                    @{
+                        var list = MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().List(x => x.UID == Umodel.ID).OrderByDescending(x => x.CreateTime).ToList();
+                        if (list.Count > 0)
+                        {
+                            foreach (var item in list)
+                            {
+                            <div class="col-md-12" style="border-top:#ccc 1px solid;">
+                                <a class="list-group-item " style="border:none;" href="">
+                                    <h5 class="list-group-item-heading">@T("申请提供帮助")</h5>
+                                </a>
+                                <div style="margin-bottom:1em; margin-right:1em;">
+                                    <font>@T("编号"):@item.SupplyNo</font>
+                                    <br>
+                                    <font>@T("参与者"):@item.UserName</font>
+                                    <br>
+                                    <font>@T("金额"):@item.SupplyAmount</font>
+                                    <br>
+                                    <font>@T("剩余金额"):@(item.SupplyAmount - item.HaveMatchingAmount)</font>
+                                    <br>
+                                    <font>@T("日期"):@item.CreateTime</font>
+                                    <br>
+                                    <font>
+                                        @T("状态"): @typeof(JN.Data.Enum.HelpStatus).GetEnumDesc(item.Status)
+                                    </font>
+
+                                    @if (item.Status == (int)JN.Data.Enum.HelpStatus.NoMatching)
+                                    {
+                                        <a href="@(Url.Action("CancelSupplyQueuing"))/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                    }
+                                </div>
+                            </div>
+                            }
+                        <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:right; padding-right:10px">
+                            <a href="@(Url.Action("NoPairlist", "Finance"))?active=0"> @T("更多")>></a>
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:center; padding-right:10px">
+                            没有更多信息
+                        </div>
+                        }
+                        }
+                </div>
+
+                <div class="mod1" style="display:none">
+                @{
+                    var listin = MvcCore.Unity.Get<JN.Data.Service.IAcceptHelpService>().List(x => x.UID == Umodel.ID).OrderByDescending(x => x.CreateTime).ToList();
+                    if (listin.Count > 0)
+                    {
+                        foreach (var item in listin)
+                        {
+                            <div class="col-md-12" style="border-top:#ccc 1px solid;">
+                                <a class="list-group-item " style="border:none;" href="">
+                                    <h5 class="list-group-item-heading">@T("申请接受帮助 ")</h5>
+                                </a>
+
+                                <div style="margin-bottom:1em; margin-right:1em;">
+                                    <font>@T("编号"):@item.AcceptNo</font>
+                                    <br>
+                                    <font>@T("参与者"):@item.UserName</font>
+                                    <br>
+                                    <font>@T("金额"):@item.AcceptAmount</font>
+                                    <br>
+                                    <font>@T("剩余金额"):@(item.AcceptAmount - item.HaveMatchingAmount)</font>
+                                    <br>
+                                    @{ int coinid = item.CoinID;}
+                                    <font>@T("钱包"): @(cacheSysParam.SingleAndInit(x => x.ID == item.CoinID).Name)钱包</font>
+                                    <br>
+                                    <font>@T("日期"):@item.CreateTime</font>
+                                    <br>
+                                    <font>
+                                        @T("状态"):@typeof(JN.Data.Enum.HelpStatus).GetEnumDesc(item.Status)
+                                    </font>
+                                    @if (item.Status == (int)JN.Data.Enum.HelpStatus.NoMatching)
+                                    {
+                                        <a href="@(Url.Action("CancelAcceptQueuing"))/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:right; padding-right:10px">
+                            <a href="@(Url.Action("NoPairlist", "Finance"))?active=1"> @T("更多")>></a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:center; padding-right:10px">
+                            没有更多信息
+                        </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--group list end-->
+</div>

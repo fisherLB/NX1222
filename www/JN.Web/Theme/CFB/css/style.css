@@ -1,0 +1,80 @@
+@charset "gb2312";
+/* CSS Document */
+
+*{margin:0; padding:0;}
+body{font-size:13px; font-family:"微软雅黑"; color:#000; /*background:#F3F3F3;*/}
+
+a{color:#000; text-decoration:none;}
+a:hover{color:#999999; text-decoration:underline;}
+
+.w0{ width:50px;}
+.w1{width:100px;}
+.w2{width:150px;}
+.w3{width:200px;}
+.w4{width:300px;}
+.w5{width:133px;}
+.w6{width:400px;}
+
+.p1{ padding:10px;}
+.pl1{ padding-left:10px;}
+.pl2{ padding-left:20px;}
+.pl3{ padding-left:50px;}
+.pl4{ padding-left:100px;}
+
+.red{color:#F00;}
+.lh{ height:30px;}
+
+/*
+	--框架样式
+*/
+.Location,.box_title{width:98%; margin:auto; margin-bottom:1px; background:#fff;color:#000; text-indent:10px;font-size:18px;border-top:1px solid #111111; border-bottom:1px solid #dedede; line-height:36px;}
+.box{width:98%; margin:auto;}
+.box_con{}
+
+table{border-collapse: collapse; line-height:2em; }
+table#t1 th {text-align:center; background:#eeeeee;}
+table#t1 td{ border:1px solid #eee!important; background:#fff;}
+
+
+/*
+	--分页样式
+*/
+.pageNow{padding:4px 8px; line-height:26px; border:1px solid #dedede; background-color:#EDEDED; margin:4px; border-radius:4px;}
+.pagelist a{ border:1px solid #dedede; padding:4px 8px; margin:4px;font-size:13px; text-decoration:none; line-height:26px; background-color:#EDEDED; border-radius:4px;}
+.pagelist a:hover{ background-color:#cccccc; border:1px solid #dedede; padding:4px 8px; margin:4px;}
+.page{ padding-right:20px; text-align:right;}
+.formpage{ margin:0px; padding:0px; float:right; line-height:26px; display:block; margin:3px 0 0 4px;}
+.pagetxt{width:30px; height:14px;}
+.pagebtn{width:50px; font:12px;}
+
+/*
+	--控件样式
+*/
+input,textarea{background-color:#fff;color: #999;}
+textarea{ border:1px solid #FEB101;}
+.btn{ background:#009933; border:none;padding:5px 15px;font-size: 12px;color:#fff;line-height:22px; border-radius:4px;}
+a.btn:hover{ color:#FFF; text-decoration:none;}
+.inp{padding:5px;font-size:13px; height:18px; border-radius:3px;border: 1px solid #ccc;}
+select{ padding:3px 2px;}
+.newbtn{ display:block; width:80px; background-color:#C93; border:1px solid #FFFF00; text-decoration:none; border-radius:4px;}
+.newbtn:hover{ text-decoration:none; color:#fff;}
+.bj{ background:#F00;border:none;padding:4px 6px;font-size: 12px;color:#fff;line-height:22px; border-radius:12px; margin:5px;}
+.bj:hover{ color:#fff; text-decoration:none;}
+.big_btn{ width:80%; height:150px; background:#009933; display:block; margin:10px 0; font-size:36px; line-height:150px; color:#fff; border-radius:150px;}
+.big_btn:hover{ color:#FFF; text-decoration:none;}
+
+/*
+	--网络图样式
+*/
+.NullRoom{width:118px; height:90px; margin:auto; border:1px solid #FEB101; text-align:center; line-height:90px;}
+.RoomDiv{width:120px; height:90px; margin:auto;}
+.RoomDiv table{width:100%; height:100%; text-align:center;}
+.RoomDiv table td{ height:30px; border:1px solid #FEB101;}
+
+
+/**/
+.main_box{ width:100%;}
+.main_box li{ line-height:30px; list-style: decimal inside;}
+
+/* 图片上传 */
+.fileimg{ background:#FFF; width:500px; margin:auto; text-align:center; padding:20px 0px; margin-top:100px; border-radius:5px;}

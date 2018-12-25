@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Page title -->
+    <title>@T(JN.BLL.syssettings.GetModel(1).SysName)</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/theme/mmm/css/font-awesome.css">
+    <link rel="stylesheet" href="/theme/mmm/css/metisMenu.css">
+    <link rel="stylesheet" href="/theme/mmm/css/animate.css">
+    <link rel="stylesheet" href="/theme/mmm/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css">
+
+    <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css">
+    <link rel="stylesheet" href="/theme/mmm/css/default.css">
+    @*<link rel="stylesheet" href="/theme/mmm/css/style.css">*@
+    <!-- App styles -->
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/theme/mmm/js/jquery-ui.min.js"></script>
+    <script src="/theme/mmm/js/jquery.slimscroll.min.js"></script>
+    <script src="/theme/mmm/js/bootstrap.min.js"></script>
+    @*<script src="/theme/mmm/js/jquery.flot.js"></script>
+        <script src="/theme/mmm/js/jquery.flot.resize.js"></script>
+        <script src="/theme/mmm/js/jquery.flot.pie.js"></script>*@
+    <script src="/theme/mmm/js/curvedLines.js"></script>
+    <script src="/theme/mmm/js/index.js"></script>
+    <script src="/theme/mmm/js/metisMenu.min.js"></script>
+    <script src="/theme/mmm/js/icheck.min.js"></script>
+    <script src="/theme/mmm/js/jquery.peity.min.js"></script>
+
+    <script src="/theme/mmm/js/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="/theme/mmm/css/sweet-alert.css">
+    <script src="/theme/mmm/js/sweet-alert.min.js"></script>
+    <!-- App scripts -->
+    <script src="/theme/mmm/js/homer.js"></script>
+    @*<script src="/theme/mmm/js/alert.js"></script>
+        <script src="/theme/mmm/js/charts.js"></script>*@
+    <link rel="stylesheet" href="/theme/1006/nmmcss/main.css" type="text/css">
+    <link rel="stylesheet" href="/theme/1006/nmmcss/zh-CN.css" type="text/css">
+
+    <script language="javascript">
+        $(window).bind('beforeunload',function(){
+            var divObj=document.createElement("div");
+            divObj.setAttribute('class','loading');
+            divObj.innerHTML='@T("正在拼命处理中,请稍候...")';
+            $('body').append(divObj);
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function menu(index) {
+            $(".nav li").removeClass("seleli");
+            $(".nav li").eq(index).addClass("seleli");
+            $("#sidebar ul").hide();
+            $("#menu" + index).show();
+        }
+    </script>
+
+    <style>
+        .mainarea {
+            position:relative;
+        }
+        .row {
+            margin-right: 0;
+           margin-left: 0; 
+        }
+        .col-xs-12
+        {
+            padding-right:0;
+            padding-left:0;
+        }
+            /*.clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .btn-toolbar:before, .btn-toolbar:after, .btn-group-vertical > .btn-group:before, .btn-group-vertical > .btn-group:after, .nav:before, .nav:after, .navbar:before, .navbar:after, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after, .pager:before, .pager:after, .panel-body:before, .panel-body:after, .modal-footer:before, .modal-footer:after {
+                display:table-row
+            }*/
+    </style>
+</head>
+<body>
+@{JN.Entity.TUser onUser = JN.BLL.users.IsLogin();}
+
+    <header class="navbar navbar-static-top" id="top" role="header">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/Home/Index/home/" class="navbar-brand"><img src="@JN.BLL.syssettings.GetModel(1).LogoPic" style="max-height:60px" alt=""></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right" role="sub-navigation">
+                @*<li class="dropdown" id="lang_nav">
+                    <a href="" data-toggle="dropdown"><span class="glyphicon glyphicon-th btn-lg"></span></a>
+                    <ul class="dropdown-menu" role="languageMenu">
+                        <li><a href="/usercenter/home?lang=en-US"><span class="language-sel-en"></span>English</a></li>
+                        <li><a href="/usercenter/home?lang=zh-CN"><span class="language-sel-zh-CN"></span>简体中文</a></li>
+                    </ul>
+                </li>*@
+
+
+                <li>
+                    <a href="/usercenter/home"><span class="glyphicon glyphicon-home btn-lg"></span></a>
+                </li>
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown"><span class="glyphicon glyphicon-user btn-lg"></span></a>
+                    <ul class="dropdown-menu pull-right" id="user-details">
+                        <li class="clearfix">
+                            <span class="details">@T("编号")</span>
+                            <span class="count">@JN.BLL.users.IsLogin().ID</span>
+                        </li>
+                        <li class="clearfix">
+                            <span class="details">@T("姓名")</span>
+                            <span class="count">@JN.BLL.users.IsLogin().RealName</span>
+                        </li>
+                        <li class="clearfix">
+                            <span class="details">@T("用户名")</span>
+                            <span class="count">@JN.BLL.users.IsLogin().UserName</span>
+                        </li>
+
+                    </ul>
+                </li>
+
+                @*<li>
+                    <a href="/user/mail/write">
+                        <span class="glyphicon"><img src="/theme/1006/nmmcss/aa3.png" class="sdfae54re6" style="width:16px" /></span> <span class="hidden-xs">@T("信息")</span>
+                    </a>
+                </li>*@
+
+                <li><a href="###" onclick="tc()"><span class="glyphicon glyphicon-off btn-lg"></span></a></li>
+            </ul>
+            <nav class="collapse navbar-collapse" role="main-navigation">
+                <ul class="nav navbar-nav">
+                    <li class="">
+                        <a href="/usercenter/home" class="glyphicons home"><i></i>@T("首页")</a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@T("帐户管理") <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/add").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/add">@T("会员注册")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/unactivation").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/unactivation">@T("待激活的会员")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/modify").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/modify">@T("我的档案")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/index").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/index">@T("直推会员")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/treeview").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/treeview">@T("推荐图谱")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/usercenter/home/changePassword").ToLower())) ? "rig_seleli" : "")"><a href="/usercenter/home/changePassword">@T("修改密码")</a></li>
+
+                        </ul>
+                    </li>
+                    <!--<li class="active">-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@T("经理专区") <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/agent/applyagent").ToLower())) ? "rig_seleli" : "")"><a href="/user/agent/applyagent">@T("申请经理")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/agent/index").ToLower())) ? "rig_seleli" : "")"><a href="/user/agent/index">@T("我的会员")</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@T("财务管理") <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/finance/wallet").ToLower())) ? "rig_seleli" : "")"><a href="/user/finance/wallet">@T("我的钱包")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/Finance/NoPairList").ToLower())) ? "rig_seleli" : "")"><a href="/user/Finance/NoPairList">@T("会员动态")</a></li>
+                            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/finance/pincode").ToLower())) ? "rig_seleli" : "")"><a href="/user/finance/pincode">@T("我的PIN码")</a></li>
+                        </ul>
+                    </li>
+                    <li class=""><a href="/user/mail/write" class="glyphicons user"><i></i>@T("邮件中心")</a></li>
+
+                    <li class="">
+                        <a href="/user/notice" class="glyphicons home"><i></i>@T("最新公告")</a>
+                    </li>
+                    <li class=""><a href="#modal-form" data-toggle="modal" class="glyphicons sharlink"><i></i>@T("推广链接")</a></li>
+
+                </ul>
+            </nav>
+
+            <div id="modal-form" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="blue bigger">我的推广链接</h4>
+                            </div>
+                            <div class="modal-body overflow-visible">
+                                <a href="@Request.Url.GetLeftPart(UriPartial.Authority)/user/Reg/index?urluid=@JN.BLL.users.IsLogin().UserName" target="_blank">@Request.Url.GetLeftPart(UriPartial.Authority)/user/Reg/index?urluid=@JN.BLL.users.IsLogin().UserName</a>
+                        </div>
+                            </div>
+                        </div>
+                </div>
+                            </div>
+</header>
+    <div id="wrapper">
+
+        <div class="page-title">
+            <div class="container">
+                <h3 class="title">@T(JN.BLL.syssettings.GetModel(1).SysName)</h3>
+                <ul class="walletNav clearfix">
+                    <li class="clearfix">
+                        <img src="/theme/1006/nmmcss/r-wallet.png" alt="" class="img">
+                        <span class="wallet">
+                            @T(JN.BLL.sysparams.GetModel(2001).Value + "钱包")<br>
+                            <strong class="wallet-color">RMB@(JN.BLL.users.IsLogin().Wallet2001)</strong>
+                        </span>
+                    </li>
+                    <li class="clearfix">
+                        <img src="/theme/1006/nmmcss/e-wallet.png" alt="" class="img">
+                        <span class="wallet">
+                            <span class="tilte-w">@T(JN.BLL.sysparams.GetModel(2002).Value + "钱包")</span>
+                            <strong class="wallet-color">RMB@(JN.BLL.users.IsLogin().Wallet2002)</strong>
+                        </span>
+                    </li>
+
+                    <li class="clearfix">
+                        <img src="/theme/1006/nmmcss/i-wallet.png" alt="" class="img">
+                        <span class="wallet">
+                            @T(JN.BLL.sysparams.GetModel(2003).Value + "钱包")<br>
+                            <strong class="wallet-color">RMB@(JN.BLL.users.IsLogin().Wallet2003)</strong>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @*<div class="clockWrap">
+            <div class="container clearfix">
+                <div class="pull-left" id="userRank"><span><img src="/theme/1006/nmmcss/a4.png"></span> 级别 : 会员</div>
+                <div class="clock-location">
+                    <strong class="mr5">服务器时间</strong>
+                    <span id="server_time_text"></span>
+                </div>
+                <div class="clock-location">
+                    <strong class="mr5">当地时间</strong>
+                    <span id="local_time_text"></span>
+                </div>
+            </div>
+        </div>*@
+
+
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+            
+    <!-- Vendor scripts -->
+    <div class="modal container fade" id="childwindow" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="color-line"></div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="childwindowtitle"></h4>
+
+                </div>
+                <section id="childwindowiframe">
+                    <div class="modal-body" style="text-align:center">
+                        <p style="text-align:center">@T("载入中，请稍候...")</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+</html>
+    <!--gethelp modal end-->
+    <!-- <script type="text/javascript" src="/js/socket.io.js"></script> -->
+
+    <script src="~/Plugin/layer/layer.js"></script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $(function () { $('[data-toggle="popover"]').popover() });
+            $('#childwindow').on('hidden.bs.modal', function (e) { window.location.reload(); });
+        });
+        function winopen(title, url, width) {
+            if (browser.versions.iPhone || browser.versions.android) {
+                $('.modal-dialog').width(350);
+            }
+            else {
+                if (width != "") $('.modal-dialog').width(width);
+            }
+            $('#childwindowiframe').load(url);
+            $("#childwindowtitle").html(title);
+            $("#childwindow").modal();
+        }
+        function winclose() {
+            $("#childwindow").modal('hide');
+        }
+
+        function tc() {
+        layer.confirm("@T("您确定要退出么？")",
+        {
+            btn: ['@T("是的")', '@T("不是，点错了")'], //按钮
+            }, function () {
+                window.location.href = '/usercenter/home/logout';
+            })
+        }
+
+
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }()
+        }
+
+</script>

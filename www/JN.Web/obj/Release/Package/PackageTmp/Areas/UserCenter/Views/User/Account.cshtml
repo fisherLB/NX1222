@@ -1,0 +1,126 @@
+﻿@model JN.Data.User
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            
+            <div class="row">
+                <div class="col-sm-3">
+                    @{
+                        var zlist = MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => (x.ParentPath.Contains("," + Model.ID.ToString() + ",") || x.ParentID == Model.ID) && x.IsActivation);
+                        decimal zyj = zlist.Count() > 0 ? zlist.Sum(x => x.Investment) : 0;
+                    }
+                    <div class="tile-stats tile-red">
+                        <div class="icon"><i class="entypo-users"></i></div>
+                        <div class="num ng-binding">@zyj.ToString("F2")</div>
+
+                        <h3>总业绩</h3>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-3">
+                    @{
+                        var xzlist = MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => (x.ParentPath.Contains("," + Model.ID.ToString() + ",") || x.ParentID == Model.ID) && x.IsActivation && System.Data.Entity.SqlServer.SqlFunctions.DateDiff("DAY", x.CreateTime, DateTime.Now) == 0);
+                        decimal xzyj = xzlist.Count() > 0 ? xzlist.Sum(x => x.Investment) : 0;
+                    }
+                    <div class="tile-stats tile-green">
+                        <div class="icon"><i class="entypo-chart-bar"></i></div>
+                        <div class="num ng-binding">@xzyj.ToString("F2")</div>
+
+                        <h3>新增业绩</h3>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <div class="tile-stats tile-aqua">
+                        <div class="icon"><i class="entypo-cc-nc"></i></div>
+                        <div class="num ng-binding">@(Model.Addup1101 ?? 0 + Model.Addup1102 ?? 0 + Model.Addup1103 ?? 0 + Model.Addup1105 ?? 0 + Model.Addup1106 ?? 0 + Model.Addup1802 ?? 0)</div>
+                        <h3>累计奖金</h3>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-3">
+
+                    <div class="tile-stats tile-blue">
+                        <div class="icon"><i class="entypo-rss"></i></div>
+                        <div class="num ng-binding">@Model.Investment</div>
+
+                        <h3>注册类型</h3>
+                    </div>
+
+                </div>
+            </div>
+
+            <div ui-view="" class="ng-scope">
+                <div class="row ng-scope" ng-controller="AccountCtrl">
+                    <div class="col-md-12">
+                        <div class="member-entry">
+
+                            <a href="javascript://" class="member-img">
+                                <img src="/Images/Client%203.png" class="img-rounded">
+                                <i class="entypo-forward"></i>
+                            </a>
+
+                            <div class="member-details">
+                                <h4>
+                                    <a href="extra-timeline.html" class="ng-binding">@Model.UserName @(Model.IsActivation ? "已激活" : "未激活")</a>
+                                </h4>
+
+                                <!-- Details with Icons -->		<div class="row info-list">
+
+
+                                    <div class="col-sm-6">
+                                        <i class="entypo-cc-nd"></i>
+                                        团队人数： <a href="#" >@zlist.Count()</a>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <i class="entypo-credit-card"></i>
+                                        现金余额：<a href="#">@Model.Wallet2002.ToString("F2")</a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <i class="entypo-cc-nd"></i>
+                                        推荐数量： <a href="#">@(MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.RefereeID == Model.ID && x.IsActivation).Count())</a>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <i class="entypo-cc-nd"></i>
+                                        累计激活帐户：<a href="#">@(MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.AgentID == Model.ID && x.IsActivation).Count())个</a>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <i class="entypo-phone"></i>
+                                        未激活帐户：<a href="#">@(MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.AgentID == Model.ID && x.IsActivation == false).Count())个</a>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <i class="entypo-mail"></i>
+                                        电子邮件：<a href="#">@Model.Email</a>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <i class="entypo-location"></i>
+                                        币主类型：<a href="#">@Model.Investment</a>
+                                    </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+

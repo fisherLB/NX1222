@@ -1,0 +1,110 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #> 
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#@ include file="$(ProjectDir)TT\\DbHelper.ttinclude"  #>
+<#
+    string keyField="";
+	///////////////////只需要修改此处表名/////////////////
+	string tableName = "AdminUser";
+	///////////////////只需要修改此处表名/////////////////
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using MvcCore;
+using System.Data.Entity;
+using System.ComponentModel;
+using MvcCore.Infrastructure;
+using System.Data.Entity.Validation;
+namespace JN.Data
+{
+    public partial class <#=        config.DbContext#> : FrameworkContext
+    {
+        /// <summary>
+        /// 把实体添加到EF上下文
+        /// </summary>
+        public DbSet<<#=        tableName#>> <#=        tableName#> { get; set; }
+    }
+
+	/// <summary>
+    /// <#=        DbHelper.GetDbTable(config.ConnectionString, config.DbDatabase, tableName).Explain#>
+    /// </summary>
+	[DisplayName("<#=        DbHelper.GetDbTable(config.ConnectionString, config.DbDatabase, tableName).Explain#>")]
+    public partial class <#=        tableName#>
+    {
+
+		
+        <#    foreach(DbColumn column in DbHelper.GetDbColumns(config.ConnectionString, config.DbDatabase, tableName)){#>
+
+        /// <summary>
+        /// <#=            column.Remark#>
+        /// </summary>  
+		<# if (string.IsNullOrEmpty(column.Remark)){#>
+		[DisplayName("<#=            column.ColumnName#>")]
+		<#}else{#>
+		[DisplayName("<#=            column.Remark#>")]
+		<#}#>
+<#        if(column.CSharpType=="string"&&column.CharLength!=-1){#>
+        [MaxLength(<#=                column.CharLength#>,ErrorMessage="<#=                column.Remark#>最大长度为<#=                column.CharLength#>")]
+<#        }#>
+<#        if(column.CSharpType=="decimal"){#>
+        [Filters.DecimalPrecision(18,<#=                column.Scale#>)]
+<#        }#>
+		<#        if(column.IsPrimaryKey){keyField=column.ColumnName;#>[Key]
+		public <#=                column.CSharpType#>  <#=                column.ColumnName#> { get; set; }
+		<#        }else{#>public <#=                column.CSharpType#><#            if(column.CommonType.IsValueType && column.IsNullable){#>?<#            }#>  <#=                column.ColumnName#> { get; set; }
+		<#        }#>      
+       
+        <#    }#> 
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+		
+        public <#=        tableName#>()
+        {
+        //    <#=        keyField#> = Guid.NewGuid();
+        }
+      
+    }
+ 
+    
+}
+namespace JN.Data.Service
+{
+    /// <summary>
+    /// <#=        DbHelper.GetDbTable(config.ConnectionString, config.DbDatabase, tableName).Explain#>业务接口
+    /// </summary>
+    public interface I<#=        tableName#>Service :IServiceBase<<#=        tableName#>> {
+		 /// <summary>
+        /// 获取实体对象验证结果
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        DbEntityValidationResult GetValidationResult(<#=        tableName#> entity);
+	}
+    /// <summary>
+    /// <#=        DbHelper.GetDbTable(config.ConnectionString, config.DbDatabase, tableName).Explain#>业务类
+    /// </summary>
+    public class <#=        tableName#>Service :  ServiceBase<<#=        tableName#>>,I<#=        tableName#>Service
+    {
+
+
+        public <#=        tableName#>Service(<#=        config.DbFactory#> dbfactory) : base(dbfactory) {}
+         /// <summary>
+        /// 获取实体对象验证结果
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public DbEntityValidationResult GetValidationResult(<#=        tableName#> entity)
+        {
+            return DataContext.Entry(entity).GetValidationResult();
+        }
+    }
+
+}   

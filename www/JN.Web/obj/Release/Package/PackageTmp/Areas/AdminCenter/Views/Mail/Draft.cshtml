@@ -1,0 +1,397 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.Message>
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="#" class="glyphicons home"><i></i> AdminKIT</a></li>
+        <li class="divider"></li>
+        <li>Bookings</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <!-- Heading -->
+    <div class="heading-buttons">
+        <h3>草稿箱</h3>
+        <div class="clearfix"></div>
+    </div>
+    <div class="separator bottom"></div>
+    <!-- // Heading END -->
+
+    <div class="innerLR">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="tabbable">
+                        <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
+                            <li class="li-new-mail pull-right">
+                                <a href="@Url.Action("write")" class="btn-new-mail">
+                                    <span class="btn bt1n-small btn-purple no-border">
+                                        <i class=" icon-envelope bigger-130"></i>
+                                        <span class="bigger-110">写邮件</span>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="active">
+                                <a href="@Url.Action("inbox")" data-target="inbox">
+                                    <i class="blue icon-inbox bigger-130"></i>
+                                    <span class="bigger-110">收件箱</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("sent")" data-target="sent">
+                                    <i class="orange icon-location-arrow bigger-130 "></i>
+                                    <span class="bigger-110">发件箱</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("draft")" data-target="draft">
+                                    <i class="green icon-pencil bigger-130"></i>
+                                    <span class="bigger-110">草稿箱</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content no-border no-padding">
+                            <div class="tab-pane in active">
+                                <div class="message-container">
+                                    <div id="id-message-list-navbar" class="message-navbar align-center clearfix">
+                                        <div class="message-bar">
+                                            <div class="message-infobar" id="id-message-infobar">
+                                                <span class="blue bigger-150">草稿箱</span>
+                                            </div>
+
+                                            <div class="message-toolbar hide">
+                                                <a href="#" class="btn btn-xs btn-message" id="multidelete">
+                                                    <i class="icon-trash bigger-125"></i>
+                                                    <span class="bigger-110">删除</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="messagebar-item-left">
+                                                <label class="inline middle">
+                                                    <input type="checkbox" id="id-toggle-all" class="ace" />
+                                                    <span class="lbl"></span>
+                                                </label>
+
+                                                &nbsp;
+                                                <div class="inline position-relative">
+                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                                        <i class="icon-caret-down bigger-125 middle"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-lighter dropdown-100">
+                                                        <li>
+                                                            <a id="id-select-message-all" href="#">全选</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a id="id-select-message-none" href="#">取消全选</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="nav-search minimized">
+                                                <form class="form-search" method="post">
+                                                    <span class="input-icon">
+                                                        <input type="text" name="key" autocomplete="off" class="input-small nav-search-input" placeholder="查询关键字 ..." value="@Request["key"]" />
+                                                        <i class="icon-search nav-search-icon"></i>
+                                                    </span>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="message-list-container">
+                                        <div class="message-list" id="message-list">
+                                            @if (Model.Count > 0)
+                                            {
+                                                for (int i = 0; i < Model.Count; i++)
+                                                {
+                                                    <div class="message-item @(!Model[i].IsRead ? "message-unread" : "")">
+                                                        <label class="inline">
+                                                            <input type="checkbox" class="ace" name="ckid" value="@Model[i].ID" />
+                                                            <span class="lbl"></span>
+                                                        </label>
+
+                                                        <i class="message-star @(Model[i].IsFlag ? "icon-flag-alt orange2" : "icon-flag-alt light-grey")"></i>
+                                                        <span class="sender" title="@Model[i].ToUserName">@Model[i].ToUserName</span>
+                                                        <span class="time">@*@JN.Common.DateSpan.Get(Model[i].CreateTime)*@</span>
+
+                                                        @if (!String.IsNullOrEmpty(Model[i].Attachment))
+                                                        {
+                                                            <span class="attachment">
+                                                                <i class="icon-paper-clip"></i>
+                                                            </span>
+                                                        }
+                                                        <span class="summary">
+                                                            @if (Model[i].IsReply)
+                                                            {
+                                                                <span class="message-flags">
+                                                                    <i class="icon-reply light-grey"></i>
+                                                                </span>
+                                                            }
+                                                            @if (Model[i].IsForward)
+                                                            {
+                                                                <span class="message-flags">
+                                                                    <i class="icon-mail-forward light-grey"></i>
+                                                                </span>
+                                                            }
+                                                            <span class="text" data-value="@Model[i].ID">
+                                                                @Model[i].Title
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div><!-- /.message-list-container -->
+
+                                    <div class="message-footer clearfix">
+                                        <!-- Pagination -->
+                                        @Html.PagedListPager((IPagedList)Model, page => Url.Action("List", new
+                                   {
+                                       page,
+                                       datefiled = Request["datefiled"],
+                                       dateform = Request["dateform"],
+                                       dateto = Request["dateto"],
+                                       numberfiled = Request["numberfiled"],
+                                       numberform = Request["numberform"],
+                                       numberto = Request["numberto"],
+                                       keyfiled = Request["keyfiled"],
+                                       keyword = Request["keyword"],
+                                       isasc = Request["isasc"],
+                                       orderfiled = Request["orderfiled"]
+                                   }), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+                                        <div class="clearfix"></div>
+                                        <!-- // Pagination END -->
+                                    </div>
+                                </div><!-- /.message-container -->
+                            </div><!-- /.tab-pane -->
+                        </div><!-- /.tab-content -->
+                    </div><!-- /.tabbable -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+
+
+
+            <div class="hide message-content" id="id-message-content">
+            </div><!-- /.message-content -->
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/assets/js/bootstrap-wysiwyg.min.js"></script>
+<script>
+    jQuery(function ($) {
+        bootbox.setDefaults({ locale: "zh_CN" });
+        //选中时调出操作栏
+        $('.message-list .message-item input[type=checkbox]').removeAttr('checked');
+        $('.message-list').delegate('.message-item input[type=checkbox]', 'click', function () {
+            $(this).closest('.message-item').toggleClass('selected');
+            if (this.checked) Inbox.display_bar(1);//display action toolbar when a message is selected
+            else {
+                Inbox.display_bar($('.message-list input[type=checkbox]:checked').length);
+                //determine number of selected messages and display/hide action toolbar accordingly
+            }
+        });
+
+        //select all
+        $('#makeread').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeRead"))", { ids: ids }, function (data) {
+                if (data == "ok") location.reload();
+            });
+        });
+
+        $('#makeunread').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeUnRead"))", { ids: ids }, function (data) {
+                if (data == "ok") location.reload();
+            });
+        });
+
+        $('#makeflag').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeFlag"))", { ids: ids }, function (data) {
+                if (data == "ok") location.reload();
+            });
+        });
+
+        $('#makeunflag').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeUnFlag"))", { ids: ids }, function (data) {
+                if (data == "ok") location.reload();
+            });
+        });
+
+        $('#multidelete').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            bootbox.confirm('您确定要删除这些邮件吗?', function (result) {
+                if (result) {
+                    $.post("@(Url.Action("MultiDelete"))", { ids: ids }, function (data) {
+                        if (data == "ok") location.reload();
+                    });
+                }
+            });
+        });
+
+
+        //check/uncheck all messages
+        $('#id-toggle-all').removeAttr('checked').on('click', function () {
+            if (this.checked) {
+                Inbox.select_all();
+            } else Inbox.select_none();
+        });
+
+        //select all
+        $('#id-select-message-all').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_all();
+        });
+
+        //select none
+        $('#id-select-message-none').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_none();
+        });
+
+        //select read
+        $('#id-select-message-read').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_read();
+        });
+
+        //select unread
+        $('#id-select-message-unread').on('click', function (e) {
+            e.preventDefault();
+            Inbox.select_unread();
+        });
+
+        //显示邮件内容
+        $('.message-list .message-item .text').on('click', function () {
+            var message = $(this).closest('.message-item');
+            //if message is open, then close it
+            if (message.hasClass('message-inline-open')) {
+                message.removeClass('message-inline-open').find('.message-content').remove();
+                return;
+            }
+
+            $('.message-container').append('<div class="message-loading-overlay"><i class="icon-spin icon-spinner orange2 bigger-160"></i></div>');
+            $(this).closest('.message-item').removeClass('message-unread');
+            var theid = $(this).attr("data-value");
+            $.post("@(Url.Action("SubMailContent"))/" + theid, {}, function (data) {
+                setTimeout(function () {
+                    $('.message-container').find('.message-loading-overlay').remove();
+                    message
+                        .addClass('message-inline-open')
+                        .append('<div class="message-content" />')
+                    var content = message.find('.message-content:last').html(data);
+
+                    content.find('.message-body').slimScroll({
+                        height: 200,
+                        railVisible: true
+                    });
+                }, parseInt(Math.random() * 500));
+            });
+        });
+
+        var Inbox = {
+            //displays a toolbar according to the number of selected messages
+            display_bar: function (count) {
+                if (count == 0) {
+                    $('#id-toggle-all').removeAttr('checked');
+                    $('#id-message-list-navbar .message-toolbar').addClass('hide');
+                    $('#id-message-list-navbar .message-infobar').removeClass('hide');
+                }
+                else {
+                    $('#id-message-list-navbar .message-infobar').addClass('hide');
+                    $('#id-message-list-navbar .message-toolbar').removeClass('hide');
+                }
+            }
+            ,
+            select_all: function () {
+                var count = 0;
+                $('.message-item input[type=checkbox]').each(function () {
+                    this.checked = true;
+                    $(this).closest('.message-item').addClass('selected');
+                    count++;
+                });
+                $('#id-toggle-all').get(0).checked = true;
+                Inbox.display_bar(count);
+            }
+            ,
+            select_none: function () {
+                $('.message-item input[type=checkbox]').removeAttr('checked').closest('.message-item').removeClass('selected');
+                $('#id-toggle-all').get(0).checked = false;
+                Inbox.display_bar(0);
+            }
+            ,
+            select_read: function () {
+                $('.message-unread input[type=checkbox]').removeAttr('checked').closest('.message-item').removeClass('selected');
+                var count = 0;
+                $('.message-item:not(.message-unread) input[type=checkbox]').each(function () {
+                    this.checked = true;
+                    $(this).closest('.message-item').addClass('selected');
+                    count++;
+                });
+                Inbox.display_bar(count);
+            }
+            ,
+            select_unread: function () {
+                $('.message-item:not(.message-unread) input[type=checkbox]').removeAttr('checked').closest('.message-item').removeClass('selected');
+                var count = 0;
+                $('.message-unread input[type=checkbox]').each(function () {
+                    this.checked = true;
+                    $(this).closest('.message-item').addClass('selected');
+                    count++;
+                });
+                Inbox.display_bar(count);
+            }
+        }
+
+    });
+</script>

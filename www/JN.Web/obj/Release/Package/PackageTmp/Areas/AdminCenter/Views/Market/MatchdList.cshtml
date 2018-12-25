@@ -1,0 +1,250 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.Matching>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@{Html.RegisterMvcPagerScriptResource();}
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="@(action == "supplyhelp" ? "active" : "")">
+                    <a href="@Url.Action("SupplyHelp")">
+                        提供帮助
+                    </a>
+                </li>
+                <li class="@(action == "accepthelp" ? "active" : "")">
+                    <a href="@Url.Action("AcceptHelp")">
+                        接受帮助
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?ac=all").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?ac=all">
+                        已匹配数据
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?ac=overduepayment").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?ac=overduepayment">
+                        超期未付款订单
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?ac=overdueverified").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?ac=overdueverified">
+                        超期未验证付款单
+                    </a>
+                </li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/market/matchdlist?st=-2").ToLower())) ? "active" : "")">
+                    <a href="@Url.Action("MatchdList")?st=-2">
+                        虚假订单
+                    </a>
+                </li>
+            </ul>
+            <div class="filter-bar margin-bottom-none">
+               @using (Ajax.BeginForm("MatchdList", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_MatchdList", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_Form_MatchdList" } }))
+                        {
+
+                    <!-- Filter -->
+                    <div>
+                        <select name="datefiled" style="width: 80px;">
+                            <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>匹配时间</option>
+                            <option value="PayEndTime" @(Request["datefiled"] == "PayEndTime" ? "selected" : "")>付款截止时间</option>
+                            <option value="PayTime" @(Request["datefiled"] == "PayTime" ? "selected" : "")>付款时间</option>
+                            <option value="VerifiedEndTime" @(Request["datefiled"] == "VerifiedEndTime" ? "selected" : "")>验证截止时间</option>
+                            <option value="CancelTime" @(Request["datefiled"] == "CancelTime" ? "selected" : "")>取消时间</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="numberfiled" style="width: 80px;">
+                            <option value="MatchAmount" @(Request["numberfiled"] == "MatchAmount" ? "selected" : "")>金额</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberform" class="input-mini" style="width: 30px;" value="@Request["numberform"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberto" class="input-mini" style="width: 30px;" value="@Request["numberto"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="keyfiled" style="width: 80px;">
+                            <option value="MatchingNo" @(Request["keyfiled"] == "MatchingNo" ? "selected" : "")>匹配单号</option>
+                            <option value="SupplyNo" @(Request["keyfiled"] == "SupplyNo" ? "selected" : "")>供单单号</option>
+                            <option value="AcceptNo" @(Request["keyfiled"] == "AcceptNo" ? "selected" : "")>受单单号</option>
+                            <option value="SupplyUserName" @(Request["keyfiled"] == "SupplyUserName" ? "selected" : "")>供单会员</option>
+                            <option value="AcceptUserName" @(Request["keyfiled"] == "AcceptUserName" ? "selected" : "")>受单会员</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="input-append">
+                            <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <input type="hidden" name="IsAsc" value="0" />
+                        <input type="hidden" name="OrderFiled" value="ID" />
+                        <input type="submit" value="查询" />
+                        <input type="button" onclick="location.href='@(Request.Url.PathAndQuery.Replace(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString() +"Export"))'" value="导出" />
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- // Filter END -->
+
+               }
+
+            </div>
+
+            <div id="_MatchdList">
+                @Html.Partial("_MatchdList", Model)
+            </div>
+
+    
+        </div><!-- /span -->
+    </div><!-- /row -->
+</div><!-- /.page-content -->
+
+<!-- PAGE CONTENT ENDS -->
+<div id="modal-form" class="modal hide" tabindex="-1" >
+    <form class="form-horizontal" id="validation-form" method="post" >
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:700px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="blue bigger">详细信息</h4>
+                </div>
+                <div class="modal-body overflow-visible">
+ 
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-primary" data-dismiss="modal">
+                        <i class="icon-remove"></i>
+                        取消
+                    </button>
+
+                 
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts{
+<script type="text/javascript">
+    @*jQuery(function ($) {
+        $('[data-rel=tooltip]').tooltip({ container: 'body' });
+        $(".punish").on("click", function () {
+            var id = $(this).attr("data-value");
+            bootbox.confirm('您确定要惩罚处理该记录吗?选择是将冻结提供订单方帐号并取消匹配', function (result) {
+                if (result) {
+                    location = '@(Url.Action("Punish"))?matchid=' + id;
+                }
+            });
+        });
+
+        $(".finshpay").on("click", function () {
+            var id = $(this).attr("data-value");
+            bootbox.confirm('您确定要确认成交状态么？', function (result) {
+                if (result) {
+                    location = '@(Url.Action("FinshPay"))?matchid=' + id;
+                }
+            });
+        });
+        $(".qxdj").on("click", function () {
+            var id = $(this).attr("data-value");
+            bootbox.confirm('您确定要取消该匹配订单吗？', function (result) {
+                if (result) {
+                    location = '@(Url.Action("Cancel"))?matchid=' + id;
+                }
+            });
+        });
+        $(".delaypay").on("click", function () {
+            var id = $(this).attr("data-value");
+            bootbox.prompt('请输入追加延时时间：（单位是小时，从截止付款时间算起）', function (result) {
+                if (result)
+                    $.post('@(Url.Action("DelayPay"))', { matchid: id, hour: result }, function (data) {
+                        if (data == 'ok') location.reload();
+                    });
+            });
+        });
+
+    });*@
+
+    function quxiao(val) {
+        var id = val;
+        bootbox.confirm('您确定要取消该匹配订单吗？', function (result) {
+            if (result) {
+                location = '@(Url.Action("Cancel"))?matchid=' + id;
+            }
+        })
+    }
+
+    function chengjiao(val) {
+        var id = val;
+        bootbox.confirm('您确定要确认成交状态么？', function (result) {
+            if (result) {
+                location = '@(Url.Action("FinshPay"))?matchid=' + id;
+            }
+        });
+    }
+
+    function chengfa(val) {
+        var id = val;
+        bootbox.confirm('您确定要惩罚处理该记录吗?选择是将冻结提供订单方帐号并取消匹配', function (result) {
+            if (result) {
+                location = '@(Url.Action("Punish"))?matchid=' + id;
+            }
+        });
+    }
+
+    function yanshi(val) {
+        var id = val;
+        bootbox.prompt('请输入追加延时时间：（单位是小时，从截止付款时间算起）', function (result) {
+            if (result)
+                $.post('@(Url.Action("DelayPay"))', { matchid: id, hour: result }, function (data) {
+                    if (data == 'ok') location.reload();
+                });
+        });
+    }
+</script>
+}

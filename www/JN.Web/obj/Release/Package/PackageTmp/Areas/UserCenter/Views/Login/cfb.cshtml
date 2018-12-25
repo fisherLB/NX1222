@@ -1,0 +1,231 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1">
+    <meta charset="utf-8" />
+    <title>@T(JN.BLL.syssettings.GetModel(1).SysName)</title>
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/theme/mmm/css/font-awesome.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/bootstrap.css" />
+    <style>
+/* LOGIN PAGE ================================================== */
+.login{
+	background-color: #5e819f;
+	/*background-image: url(/nmmcss/896642.jpg);*/
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.login .navbar {
+	min-height: initial;
+	background: #c0392b;
+	background: rgba(192,57,43,0.85)
+}
+.login ul[role="sub-navigation"] {margin:0}
+.login .wrapper{
+	max-width: 354px;
+	min-width: 300px;
+	margin: 100px auto 0;
+	position: relative;
+}
+	.login .wrapper .brand{
+		margin-bottom: 10px;
+		text-align: center;
+	}
+		.login .wrapper .brand h2{
+			font-size: 22px;
+			color: #FFF;
+			line-height: 32px;
+			margin: 0;
+			font-style: italic;
+			text-shadow: 0px 1px 1px rgba(0,0,0,0.8);
+		}
+	.login .wrapper .widget{
+		background: transparent;
+		margin: 0 auto 15px;
+	}
+	.login .wrapper .widget .widget-body{
+		background: #fafafa;
+		background: rgba(250,250,250,0.7);
+		position: relative;
+		padding: 15px;
+	}
+	.login .wrapper .widget .widget-body h1{
+		font-size: 20pt;
+		/*text-align: center;*/
+		margin: 10px 0 20px 0;
+		display: block;
+		text-shadow: 0 1px 0 #fff;
+	}
+	.login .wrapper .widget .widget-body label{
+		font-size: 13px;
+		color: #7c7c7c;
+		font-weight: 500;
+	}
+
+	.login .wrapper input[type="text"], .login .wrapper input[type="password"] {
+		font-size: 13px;
+		height: auto;
+		margin-bottom: 10px;
+		padding: 5px 9px;
+		box-shadow: inset 1px 1px 1px rgba(255,255,255,0),inset -1px -1px 1px rgba(0,0,0,0);
+		background: #fff;
+	}
+	body.login .wrapper .password {
+		float: right;
+		font-size: 12px;
+		font-weight: 400;
+	}
+	body.login .wrapper .separator{padding: 0 0 15px;}
+
+
+	/* Navbar ============== */
+	.navbar-nav > li > a {
+		color: #ececec;
+		font-size: 12px;
+		padding: 10px;
+	}
+	.navbar-nav > li.active > a,
+	.navbar-nav > li > a:focus,
+	.navbar-nav > li > a:hover{
+		outline: 0;
+		background: #7d2118;
+		box-shadow: inset 0px -1px 0px rgba(0,0,0,0.2);
+	}
+	.nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+		background: #424242;
+	}
+
+	.navbar-nav>li>.dropdown-menu{
+		background: #c0392b;
+		border: 1px solid #a33024;
+	}
+		.navbar-nav>li>.dropdown-menu li a{
+			color: #FFF;
+			font-size: 12px;
+			padding: 10px 15px;
+		}
+		.navbar-nav>li>.dropdown-menu li a:focus,
+		.navbar-nav>li>.dropdown-menu li a:hover{
+			background: #7d2118;
+		}
+		.dropdown-menu>.active>a,
+		.dropdown-menu>.active>a:hover,
+		.dropdown-menu>.active>a:focus{background: #424242;}
+
+	/* Navbar Right - Language Dropdown ============== */
+	[class*="language-sel-"] {
+		width:16px;
+		height:11px;
+		top: 1px;
+		margin-right:5px;
+		position: relative;
+		display: inline-block;
+	}
+        .language-sel-en {
+            background: url(/theme/cfb/images/flags/gb.png) no-repeat 0 0 !important;
+        }
+        .language-sel-zh-CN {
+            background: url(/theme/cfb/images/flags/cn.png) no-repeat 0 0 !important;
+        }
+
+	/* Button ============== */
+	.btn-inverse{
+		background: #45484d;
+		color: #fff;
+	}
+	.btn-inverse:focus,
+	.btn-inverse:hover{
+		color: #fff;
+		background: #222;
+	}
+
+
+	/* Copyright ============== */
+	.copyright{
+		color: #FFF;
+		text-align: center;
+		text-shadow: 0px 1px 2px #000;
+	}
+
+
+	@@media (max-width: 767px){
+		.navbar-toggle .icon-bar{background: #FFF;}
+
+		nav[role="main-navigation"]{
+			float: none;
+			margin: 0 !important;
+		}
+
+		ul[role="sub-navigation"]{text-align: right; margin: 0;}
+		ul[role="sub-navigation"] > li{display: inline-block;}
+		ul[role="sub-navigation"] .open .dropdown-menu{
+			position: absolute;
+			float: left;
+			left: auto;
+			right: 0;
+			background-color: #000
+		}
+		ul[role="sub-navigation"] .open .dropdown-menu li a{
+			text-align: left;
+			padding: 5px 15px;
+		}
+	}
+    </style>
+</head>
+<body class="login" style="background-image: url('@(JN.BLL.syssettings.GetModel(1).BannerPic)')">
+    <header class="navbar navbar-static-top" id="top" role="header" style="background-color: #008e70;">
+        <div class="container">
+            <ul class="nav navbar-nav navbar-right" role="sub-navigation">
+                <li class="dropdown" id="lang_nav">
+                    <a href="/#" data-toggle="dropdown">
+                        <span class="language-sel-zh-CN fa-lang"></span>
+                        <span class="language-text">简体中文</span>
+                    </a>
+                    <ul class="dropdown-menu" role="languageMenu">
+                        <li><a href="/Home/Login/e1"><span class="language-sel-en"></span>Русский язык</a></li>
+                        <li><a href="/Home/Login/"><span class="language-sel-zh-CN"></span>简体中文</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="brand">
+            <a href="http://" class="appbrand"><img src="/theme/cfb/images/nmm_logo_login.png" alt="" /></a>
+            <h2>诚信理财</h2>
+        </div>
+
+        <div class="widget">
+            <div class="widget-body">
+                <h1>系统登录</h1>
+                <form name="logFrm" id="logFrm" action="/user/login/logins" method="post">
+                    <label>用户名</label>
+                    <input type="text" class="form-control" name="username" id="username" placeholder="用户名" />
+
+                    <label>登录密码</label>
+                    <input name="password" type="password" class="form-control" id="password" placeholder="登录密码" />
+
+                    <div class="separator bottom clearfix"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-12">
+                            <input class="btn btn-block btn-primary" type="submit" name="submit" value="登录" id="login_btn" style="background-color:#e67817;" />
+
+                            <a href="/home/login/mmzh.html" class="btn btn-block btn-inverse" style="background-color:#07a479;">找回密码</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div align="center">
+            慈善之光互助社区
+        </div>
+    </div>
+    <script src="~/Theme/CFB/js/jquery.js"></script>
+    <script src="~/Theme/mmm/js/bootstrap.min.js"></script>
+    @*<script type="text/javascript" src="nmmcss/modernizr.js"></script>*@
+    </body>
+</html>

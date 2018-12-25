@@ -1,0 +1,302 @@
+﻿<div style="padding:20px 20px">
+    <style>
+        .form-horizontal .control-group {
+            margin-bottom: 10px;
+        }
+    </style>
+    @using (Ajax.BeginForm("_PartialAddUser", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+    {
+        <div class="control-group">
+            <label class="control-label" for="username">会员编号：</label>
+
+            <div class="controls">
+                <div class="clearfix">
+                    <input type="text" name="username" class="form-control" value="" />
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="refereeuser">推荐人:</label>
+            <div class="controls">
+                <input type="text" name="refereeuser" style="width:135px" class="form-control" value="@Request["refereeuser"]" />
+            </div>
+        </div>
+        if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") != "sun")
+        {
+            <div class="control-group">
+                <label class="control-label" for="parentuser">安置人编号:</label>
+                <div class="controls">
+                    <input type="text" name="parentuser" style="width:135px" class="form-control" value="@Request["parentuser"]" />
+                </div>
+            </div>
+        }
+        if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") != "sun")
+        {
+            <div class="control-group">
+                <label class="control-label" for="childplace">安置位置:</label>
+                <div class="controls">
+                    <div class="clearfix">
+                        <select name="childplace" class="form-control">
+                            @if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") != "double")
+                            {
+                                <option value="1" @(Request["childplace"] == "1" ? "selected" : "")>左</option>
+                                <option value="2" @(Request["childplace"] == "2" ? "selected" : "")>中</option>
+                                <option value="3" @(Request["childplace"] == "3" ? "selected" : "")>右</option>
+                            }
+                            else
+                            {
+                                <option value="1" @(Request["childplace"] == "1" ? "selected" : "")>左</option>
+                                <option value="2" @(Request["childplace"] == "2" ? "selected" : "")>右</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        }
+        if (JN.Services.Tool.ConfigHelper.GetConfigBool("HaveAgent"))
+        {
+            <div class="control-group">
+                <label class="control-label" for="agentuser">商务中心编号:</label>
+
+                <div class="controls">
+                    <input type="text" name="agentuser" class="form-control" value="@Request["agentuser"]" />
+                </div>
+            </div>
+        }
+        @*<div class="control-group">
+                <label class="control-label" for="nickname">昵称：</label>
+            <div class="controls">
+                <input type="text" name="nickname" class="form-control" value="@Model.NickName" @(Model.ID > 0 ? "readonly" : "") />
+            </div>
+            </div>*@
+
+        <div class="control-group">
+            <label class="control-label" for="realname">真实姓名：</label>
+
+            <div class="controls">
+                <div class="clearfix">
+                    <input type="text" name="realname" class="form-control" value="" />
+                </div>
+            </div>
+        </div>
+
+            @*<div class="control-group">
+                    <label class="control-label">性别：</label>
+
+                    <div class="controls">
+                        <div>
+                                <input name="gender" value="男" @(Model.Sex == "男" ? "checked" : "") type="radio" class="ace" />
+                                <span class="lbl"> 男</span>
+                                <input name="gender" value="女" @(Model.Sex == "女" ? "checked" : "") type="radio" class="ace" />
+                                <span class="lbl"> 女</span>
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="control-group">
+                <label class="control-label" for="phone">手机号码：</label>
+                <div class="controls">
+                    <input type="text" name="mobile" class="form-control" value="" />
+                </div>
+            </div>
+
+            @*<div class="control-group">
+                    <label class="control-label" for="tel">电话：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="tel" name="tel" class="form-control" value="@Model.Tel" />
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="control-group">
+                <label class="control-label" for="email">邮箱：</label>
+
+                <div class="controls">
+                    <input type="email" name="email" class="form-control" value="" />
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="email">登录密码：</label>
+
+                <div class="controls">
+                    <input type="password" name="password" class="form-control" value="" />
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="email">二级密码：</label>
+
+                <div class="controls">
+                    <input type="password" name="password2" class="form-control" value="" />
+                </div>
+            </div>
+        <div class="hr hr-dotted"></div>
+
+        @*<div class="control-group">
+            <label class="control-label" for="idcard">身份证号码：</label>
+
+            <div class="controls">
+                <input type="text" name="idcard" class="form-control" value="" />
+            </div>
+        </div>*@
+
+            @*<div class="control-group">
+                    <label class="control-label" for="url">所在地区：</label>
+
+                    <div class="controls" id="area">
+                        <select id="province"></select><input type="hidden" name="province" id="hidprovince" value="@Model.Province" />
+                        <select id="city"></select><input type="hidden" name="city" id="hidcity" value="@Model.City" />
+                        <select id="county"></select><input type="hidden" name="county" id="hidcounty" value="@Model.County" />
+                    </div>
+                </div>*@
+
+            @*<div class="control-group">
+                    <label class="control-label" for="address">联系地址：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="address" class="form-control" value="@Model.Address" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="qq">QQ：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="qq" class="form-control" value="@Model.QQ" />
+                        </div>
+                    </div>
+                </div>*@
+
+            @*<div class="hr hr-dotted"></div>
+
+                <div class="control-group">
+                    <label class="control-label" for="question">密保问题：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="question" class="form-control" value="@Model.Question" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="answer">密保答案：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="answer" class="form-control" value="@Model.Answer" />
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="hr hr-dotted"></div>
+            <div class="control-group" style="display:none">
+                <label class="control-label" for="address">支付宝帐号：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="alipay" class="form-control" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="bankname">银行卡发卡行：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        @Html.DropDownList("bankname", new SelectList(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 5000).OrderBy(x => x.Sort), "Name", "Value"), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="bankcard">银行卡号：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="bankcard" class="form-control" value="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="bankofdeposit">开户行：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="bankofdeposit" class="form-control" value="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group" style="display:none">
+                <label class="control-label" for="bankuser">银行卡户名：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="bankuser" class="form-control" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="investment">注册类型:</label>
+                <div class="controls">
+                    <div class="clearfix">
+                        @Html.DropDownList("investment", new SelectList(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 1000 && x.IsUse).OrderBy(x => x.Sort).ToList(), "Value", "Name"), new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="hr hr-dotted"></div>
+            <div class="control-group">
+                <label class="control-label">&nbsp;</label>
+                <div class="controls">
+                    <button class="btn btn-primary" type="submit">
+                        保 存
+                    </button>
+                    <a href="javascript:winclose();" class="btn btn-grey">
+                        关闭
+                    </a>
+                </div>
+            </div>
+    }
+</div>
+    <!-- PAGE CONTENT ENDS -->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function afterPost(data) {
+            if (data.Status == 200) {
+                alert("保存成功，即将为您跳转页面!");
+                window.location.reload();
+            } else {
+                alert("保存失败！错误信息：" + data.Message);
+            }
+        }
+
+            eval("var word=" + '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16) + '"');
+            eval("var word2=" + '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16) + '"');
+            $("input[name='realname']").val("李" + word + word2);
+            $("input[name='password']").val("111111");
+            $("input[name='confirmpassword']").val("111111");
+            $("input[name='password2']").val("222222");
+            $("input[name='confirmpassword2']").val("222222");
+            $("input[name='password3']").val("333333");
+            $("input[name='username']").val("" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()));
+            $("input[name='gender']").attr("checked", '男');
+            $("input[name='mobile']").val("186456" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()));
+            $("input[name='email']").val("oemsys" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + "@@163.com");
+            $("input[name='nickname']").val("李" + word + word2);
+            $("input[name='confirmemail']").val($("input[name='email']").val());
+            $("select[name='bankname']").val("中国银行");
+            $("input[name='bankcard']").val("6217 0033 9700 " + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + " 918");
+            $("input[name='bankofdeposit']").val("广西南宁北郊支行");
+            $("input[name='bankuser']").val($("input[name='realname']").val());
+            //$("input[name='alipay']").val($("input[name='mobile']").val());
+            //$("input[name='idcard']").val("4501031992102" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()));
+    </script>
+

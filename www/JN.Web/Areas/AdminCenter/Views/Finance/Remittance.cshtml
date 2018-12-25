@@ -1,0 +1,220 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.Remittance>
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    @{
+                        int status = Request["status"].ToInt();
+                    }
+                    @*<li class="@(status == 0 ? "active" : "")">
+                            <a href="?status=0">
+                                待审核的充值汇款
+                            </a>
+                        </li>*@
+                    <li class="@(status == 3 ? "active" : "")">
+                        <a href="?status=3">
+                            待确认在线充值
+                        </a>
+                    </li>
+                    <li class="@(status == 1 ? "active" : "")">
+                        <a href="?status=1">
+                            会员充值汇款历史
+                        </a>
+                    </li>
+                </ul>
+                <div class="filter-bar margin-bottom-none">
+                    <form method="get">
+
+                        <!-- Filter -->
+                        <div>
+                            <select name="datefiled" style="width: 80px;">
+                                <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>从:</label>
+                            <div class="input-append">
+                                <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                                <span class="add-on glyphicons calendar"><i></i></span>
+                            </div>
+                        </div>
+                        <!-- // Filter END -->
+                        <!-- Filter -->
+                        <div>
+                            <label>到:</label>
+                            <div class="input-append">
+                                <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                                <span class="add-on glyphicons calendar"><i></i></span>
+                            </div>
+                        </div>
+                        <!-- // Filter END -->
+                        <!-- Filter -->
+                        <div style="margin-left:10px">
+                            <select name="numberfiled" style="width: 80px;">
+                                <option value="RechargeAmount" @(Request["numberfiled"] == "ChangeMoney" ? "selected" : "")>金额</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>从:</label>
+                            <div class="input-append">
+                                <input type="text" name="numberform" class="input-mini" style="width: 30px;" value="@Request["numberform"]" />
+                                <span class="add-on glyphicons euro"><i></i></span>
+                            </div>
+                        </div>
+                        <!-- // Filter END -->
+                        <!-- Filter -->
+                        <div>
+                            <label>到:</label>
+                            <div class="input-append">
+                                <input type="text" name="numberto" class="input-mini" style="width: 30px;" value="@Request["numberto"]" />
+                                <span class="add-on glyphicons euro"><i></i></span>
+                            </div>
+                        </div>
+                        <!-- // Filter END -->
+                        <!-- Filter -->
+                        <div style="margin-left:10px">
+                            <select name="keyfiled" style="width: 80px;">
+                                <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>会员编号</option>
+                                <option value="Remark" @(Request["keyfiled"] == "Remark" ? "selected" : "")>描述</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="input-append">
+                                <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                                <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                            </div>
+                        </div>
+                        <!-- // Filter END -->
+                        <!-- Filter -->
+                        <div>
+                            <input type="hidden" name="IsAsc" value="0" />
+                            <input type="hidden" name="OrderFiled" value="ID" />
+                            <input type="submit" value="查询" />
+                            <input type="button" onclick="location.href='@(Request.Url.PathAndQuery.Replace(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString() +"Export"))'" value="导出" />
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- // Filter END -->
+
+                    </form>
+
+                </div>
+
+                <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="center">
+                            </th>
+                            <th>流水号</th>
+                            <th>充值会员</th>
+                            <th>充值方式</th>
+                            <th>充值金额</th>
+                            <th>备注</th>
+                            <th>状态</th>
+                            <th>
+                                <i class="icon-time bigger-110 hidden-480"></i>
+                                时间
+                            </th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count > 0)
+                        {
+                            for (int i = 0; i < Model.Count; i++)
+                            {
+
+                                <tr>
+                                    <td class="center text-muted">
+                                        @(i + 1)
+                                    </td>
+                                    <td>
+                                        @Model[i].ChongNumber
+                                    </td>
+                                    <td>
+                                        @Model[i].UserName
+                                    </td>
+                                    <td>
+                                        @Model[i].RechargeWay
+                                    </td>
+                                    <td>
+                                        @Model[i].RechargeAmount.ToString("F2")
+                                    </td>
+                                    <td>
+                                        @Model[i].Remark
+                                    </td>
+                                    <td class="hidden-480">@(typeof(JN.Data.Enum.RechargeSatus).GetEnumDesc(Model[i].Status))</td>
+                                    <td>
+                                        @Model[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
+                                    </td>
+                                    <td>
+                                        @if (Model[i].Status < (Int16)JN.Data.Enum.RechargeSatus.Sucess)
+                                        {
+                                            <a href="@(Url.Action("RemittancePass", new { ID = Model[i].ID}))" class="btn btn-xs btn-success" data-rel="tooltip" title="审核充值">
+                                                <i class="icon-ok bigger-120"></i>
+                                            </a>
+
+                                            <a href="###" data-value="@Model[i].ID" class="btn btn-xs btn-danger qstx" data-rel="tooltip" title="删除" data-placement="top">
+                                                <i class="icon-trash bigger-120"></i>
+                                            </a>
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr><td colspan="12" align="center" style="color:#999; line-height:50px">很抱歉，没有任何记录。</td></tr>
+                        }
+                    </tbody>
+                </table>
+
+
+                <div class="separator top form-inline small">
+
+                    <!-- Pagination -->
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+                    <div class="clearfix"></div>
+                    <!-- // Pagination END -->
+
+                    <span style="color:#f00">
+                        *注意：状态为“待确认”的充值单表示无法确定会员是否已成功支付，有可能是会员提交充值并未实际支付，一般不需要处理。<br />
+                        当会员提出异议时，说明有可能会员已支付但平台未接收到成功调用，支付成功后即便状态未实时更新，支付宝平台仍在几个小时内有多次反馈请求，此时平台充值状态仍会更新。<br />
+                        24小时后还未到帐此时应该到支付宝平台去核实支付流水，并给会员补币。
+                    </span>
+                </div><!-- /.table-responsive -->
+            </div><!-- /span -->
+    </div><!-- /row -->
+</div><!-- /.page-content -->
+@section scripts{
+    <script type="text/javascript">
+    jQuery(function ($) {
+        $(".qstx").on("click", function () {
+            var id = $(this).attr("data-value");
+            bootbox.confirm('您确定要删除该记录吗?', function (result) {
+                if (result) {
+                    location = '@Url.Action("RemittanceDelete")/' + id;
+                }
+            });
+        });
+    })
+    </script>
+}

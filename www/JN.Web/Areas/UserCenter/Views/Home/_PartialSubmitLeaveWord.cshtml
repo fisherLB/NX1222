@@ -1,0 +1,49 @@
+﻿@model JN.Data.Matching
+<!-- 留言 -->
+
+        <div class="modal-body" style="height:300px; overflow:auto">
+            <p><strong>Order: @(Model.MatchingNo)</strong></p>
+            <p>@T("你可以与这位参与者消息联系。")</p>
+            <p style="font-weight: bold;color: red;">
+                ATTENTION!
+                @T(" 注意：如对方要求提供银行账号，支付宝，微信支付以外的转账方式，请不要同意。")
+            </p>
+            <hr>
+            <div class="col-lg-12" id="msg">
+                @{
+                    var _matchingno = Model.MatchingNo;
+                    var leavewords = MvcCore.Unity.Get<JN.Data.Service.ILeaveWordService>().List(x => x.MatchingNo == _matchingno).OrderBy(x => x.CreateTime).ToList();
+                    foreach (var item in leavewords)
+                    {
+                        <p style="color:#999; font-size:9px">@item.UserName 发表于： @item.CreateTime</p>
+                        <p>@MvcHtmlString.Create(item.Content)</p>
+                    }
+                }
+            </div>
+            <hr>
+            <div class="col-lg-12">
+                <textarea rows="3" style="width:640px" name="msgcontent" id="msgcontent"></textarea>
+                <input type="button" onclick="subleave()" value="@T("提交")">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-default" data-dismiss="modal">@T("关闭")</button>
+        </div>
+
+        <script>
+
+            function subleave() {
+
+                var msgcontent = $("#msgcontent").val();
+                var matchingno = "@(Model.MatchingNo)";
+                $.post("@(Url.Action("SendLeavword"))", { matchingno: matchingno, msgcontent: msgcontent }, function (data) {
+                    if (data.result == "ok") {
+                        alert('留言成功!');
+                        winopen('留言板', '@(Url.Action("_SubmitLeaveWord"))?rid=@(Model.ID)', 700);
+                    } else {
+                        layer.alert(data.msg);
+                    }
+                })
+            }
+
+        </script>

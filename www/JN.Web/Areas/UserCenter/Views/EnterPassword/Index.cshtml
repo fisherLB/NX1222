@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "密码验证";
+    Layout = "~/Areas/User/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="error-container">
+                <div class="well">
+                    <h2 class="grey lighter smaller">
+                        <span class="blue bigger-125">
+                            <i class="icon-key"></i>
+                            @T("密码验证")
+                        </span>
+                    </h2>
+
+                    <hr />
+                    <!-- PAGE CONTENT BEGINS -->
+
+                    <div class="form-horizontal">
+                        <div class="space"></div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-5 no-padding-right" for="password">@T("请输入您的"+ ViewBag.PwdLevel + "级密码")：</label>
+
+                            <div class="col-xs-12 col-sm-3">
+                                <div class="clearfix">
+                                    <input type="hidden" name="oldurl" value="@ViewBag.Url" />
+                                    <input type="hidden" name="pwdlevel" value="@ViewBag.PwdLevel" />
+                                    <input type="password" name="password" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space"></div>
+                        <div class="hr hr-dotted"></div>
+
+
+                        <div class="center">
+                            <a id="btnlogin" class="btn btn-primary">
+                                <i class="icon-dashboard"></i>
+                                @T("确定")
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#btnlogin').on('click', function () {
+            loginSubmit();
+        });
+    });
+
+    function loginSubmit() {
+        var password = $("input[name='password']").val();
+        var oldurl = $("input[name='oldurl']").val();
+        var pwdlevel = $("input[name='pwdlevel']").val();
+        var gourl = "/User/EnterPassword";
+        $.post(gourl, { password: password, oldurl: oldurl, pwdlevel: pwdlevel }, function (response) {
+            if (response.status == "ok") {
+                window.location.href = response.data;
+            } else {
+                alert(response.data);
+            }
+        });
+    }
+
+    if (document.addEventListener) {//如果是Firefox
+        document.addEventListener("keypress", fireFoxHandler, true);
+    } else {
+        document.attachEvent("onkeypress", ieHandler);
+    }
+    function fireFoxHandler(evt) {
+        //alert("firefox");
+        if (evt.keyCode == 13) {
+            loginSubmit();
+        }
+    }
+    function ieHandler(evt) {
+        //alert("IE");
+        if (evt.keyCode == 13) {
+            loginSubmit();
+        }
+    }
+</script>

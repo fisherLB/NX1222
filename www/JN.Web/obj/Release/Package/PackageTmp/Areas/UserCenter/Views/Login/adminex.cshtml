@@ -1,0 +1,101 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="ThemeBucket" />
+    <link rel="shortcut icon" href="#" type="image/png" />
+    <title>@MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SiteTitle</title>
+    <link href="/theme/adminex/css/style.css" rel="stylesheet" />
+    <link href="/theme/adminex/css/style-responsive.css" rel="stylesheet" />
+    <!--[if !IE]> -->
+    <script src="/assets/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="/assets/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+
+</head>
+<body class="login-body">
+    <div class="container form-signin">
+            <div class=" form-signin-heading text-center">
+                <h1 class="sign-title">请登录</h1>
+                @*<img src="/theme/adminex/images/login-logo.png" alt="" />*@
+                <h2 style="color:#035651">@MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName</h2>
+            </div>
+            <div class="login-wrap">
+                <input type="text" class="form-control" name="username" />
+                <input type="password" class="form-control" name="password" />
+                <div class="input-group">
+                    <input type="text" class="form-control" style="width:120px; margin-right:8px" name="code" /><img id="imgCode" src="/User/Login/GetCodeImage?id=1" onclick="ChangeCheckCode();return false;" style="border:none; height:38px" />
+                    </div>
+                <button class="btn btn-lg btn-login btn-block" id="btnlogin">
+                    <i class="fa fa-check"></i>
+                </button>
+                    @*<div class="registration">
+                        Not a member yet?
+                        <a class="" href="registration.html">
+                            Signup
+                        </a>
+                    </div>*@
+                    <label class="checkbox">
+                        <input type="checkbox" value="remember-me" /> 记住登录状态
+                        @*<span class="pull-right">
+                            <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+                        </span>*@
+                    </label>
+                </div>
+    </div>
+    <script type="text/javascript">
+        function ChangeCheckCode() {
+            var oldUrl = $('#imgCode').attr("src");
+            $('#imgCode').attr("src", oldUrl + '1');
+        }
+
+        jQuery(function ($) {
+            $('#btnlogin').on('click', function () {
+                loginSubmit();
+            });
+        });
+
+        function loginSubmit() {
+            var name = $("input[name='username']").val();
+            var pwd = $("input[name='password']").val();
+            var lang = $("select[name='lang']").val();
+            var code = $("input[name='code']").val();
+            var gourl = "/User/Login";
+            $.post(gourl, { username: name, password: pwd, lang: lang, code: code }, function (response) {
+                if (response.status == "ok") {
+                    window.location.href = response.data;
+                } else {
+                    if (response.status == "errcode")
+                        ChangeCheckCode();
+                    alert(response.data);
+                }
+            });
+        }
+
+        if (document.addEventListener) {//如果是Firefox
+            document.addEventListener("keypress", fireFoxHandler, true);
+        } else {
+            document.attachEvent("onkeypress", ieHandler);
+        }
+        function fireFoxHandler(evt) {
+            //alert("firefox");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+        function ieHandler(evt) {
+            //alert("IE");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+    </script>
+</body>
+</html>

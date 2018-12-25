@@ -1,0 +1,404 @@
+﻿@{
+    ViewBag.Title = "管理首页";
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+    var Amodel = JN.Services.AdminLoginHelper.CurrentAdmin();
+}
+
+<!-- page specific plugin styles -->
+<!-- Content -->
+<div id="content" >
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb" >
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+        @*<li class=" pull-right" style="margin-top:5px">
+            <a class="btn btn-primary" href="@(Url.Action("ClearAllCache"))">
+                清除所有缓存
+            </a>
+            <a class="btn btn-primary" href="@(Url.Action("ClearAllCache"))">
+                关闭调试模式
+            </a>
+        </li>*@
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+
+        @*<div class="alert alert-primary" >
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>欢迎使用</strong> @(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName)后台管理系统
+
+        </div>*@
+        <div class="separator bottom"></div>
+        <div class="row-fluid">
+            <div class="span3">
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats margin-bottom-none">
+                    <span class="glyphicons user"><i></i></span>
+                    <span class="txt">所有/今日会员统计</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-important">@(MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.IsActivation).Count())
+                    /
+                        @(MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => System.Data.Entity.SqlServer.SqlFunctions.DateDiff("day", x.CreateTime, DateTime.Now) == 0).Count())
+                    </span>
+                </a>
+                <!-- // Stats Widget END -->
+            </div>
+            @*<div class="span2">
+
+        <!-- Stats Widget -->
+        <a href="" class="widget-stats margin-bottom-none">
+            <span class="glyphicons group"><i></i></span>
+            <span class="txt">代理商总量</span>
+            <div class="clearfix"></div>
+            <span class="count label label-warning">@(MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.IsAgent ?? false).Count())</span>
+        </a>
+        <!-- // Stats Widget END -->
+
+    </div>
+    <div class="span2">
+
+        <!-- Stats Widget -->
+        <a href="" class="widget-stats margin-bottom-none">
+            <span class="glyphicons envelope"><i></i></span>
+            <span class="txt">未读留言</span>
+            <div class="clearfix"></div>
+            <span class="count label label-primary">@(MvcCore.Unity.Get<JN.Data.Service.IMessageService>().List(x => x.UID == 0 && x.IsRead == false && x.ToUID == 0).Count())</span>
+        </a>
+        <!-- // Stats Widget END -->
+
+    </div>*@
+            <div class="span3">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats margin-bottom-none">
+                    <span class="glyphicons coins"><i></i></span>
+                    <span class="txt">累计/今日提供单</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-important">
+                    @(MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().List(x => x.Status > 0).Count() > 0 ? MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().List(x => x.Status > 0).Sum(x => x.ExchangeAmount) : 0)
+                    /
+@(MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().List(x => x.Status > 0 && System.Data.Entity.SqlServer.SqlFunctions.DateDiff("day", x.CreateTime, DateTime.Now) == 0).Count() > 0 ? MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().List(x => x.Status > 0 && System.Data.Entity.SqlServer.SqlFunctions.DateDiff("day", x.CreateTime, DateTime.Now) == 0).Sum(x => x.ExchangeAmount) : 0)
+                    </span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+            <div class="span3">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats margin-bottom-none">
+                    <span class="glyphicons inbox "><i></i></span>
+                    <span class="txt">累计/今日接受</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-important">
+                    @(MvcCore.Unity.Get<JN.Data.Service.IAcceptHelpService>().List(x => x.Status > 0).Count() > 0 ? MvcCore.Unity.Get<JN.Data.Service.IAcceptHelpService>().List(x => x.Status > 0).Sum(x => x.ExchangeAmount) : 0)
+                    /
+                        @(MvcCore.Unity.Get<JN.Data.Service.IAcceptHelpService>().List(x => x.Status > 0 && System.Data.Entity.SqlServer.SqlFunctions.DateDiff("day", x.CreateTime, DateTime.Now) == 0).Count() > 0 ? MvcCore.Unity.Get<JN.Data.Service.IAcceptHelpService>().List(x => x.Status > 0 && System.Data.Entity.SqlServer.SqlFunctions.DateDiff("day", x.CreateTime, DateTime.Now) == 0).Sum(x => x.ExchangeAmount) : 0)
+                    </span>
+                </a>
+                <!-- // Stats Widget END -->
+
+            </div>
+            <div class="span3">
+
+                <!-- Stats Widget -->
+                <a href="" class="widget-stats margin-bottom-none">
+                    <span class="glyphicons inbox_plus"><i></i></span>
+                    <span class="txt">所有/今日匹配</span>
+                    <div class="clearfix"></div>
+                    <span class="count label label-important">
+                        @(MvcCore.Unity.Get<JN.Data.Service.IMatchingService>().List(x => x.Status > 0).Count() > 0 ? MvcCore.Unity.Get<JN.Data.Service.IMatchingService>().List(x => x.Status > 0).Sum(x => x.MatchAmount) : 0)
+                        /
+                        @(MvcCore.Unity.Get<JN.Data.Service.IMatchingService>().List(x => x.Status > 0 && System.Data.Entity.SqlServer.SqlFunctions.DateDiff("day", x.CreateTime, DateTime.Now) == 0).Count() > 0 ? MvcCore.Unity.Get<JN.Data.Service.IMatchingService>().List(x => x.Status > 0 && System.Data.Entity.SqlServer.SqlFunctions.DateDiff("day", x.CreateTime, DateTime.Now) == 0).Sum(x => x.MatchAmount) : 0)
+                    </span>                </a>
+                <!-- // Stats Widget END -->
+            </div>
+        </div>
+        <div class="separator bottom"></div>
+        <!-- Widget -->
+        <div class="widget">
+
+            <!-- Widget heading -->
+            <div class="widget-head">
+                <h4 class="heading">数据图表</h4>
+            </div>
+            <!-- // Widget heading END -->
+
+            <div class="widget-body">
+
+                <!-- Simple Chart -->
+                <div id="chart_div" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+        <!-- // Widget END -->
+        @*<!-- Widget -->
+        <div class="widget">
+
+            <!-- Widget heading -->
+            <div class="widget-head">
+                <h4 class="heading">Lines chart with fill & without points</h4>
+            </div>
+            <!-- // Widget heading END -->
+
+            <div class="widget-body">
+
+                <!-- Chart with lines and fill with no points -->
+                <div id="chart_lines_fill_nopoints" style="height: 250px;"></div>
+            </div>
+        </div>
+        <!-- // Widget END -->*@
+
+        @*<div class="widget">
+            <div class="widget-head progress progress-primary" id="widget-progress-bar">
+                <div class="bar" style="width: 96%;">Lorem ipsum <strong>dolor</strong> - <strong class="steps-percent">96%</strong></div>
+            </div>
+            <div class="widget-body">
+                <h4>Progress Widget</h4>
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
+            </div>
+            <span class="btn btn-toggle-code btn-mini btn-primary btn-icon glyphicons embed_close" data-toggle="hide" data-target="#code-2"><i></i> Source</span>
+        </div>*@
+
+        <div class="row-fluid">
+            <div class="span6">
+
+                <!-- Stats/List/Sparklines Widget -->
+                <div class="widget" data-toggle="collapse-widget">
+
+                    <!-- Widget Heading -->
+                    <div class="widget-head">
+                        <h4 class="heading glyphicons stats"><i></i>最新公告</h4>
+                    </div>
+                    <!-- // Widget Heading END -->
+
+                    <div class="widget-body list collapse in">
+                        <table class="table table-bordered table-condensed">
+
+                            @*<!-- Table heading -->
+            <thead>
+                <tr>
+                    <th class="center">No.</th>
+                    <th>Column Heading</th>
+                </tr>
+            </thead>
+            <!-- // Table heading END -->*@
+                            <!-- Table body -->
+                            <tbody>
+                                @{
+                                    var ggLst = MvcCore.Unity.Get<JN.Data.Service.INoticeService>().List().OrderByDescending(x => x.IsTop).ThenByDescending(x => x.ID).Take(10).ToList();
+                                    if (ggLst.Count > 0)
+                                    {
+
+                                        foreach (var notice in ggLst)
+                                        {
+                                            <tr>
+                                                <td class="center">@notice.CreateTime.ToString("yyyy-MM-dd")</td>
+                                                <td>
+                                                    <a href="@(Url.Action("Modify", "Notice", new { ID=notice.ID}))">
+                                                        @notice.Title
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="2">暂无通告</td></tr>
+                                    }
+                                }
+                            </tbody>
+                            <!-- // Table body END -->
+
+                        </table> 
+                    </div>
+                </div>
+                <!-- Stats/List/Sparklines Widget END -->
+
+            </div>
+            <div class="span6">
+
+                <!-- Traffic Sources Pie Chart -->
+                <div class="widget" data-toggle="collapse-widget">
+                    <div class="widget-head">
+                        <h4 class="heading glyphicons pie_chart"><i></i>登录历史</h4>
+                    </div>
+                    <div class="widget-body collapse in">
+                        <table class="table table-bordered table-condensed">
+                            @{
+                                var actLst = MvcCore.Unity.Get<JN.Data.Service.IActLogService>().List(x => x.Location.Contains("/Admin/Login") && x.UID == Amodel.ID).Take(10).OrderByDescending(x => x.ID).ToList();
+                                if (actLst.Count > 0)
+                                {
+
+                                    foreach (var log in actLst)
+                                    {
+                                        <tr>
+                                            <td>@log.IP</td>
+                                            <td>@log.ActContent</td>
+                                            <td>@log.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                        </tr>
+                                    }
+
+                                }
+                            }
+                        </table>
+
+                   </div>
+                </div>
+                <!-- // Traffic Sources Pie Chart END -->
+
+            </div>
+        </div>
+    </div>
+    </div><!-- /.page-content -->
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="/assets/js/excanvas.min.js"></script>
+    <![endif]-->
+    @section scripts{
+        <!-- Themer -->
+<script>
+	var themerPrimaryColor = primaryColor;
+</script>
+        	<!--  Flot Charts Plugin -->
+<script src="/common/theme/scripts/plugins/charts/flot/jquery.flot.js"></script>
+<script src="/common/theme/scripts/plugins/charts/flot/jquery.flot.pie.js"></script>
+<script src="/common/theme/scripts/plugins/charts/flot/jquery.flot.tooltip.js"></script>
+<script src="/common/theme/scripts/plugins/charts/flot/jquery.flot.selection.js"></script>
+<script src="/common/theme/scripts/plugins/charts/flot/jquery.flot.resize.js"></script>
+<script src="/common/theme/scripts/plugins/charts/flot/jquery.flot.orderBars.js"></script>
+
+            @*<!-- Charts Helper Demo Script -->
+<script src="/common/theme/scripts/demo/charts.helper.js?1369414384"></script>
+            <!-- Charts Page Demo Script -->
+<script src="/common/theme/scripts/demo/charts.js?1369414384"></script>*@
+
+<script src="/js/echarts/echarts.min.js"></script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('chart_div'));
+  
+        myChart.setOption({
+                    tooltip: {
+                        trigger: 'axis',
+                        position: function (pt) {
+                            return [pt[0], '10%'];
+                        }
+                    },
+                    title: {
+                        left: 'center',
+                        text: '会员新增数据',
+                    },
+                    legend: {
+                        top: 'bottom',
+                        data: ['意向']
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataView: { show: true, readOnly: false },
+                            magicType: { show: true, type: ['line', 'bar', 'stack', 'tiled'] },
+                            restore: { show: true },
+                            saveAsImage: { show: true }
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: []
+                    },
+                    yAxis: {
+                        type: 'value',
+                        boundaryGap: [0, '100%']
+                    },
+                    //dataZoom: [{
+                    //    type: 'inside',
+                    //    start: 0,
+                    //    end: 10
+                    //}, {
+                    //    start: 0,
+                    //    end: 10
+                    //}],
+                    series: [
+                        {
+                            name: '新增会员',
+                            type: 'line',
+                            smooth: true,
+                            symbol: 'none',
+                            sampling: 'average',
+                            itemStyle: {
+                                normal: {
+                                    color: 'rgb(255, 70, 131)'
+                                }
+                            },
+                            areaStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgb(255, 158, 68)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgb(255, 70, 131)'
+                                    }])
+                                }
+                            },
+                            data: []
+                        }
+                    ]
+                });
+
+                // 异步加载数据
+        $.get('/admincenter/home/getchardata').done(function (data) {
+                    // 填入数据
+                    myChart.setOption({
+                        xAxis: {
+                            data: data.dates
+                        },
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '销量',
+                            data: data.datas
+                        }]
+                    });
+                });
+                //$.ajax({
+                //    type: "POST",
+                //    url: "/admincenter/home/getchardata",
+                //    data: "t=" + new Date(),
+                //    dataType: 'json',
+                //    success: function (data) {
+                //            option.xAxis[0].data = data.dates;
+                //            option.series[0].data = data.datas;
+                //            myChart.setOption(option);
+                //    }
+                //});
+
+
+</script>
+
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $('.widget-container-span').sortable({
+                    connectWith: '.widget-container-span',
+                    items: '> .widget-box',
+                    opacity: 0.8,
+                    revert: true,
+                    forceHelperSize: true,
+                    placeholder: 'widget-placeholder',
+                    forcePlaceholderSize: true,
+                    tolerance: 'pointer'
+                });
+            });
+
+            $(function () {
+                $('#widget-progress-bar .bar').width("50%");
+                setInterval(function () {
+                    var w = mt_rand(30, 100);
+                    $('#widget-progress-bar .steps-percent').html(w + "%");
+                    $('#widget-progress-bar .bar').width(w + "%");
+                }, 2000);
+            });
+        </script>
+    }

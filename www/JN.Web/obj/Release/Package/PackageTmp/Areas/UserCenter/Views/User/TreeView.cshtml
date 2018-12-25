@@ -1,0 +1,127 @@
+﻿@model JN.Data.User
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <h4>@T("我的会员")</h4>
+
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T(ViewBag.Title)</a>
+        </div>
+    </div>
+
+            <div class="mainoprate">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->                       
+                                @*<a href="@Url.Action("TreeView")" class="btn btn-primary">推荐图谱</a>
+                                @if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "double")
+            {
+                                    <a href="@Url.Action("DoubleTrack")" class="btn btn-danger">安置图谱</a>
+                                }
+
+                                @if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "three")
+            {
+                                    <a href="@Url.Action("ThreeTrack")" class="btn btn-danger">安置图谱</a>
+                                }*@
+                        <div class="widget-box">
+                            <div class="widget-header header-color-blue2 ">
+                                <h4 class="lighter smaller ">@Model.UserName</h4>
+                            </div>
+                            <div class="widget-body">
+                                <div class="widget-main padding-8">
+                                    @{
+                                        if (MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.RefereeID == Model.ID).Count() > 0)
+                                        {
+                                            <div id="tree1" class="tree-demo">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span>@(Model.UserName) @T("下没有推荐用户").</span>
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="space"></div>
+                        <div class="center" style=" margin-left:8px;">
+                            <a href="javascript:history.go(-1);" class="btn btn-default">
+                                <i class="icon-arrow-left"></i>
+                                @T("返回")
+                            </a>
+
+                            <a href="/UserCenter/Home" class="btn btn-danger">
+                                <i class="icon-dashboard"></i>
+                                @T("返回主界面")
+                            </a>
+                        </div>
+
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+                <!-- page specific plugin scripts -->
+                <!--[if lte IE 8]>
+                  <script src="/assets/js/excanvas.min.js"></script>
+                <![endif]-->
+                <!-- BEGIN PAGE LEVEL SCRIPTS -->
+                <link href="~/common/theme/scripts/plugins/jstree/dist/themes/default/style.css" rel="stylesheet" />
+                <script src="~/common/theme/scripts/plugins/jstree/dist/jstree.min.js"></script>
+                <script type="text/javascript">
+                    jQuery(function ($) {
+                        //$('#tree1').tree({
+                        //    dataSource: new DataSourceTree({ url: '/User/User/GetTreeJson' }),
+                        //    multiSelect: false,
+                        //    loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                        //    'open-icon': 'icon-minus',
+                        //    'close-icon': 'icon-plus',
+                        //    'selectable': false
+                        //});
+
+                        $("#tree1").jstree({
+                            "core": {
+                                "themes": {
+                                    "responsive": false
+                                },
+                                // so that create works
+                                "check_callback": true,
+                                'data': {
+                                    'url': function (node) {
+                                        if (node.id > 0)
+                                            return '@(Url.Action("GetTreeJson"))?id=' + node.id;
+                                        else
+                                            return '@(Url.Action("GetTreeJson"))?id=@Model.ID';
+                                    },
+                                    'data': function (node) {
+                                        return { 'parent': node.id };
+                                    }
+                                }
+                            },
+                            //"types" : {
+                            //    "default" : {
+                            //        "icon" : "fa fa-folder icon-state-warning icon-lg"
+                            //    },
+                            //    "file" : {
+                            //        "icon" : "fa fa-file icon-state-warning icon-lg"
+                            //    }
+                            //},
+                            "state": { "key": "demo3" },
+                            "plugins": ["dnd", "state", "types"]
+                        });
+
+
+                    });
+                </script>
+</div></div></div>

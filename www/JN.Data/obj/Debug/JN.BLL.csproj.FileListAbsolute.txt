@@ -1,0 +1,5 @@
+H:\公司项目\Q160214\ZYStock\ZYStocks.BLL\bin\Debug\JN.BLL.dll
+H:\公司项目\Q160214\ZYStock\ZYStocks.BLL\bin\Debug\JN.BLL.pdb
+H:\公司项目\Q160214\ZYStock\ZYStocks.BLL\obj\Debug\JN.BLL.csprojResolveAssemblyReference.cache
+H:\公司项目\Q160214\ZYStock\ZYStocks.BLL\obj\Debug\JN.BLL.dll
+H:\公司项目\Q160214\ZYStock\ZYStocks.BLL\obj\Debug\JN.BLL.pdb

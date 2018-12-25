@@ -1,0 +1,122 @@
+﻿@model JN.Data.User
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="@(Request.Url.ToString().ToLower().Contains(("ApplyExchange?fromCoin=2002&toCoin=2001").ToLower()) ? "active" : "")">
+                        <a href="/User/Finance/ApplyExchange?fromCoin=2002&toCoin=2001">
+                            @T(cacheSysParam.Single(x => x.ID == 2002).Name + "兑换" + cacheSysParam.Single(x => x.ID == 2001).Name)
+                        </a>
+                    </li>
+                </ul> 
+                <div class="tab-content">
+                    <div class="table-responsive">
+@using (Ajax.BeginForm("ApplyExchange", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+{
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="mainwallet">@T("当前" + cacheSysParam.Single(x => x.ID == ViewBag.fromCoin).Name + "余额"):</label>
+                                @{
+                                    decimal fromWallet = 0;
+                                    if (ViewBag.fromCoin == 2001)
+                                    {
+                                        fromWallet = Model.Wallet2001;
+                                    }
+                                    else if (ViewBag.fromCoin == 2002)
+                                    {
+                                        fromWallet = Model.Wallet2002;
+                                    }
+                                }
+                                <div class="col-xs-12 col-sm-2">
+                                    <div class="clearfix">
+                                        <input type="text" name="mainwallet" class="form-control" value="@fromWallet.ToString("F2")" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="poundage">@T("兑换手续费率"):</label>
+
+                                <div class="col-xs-12 col-sm-2">
+                                    <input type="text" id="poundage" class="form-control" value="@ViewBag.Poundage" readonly="readonly" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="drawmoney">@T("兑换数量"):</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="input-group">
+                                        <input type="text" id="takenumber" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:100px" value="0" /><input type="text" style="width: 70px" readonly class="form-control" value="×@(ViewBag.Beisu) = " /><input type="text" name="drawmoney" style="width:100px" class="form-control" value="0" readonly="readonly" />
+                                        <input type="hidden" id="takemultiple" value="@ViewBag.Beisu">
+                                        <input type="hidden" id="fromCoin" value="@ViewBag.fromCoin">
+                                        <input type="hidden" id="toCoin" value="@ViewBag.toCoin">
+                                    </div>
+                                    <span style="color:#f00; line-height:25px">*@T("数量必须为" + ViewBag.Beisu + "的倍数")</span>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="actualdrawmoney">@T("实际兑换数量"):</label>
+
+                                <div class="col-xs-12 col-sm-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="icon-usd"></i>
+                                        </span>
+
+                                        <input type="text" name="actualdrawmoney" class="form-control" value="0" style="width:123px" readonly="readonly" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hr hr-dotted"></div>
+
+                            <div class="clearfix form-actions">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="icon-ok bigger-110"></i>
+                                        @T("保存")
+                                    </button>
+
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button class="btn" type="reset">
+                                        <i class="icon-undo bigger-110"></i>
+                                        @T("重置")
+                                    </button>
+                                </div>
+                            </div>
+}
+                    </div><!-- /.table-responsive -->
+                </div><!-- /span -->
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+                </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    function afterPost(data) {
+        if (data.Status == 200) {
+            alert("保存成功，即将为您跳转页面!");
+            location.href = "@(Url.Action("takecash"))";
+        } else {
+            alert("保存失败！错误信息：" + data.Message);
+        }
+    }
+    jQuery(function ($) {
+        $("#takenumber").on('keyup', function () {
+            $("input[name='drawmoney']").val(parseInt($("#takenumber").val()) * parseInt($("#takemultiple").val()));
+            $("input[name='actualdrawmoney']").val(parseFloat($("#takenumber").val()) * parseFloat($("#takemultiple").val()) * (1 - parseFloat($("#poundage").val())));
+        });
+    });
+</script>

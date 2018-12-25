@@ -1,0 +1,364 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Page title -->
+    <title>@T(JN.BLL.syssettings.GetModel(1).SysName)</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/theme/mmm/css/font-awesome.css">
+    <link rel="stylesheet" href="/theme/mmm/css/metisMenu.css">
+    <link rel="stylesheet" href="/theme/mmm/css/animate.css">
+    <link rel="stylesheet" href="/theme/mmm/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css">
+
+    <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css">
+    <link rel="stylesheet" href="/theme/mmm/css/default.css">
+    <link rel="stylesheet" href="/theme/mmm/css/style.css">
+    <!-- App styles -->
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/theme/mmm/js/jquery-ui.min.js"></script>
+    <script src="/theme/mmm/js/jquery.slimscroll.min.js"></script>
+    <script src="/theme/mmm/js/bootstrap.min.js"></script>
+    @*<script src="/theme/mmm/js/jquery.flot.js"></script>
+        <script src="/theme/mmm/js/jquery.flot.resize.js"></script>
+        <script src="/theme/mmm/js/jquery.flot.pie.js"></script>*@
+    <script src="/theme/mmm/js/curvedLines.js"></script>
+    <script src="/theme/mmm/js/index.js"></script>
+    <script src="/theme/mmm/js/metisMenu.min.js"></script>
+    <script src="/theme/mmm/js/icheck.min.js"></script>
+    <script src="/theme/mmm/js/jquery.peity.min.js"></script>
+
+    <script src="/theme/mmm/js/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="/theme/mmm/css/sweet-alert.css">
+    <script src="/theme/mmm/js/sweet-alert.min.js"></script>
+    <!-- App scripts -->
+    <script src="/theme/mmm/js/homer.js"></script>
+    @*<script src="/theme/mmm/js/alert.js"></script>
+        <script src="/theme/mmm/js/charts.js"></script>*@
+    <link href="~/Theme/CFB/css/css.css" rel="stylesheet" />
+    <script language="javascript">
+        $(window).bind('beforeunload',function(){
+            var divObj=document.createElement("div");
+            divObj.setAttribute('class','loading');
+            divObj.innerHTML='@T("正在拼命处理中,请稍候...")';
+            $('body').append(divObj);
+        });
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        function menu(index) {
+            $(".nav li").removeClass("seleli");
+            $(".nav li").eq(index).addClass("seleli");
+            $("#sidebar ul").hide();
+            $("#menu" + index).show();
+        }
+    </script>
+
+    <style>
+        .mainarea {
+            position:relative;
+        }
+        .row {
+            margin-right: 0;
+           margin-left: 0; 
+        }
+            /*.clearfix:after, .dl-horizontal dd:before, .dl-horizontal dd:after, .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after, .form-horizontal .form-group:before, .form-horizontal .form-group:after, .btn-toolbar:before, .btn-toolbar:after, .btn-group-vertical > .btn-group:before, .btn-group-vertical > .btn-group:after, .nav:before, .nav:after, .navbar:before, .navbar:after, .navbar-header:before, .navbar-header:after, .navbar-collapse:before, .navbar-collapse:after, .pager:before, .pager:after, .panel-body:before, .panel-body:after, .modal-footer:before, .modal-footer:after {
+                display:table-row
+            }*/
+    </style>
+</head>
+<body>
+@{JN.Entity.TUser onUser = JN.BLL.users.IsLogin();}
+
+<div class="header">
+    <div class="top">
+        <ul class="nav" style="margin-left:150px">
+            <li class="@((Request.Url.ToString().ToLower().Contains(("/usercenter/home").ToLower()) || Request.Url.ToString().ToLower().Contains(("/user/notice").ToLower())) ? "seleli" : "")"><a href="/usercenter/home">@T("首页")</a></li>
+            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user").ToLower())) ? "seleli" : "")"><a href="###" onclick="menu(1)">@T("社区体系")</a></li>
+            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/finance").ToLower())) ? "seleli" : "")"><a href="javascript:menu(2)">@T("钱包管理")</a></li>
+            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/agent").ToLower())) ? "seleli" : "")"><a href="javascript:menu(3)">@T("管家中心")</a></li>
+            <li class="@((Request.Url.ToString().ToLower().Contains(("/user/mail").ToLower())) ? "seleli" : "")"><a href="javascript:menu(4)">@T("邮件管理")</a></li>
+            @*<li><a onclick="return confirm('@T("确定要退出登录")?')" title="退出登录" href="../exit.aspx">@T("安全退出")</a></li>*@
+
+        </ul>
+        <div class="navbar-right">
+            <div class="systool" style="position:relative">
+                <span class="glyphicon glyphicon-home btn-lg" onclick="window.location.href = '/usercenter/home'"></span>
+                @if (JN.Common.ConfigHelper.GetConfigBool("MultiLanguage"))
+                {
+                    <a class="dropdown-toggle glyphicon glyphicon-th btn-lg" href="###" data-toggle="dropdown">
+                        <small class="text-muted"></small>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li>
+                            <a href="/usercenter/home?lang=en-US">
+                                <img src="/theme/mmm/images/en.png">
+                                English
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/usercenter/home?lang=zh-CN">
+                                <img src="/theme/mmm/images/cn.png">
+                                简体中文
+                            </a>
+                        </li>
+                    </ul>
+                }
+                <span class="glyphicon glyphicon-off btn-lg" onclick="tc()"></span>
+                <span>&nbsp;</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container1">
+    <div class="leftbar" style="border-right:1px solid #ccc">
+        <div class="lm01">
+            <!--<img class="peptx" src="images/tximg.jpg" />-->
+            @*<img class="peptx" src="/theme/cfb/images/face.jpg" width="100" style="border:1px solid #ccc; border-radius:50px;" />*@
+            <img class="peptx" src="@JN.BLL.syssettings.GetModel(1).LogoPic" style="width: 100px; " />
+            <div class="pepdet">
+                <p class="pepname">@JN.BLL.users.IsLogin().NickName</p>
+                <p style="color:#f00">余额：@onUser.Wallet2001 @*@T(JN.BLL.sysparams.GetModel(2001).Value)*@</p>
+                <p>@T("推荐人")：@T(JN.BLL.users.GetModel(onUser.RefereeID) == null ? "无" : JN.BLL.users.GetModel(onUser.RefereeID).NickName)</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="lm01" style="text-align:center; margin-top:10px; margin-bottom:10px">
+            @T(" 扫我注册")<br />
+            <img width="150" height="150" src="/user/user/QrCode" /><br />
+            <a target="_blank" href="@Request.Url.GetLeftPart(UriPartial.Authority)/user/Reg/index?urluid=@JN.BLL.users.IsLogin().UserName">@T("推广链接")</a>
+        </div>
+            <div class="lm02">
+                <div id="notice" class="notice">
+                    <div id="notice-tit" class="notice-tit">
+                        <ul>
+                            <li onmouseover="js()" id="js" class="select">
+                                <a href="#">@T("申请提供帮助")</a>
+                            </li>
+                            <li onmouseover="tg()" id="tg">
+                                <a href="#">@T("申请接受帮助 ")</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="notice-con" class="notice-con">
+                        <div class="mod2" style="display:block">
+                            @{List<JN.Entity.TSupplyHelp> list = JN.BLL.supplyhelps.GetModelList(10, "Uid=" + JN.BLL.users.IsLogin().ID + "", "IsTop desc,CreateTime desc");}
+                            @if (list != null && list.Count > 0)
+                            {
+                                foreach (var item in list)
+                                {
+                                    <div class="col-md-12" style="border-top:#ccc 1px solid;">
+                                        <a class="list-group-item " style="border:none;" href="">
+                                            <h5 class="list-group-item-heading">@T("申请提供帮助")</h5>
+                                        </a>
+                                        <div style="margin-bottom:1em; margin-right:1em;">
+                                            <font>@T("编号"):@item.SupplyNo</font>
+                                            <br>
+                                            <font>@T("参与者"):@item.UserName</font>
+                                            <br>
+                                            <font>@T("金额"):@item.SupplyAmount</font>
+                                            <br>
+                                            <font>@T("剩余金额"):@(item.SupplyAmount - item.HaveMatchingAmount)</font>
+                                            <br>
+                                            <font>@T("日期"):@item.CreateTime</font>
+                                            <br>
+                                            <font>
+                                                @T("状态"): @JN.Common.EnumHelp.GetDescription(typeof(JN.Entity.Enum.HelpStatus), item.Status)
+                                            </font>
+
+                                            @if (item.Status == (int)JN.Entity.Enum.HelpStatus.NoMatching)
+                                            {
+                                                <a href="/usercenter/home/CancelSupplyQueuing/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:right; padding-right:10px">
+                                    <a href="/user/Finance/nopairlist?active=0"> @T("更多")>></a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:center; padding-right:10px">
+                                    @T("没有更多信息")
+                                </div>
+                            }
+                        </div>
+
+                        <div class="mod1" style="display:none">
+                            @{List<JN.Entity.TAcceptHelp> listin = JN.BLL.accepthelps.GetModelList(10, "Uid=" + JN.BLL.users.IsLogin().ID + "", " IsTop desc,CreateTime desc");}
+                            @if (listin != null && listin.Count > 0)
+                            {
+                                foreach (var item in listin)
+                                {
+                                    <div class="col-md-12" style="border-top:#ccc 1px solid;">
+                                        <a class="list-group-item " style="border:none;" href="">
+                                            <h5 class="list-group-item-heading">@T("申请接受帮助 ")</h5>
+                                        </a>
+
+                                        <div style="margin-bottom:1em; margin-right:1em;">
+                                            <font>@T("编号"):@item.AcceptNo</font>
+                                            <br>
+                                            <font>@T("参与者"):@item.UserName</font>
+                                            <br>
+                                            <font>@T("金额"):@item.AcceptAmount</font>
+                                            <br>
+                                            <font>@T("剩余金额"):@(item.AcceptAmount - item.HaveMatchingAmount)</font>
+                                            <br>
+                                            <font>@T("钱包"):@(JN.BLL.sysparams.GetModel(item.CoinID).Name)钱包</font>
+                                            <br>
+                                            <font>@T("日期"):@item.CreateTime</font>
+                                            <br>
+                                            <font>
+                                                @T("状态"):@JN.Common.EnumHelp.GetDescription(typeof(JN.Entity.Enum.HelpStatus), item.Status)
+                                            </font>
+                                            @if (item.Status == (int)JN.Entity.Enum.HelpStatus.NoMatching)
+                                            {
+                                                <a href="/usercenter/home/CancelAcceptQueuing/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:right; padding-right:10px">
+                                    <a href="/user/Finance/nopairlist?active=1"> @T("更多")>></a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:center; padding-right:10px">
+                                    @T("没有更多信息")
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--end leftbar-->
+    <div class="mainbody">
+        <div class="currmenu" id="sidebar">
+            <ul class="rig_nav" style="display:@((Request.Url.ToString().ToLower().Contains(("/usercenter/home").ToLower()) || Request.Url.ToString().ToLower().Contains(("/user/notice").ToLower())) ? "" : "none")">
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/usercenter/home/index").ToLower())) ? "rig_seleli" : "")"><a href="/usercenter/home">@T("桌面")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/usercenter/home/changepassword").ToLower())) ? "rig_seleli" : "")"><a href="/usercenter/home/changepassword">@T("修改密码")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/notice").ToLower())) ? "rig_seleli" : "")"><a href="/user/notice">@T("最新公告")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/modify").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/modify">@T("我的档案")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/mail/write").ToLower())) ? "rig_seleli" : "")"><a href="/user/mail/write">@T("发送邮件")</a></li>
+            </ul>
+            <ul class="rig_nav " id="menu1" style="display:@((Request.Url.ToString().ToLower().Contains(("/user/user").ToLower())) ? "" : "none")">
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/add").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/add">@T("会员注册")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/unactivation").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/unactivation">@T("待激活的会员")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/index").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/index">@T("直推会员")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/user/treeview").ToLower())) ? "rig_seleli" : "")"><a href="/user/user/treeview">@T("推荐图谱")</a></li>
+            </ul>
+            <ul class="rig_nav" id="menu2" style="display: @((Request.Url.ToString().ToLower().Contains(("/user/finance").ToLower())) ? "" : "none")">
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/finance/wallet").ToLower())) ? "rig_seleli" : "")"><a href="/user/finance/wallet">@T("我的钱包")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/Finance/NoPairList").ToLower())) ? "rig_seleli" : "")"><a href="/user/Finance/NoPairList">@T("会员动态")</a></li>
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/finance/pincode").ToLower())) ? "rig_seleli" : "")"><a href="/user/finance/pincode">@T("我的PIN码")</a></li>
+            </ul>
+            <ul class="rig_nav" id="menu3" style="display: @((Request.Url.ToString().ToLower().Contains(("/user/agent").ToLower())) ? "" : "none")">
+                @if (onUser.IsAgent == false)
+{
+    <li class="@((Request.Url.ToString().ToLower().Contains(("/user/agent/applyagent").ToLower())) ? "rig_seleli" : "")"><a href="/user/agent/applyagent">@T("申请管家")	</a></li>
+}
+                else
+                {
+                    <li class="@((Request.Url.ToString().ToLower().Contains(("/user/agent/index").ToLower())) ? "rig_seleli" : "")"><a href="/user/agent/index">@T("我的会员")</a></li>
+                }
+            </ul>
+            <ul class="rig_nav" id="menu4" style="display: @((Request.Url.ToString().ToLower().Contains(("/user/mail").ToLower())) ? "" : "none")">
+                <li class="@((Request.Url.ToString().ToLower().Contains(("/user/mail/write").ToLower())) ? "rig_seleli" : "")"><a href="/user/mail/write">@T("邮件中心")</a></li>
+        @*<li><a href="../P_Second.aspx?url=2">发件箱</a></li>
+        <li><a href="../P_Second.aspx?url=3">写邮件</a></li>*@
+    </ul>
+
+        </div><!--end currmenu-->
+        <link href="~/Theme/CFB/css/style.css" rel="stylesheet" />
+            @RenderBody()
+    </div><!--end mainbody-->
+
+    <!-- Vendor scripts -->
+    <div class="modal container fade" id="childwindow" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="color-line"></div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="childwindowtitle"></h4>
+
+                </div>
+                <section id="childwindowiframe">
+                    <div class="modal-body" style="text-align:center">
+                        <p style="text-align:center">@T("载入中，请稍候...")</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+</html>
+    <!--gethelp modal end-->
+    <!-- <script type="text/javascript" src="/js/socket.io.js"></script> -->
+
+    <script src="~/Plugin/layer/layer.js"></script>
+
+
+  <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () { $('[data-toggle="popover"]').popover() });
+            $('#childwindow').on('hidden.bs.modal', function (e) { window.location.reload(); });
+        });
+        function winopen(title, url, width) {
+            if (browser.versions.iPhone || browser.versions.android) {
+                $('.modal-dialog').width(350);
+            }
+            else {
+                if (width != "") $('.modal-dialog').width(width);
+            }
+            $('#childwindowiframe').load(url);
+            $("#childwindowtitle").html(title);
+            $("#childwindow").modal();
+        }
+        function winclose() {
+            $("#childwindow").modal('hide');
+        }
+
+        function tc() {
+        layer.confirm("@T("您确定要退出么？")",
+        {
+            btn: ['@T("是的")', '@T("不是，点错了")'], //按钮
+            }, function () {
+                window.location.href = '/usercenter/home/logout';
+            })
+        }
+
+
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }()
+        }
+
+</script>
+

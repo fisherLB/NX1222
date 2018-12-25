@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Areas/User/Views/Shared/_Layout" + JN.Common.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+@using Webdiyer.WebControls.Mvc
+@model PagedList<JN.Entity.TMatching>
+<script src="~/theme/mmm/js/box.js"></script>
+<style>
+    .mainoprate {
+        margin-top: 0px;
+        margin-bottom: 8px;
+        padding: 15px;
+    }
+    .btn-success {
+        background-color: #5ab95c;
+        border-color: #5ab95c;
+        color: #FFFFFF;
+        width: 400px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 30px;
+    }
+    .btn-warning {
+        background-color: #efad4c;
+        border-color: #efad4c;
+        color: #FFFFFF;
+        width: 400px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size:30px;
+    }
+    .btn-successdialog {
+        background-color: #5ab95c;
+        border-color: #5ab95c;
+        color: #FFFFFF;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .btn-warningdialog {
+        background-color: #efad4c;
+        border-color: #efad4c;
+        color: #FFFFFF;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+<div class="mainarea" id="mainarea" >
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <b>@T("欢迎页") </b>
+            <br>
+            <span>Present your events in timeline style.</span>
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T(ViewBag.Title)</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="mainoprate">
+                @*<div class="col-md-12">
+                        <img src="/theme/mmm/images/MMM-banner.jpg" width="100%" style="margin-bottom: 10px;">
+                    </div>*@
+
+                @*<table width="100%">
+                    <tbody>
+                        <tr align="center">
+                            <td width="50%" height="60"><a href="###" onclick="javascript: winopen('提供帮助', '/usercenter/home/_SubmitSupplyHelp');" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000" class="big_btn">@T("提供帮助")</a></td>
+                            <td width="50%"><a href="###" onclick="javascript: winopen('接受帮助', '/usercenter/home/_SubmitAcceptHelp');" style="text-shadow: 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000" class="big_btn">@T("接受帮助")</a></td>
+                        </tr>
+                    </tbody>
+                </table>*@
+                <!--导航结束-->
+                <div class="box_l">
+                    <table class=" t1" cellspacing="0" border="0" style="width:100%;border-collapse:collapse">
+                        <tbody>
+                            <tr>
+                                <td width="50%" align="center" scope="col"><button class="btn btn-success btn-lg" onclick="javascript: winopen('提供帮助', '/usercenter/home/_SubmitSupplyHelp');">@T("提供帮助")</button></td>
+                                <td width="50%" align="center" scope="col"><button class="btn btn-warning btn-lg btngethelp" onclick="javascript: winopen('接受帮助', '/usercenter/home/_SubmitAcceptHelp');">@T("接受帮助")</button></td>
+                                @*<td width="50%" align="center" scope="col"><a href="#" onclick="javascript: winopen('提供帮助', '/usercenter/home/_SubmitSupplyHelp');"><img src="/Theme/1025/images/tghelp.jpg" width="400px" height="110px" border="0" /></a></td>
+                                <td width="50%" align="center" scope="col"><a href="#" onclick="javascript: winopen('接受帮助', '/usercenter/home/_SubmitAcceptHelp');"><img src="/Theme/1025/images/jshelp.jpg" width="400px" height="110px" border="0" /></a></td>*@
+                                @*<td width="50%" align="center" scope="col"><a href="#" onclick="javascript: winopen('提供帮助', '/usercenter/home/_SubmitSupplyHelp');" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000"><img src="~/Theme/CFB/index/images/tgyz.jpg" width="100%" border="0" /></a></td>
+    <td align="center" scope="col"><a href="#" onclick="javascript: winopen('接受帮助', '/usercenter/home/_SubmitAcceptHelp');" style="text-shadow: 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000"><img src="~/Theme/CFB/index/images/jsyz.jpg" width="100%" border="0" /></a></td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @*<div class="row">
+                        <div class=" col-xs-12 col-sm-12 col-md-6">
+                            <div class="hpanel">
+                                <div class="panel-body" style="background: url(/theme/mmm/images/button-img1.jpg) no-repeat right bottom #fff; color: #fff; background-size: cover;">
+                                    <div class="text-center">
+                                        <h2 class="m-b-xs" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("我要帮助其他人")</h2>
+                                        <p class="font-bold text-success" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("购买" + JN.BLL.sysparams.GetModel(2001).Value)</p>
+                                        <div class="m" style="height: 40px;">
+                                        </div>
+                                        <p class="small" style="height: 60px;">
+                                        </p>
+                                        <button class="btn btn-success btn-lg" onclick="javascript: winopen('提供帮助', '/usercenter/home/_SubmitSupplyHelp');">@("提供帮助")</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            <div class="hpanel">
+                                <div class="panel-body" style="background: url(/theme/mmm/images/button-img2.jpg) no-repeat center bottom #fff; color: #fff; background-size: cover; ">
+                                    <div class="text-center">
+                                        <h2 class="m-b-xs" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("我需要别人帮助")</h2>
+                                        <p class="font-bold text-warning" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("出售" + JN.BLL.sysparams.GetModel(2001).Value)</p>
+                                        <div class="m" style="height: 40px;">
+                                        </div>
+                                        <p class="small" style="height: 60px;">
+                                        </p>
+                                        <button class="btn btn-warning btn-lg" onclick="javascript: winopen('接受帮助', '/usercenter/home/_SubmitAcceptHelp');">@("接受帮助")</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 hide">
+                            <div class="hpanel" id="ad">
+                                <div class="panel-body">
+                                    <div class="text-center" style="overflow:auto" id="bd">
+                                        <h2 class="m-b-xs" id="total">0</h2>
+                                        <div>
+                                            <div class="small" id="show">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="row" id="context">
+                    <div id="ListContent">
+                        @Html.Partial("_PartialMatchList", Model)
+                    </div>
+
+                    <!--group list end-->
+
+                    <div class="list_top">援助信息显示</div>
+                    <div class="box_l">
+                        <div>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr>
+                                        <td width="50%" valign="top">
+                                            <table width="100%" border="0" cellspacing="0" bgcolor="#99FF33" class="t1" id="GridView1" style="border-collapse:collapse">
+                                                <thead>
+                                                    <tr>
+                                                        <td colspan="8" scope="col" style="background:#fff;">申请提供帮助信息</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" scope="col">申请单号</td>
+                                                        <td align="center" scope="col">申请会员</td>
+                                                        <td align="center" scope="col"><span class="list-td2">申请金额</span></td>
+                                                        <td align="center" scope="col"><span class="list-td2">已匹配</span></td>
+                                                        @*<td align="center" scope="col"><span class="list-td2">未匹配金额</span></td>*@
+                                                        <td align="center" scope="col">创建时间</td>
+                                                        <td align="center" scope="col"><span class="list-td2">状态</span></td>
+                                                        <td align="center" scope="col"><span class="list-td2">操作</span></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{List<JN.Entity.TSupplyHelp> list = JN.BLL.supplyhelps.GetModelList(5, "Uid=" + JN.BLL.users.IsLogin().ID + "", "IsTop,CreateTime");}
+                                                    @if (list != null && list.Count > 0)
+                                                    {
+                                                        foreach (var item in list)
+                                                        {
+
+                                                            <tr>
+                                                                <td>@item.SupplyNo</td>
+                                                                <td>@item.UserName</td>
+                                                                <td>@item.SupplyAmount</td>
+                                                                <td>@item.HaveMatchingAmount</td>
+                                                                @*<td>@(item.SupplyAmount - item.HaveMatchingAmount)</td>*@
+                                                                <td>@item.CreateTime.ToString("MM-dd HH:mm:ss")</td>
+                                                                <td><font color="##EE00EE">@JN.Common.EnumHelp.GetDescription(typeof(JN.Entity.Enum.HelpStatus), item.Status)  </font></td>
+                                                                <td>
+                                                                    @if (item.Status == (int)JN.Entity.Enum.HelpStatus.NoMatching)
+                                                                    {
+                                                                        <a href="/usercenter/home/CancelSupplyQueuing/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                                                    }
+                                                                </td>
+
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <td width="10px"></td>
+                                        <td valign="top">
+                                            <table width="100%" border="0" cellspacing="0" bgcolor="#66FFFF" class="t1" id="GridView1" style="border-collapse:collapse">
+                                                <thead>
+                                                    <tr>
+                                                        <td colspan="8" scope="col" style="background:#fff;">申请接受帮助信息</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" scope="col">申请单号</td>
+                                                        <td align="center" scope="col">申请会员</td>
+                                                        <td align="center" scope="col"><span class="list-td2">申请金额</span></td>
+                                                        <td align="center" scope="col"><span class="list-td2">已匹配</span></td>
+                                                        @*<td align="center" scope="col"><span class="list-td2">未匹配金额</span></td>*@
+                                                        <td align="center" scope="col">创建时间</td>
+                                                        <td align="center" scope="col"><span class="list-td2">状态</span></td>
+                                                        <td align="center" scope="col"><span class="list-td2">操作</span></td>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    @{List<JN.Entity.TAcceptHelp> listin = JN.BLL.accepthelps.GetModelList(5, "Uid=" + JN.BLL.users.IsLogin().ID + "", " IsTop,CreateTime  asc");}
+                                                    @if (listin != null && listin.Count > 0)
+                                                    {
+                                                        foreach (var item in listin)
+                                                        {
+                                                            <tr>
+                                                                <td>@item.AcceptNo</td>
+                                                                <td>@item.UserName</td>
+                                                                <td>@item.AcceptAmount</td>
+                                                                <td>@item.HaveMatchingAmount</td>
+                                                                @*<td>@(item.AcceptAmount - item.HaveMatchingAmount)</td>*@
+                                                                <td>@item.CreateTime.ToString("MM-dd HH:mm:ss")</td>
+                                                                <td><font color="#EE00EE">@JN.Common.EnumHelp.GetDescription(typeof(JN.Entity.Enum.HelpStatus), item.Status)</font></td>
+                                                                <td>
+                                                                    @if (item.Status == (int)JN.Entity.Enum.HelpStatus.NoMatching)
+                                                                    {
+                                                                        <a href="/usercenter/home/CancelAcceptQueuing/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                                                    }
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

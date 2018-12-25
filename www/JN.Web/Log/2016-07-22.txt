@@ -1,0 +1,363 @@
+﻿---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/user/add
+发生时间：2016/7/22 15:15:42
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+~/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/user/unactivation
+发生时间：2016/7/22 15:15:51
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+~/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/finance/BonusDetail
+发生时间：2016/7/22 15:16:02
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Views/finance/_PartialSubmitSupplyHelp.aspx
+~/Views/finance/_PartialSubmitSupplyHelp.ascx
+~/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.vbhtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+~/Views/finance/_PartialSubmitSupplyHelp.cshtml
+~/Views/finance/_PartialSubmitSupplyHelp.vbhtml
+~/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/finance/supplylist
+发生时间：2016/7/22 15:16:10
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Views/finance/_PartialSubmitSupplyHelp.aspx
+~/Views/finance/_PartialSubmitSupplyHelp.ascx
+~/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.vbhtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+~/Views/finance/_PartialSubmitSupplyHelp.cshtml
+~/Views/finance/_PartialSubmitSupplyHelp.vbhtml
+~/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/finance/MenPiaoTransfer
+发生时间：2016/7/22 15:20:00
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Views/finance/_PartialSubmitSupplyHelp.aspx
+~/Views/finance/_PartialSubmitSupplyHelp.ascx
+~/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/finance/_PartialSubmitSupplyHelp.vbhtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+~/Views/finance/_PartialSubmitSupplyHelp.cshtml
+~/Views/finance/_PartialSubmitSupplyHelp.vbhtml
+~/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/user/unactivation
+发生时间：2016/7/22 15:21:28
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+~/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/user/activation
+发生时间：2016/7/22 15:33:00
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Views/user/_PartialSubmitSupplyHelp.aspx
+~/Views/user/_PartialSubmitSupplyHelp.ascx
+~/Views/Shared/_PartialSubmitSupplyHelp.aspx
+~/Views/Shared/_PartialSubmitSupplyHelp.ascx
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Areas/UserCenter/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+~/Views/user/_PartialSubmitSupplyHelp.cshtml
+~/Views/user/_PartialSubmitSupplyHelp.vbhtml
+~/Views/Shared/_PartialSubmitSupplyHelp.cshtml
+~/Views/Shared/_PartialSubmitSupplyHelp.vbhtml
+---------------------------------------------------
+来自页面：http://localhost:41520/usercenter/home
+发生时间：2016/7/22 15:34:10
+异常对像：System.Web.Mvc.HtmlHelper.FindPartialView
+错误追踪：   在 System.Web.Mvc.HtmlHelper.FindPartialView(ViewContext viewContext, String partialViewName, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.HtmlHelper.RenderPartialInternal(String partialViewName, ViewDataDictionary viewData, Object model, TextWriter writer, ViewEngineCollection viewEngineCollection)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName, Object model, ViewDataDictionary viewData)
+   在 System.Web.Mvc.Html.PartialExtensions.Partial(HtmlHelper htmlHelper, String partialViewName)
+   在 ASP._Page_Areas_UserCenter_Views_Shared__Layout052401_cshtml.Execute() 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Views\Shared\_Layout052401.cshtml:行号 304
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   在 System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.WebPages.WebPageBase.<>c__DisplayClass3.<RenderPageCore>b__2(TextWriter writer)
+   在 System.Web.WebPages.HelperResult.WriteTo(TextWriter writer)
+   在 System.Web.WebPages.WebPageBase.Write(HelperResult result)
+   在 System.Web.WebPages.WebPageBase.RenderSurrounding(String partialViewName, Action`1 body)
+   在 System.Web.WebPages.WebPageBase.PopContext()
+   在 System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   在 System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)
+   在 System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：未找到分部视图“/Areas/UserCenter/Views/Home/_PartialSubmitSupplyHelp”或没有视图引擎支持搜索的位置。搜索了以下位置: 
+/Areas/UserCenter/Views/Home/_PartialSubmitSupplyHelp
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/Index?adminloginname=5
+发生时间：2016/7/22 17:43:19
+异常对像：System.Web.HttpResponse.Redirect
+错误追踪：   在 System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   在 System.Web.HttpResponseWrapper.Redirect(String url)
+   在 JN.Web.Areas.UserCenter.Controllers.BaseController.OnActionExecuting(ActionExecutingContext filterContext) 位置 f:\项目\wl16071701\www\JN.Web\Areas\UserCenter\Controllers\BaseController.cs:行号 121
+   在 System.Web.Mvc.Controller.System.Web.Mvc.IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.InvokeActionMethodFilterAsynchronouslyRecursive(Int32 filterIndex)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__31(AsyncCallback asyncCallback, Object asyncState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallBeginDelegate(AsyncCallback callback, Object callbackState)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.Begin(AsyncCallback callback, Object state, Int32 timeout)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.BeginInvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters, AsyncCallback callback, Object state)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+错误提示：无法在发送 HTTP 标头之后进行重定向。
+---------------------------------------------------
+来自页面：http://localhost:41520/UserCenter/Home/Index?adminloginname=5
+发生时间：2016/7/22 17:43:19
+异常对像：System.Web.HttpResponse.Redirect
+错误追踪：   在 System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   在 System.Web.HttpResponseWrapper.Redirect(String url, Boolean endResponse)
+   在 System.Web.Mvc.RedirectResult.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2d.<BeginInvokeAction>b__1d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+错误提示：无法在发送 HTTP 标头之后进行重定向。

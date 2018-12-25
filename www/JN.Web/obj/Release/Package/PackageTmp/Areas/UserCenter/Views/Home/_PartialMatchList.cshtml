@@ -1,0 +1,242 @@
+﻿@using System.Web.Optimization
+@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.Matching>
+@{
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+}
+<link href="~/Plugin/countdown/jquery.countdown.css" rel="stylesheet" />
+<script src="~/Plugin/countdown/jquery.countdown.js"></script>
+<!-- 匹配列表 -->
+
+
+<div class="table-responsive">
+    @*{ //接受订单完成后24小时必须进行复投*@
+       @MvcHtmlString.Create(JN.Services.Manager.MMM.MustBeReCastAfterAcceptHelp(Umodel));
+   
+    <table class="table table-striped">
+        <tbody>
+            <!--compley-->
+            @foreach (var item in Model)
+        {
+                <tr>
+                    <td align="center">
+                        @if (item.AcceptUID == Umodel.ID)
+                    {
+                        if (item.Status <= (int)JN.Data.Enum.MatchingStatus.Delayed && item.Status >= 0)
+                        {
+                            <a href="javascript:void(0);" data-toggle="modal" class="complete ">
+                                @*<i class="fa icon-star-empty" style="font-size: 35px;display: block;color: green;"></i>*@
+                                <img src="~/Theme/071701/images/icon-star-empty-g.png" />
+                            </a>
+                        }
+                        else if (item.Status == (int)JN.Data.Enum.MatchingStatus.Paid)
+                        {
+                            <a href="javascript:void(0);" onclick="javascript: winopen('验证付款', '@(Url.Action("_PartialVerifyPay"))?id=@item.ID');" class="complete comp">
+                                @*<i class="fa pe-7s-star-half" style="font-size: 35px;display: block;color: green;"></i>*@
+                                <img src="~/Theme/071701/images/pe-7s-star-half-g.png" />
+                            </a>
+                        }
+                        else if (item.Status == (int)JN.Data.Enum.MatchingStatus.Verified)
+                        {
+                            <a href="javascript:void(0);" class="complete ">
+                                @*<i class="fa icon-star-full" style="font-size: 35px;display: block;color: green;"></i>*@
+                                <img src="~/Theme/071701/images/icon-star-full.png" />
+                            </a>
+                        }
+                        else if (item.Status == (int)JN.Data.Enum.MatchingStatus.Falsehood)
+                        {
+                            <a href="javascript:void(0);" class="complete ">
+                                @*<i class="fa pe-7s-star-half" style="font-size: 35px;display: block;color: red;"></i>*@
+                                <img src="~/Theme/071701/images/pe-7s-star-half-r.png" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0);" class="complete ">
+                                @*<i class="fa icon-star-empty" style="font-size: 35px; display: block;color: #ccc"></i>*@
+                                <img src="~/Theme/071701/images/icon-star-empty-c.png" />
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        if (item.Status <= (int)JN.Data.Enum.MatchingStatus.Delayed && item.Status >= 0)
+                        {
+                            <a href="javascript:void(0);" onclick="javascript: winopen('完成付款', '@(Url.Action("_PartialConfirmPay"))?id=@item.ID');" class="complete ">
+                                @*<i class="fa icon-star-empty" style="font-size: 35px;display: block;color: green;"></i>*@
+                                <img src="~/Theme/071701/images/icon-star-empty-g.png" />
+                            </a>
+                        }
+                        else if (item.Status == (int)JN.Data.Enum.MatchingStatus.Paid)
+                        {
+                            <a href="javascript:void(0);" class="complete ">
+                                @*<i class="fa pe-7s-star-half" style="font-size: 35px;display: block;color: green;"></i>*@
+                                <img src="~/Theme/071701/images/pe-7s-star-half-g.png" />
+                            </a>
+                        }
+                        else if (item.Status == (int)JN.Data.Enum.MatchingStatus.Verified)
+                        {
+                            <a href="javascript:void(0);" class="complete ">
+                                @*<i class="fa icon-star-full" style="font-size: 35px;display: block;color: green;"></i>*@
+                                <img src="~/Theme/071701/images/icon-star-full.png" />
+                            </a>
+                        }
+                        else if (item.Status == (int)JN.Data.Enum.MatchingStatus.Falsehood)
+                        {
+                            <a href="javascript:void(0);" class="complete ">
+                                @*<i class="fa pe-7s-star-half" style="font-size: 35px;display: block;color: yellow;"></i>*@
+                                <img src="~/Theme/071701/images/pe-7s-star-half-y.png" />
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0);" class="complete ">
+                                @*<i class="fa icon-star-empty" style="font-size: 35px; display: block;color: #ccc"></i>*@
+                                <img src="~/Theme/071701/images/icon-star-empty-c.png" />
+                            </a>
+                        }
+                    }
+                        <p style="margin-top: 5px;"><strong>@item.MatchingNo</strong></p>
+                    </td>
+                    <td>
+                        @if (item.SupplyUID == Umodel.ID)
+                    {
+                            <span>@T("提供帮助")　@(item.SupplyNo)</span>
+                    }
+                    else
+                    {
+                            <span>@T("接受帮助")　@(item.AcceptNo)</span>
+                    }
+                        <br>
+                        <small><i class="fa pe-7s-clock"></i> @T("配对时间"):@item.CreateTime</small><br>
+                        @if (item.Status < (int)JN.Data.Enum.MatchingStatus.Paid && item.Status >= 0)
+                    {
+                            <small>
+                                <i class="fa pe-7s-clock"></i> @T("剩余时间")：<span class="time_countdown" style="color:#f00" data="@((item.PayEndTime ?? DateTime.Now).ToString())"></span>
+                            </small>
+                    }
+                        @if (item.Status == (int)JN.Data.Enum.MatchingStatus.Paid)
+                    {
+                            <small>
+                                <i class="fa pe-7s-clock"></i> @T("剩余时间")：<span class="time_countdown" style="color:#f00" data="@((item.VerifiedEndTime ?? DateTime.Now).ToString())"></span>
+                            </small>
+                    }
+                    </td>
+                    <td>
+                        @{
+            if (item.AcceptUID == Umodel.ID)
+            {
+                @item.SupplyUserName
+                            var onUser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(item.SupplyUID);
+                            if (onUser != null)
+                            {
+                                <br /><span>(姓名：@onUser.RealName)</span>
+                            }
+
+                            <br />
+                            var sModel = MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().Single(x => x.SupplyNo == item.SupplyNo);
+                            if (sModel != null)
+                            {
+                                <span>
+                                    付款方式：@(sModel.PayWay)
+                                </span>
+                            }
+                        }
+                        else
+                        {
+                <span>YOU</span>
+                            if (item.FromUID > 0)
+                            {
+                                <br /><span style="color:#f00">@T("来自：")@(item.FromUserName)@T("的订单转移")</span><br />
+                            }
+                        }
+                        }
+                    </td>
+
+                    <td>&gt;</td>
+
+                    <td>
+                        @(item.MatchAmount) @T("人民币")
+                        <br>
+                        @if (!string.IsNullOrEmpty(item.ProofImageUrl))
+                    {
+                            <a href="@item.ProofImageUrl" target="_blank"><i class="fa pe-7s-file-picture" style="font-size: 20px;"></i></a>
+                    }
+                    </td>
+                    <td>&gt;</td>
+                    <td>
+                        @{
+            if (item.AcceptUID == Umodel.ID)
+            {
+                <span>YOU</span>
+                        }
+                        else
+                        {
+                @item.AcceptUserName
+                            var onUser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(item.SupplyUID);
+                            if (onUser != null)
+                            {
+                                <br /><span>姓名：@onUser.RealName</span>
+                            }
+                            <br />
+                            var aModel = MvcCore.Unity.Get<JN.Data.Service.IAcceptHelpService>().Single(x => x.AcceptNo == item.AcceptNo);
+                            if (aModel != null)
+                            {
+                                <span>
+                                    付款方式：@(aModel.PayWay)
+                                </span>
+                            }
+                        }
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-xs addmsg" onclick="javascript:winopen(' @T("留言板")','@(Url.Action("_PartialSubmitLeaveWord"))?rid=@item.ID');">@T("留言"):<span style="color:red">（@(MvcCore.Unity.Get<JN.Data.Service.ILeaveWordService>().List(x => x.MatchingNo == item.MatchingNo).Count())）</span></button><br />
+                        <button type="button" class="btn_detail btn-primary btn-xs" onclick="javascript:winopen(' @T("详细信息")','@(Url.Action("_PartialPayDetail"))?rid=@item.ID');">@T("详细资料")&gt;&gt;</button>
+
+                    </td>
+                </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<!--S 翻页页码  -->
+        <!--S 翻页页码  -->
+<div>
+    @*<div style="float:left;width:50%">Page @Model.CurrentPageIndex of @Model.TotalPageCount, @Model.TotalItemCount items</div>*@
+    <div class="pagination pagination-small pull-right">
+        @Ajax.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions { PageIndexParameterName = "page", FirstPageText = "<<", LastPageText = ">>", NextPageText = ">", PrevPageText = "<", ContainerTagName = "ul", NumericPagerItemCount = 5, CssClass = "pagination", CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>", DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", PagerItemTemplate = "<li>{0}</li>", PageIndexBoxId = "pageIndexBox2", GoToButtonId = "goToBtn2" }, new MvcAjaxOptions { UpdateTargetId = "ListContent", HttpMethod = "Post", DataFormId = "searchForm" })
+    </div>
+
+</div>
+<!--E 翻页页码  -->
+                <script type="text/javascript">
+                $('.time_countdown').each(function () {
+                    var $this = $(this);
+                    var datez = new Date($this.attr('data') + '').getTime();
+                    var date = new Date(datez);
+                    Y = date.getFullYear() + '/';
+                    M = (date.getMonth() + 1) + '/';
+                    D = date.getDate() + ' ';
+                    h = date.getHours() + ':';
+                    m = date.getMinutes() + ':';
+                    s = date.getSeconds();
+
+                    dates = Y + M + D + h + m + s;
+                    console.log(Y + M + D + h + m + s + '.......');
+                    $this.countdown(dates, function (event) {
+                        $(this).text(
+                                event.strftime('%-D 天 %-H 小时 %M 分钟 %S 秒')
+                        );
+                    });
+                    datez = null;
+                });
+            </script>

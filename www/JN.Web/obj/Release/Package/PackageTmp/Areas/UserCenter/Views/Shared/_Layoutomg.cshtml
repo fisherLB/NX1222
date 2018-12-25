@@ -1,0 +1,250 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@JN.BLL.syssettings.GetModel("id>0").SysName</title>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/theme/mmm/css/font-awesome.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/metisMenu.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/animate.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/bootstrap.css" />
+
+    <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css" />
+
+    <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/default.css" />
+    <link rel="stylesheet" href="/theme/mmm/css/style.css" />
+    <!-- App styles -->
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/theme/mmm/js/jquery-ui.min.js"></script>
+    <script src="/theme/mmm/js/jquery.slimscroll.min.js"></script>
+    <script src="/theme/mmm/js/bootstrap.min.js"></script>
+    @*<script src="/theme/mmm/js/jquery.flot.js"></script>
+        <script src="/theme/mmm/js/jquery.flot.resize.js"></script>
+        <script src="/theme/mmm/js/jquery.flot.pie.js"></script>*@
+    <script src="/theme/mmm/js/curvedLines.js"></script>
+    <script src="/theme/mmm/js/index.js"></script>
+    <script src="/theme/mmm/js/metisMenu.min.js"></script>
+    <script src="/theme/mmm/js/icheck.min.js"></script>
+    <script src="/theme/mmm/js/jquery.peity.min.js"></script>
+
+    <script src="/theme/mmm/js/toastr.min.js"></script>
+
+    <link rel="stylesheet" href="/theme/mmm/css/sweet-alert.css" />
+    <script src="/theme/mmm/js/sweet-alert.min.js"></script>
+    <!-- App scripts -->
+    <script src="/theme/mmm/js/homer.js"></script>
+    <script src="/theme/mmm/js/alert.js"></script>
+        <script src="/theme/mmm/js/charts.js"></script>
+    @*<link href="~/Theme/CFB/css/css.css" rel="stylesheet" />
+    <link href="~/Theme/CFB/index/css/style.css" rel="stylesheet" />
+    <script src="~/Theme/CFB/index/js/index.js"></script>*@
+    <link rel="stylesheet" type="text/css" href="/Theme/1025/css/style.css" />
+    <script type="text/javascript" src="/Theme/1025/js/index.js"></script>
+    <style>
+        .mainarea {
+            position:relative
+        }
+    </style>
+</head>
+<body style="background: #c3c1c2;">
+    @{JN.Entity.TUser onUser = JN.BLL.users.IsLogin();}
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <td id="leftbar" name="leftbar" valign="top">
+                    <div id="left">
+                        <div class="userinfo">
+                            <img src="/Theme/1025/img/logo.png" width="180px" />
+                        </div>
+                        <div class="black"></div>
+                        <div class="usermsg" style="font-size:14px; line-height:25px">
+                            <p>
+                                用户名：@onUser.UserName
+                            </p>
+                            <p>
+                                <a href="#" style="color:#F00;">@(JN.BLL.users.IsLogin().IsActivation ? "账户已激活" : "账户未激活")</a><a href="#" onclick="tc()" class="tuichu">退出</a>
+                            </p>
+                            <p>会员级别:@T(!onUser.IsAgent ? "普通会员" : onUser.AgentLevel == 1 ? "经理" : onUser.AgentLevel == 2 ? "高级经理" : onUser.AgentLevel == 3 ? "总监" : onUser.AgentLevel == 4 ? "董事" : "普通会员")</p>
+                            <p>我的推荐人:@T(JN.BLL.users.GetModel(onUser.RefereeID) == null ? "无" : JN.BLL.users.GetModel(onUser.RefereeID).NickName)</p>
+                            <p>推荐人电话：@T(JN.BLL.users.GetModel(onUser.RefereeID) == null ? "无" : JN.BLL.users.GetModel(onUser.RefereeID).Mobile)</p>
+                            <p>注册时间：@onUser.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                            <p style="color:#F00;"></p>
+                            <p style="margin-left: -25px;background: #642f0d;padding-left: 25px;color: #fff;">财富状态</p>
+                            @{
+                                decimal unusable2001 = (decimal)JN.Common.TypeConverter.ObjectToFloat(JN.BLL.bonusdetails.GetFieldValue("sum(BonusMoney)", "IsBalance=0 and (BonusID=1102) and UID=" + JN.BLL.users.IsLogin().ID), 0);
+                                //unusable2001 += (decimal)JN.Common.TypeConverter.ObjectToFloat(JN.BLL.matchings.GetFieldValue("ISNULL(SUM(MatchAmount),0)", "SupplyUID=" + JN.BLL.users.IsLogin().ID + " and Status<" + (int)JN.Entity.Enum.MatchingStatus.Verified), 0);
+                                //decimal dongjie = (decimal)JN.Common.TypeConverter.ObjectToFloat(JN.BLL.bonusdetails.GetFieldValue("sum(BonusMoney)", "IsBalance=0 and (Period=-1) and UID=" + JN.BLL.users.IsLogin().ID), 0);
+                            }
+
+                            <p>可提取金额：@JN.BLL.users.IsLogin().Wallet2001</p>
+                            <p>不可提取金额：@unusable2001</p>
+                            @*<p>待解冻金额：@dongjie</p>*@
+                            <p style="margin-left: -25px;background: #642f0d;padding-left: 25px;color: #fff;">奖金状态</p>
+                            @{
+                                decimal wallet = 0;
+                                decimal walletw = 0;
+                                int recount = JN.BLL.users.GetRecordCount("RefereePath like '%," + onUser.ID + "%' and IsActivation=1");
+                                //if (JN.BLL.matchings.GetRecordCount("SupplyUID=" + JN.BLL.users.IsLogin().ID + " and Status=" + (int)JN.Entity.Enum.MatchingStatus.Paid + " and datediff(month,[AllDealTime],getdate())=0 ") < Convert.ToInt32(JN.BLL.sysparams.GetModel(3024).Value2))
+                                //{
+                                //    walletw = JN.BLL.users.IsLogin().Wallet2002;
+                                //}
+                                //else
+                                //{
+                                //    wallet = JN.BLL.users.IsLogin().Wallet2002;
+                                //}
+                                wallet = (decimal)JN.Common.TypeConverter.ObjectToFloat(JN.BLL.bonusdetails.GetFieldValue("sum(BonusMoney)", "IsBalance=1 and (BonusID=1104 or BonusID=1103 or BonusID=1105) and UID=" + JN.BLL.users.IsLogin().ID), 0);
+                                walletw = (decimal)JN.Common.TypeConverter.ObjectToFloat(JN.BLL.bonusdetails.GetFieldValue("sum(BonusMoney)", "IsBalance=1 and (Period=-1) and (BonusID=1104 or BonusID=1103 or BonusID=1105) and UID=" + JN.BLL.users.IsLogin().ID), 0);
+                                decimal unusable2002 = (decimal)JN.Common.TypeConverter.ObjectToFloat(JN.BLL.bonusdetails.GetFieldValue("sum(BonusMoney)", "IsBalance=0 and (BonusID=1104 or BonusID=1103 or BonusID=1105) and UID=" + JN.BLL.users.IsLogin().ID), 0);
+
+                            }
+                            <p>可提取金额：@wallet</p>
+                            <p>不可提取金额：@unusable2002</p>
+                            <p>待解冻金额：@walletw</p>
+                            <p>团队人数：@recount</p>
+                        </div>
+                        <div class="sysreg">
+                            <p style="background: #642f0d;padding-left: 25px;color: #fff;">扫我注册</p>
+                            <img src="/user/user/QrCode" width="150" height="150" />
+                            <p style="text-decoration: underline;color: #EC4109;">推广网址:<br /><a target="_blank" style="text-decoration: underline; color: red; display: block; width: 210px; font-size:14px; line-height:20px; word-wrap: break-word;" href="@Request.Url.GetLeftPart(UriPartial.Authority)/user/Reg/index?urluid=@JN.BLL.users.IsLogin().UserName">@Request.Url.GetLeftPart(UriPartial.Authority)/user/Reg/index?urluid=@JN.BLL.users.IsLogin().UserName</a></p>
+                        </div>
+                        <div class="leftmenu1">
+                            <ul>
+                                <li>
+                                    <a class="a_list a_list1">网站首页</a>
+                                    <div class="menu_list ">
+                                        <a class="lista_first" href="/usercenter/home" >@T("桌面")</a>
+                                        <a href="/usercenter/home/changepassword">@T("修改密码")</a>
+                                        <a href="/user/notice">@T("最新公告")</a>
+                                        <a href="/user/user/modify">@T("我的档案")</a>
+                                        <a href="/user/mail/write">@T("联系在线客服")</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="a_list a_list2">@T("会员管理")</a>
+                                    <div class="menu_list" style="display: none;">
+                                        <a href="/user/user/add">@T("会员注册")</a>
+                                        <a href="/user/agent/applyagent">@T("申请经理")	</a>
+                                        <a href="/user/user/unactivation">@T("待激活的会员")</a>
+                                        <a href="/user/user/treeview">@T("推荐图谱")</a>
+                                        <a href="/user/user/index">@T("直推会员")</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="a_list a_list3">@T("账户管理")</a>
+                                    <div class="menu_list" style="display: none;">
+                                        <a href="/user/finance/wallet">@T("我的钱包")</a>
+                                        <a href="/user/Finance/NoPairList">@T("交易记录")</a>
+                                        <a href="/user/user/unactivation">@T("账户激活")</a>
+                                        <a href="/user/finance/pincode">@T("我的激活码")</a>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </td>
+                <td width="100%" valign="top">
+                    <div id="right">
+                        <div class="main">
+                            <!--导航开始-->
+                            <div class="nav11" style="background: #642F0D;">
+                                <div class="nav11">
+                                    <ul class="menu11">
+                                        <li><a href="/usercenter/home">网站首页</a></li>
+                                        <li><a href="/user/user/modify">我的档案</a></li>
+                                        <li><a href="/usercenter/home/changepassword">修改密码</a></li>
+                                        <li><a href="/user/notice">最新公告</a></li>
+                                        <li><a href="/user/mail/write">联系客服</a></li>
+                                        <li><a href="/user/user/unactivation">账户激活</a></li>
+                                        <li><a href="/user/finance/pincode">我的激活码</a></li>
+                                    </ul>
+                                </div>   
+                            </div>
+                            <!--导航结束-->
+                            <!--大图和中美国旗-->
+                            <div class="big_pic">
+
+                                <img width="100%" height="316px" src="/Theme/1025/images/mmm.jpg" />
+
+                            </div>
+                            @RenderBody()
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal container fade" id="childwindow" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="color-line"></div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="childwindowtitle"></h4>
+
+                </div>
+                <section id="childwindowiframe">
+                    <div class="modal-body" style="text-align:center">
+                        <p style="text-align:center">@T("载入中，请稍候...")</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div id="foot">@JN.BLL.syssettings.GetModel("id>0").CopyInfo</div>
+</body>
+</html>
+<script src="~/Plugin/layer/layer.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $(function () { $('[data-toggle="popover"]').popover() });
+            $('#childwindow').on('hidden.bs.modal', function (e) { window.location.reload(); });
+        });
+        function winopen(title, url, width) {
+            if (browser.versions.iPhone || browser.versions.android) {
+                $('.modal-dialog').width(350);
+            }
+            else {
+                if (width != "") $('.modal-dialog').width(width);
+            }
+            $('#childwindowiframe').load(url);
+            $("#childwindowtitle").html(title);
+            $("#childwindow").modal();
+        }
+        function winclose() {
+            $("#childwindow").modal('hide');
+        }
+
+        function tc() {
+        layer.confirm("@T("您确定要退出么？")",
+        {
+            btn: ['@T("是的")', '@T("不是，点错了")'], //按钮
+            }, function () {
+                window.location.href = '/usercenter/home/logout';
+            })
+        }
+
+
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }()
+        }
+
+</script>

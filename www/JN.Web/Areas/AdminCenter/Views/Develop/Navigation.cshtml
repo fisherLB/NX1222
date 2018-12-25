@@ -1,0 +1,133 @@
+﻿@model List<JN.Entity.TNavigation>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+            @if (!string.IsNullOrEmpty(ViewBag.Brief))
+            {
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    @ViewBag.Brief
+                </small>
+            }
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="dd" id="nestable">
+                        <ol class="dd-list">
+@if (Model.Count > 0)
+{
+    for (int i = 0; i < Model.Count; i++)
+    {
+        <li class="dd-item" data-id="@Model[i].ID">
+            <div class="dd-handle">
+                <span class="orange">@Model[i].Title</span>
+                <span class="lighter grey">
+                    &nbsp; @Model[i].Child
+                </span>
+                <div class="pull-right action-buttons">
+                    <a class="blue" href="#">
+                        <i class="icon-pencil bigger-130"></i>
+                    </a>
+
+                    <a class="red" href="#">
+                        <i class="icon-trash bigger-130"></i>
+                    </a>
+                </div>
+            </div>
+            @if (Model[i].Child > 0)
+            {
+                <ol class="dd-list">
+
+                    @{
+                List<JN.Entity.TNavigation> depth2 = JN.BLL.navigations.GetModelList("ParentID=" + Model[i].ID + " order by sort");
+                if (depth2.Count > 0)
+                {
+                    foreach (JN.Entity.TNavigation navi2 in depth2)
+                    {
+                        <li class="dd-item" data-id="@navi2.ID">
+                            <div class="dd-handle">
+                                @navi2.Title
+                                <div class="pull-right action-buttons">
+                                    <a class="blue" href="#">
+                                        <i class="icon-pencil bigger-130"></i>
+                                    </a>
+
+                                    <a class="red" href="#">
+                                        <i class="icon-trash bigger-130"></i>
+                                    </a>
+                                </div>
+                            </div>
+@if (navi2.Child > 0)
+            {
+                            <ol class="dd-list">
+                                @{
+                List<JN.Entity.TNavigation> depth3 = JN.BLL.navigations.GetModelList("ParentID=" + Model[i].ID + " order by sort");
+                                if (depth2.Count > 0)
+                                {
+                                    foreach (JN.Entity.TNavigation navi3 in depth3)
+                                    {
+                                        <li class="dd-item" data-id="@navi3.ID">
+                                            <div class="dd-handle">
+                                                @navi3.Title
+                                                <div class="pull-right action-buttons">
+                                                    <a class="blue" href="#">
+                                                        <i class="icon-pencil bigger-130"></i>
+                                                    </a>
+
+                                                    <a class="red" href="#">
+                                                        <i class="icon-trash bigger-130"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                }
+                                }
+                            </ol>
+}
+                        </li>
+                    }
+                }
+}
+</ol>
+            }
+        </li>
+    }
+}
+                        </ol>
+                    </div>
+                </div>
+
+            </div><!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<div id="xx">123</div>
+<script src="/assets/js/jquery.nestable.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+
+        $('.dd').nestable();
+
+        $('.dd-handle a').on('mousedown', function (e) {
+            e.stopPropagation();
+        });
+
+        $('[data-rel="tooltip"]').tooltip();
+        $('#nestable').nestable().on('change', function () {
+            var r = $('.dd').nestable('serialize');
+            $("#xx").html(JSON.stringify(r));	//改变排序之后的数据
+        });
+        $('#nestable').nestable().on('change', updateOutput);
+    });
+</script>

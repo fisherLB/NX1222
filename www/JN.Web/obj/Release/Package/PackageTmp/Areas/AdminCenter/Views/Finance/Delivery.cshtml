@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <div class="innerLR">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+@using (Ajax.BeginForm("Delivery", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+        {
+                <div class="control-group">
+                    <label class="control-label" for="mainwallet">会员帐号：</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="username" class="form-control" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="drawmoney">赠送币种：</label>
+                    <div class="controls">
+                        <div class="clearfix">
+                            @Html.DropDownList("coinid", ViewData["SysParamList"] as SelectList, new { @class = "form-control" });
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="drawmoney">赠送数量：</label>
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="controls">
+                            <input type="text" name="deliverynumber" class="form-control" style="width:100px" value="0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="phone">备注：</label>
+
+                    <div class="controls">
+                        <textarea name="remark" class="form-control">系统派送</textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="drawmoney">二级密码：</label>
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="controls">
+                            <input type="password" name="password2" class="form-control" style="width:100px"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+                <div class="control-group">
+                    <label class="control-label">&nbsp;</label>
+                    <div class="controls">
+                        <button class="btn btn-primary" type="submit" id="btn" >
+                            赠 送
+                        </button>
+                        <a href="javascript:history.go(-1);" class="btn btn-grey">
+                            <i class="icon-arrow-left"></i>
+                            返 回
+                        </a>
+                    </div>
+                </div>
+}
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+@section scripts{
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    $("btn").click(function () {
+        $('#btn').attr('disabled', "true");
+    });
+        function afterPost(data) {
+        if (data.Status == 200) {
+            alert("保存成功，即将为您跳转页面!");
+            location.href = "@(Url.Action("DeliveryDetail"))?coin=" + $("#coinid").val();
+        } else {
+            alert("保存失败！错误信息：" + data.Message);
+        }
+    }
+</script>
+
+    }

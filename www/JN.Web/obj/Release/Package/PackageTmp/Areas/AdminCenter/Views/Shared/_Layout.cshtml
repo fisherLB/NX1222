@@ -1,0 +1,728 @@
+﻿@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    string curl = Request.Url.ToString().ToLower();
+    var Amodel = JN.Services.AdminLoginHelper.CurrentAdmin();
+}
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9"> <![endif]-->
+<!--[if gt IE 8]> <html class="ie gt-ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!-- <![endif]-->
+<head>
+    <title>后台管理</title>
+
+    <!-- Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+
+    <!-- Bootstrap -->
+    <link href="/common/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="/common/bootstrap/css/responsive.css" rel="stylesheet" />
+   
+    <!-- Glyphicons Font Icons -->
+    <link href="/common/theme/css/glyphicons.css" rel="stylesheet" />
+
+    <!-- Uniform Pretty Checkboxes -->
+    <link href="/common/theme/scripts/plugins/forms/pixelmatrix-uniform/css/uniform.default.css" rel="stylesheet" />
+
+    <!--[if IE]><!-->
+    <script src="/common/theme/scripts/plugins/other/excanvas/excanvas.js"></script><!--<![endif]-->
+    <!--[if lt IE 8]><script src="/common/theme/scripts/plugins/other/json2.js"></script><![endif]-->
+    <!-- Bootstrap Extended -->
+    <link href="/common/bootstrap/extend/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href="/common/bootstrap/extend/jasny-bootstrap/css/jasny-bootstrap-responsive.min.css" rel="stylesheet">
+    @*<link href="/common/bootstrap/extend/bootstrap-wysihtml5/css/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet">*@
+    <link href="/common/bootstrap/extend/bootstrap-select/bootstrap-select.css" rel="stylesheet" />
+    <link href="/common/bootstrap/extend/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" rel="stylesheet" />
+
+    <!-- DateTimePicker Plugin -->
+    <link href="/common/theme/scripts/plugins/forms/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <!-- JQueryUI -->
+    <link href="/common/theme/scripts/plugins/system/jquery-ui/css/smoothness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet" />
+
+    <!-- Notyfy Notifications Plugin -->
+    <link href="/common/theme/scripts/plugins/notifications/notyfy/jquery.notyfy.css" rel="stylesheet" />
+    <link href="/common/theme/scripts/plugins/notifications/notyfy/themes/default.css" rel="stylesheet" />
+
+
+    <!-- Main Theme Stylesheet :: CSS -->
+    <link href="/common/theme/css/style-dark.css?1369414383" rel="stylesheet" />
+    <script src="~/Content/admingreen/js/search_line.js"></script>
+    <style>
+        .pagination {
+            margin: 0;
+        }
+        .cancel td {
+            color: #ccc;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Container Fluid -->
+    <div class="container-fluid fluid menu-left">
+        <!-- Top navbar -->
+        <div class="navbar main hidden-print" style="position:relative;">
+            <div class="btn btn-navbar" id="shousuo" style="height: 100%; top: 500px;  left: 160px; z-index: 100; background: green; position: absolute; background: url(/Content/admingreen/images/main_18_1.gif) no-repeat 2px; ">
+            </div>
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
+                <tr>
+                    <td height="9" style="line-height: 9px; background-image: url(/Content/admingreen/images/main_04.gif)">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="97" height="9" background="/Content/admingreen/images/main_01.gif">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="47" background="/Content/admingreen/images/main_09.gif">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="38" height="47" background="/Content/admingreen/images/main_06.gif">&nbsp;</td>
+                                <td width="59">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td height="29" background="/Content/admingreen/images/main_07.gif">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td height="18" background="/Content/admingreen/images/main_14.gif">
+                                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
+                                                    <tr>
+                                                        <td style="width:1px;">&nbsp;</td>
+                                                        <td><span class="STYLE1">@Amodel.AdminName</span></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="155" background="/Content/admingreen/images/main_08.gif">&nbsp;</td>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td height="23" valign="bottom"><img src="/Content/admingreen/images/main_12.gif" width="767" height="23" border="0" usemap="#Map" /></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="200" background="/Content/admingreen/images/main_11.gif">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="11%" height="23">&nbsp;</td>
+                                            <td width="89%" valign="bottom"><span class="STYLE1" id="nihao"></span></td>
+</tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="5" style="line-height: 5px; background-image: url(/Content/admingreen/images/main_18.gif)">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="180" background="/Content/admingreen/images/main_16.gif" style="line-height:5px;">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <map name="Map" id="Map">
+                <area shape="rect" coords="0,0,47,21" href="@Url.Action("Index", "Home")" />
+                <area shape="rect" coords="48,0,90,21" href="JavaScript:;" onclick="window.history.back()" />
+                <area shape="rect" coords="90,0,135,21" href="JavaScript:;" onclick="window.history.forward()" />
+                <area shape="rect" coords="135,0,185,21" href="JavaScript:;" onclick="window.location.reload()" />
+                <area shape="rect" coords="191,0,280,21" href="@Url.Action("Modify", "AdminUser", new { ID = Amodel.ID })" />
+                <area shape="rect" coords="284,0,367,21" href="@Url.Action("Index", "DBManage")" />
+                <area shape="rect" coords="371,0,448,21" href="@Url.Action("ChangePassword", "Home")" />
+                <area shape="rect" coords="451,0,526,21" href="@(Url.Action("ClearAllCache", "Home"))" />
+                <area shape="rect" coords="529,0,640,21" href="@(Url.Action("ClearAllCache", "Home"))" />
+                <area shape="rect" coords="645,0,711,21" href="@Url.Action("Index", "Notice")" />
+                <area shape="rect" coords="714,0,765,21" href="@Url.Action("LogOut", "Home")" />
+            </map>
+
+
+        </div>
+        <!-- Top navbar END -->
+        <!-- Sidebar menu & content wrapper -->
+        <div id="wrapper">
+
+            <!-- Sidebar Menu -->
+            <div id="menu" class="hidden-phone hidden-print">
+                <table width="165" height="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td height="28" background="/Content/admingreen/images/left_btn.gif">
+                            <table width="110%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="19%">&nbsp;</td>
+                                    <td width="81%" height="20"><span class="STYLE2">管理菜单</span></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="padding-left:5px;">
+                            <table width="160" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu1" class="menu_title" onmouseover="this.className='menu_title2';" onclick="showsubmenu(1)" onmouseout="this.className='menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">会员中心</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu1">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+                                                                    <ul class="STYLE3  @(curl.Contains("/user/") ? "in" : "")" id="menu_user">
+                                                                        <li class="@(curl.Contains("/user/modify") ? "active" : "")"><a href="@Url.Action("Modify", "User")"><span>添加初始会员</span></a></li>
+                                                                        <li class="@(curl.Contains("/user/list?isactivation=0") ? "active" : "")"><a href="@Url.Action("List", "User", new { isactivation=0})"><span>未激活的会员</span></a></li>
+                                                                        <li class="@(curl.Contains("/user/list?isactivation=1") ? "active" : "")"><a href="@Url.Action("List", "User", new { isactivation=1})"><span>已激活的会员</span></a></li>
+                                                                        <li class="@(curl.Contains("/user/lock") ? "active" : "")"><a href="@Url.Action("Lock", "User")"><span>被冻结的会员</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu2" class="menu_title" onmouseover="this.className='menu_title2';" onclick="showsubmenu(12)" onmouseout="this.className='menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">经理管理</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu2">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+                                                                    <ul class="STYLE3  @(curl.Contains("/agent/") ? "in" : "")" id="menu_pincode">
+                                                                        <li class="@(curl.Contains("/agent/delivery") ? "active" : "")"><a href="@Url.Action("Delivery", "Agent")"><span>会员升级</span></a></li>
+                                                                        <li class="@(curl.Contains("/agent/index") ? "active" : "")"><a href="@Url.Action("Index", "Agent")"><span>经理列表</span></a></li>
+                                                                        <li class="@(curl.Contains("/agent/unPassed") ? "active" : "")"><a href="@Url.Action("UnPassed", "Agent")"><span>待审核经理列表</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu3" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(3)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">商城管理</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu3">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+
+                                                                    <ul class="STYLE3  @(curl.Contains("/shop/") ? "in" : "")" id="menu_settlement">
+                                                                        <li class="@(curl.Contains("/shop/Modify") ? "active" : "")"><a href="@Url.Action("Modify", "shop")"><span>发布商品</span></a></li>
+                                                                        <li class="@(curl.Contains("/shop/Order") ? "active" : "")"><a href="@Url.Action("Order", "shop")"><span>订单管理</span></a></li>
+                                                                        <li class="@(curl.Contains("/shop/Product") ? "active" : "")"><a href="@Url.Action("Product", "shop")"><span>商品管理</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu3" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(3)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">利息发放管理</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu3">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+
+                                                                    <ul class="STYLE3  @(curl.Contains("/settlement/") ? "in" : "")" id="menu_settlement">
+                                                                        <li class="@(curl.Contains("/settlement/list") ? "active" : "")"><a href="@Url.Action("List", "Settlement")"><span>历史分发利息列表</span></a></li>
+                                                                        <li class="@(curl.Contains("/settlement/manualbalance") ? "active" : "")"><a href="@Url.Action("ManualBalance", "Settlement")"><span>手动分发利息</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu4" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(4)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">市场流动信息管理</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu4">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+                                                                    <ul class="STYLE3  @(curl.Contains("/market/") ? "in" : "")" id="menu_market">
+                                                                        <li class="@(curl.Contains("/market/pplist") ? "active" : "")"><a href="@Url.Action("PPList", "Market")"><span>匹配管理</span></a></li>
+                                                                        <li class="@(curl.Contains("/market/supplyhelp") ? "active" : "")"><a href="@Url.Action("SupplyHelp", "Market")"><span>提供帮助</span></a></li>
+                                                                        <li class="@(curl.Contains("/market/accepthelp") ? "active" : "")"><a href="@Url.Action("AcceptHelp", "Market")"><span>接受帮助</span></a></li>
+                                                                        <li class="@(curl.Contains("/market/matchdlist?ac=all") ? "active" : "")"><a href="@Url.Action("MatchdList", "Market")?ac=all"><span>所有匹配订单</span></a></li>
+                                                                        <li class="@(curl.Contains("/market/matchdlist?ac=overduepayment") ? "active" : "")"><a href="@Url.Action("MatchdList", "Market")?ac=overduepaymen"><span>超期未付款订单</span></a></li>
+                                                                        <li class="@(curl.Contains("/market/matchdlist?ac=overdueverified") ? "active" : "")"><a href="@Url.Action("MatchdList", "Market")?ac=overdueverified"><span>超时未验证</span></a></li>
+                                                                        <li class="@(curl.Contains("/market/matchdlist?matchdlist?st=-2") ? "active" : "")"><a href="@Url.Action("MatchdList", "Market")?st=-2"><span>虚假订单</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu6" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(6)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">财务管理</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu6">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+                                                                    <ul class="STYLE3 @(curl.Contains("/finance/") ? "in" : "")" id="menu_finance">
+                                                                        <li class="@(curl.Contains("/finance/delivery") ? "active" : "")"><a href="@Url.Action("Delivery", "Finance")"><span>赠送电子币</span></a></li>
+                                                                        <li class="@(curl.Contains("/finance/deliverydetail") ? "active" : "")"><a href="@Url.Action("DeliveryDetail", "Finance")"><span>会员派送记录</span></a></li>
+                                                                        @*<li class="@(curl.Contains("/finance/takecash") ? "active" : "")"><a href="@Url.Action("TakeCash", "Finance")"><span>会员提现管理</span></a></li>*@
+                                                                        @*<li class="@(curl.Contains("/finance/remittance") ? "active" : "")"><a href="@Url.Action("Remittance", "Finance", new { status = 1})"><span>会员充值管理</span></a></li>*@
+                                                                        <li class="@(curl.Contains("/finance/bonusdetail") ? "active" : "")"><a href="@Url.Action("BonusDetail", "Finance")"><span>会员奖金明细</span></a></li>
+                                                                        @*<li class="@(curl.Contains("/finance/transfer") ? "active" : "")"><a href="@Url.Action("Transfer", "Finance")"><span>会员转帐查询</span></a></li>*@
+                                                                        <li class="@(curl.Contains("/finance/accountdetail") ? "active" : "")"><a href="@Url.Action("AccountDetail", "Finance")"><span>会员帐户明细</span></a></li>
+                                                                        @*<li class=""><a href="@Url.Action("Account", "Finance")"><span>会员帐户统计</span></a></li>
+                                                                            <li class=""><a href="@Url.Action("Statistics", "Finance")"><span>公司财务统计</span></a></li>*@
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu7" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(7)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">邮件与公告</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu7">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+
+                                                                    <ul class="STYLE3 @(curl.Contains("/mail") || curl.Contains("/notice") ? "in" : "")" id="menu_mail">
+
+                                                                        <li class="@(curl.Contains("/mail/write") ? "active" : "")"><a href="@Url.Action("Write", "Mail")"><span>发邮件</span></a></li>
+                                                                        <li class="@(curl.Contains("/mail/inbox") ? "active" : "")"><a href="@Url.Action("Inbox", "Mail")"><span>收件箱</span></a></li>
+                                                                        <li class="@(curl.Contains("/mail/sent") ? "active" : "")"><a href="@Url.Action("Sent", "Mail")"><span>发件箱</span></a></li>
+
+                                                                        <li class="@(curl.Contains("/notice/modify") ? "active" : "")"><a href="@Url.Action("Modify", "Notice")"><span>发布公告</span></a></li>
+                                                                        <li class="@(curl.Contains("/notice/index") ? "active" : "")"><a href="@Url.Action("Index", "Notice")"><span>公告管理</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu8" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(8)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">系统设置</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu8">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+                                                                    <ul class="STYLE3 @(curl.Contains("/sysparam") ? "in" : "")" id="menu_syssetting">
+                                                                        <li class="@(curl.Contains("/sysparam/sysparam") ? "active" : "")"><a href="@Url.Action("SysParam", "SysParam")"><span>初始参数设置</span></a></li>
+                                                                        @*<li class=""><a href="@Url.Action("UserVerify", "SysParam")"><span>会员密码级别设置</span></a></li>*@
+                                                                        <li class="@(curl.Contains("/sysparam/syssetting") ? "active" : "")"><a href="@Url.Action("SysSetting", "SysParam")"><span>系统运行设置</span></a></li>
+                                                                        <li class="@(curl.Contains("/sysparam/language") ? "active" : "")"><a href="@Url.Action("Language", "SysParam")"><span>多语言支持</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu13" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(13)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">管理员管理</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu13">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+                                                                    <ul class="STYLE3 @(curl.Contains("/adminuser") ? "in" : "")" id="menu_admin">
+                                                                        <li class="@(curl.Contains("/adminuser/modify") ? "active" : "")"><a href="@Url.Action("Modify", "AdminUser")"><span>添加管理员</span></a></li>
+                                                                        <li class="@(curl.Contains("/adminuser/index") ? "active" : "")"><a href="@Url.Action("Index", "AdminUser")"><span>管理员管理</span></a></li>
+                                                                        <li class="@(curl.Contains("/adminuser/role") ? "active" : "")"><a href="@Url.Action("Role", "AdminUser")"><span>管理员角色</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu12" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(12)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">系统日志</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu12">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+
+                                                                    <ul class="STYLE3 @(curl.Contains("/log") ? "in" : "")" id="menu_log">
+                                                                        <li class="@(curl.Contains("/log/useractlog") ? "active" : "")"><a href="@Url.Action("UserActLog", "Log")"><span>行为日志</span></a></li>
+                                                                        <li class="@(curl.Contains("/log/syslog") ? "active" : "")"><a href="@Url.Action("SysLog", "Log")"><span>系统日志</span></a></li>
+                                                                        <li class="@(curl.Contains("/log/warninglog") ? "active" : "")"><a href="@Url.Action("WarningLog", "Log")"><span>预警日志</span></a></li>
+                                                                        <li class="@(curl.Contains("/log/smslog") ? "active" : "")"><a href="@Url.Action("SMSLog", "Log")"><span>短信日志</span></a></li>
+                                                                        <li class="@(curl.Contains("/log/timingplanlog") ? "active" : "")"><a href="@Url.Action("TimingplanLog", "Log")"><span>作业计划日志</span></a></li>
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu11" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(11)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">开发人员选项</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu11">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+
+
+                                                                    <ul class="STYLE3 @(curl.Contains("/develop") ? "in" : "")" id="menu_develop">
+                                                                        <li class=""><a href="@Url.Action("TimingPlan", "Develop")"><span>定时作业计划</span></a></li>
+                                                                        <li class="glyphicons database_plus"><a href="@Url.Action("Index", "DBManage")"><i></i><span>数据库备份与恢复</span></a></li>
+                                                                        <li class="@(curl.Contains("/develop/setting") ? "active" : "")"><a href="@Url.Action("Setting", "Develop")"><span>系统设置</span></a></li>
+                                                                        <li class="@(curl.Contains("/develop/theme") ? "active" : "")"><a href="@Url.Action("Theme", "Develop")"><span>平台主题</span></a></li>
+
+                                                                        <li class="@(curl.Contains("/icons") ? "active" : "")"><a href="@Url.Action("Icons", "Develop")"><span>图标大全(后台)</span></a></li>
+                                                                        <li class="@(curl.Contains("/usericons") ? "active" : "")"><a href="@Url.Action("UserIcons", "Develop")"><span>图标大全(前台)</span></a></li>
+
+
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="18" background="/Content/admingreen/images/main_58.gif">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0"></table>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Scrollable menu wrapper with Maximum height -->
+                <!-- // Scrollable Menu wrapper with Maximum Height END -->
+            </div>
+            <!-- // Sidebar Menu END -->
+            @RenderBody()
+            <div class="modal fade" id="childwindow" tabindex="-1" role="dialog" aria-hidden="true" style="width:auto">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="color-line"></div>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title" id="childwindowtitle"></h4>
+
+                        </div>
+                        <section id="childwindowiframe">
+                            <div class="modal-body" style="text-align:center">
+                                <p style="text-align:center">载入中，请稍候...</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- // Sidebar menu & content wrapper END -->
+        <!-- // Footer END -->
+
+    </div>
+    <!-- // Main Container Fluid END -->
+    <!-- JQuery -->
+    @*<script src="/common/theme/scripts/plugins/system/jquery.min.js"></script>*@
+
+    <!-- JQueryUI -->
+    <script src="/common/theme/scripts/plugins/system/jquery-ui/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+    <!-- JQueryUI Touch Punch -->
+    <!-- small hack that enables the use of touch events on sites using the jQuery UI user interface library -->
+    <script src="/common/theme/scripts/plugins/system/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- Modernizr -->
+    <script src="/common/theme/scripts/plugins/system/modernizr.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/common/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- SlimScroll Plugin -->
+    <script src="/common/theme/scripts/plugins/other/jquery-slimScroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Common Demo Script -->
+    <script src="/common/theme/scripts/demo/common.js?1369414383"></script>
+
+    <!-- Holder Plugin -->
+    <script src="/common/theme/scripts/plugins/other/holder/holder.js"></script>
+
+    <!-- Uniform Forms Plugin -->
+    @*<script src="/common/theme/scripts/plugins/forms/pixelmatrix-uniform/jquery.uniform.min.js"></script>*@
+
+    <!-- Global -->
+    <script>
+        var basePath = '/common/';
+    </script>
+
+    <!-- Bootstrap Extended -->
+    @*<script src="/common/bootstrap/extend/bootstrap-select/bootstrap-select.js"></script>*@
+    <script src="/common/bootstrap/extend/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
+    <script src="/common/bootstrap/extend/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js"></script>
+    <script src="/common/bootstrap/extend/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+    @*<script src="/common/bootstrap/extend/jasny-bootstrap/js/bootstrap-fileupload.js"></script>*@
+    <script src="/common/bootstrap/extend/bootbox.js"></script>
+    @*<script src="/common/bootstrap/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js"></script>
+        <script src="/common/bootstrap/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"></script>*@
+
+    <!-- Notyfy Notifications Plugin -->
+    <script src="/common/theme/scripts/plugins/notifications/notyfy/jquery.notyfy.js"></script>
+
+    <!-- DateTimePicker Plugin -->
+    <script src="/common/theme/scripts/plugins/forms/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <!-- Cookie Plugin -->
+    <script src="/common/theme/scripts/plugins/system/jquery.cookie.js"></script>
+
+    <!-- Colors -->
+    <script>
+        var primaryColor = '#e25f39',
+            dangerColor = '#bd362f',
+            successColor = '#609450',
+            warningColor = '#ab7a4b',
+            inverseColor = '#45484d';
+    </script>
+    <!-- Dashboard Demo Script -->
+    @*<script src="/common/theme/scripts/demo/index.js?1369414383"></script>*@
+
+    <script type="text/javascript">
+        function winopen(title, url, width) {
+            if (browser.versions.iPhone || browser.versions.android) {
+                $('.modal-dialog').width(350);
+            }
+            else {
+                if (width != "") $('.modal-dialog').width(width);
+            }
+            $('#childwindowiframe').load(url);
+            $("#childwindowtitle").html(title);
+            $("#childwindow").modal();
+        }
+        function winclose() {
+            $("#childwindow").modal('hide');
+        }
+
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }()
+        }
+
+    </script>
+    @RenderSection("scripts")
+</body>
+</html>
+
+<script>
+    
+
+    function showsubmenu(sid) {
+        whichEl = eval("submenu" + sid);
+        imgmenu = eval("imgmenu" + sid);
+        if (whichEl.style.display == "none") {
+            eval("submenu" + sid + ".style.display=\"\";");
+            imgmenu.background = "/Content/admingreen/images/main_47.gif";
+        }
+        else {
+            eval("submenu" + sid + ".style.display=\"none\";");
+            imgmenu.background = "/Content/admingreen/images/main_48.gif";
+        }
+    }
+
+</script>
+
+<script language="javascript">
+    function settime() {
+        var myyear, mymonth, myweek, myday, mytime, mymin, myhour, mysec;
+        function initArray() {
+            this.length = initArray.arguments.length;
+            for (var i = 0; i < this.length; i++) {
+                this[i + 1] = initArray.arguments[i];
+            }
+        }
+        var d = new initArray(" 星期日", " 星期一", " 星期二", " 星期三", " 星期四", " 星期五", " 星期六");
+        var mydate = new Date();
+        myyear = mydate.getFullYear();
+        mymonth = mydate.getMonth() + 1;
+        myday = mydate.getDate();
+        myhour = mydate.getHours();
+        mymin = mydate.getMinutes();
+        mysec = mydate.getSeconds();
+        mytime = d[mydate.getDay() + 1] + " " + myyear + "-" + mymonth + "-" + myday + " " + myhour + ":" + mymin + ":" + mysec;
+        if (mytime.length < 25) {
+            for (var i = mytime.length; i <= 25; i++) {
+                mytime += "&nbsp;";
+            }
+        }
+        document.getElementById("nihao").innerHTML = mytime;
+        setTimeout('settime()', 1000);
+    }
+    settime();
+</script>

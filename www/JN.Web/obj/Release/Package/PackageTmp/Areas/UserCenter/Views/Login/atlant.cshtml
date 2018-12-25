@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="body-full-height">
+<head>
+    <!-- META SECTION -->
+    <title>@MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SiteTitle</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!-- END META SECTION -->
+    <!-- CSS INCLUDE -->
+    <link rel="stylesheet" type="text/css" id="theme" href="/theme/atlant/css/theme-default.css" />
+    <!-- EOF CSS INCLUDE -->
+    <!--[if !IE]> -->
+    <script src="/assets/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="/assets/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <div class="login-container">
+
+        <div class="login-box animated fadeInDown">
+            @*<div class="login-logo"></div>*@
+            <h1 style="color:#fff; text-align:center">@MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName</h1>
+            <div class="login-body">
+                <div class="login-title"><strong>欢迎您</strong>, 请登录</div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="请输入用户名" name="username" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" placeholder="请输入登录密码" name="password" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input type="text" style="width:120px; margin-right:8px" class="form-control" placeholder="验证码" name="code" /> 
+                                <img id="imgCode" src="/User/Login/GetCodeImage?id=1" onclick="ChangeCheckCode();return false;" style="border:none; height:38px" />
+                            </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        @*<div class="col-md-6">
+                            <a href="#" class="btn btn-link btn-block">忘记密码?</a>
+                        </div>*@
+                        <div class="col-md-6">
+                            <button class="btn btn-info btn-block" id="btnlogin">登录</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="login-footer">
+                <div class="pull-left">
+                    @MvcHtmlString.Create(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).CopyInfo)
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        function ChangeCheckCode() {
+            var oldUrl = $('#imgCode').attr("src");
+            $('#imgCode').attr("src", oldUrl + '1');
+        }
+
+        jQuery(function ($) {
+            $('#btnlogin').on('click', function () {
+                loginSubmit();
+            });
+        });
+
+        function loginSubmit() {
+            var name = $("input[name='username']").val();
+            var pwd = $("input[name='password']").val();
+            var lang = $("select[name='lang']").val();
+            var code = $("input[name='code']").val();
+            var gourl = "/User/Login";
+            $.post(gourl, { username: name, password: pwd, lang: lang, code: code }, function (response) {
+                if (response.status == "ok") {
+                    window.location.href = response.data;
+                } else {
+                    if (response.status == "errcode")
+                        ChangeCheckCode();
+                    alert(response.data);
+                }
+            });
+        }
+
+        if (document.addEventListener) {//如果是Firefox
+            document.addEventListener("keypress", fireFoxHandler, true);
+        } else {
+            document.attachEvent("onkeypress", ieHandler);
+        }
+        function fireFoxHandler(evt) {
+            //alert("firefox");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+        function ieHandler(evt) {
+            //alert("IE");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

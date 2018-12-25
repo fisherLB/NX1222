@@ -1,0 +1,180 @@
+﻿@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+}
+<!-- 接受帮助 -->
+    <form method="post" id="frmAcceptHelp">
+    <section id="accepthelp_setp1">
+        <div class="panel-heading">
+            <h3 class="panel-title">获得帮助: 我需要他人帮助</h3>
+        </div>
+        <div class="modal-body" style="text-align:center">
+            @{
+                int coinid = Request["coinid"].ToInt();
+                string walletname = cacheSysParam.SingleAndInit(x => x.ID == 2001).Value;
+                decimal walletbalance = Umodel.Wallet2001;
+                decimal walletsell = Umodel.Wallet2001;
+                decimal minsell = cacheSysParam.SingleAndInit(x => x.ID == 3002).Value.Split('-')[0].ToDecimal();
+                decimal maxsell = cacheSysParam.SingleAndInit(x => x.ID == 3002).Value.Split('-')[1].ToDecimal();
+
+                if (coinid == 2003)
+                {
+                    walletbalance = Umodel.Wallet2003;
+                    walletsell = Umodel.Wallet2003;
+                    minsell = cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[0].ToDecimal();
+                    maxsell = cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[1].ToDecimal();
+                    walletname = cacheSysParam.SingleAndInit(x => x.ID == coinid).Value;
+                }
+                else if (coinid == 2002)
+                {
+                    walletbalance = Umodel.Wallet2002;
+                    walletsell = Umodel.Wallet2002;
+                    minsell = cacheSysParam.SingleAndInit(x => x.ID == 3004).Value.Split('-')[0].ToDecimal();
+                    maxsell = cacheSysParam.SingleAndInit(x => x.ID == 3004).Value.Split('-')[1].ToDecimal();
+                    walletname = cacheSysParam.SingleAndInit(x => x.ID == coinid).Value;
+                }
+            }
+
+            @if (coinid > 0)
+            {
+                <input type="hidden" name="coinid" value="@coinid" />
+            }
+            else
+            {
+                <div class="input-group m-b-sm" id="qb">
+                    <span class="input-group-addon border0">@T("选择钱包")</span>
+                    <select onchange="chk(this.value)" class="form-control" name="coinid">
+                        <option value="2001">@T(cacheSysParam.SingleAndInit(x => x.ID == 2001).Value)</option>
+                        <option value="2002"> @T(cacheSysParam.SingleAndInit(x => x.ID == 2002).Value)</option>
+    @*<option value="2003">@T(cacheSysParam.SingleAndInit(x => x.ID == 2003).Value + "钱包")</option>*@
+                    </select>
+                </div>
+            }
+            <div class="input-group m-b-sm"><span class="input-group-addon border0">@T("帐户余额")</span> <input type="text" placeholder="" class="form-control balance" value="@walletbalance" readonly=""></div>
+            <div class="input-group m-b-sm"><span class="input-group-addon border0">@T("可售金额")</span> <input type="text" placeholder="" class="form-control sell" value="@walletbalance" readonly=""></div>
+            <div class="input-group m-b-sm"><span class="input-group-addon border0">@T("最低金额")</span> <input type="text" class="form-control min" value="@minsell" readonly=""></div>
+            <div class="input-group m-b-sm"><span class="input-group-addon border0">@T("最高金额")</span> <input type="text" placeholder="" class="form-control max" value="@maxsell" readonly=""></div>
+            <label class="col-sm-12 control-label" style="margin-top:10px">@T("接受帮助支付方式")</label>
+            <div class="radio" align="left">
+                <label> <input type="checkbox" value="银行支付" class="ckbox2" name="payway" @(string.IsNullOrEmpty(Umodel.BankCard) ? "disabled" : "")>@T("银行支付")
+                &nbsp;&nbsp;<input type="checkbox" value="支付宝" class="ckbox2" name="payway" @(string.IsNullOrEmpty(Umodel.AliPay) ? "disabled" : "")>@T("支付宝")
+                    @*&nbsp;&nbsp;<input type="checkbox" value="微信支付" class="ckbox2" name="payway" @(string.IsNullOrEmpty(Umodel.WeiXin) ? "disabled" : "")>@T("微信支付")*@</label>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control acceptamount" placeholder="@T("输入金额")" name="acceptamount" id="acceptamount" autocomplete="off" required=""><label id="message"></label>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary jiancha">
+                            @T("检查")
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 10px">
+                <font id="gh_amount">0</font>×<span class="hl">@cacheSysParam.SingleAndInit(x => x.ID == 3801).Value</span>＝<font id="gh"></font>
+                @T("人民币")
+            </div>
+            <div class="icheckbox_square-green checked" style="position: relative;"><input type="checkbox" class="i-checks" name="i-checks" checked="" required="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+            @*@T(" 警告，我已完全了解所有风险。我决定参与" + sysEntity.SysName + ",尊重" + sysEntity.SysName + "文化与传统。")*@
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">@T("取消")</button>
+            <button type="button" class="btnconfirm btn-warningdialog btn-sm" id="btnAcceptHelp" disabled>@T("接受帮助")</button>
+        </div>
+    </section>
+    @*<section id="accepthelp_setp2" style="display:none">
+        <div class="modal-body" style="height:300px;">
+            <p><strong>@T("您将会获得")<font color="00FF00" id="amount_get"></font> @T("RMB  : 人民币")</strong></p>
+            <p></p>
+            <p>@T("注意：您的申请如果需要被取消，可以在配对单产生之前提交取消申请。一旦配对单产生了，该申请将无法被取消。")</p>
+            <p><strong><font color="#FF0000">@T("注意：请核实交易的资料，一旦完成申请，该交易是不能被取消或更改。")</font></strong></p>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btnSubmitAcceptHelp btn-primary">@T("确认")</button>
+        </div>
+    </section>*@
+</form>
+    <script>
+        function chk(val) {
+
+            if (val == 2002) {
+                $(".balance").val(@Umodel.Wallet2002);
+                $(".sell").val(@Umodel.Wallet2002);
+                $(".min").val(@cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[0]);
+                $(".max").val(@cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[1]);
+
+            } else if (val == 2003) {
+                $(".balance").val(@Umodel.Wallet2003);
+                $(".sell").val(@Umodel.Wallet2003);
+                $(".min").val(@cacheSysParam.SingleAndInit(x => x.ID == 3004).Value.Split('-')[0]);
+                $(".max").val(@cacheSysParam.SingleAndInit(x => x.ID == 3004).Value.Split('-')[1]);
+            } else {
+                $(".balance").val(@Umodel.Wallet2001);
+                $(".sell").val(@Umodel.Wallet2001);
+                $(".min").val(@cacheSysParam.SingleAndInit(x => x.ID == 3002).Value.Split('-')[0]);
+                $(".max").val(@cacheSysParam.SingleAndInit(x => x.ID == 3002).Value.Split('-')[1]);
+            }
+        }
+
+        //$("#btnAcceptHelp").click(function () {
+        //    $("#accepthelp_setp1").css("display", "none");
+        //    $("#accepthelp_setp2").css("display", "block");
+        //});
+
+        $("#btnAcceptHelp").click(function () {
+    
+            $("#frmAcceptHelp").ajaxSubmit({
+                url: "@Url.Action("AcceptHelp")",
+                type: "post",
+            success: function (data) {
+                if (data.Status == 200) {
+                    alert("提交成功，即将为您跳转！");
+                    location.href = "@(Url.Action("Index", "Home"))";
+                } else {
+                    alert("提交失败：" + data.Message);
+                }
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+        });
+
+        //检查按钮事件
+        $(".jiancha").click(function () {
+            if (isNaN($(this).val())) {
+                $(this).val(0);
+            }
+            var ths = $(".acceptamount").val();
+            var mat = Math.floor(ths / 10);
+            $(this).val(mat * 10);
+            var amount = mat * 10;
+            var cp = parseInt($(".balance").val());
+            var maxx = parseInt($(".max").val());
+            var min = parseInt($(".min").val());
+            var getvalue = amount * parseFloat($(".hl").html());
+            $("#gh_amount").text(amount);
+            $("#gh").text(getvalue);
+        
+            if (amount <= cp && amount <= maxx && amount >= min) {
+                $("#gh_amount").css("color", "#00FF00");
+                $("#gh").css("color", "#00FF00");
+                $('#btnAcceptHelp').removeAttr("disabled");
+            } else {
+                $('#btnAcceptHelp').attr('disabled', "true");
+                $("#gh_amount").css("color", "red");
+                $("#gh").css("color", "red");
+            }
+            $("#amount_get").text(getvalue);
+        });
+    </script>

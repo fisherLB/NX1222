@@ -1,0 +1,335 @@
+﻿@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<script src="/assets/js/jquery.hotkeys.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/assets/css/datepicker.css" />
+<link rel="stylesheet" href="/assets/css/bootstrap-timepicker.css" />
+
+<script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+<script src="/assets/js/date-time/bootstrap-timepicker.min.js"></script>
+<script src="/assets/js/date-time/moment.min.js"></script>
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+            @if (!string.IsNullOrEmpty(ViewBag.Brief))
+            {
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    @ViewBag.Brief
+                </small>
+            }
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <form class="form-horizontal" id="validation-form" method="post">
+              @*   <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right">是否开发模式：</label>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="clearfix">
+                            <label>
+                                <input name="isdevelopmode" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(JN.Services.Tool.ConfigHelper.GetConfigBool("DevelopMode") ? "checked='checked'" : "")>
+                                <span class="lbl" style="color:#999">（关闭后可在Web.Config的“DevelopMode”开启开发人员选项）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+           <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right">是否开启多语言环境：</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <label>
+                                <input name="ismultilanguage" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(JN.Services.Tool.ConfigHelper.GetConfigBool("MultiLanguage") ? "checked='checked'" : "")>
+                                <span class="lbl"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="closehint">会员图谱：</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="radio">
+                            <label>
+                                <input name="memberatlas" type="radio" class="ace" value="sun" @(JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "sun" ? "checked='checked'" : "")>
+                                <span class="lbl"> 太阳线</span>
+                            </label>
+
+                            <label>
+                                <input name="memberatlas" type="radio" class="ace" value="double" @(JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "double" ? "checked='checked'" : "")>
+                                <span class="lbl"> 双轨线</span>
+                            </label>
+
+                            <label>
+                                <input name="memberatlas" type="radio" class="ace" value="three" @(JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "three" ? "checked='checked'" : "")>
+                                <span class="lbl"> 三轨线</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="closehint">动态奖（注册时产生）：</label>
+
+        <div class="col-xs-12 col-sm-4">
+            <div class="clearfix">
+                <div class="checkbox">
+                    <label>
+                        <input name="dtbonus" type="checkbox" class="ace" value="1201" @(JN.Services.Tool.ConfigHelper.GetConfigString("DtBonus").Contains("1201") ? "checked='checked'" : "") disabled>
+                        <span class="lbl"> 直推奖</span>
+                    </label>
+                    <label>
+                        <input name="dtbonus" type="checkbox" class="ace" value="1202" @(JN.Services.Tool.ConfigHelper.GetConfigString("DtBonus").Contains("1202") ? "checked='checked'" : "") disabled>
+                        <span class="lbl"> 对碰奖</span>
+                    </label>
+                    <label>
+                        <input name="dtbonus" type="checkbox" class="ace" value="1203" @(JN.Services.Tool.ConfigHelper.GetConfigString("DtBonus").Contains("1203") ? "checked='checked'" : "") disabled>
+                        <span class="lbl"> 绩差奖</span>
+                    </label>
+                    <label>
+                        <input name="dtbonus" type="checkbox" class="ace" value="1204" @(JN.Services.Tool.ConfigHelper.GetConfigString("DtBonus").Contains("1204") ? "checked='checked'" : "") disabled>
+                        <span class="lbl"> 层碰奖</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="closeregisterhint">动态奖结算方式：</label>
+
+        <div class="col-xs-12 col-sm-4">
+            <div class="clearfix">
+                <div class="radio">
+                    <label>
+                        <input name="dtsettlementway" type="radio" class="ace" value="immediate" @(JN.Services.Tool.ConfigHelper.GetConfigString("DtSettlementWay") == "immediate" ? "checked='checked'" : "")>
+                        <span class="lbl"> 秒结</span>
+                    </label>
+
+                    <label>
+                        <input name="dtsettlementway" type="radio" class="ace" value="timing" @(JN.Services.Tool.ConfigHelper.GetConfigString("DtSettlementWay") == "timing" ? "checked='checked'" : "")>
+                        <span class="lbl"> 定时结（请在“定时作业计划”添加任务）</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isregisteropen">静态奖（定时）：</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="clearfix">
+                            <div class="checkbox">
+                                <label>
+                                    <input name="staticbonus" type="checkbox" class="ace" value="1101" @(JN.Services.Tool.ConfigHelper.GetConfigString("StaticBonus").Contains("1101") ? "checked='checked'" : "") disabled>
+                                    <span class="lbl"> 静态分红</span>
+                                </label>
+                                <label>
+                                    <input name="staticbonus" type="checkbox" class="ace" value="1102" @(JN.Services.Tool.ConfigHelper.GetConfigString("StaticBonus").Contains("1102") ? "checked='checked'" : "") disabled>
+                                    <span class="lbl"> 领导奖</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right">结算时间禁止用户操作：</label>
+
+                    <div class="col-xs-12 col-sm-5 form-inline">
+                        <div class="clearfix">
+
+                            <div class="input-group bootstrap-timepicker">
+                                <select name="unoperatetime" style="width:80px" class="form-control">
+                                    <option value="1" @(JN.Services.Tool.ConfigHelper.GetConfigString("UnOperateTime") == "1" ? "selected='selected'" : "")>1分钟</option>
+                                    <option value="2" @(JN.Services.Tool.ConfigHelper.GetConfigString("UnOperateTime") == "2" ? "selected='selected'" : "")>2分钟</option>
+                                    <option value="5" @(JN.Services.Tool.ConfigHelper.GetConfigString("UnOperateTime") == "5" ? "selected='selected'" : "")>5分钟</option>
+                                    <option value="10" @(JN.Services.Tool.ConfigHelper.GetConfigString("UnOperateTime") == "10" ? "selected='selected'" : "")>10分钟</option>
+                                    <option value="20" @(JN.Services.Tool.ConfigHelper.GetConfigString("UnOperateTime") == "20" ? "selected='selected'" : "")>20分钟</option>
+                                    <option value="30" @(JN.Services.Tool.ConfigHelper.GetConfigString("UnOperateTime") == "30" ? "selected='selected'" : "")>30分钟</option>
+                                </select> <input id="startunoperatetime" name="startunoperatetime" type="text" value="@JN.Services.Tool.ConfigHelper.GetConfigString("StartUnOperateTime")" style="width:100px" class="form-control" /> 开始
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right">最高会员级别：</label>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="clearfix">
+                            <label>
+                                <input name="User_MaxLevel" type="text" style="width:100px" value="@JN.Services.Tool.ConfigHelper.GetConfigString("User_MaxLevel")" class="form-control" />
+                                <span class="lbl" style="color:#999">（无会员级别时填写0，后台可调整会员级别）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right">有报单中心：</label>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="clearfix">
+                            <label>
+                                <input name="HaveAgent" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(JN.Services.Tool.ConfigHelper.GetConfigBool("HaveAgent") ? "checked='checked'" : "")>
+                                <span class="lbl" style="color:#999">（可申请报单中心及管理）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right">最高报单中心级别：</label>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="clearfix">
+                            <label>
+                                <input name="Agent_MaxLevel" type="text" style="width:100px" value="@JN.Services.Tool.ConfigHelper.GetConfigString("Agent_MaxLevel")" class="form-control" />
+                                <span class="lbl" style="color:#999">（无报单中心级别时填写0，后台可调整报单中心级别）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">有子帐号：</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <label>
+                                <input name="HaveSubAccount" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(JN.Services.Tool.ConfigHelper.GetConfigBool("HaveSubAccount") ? "checked='checked'" : "")>
+                                <span class="lbl" style="color:#999">（子帐号不占位只参与分红）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">注册显示项：</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <label>
+                                选填/必填/唯一
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">取回密码方式（短信/邮箱/密保）：</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">短信接口：</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">邮件接口：</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <label>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">有交易市场：</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <label>
+                                <input name="HaveMarket" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(JN.Services.Tool.ConfigHelper.GetConfigBool("HaveMarket") ? "checked='checked'" : "")>
+                                <span class="lbl" style="color:#999"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sitekeywords">有商城店铺：</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <label>
+                                <input name="HaveShop" class="ace ace-switch ace-switch-4" value="True" type="checkbox" @(JN.Services.Tool.ConfigHelper.GetConfigBool("HaveShop") ? "checked='checked'" : "")>
+                                <span class="lbl" style="color:#999"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="sysname">后台路径名称：</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="clearfix">
+                            <input type="text" name="adminpath" class="form-control" value="@(JN.Services.Tool.ConfigHelper.GetConfigString("AdminPath"))" /> <span>修改后访问后台地址：“http://www.xxx.com/Admin”</span>
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            保存
+                        </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            返回
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+@section scripts{
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/assets/js/bootstrap-wysiwyg.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#startunoperatetime').timepicker({
+            minuteStep: 1,
+            showSeconds: true,
+            showMeridian: false
+        }).next().on(ace.click_event, function () {
+            $(this).prev().focus();
+        });
+    });
+
+
+</script>
+}

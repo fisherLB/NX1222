@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Areas/User/Views/Shared/_Layout" + JN.Common.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+@using Webdiyer.WebControls.Mvc
+@model PagedList<JN.Entity.TMatching>
+<script src="~/theme/mmm/js/box.js"></script>
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <b>@T("欢迎页") </b>
+            <br>
+            <span>Present your events in timeline style.</span>
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T(ViewBag.Title)</a>
+        </div>
+    </div>
+    <div class="row">
+            <div class="mainoprate">
+                    @*<div class="col-md-12">
+                            <img src="/theme/mmm/images/MMM-banner.jpg" width="100%" style="margin-bottom: 10px;">
+                        </div>*@
+
+                    <table width="100%">
+                        <tbody>
+                            <tr align="center">
+                                <td width="50%" height="60"><a href="###" onclick="javascript: winopen('提供帮助', '/usercenter/home/_PartialSubmitSupplyHelp');" style="background-image: url(/theme/cfb/images/tghelp.jpg); text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000" class="big_btn">@T("提供帮助")</a></td>
+                                <td width="50%"><a href="###" onclick="javascript: winopen('获取帮助', '/usercenter/home/_PartialSubmitAcceptHelp');" style="background-image: url(/theme/cfb/images/jshelp.jpg); text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000" class="big_btn">@T("获取帮助")</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @*<div class="row">
+                            <div class=" col-xs-12 col-sm-12 col-md-6">
+                                <div class="hpanel">
+                                    <div class="panel-body" style="background: url(/theme/mmm/images/button-img1.jpg) no-repeat right bottom #fff; color: #fff; background-size: cover;">
+                                        <div class="text-center">
+                                            <h2 class="m-b-xs" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("我要帮助其他人")</h2>
+                                            <p class="font-bold text-success" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("购买" + JN.BLL.sysparams.GetModel(2001).Value)</p>
+                                            <div class="m" style="height: 40px;">
+                                            </div>
+                                            <p class="small" style="height: 60px;">
+                                            </p>
+                                            <button class="btn btn-success btn-lg" onclick="javascript: winopen('提供帮助', '/usercenter/home/_SubmitSupplyHelp');">@("提供帮助")</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="hpanel">
+                                    <div class="panel-body" style="background: url(/theme/mmm/images/button-img2.jpg) no-repeat center bottom #fff; color: #fff; background-size: cover; ">
+                                        <div class="text-center">
+                                            <h2 class="m-b-xs" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("我需要别人帮助")</h2>
+                                            <p class="font-bold text-warning" style="text-shadow: 0 0 3px #000,0 0 3px #000,0 0 3px #000,0 0 3px #000 ">@("出售" + JN.BLL.sysparams.GetModel(2001).Value)</p>
+                                            <div class="m" style="height: 40px;">
+                                            </div>
+                                            <p class="small" style="height: 60px;">
+                                            </p>
+                                            <button class="btn btn-warning btn-lg" onclick="javascript: winopen('接受帮助', '/usercenter/home/_SubmitAcceptHelp');">@("接受帮助")</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 hide">
+                                <div class="hpanel" id="ad">
+                                    <div class="panel-body">
+                                        <div class="text-center" style="overflow:auto" id="bd">
+                                            <h2 class="m-b-xs" id="total">0</h2>
+                                            <div>
+                                                <div class="small" id="show">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="row" id="context">
+                        <div id="ListContent">
+                            @Html.Partial("_PartialMatchList", Model)
+                        </div>
+
+                        <!--group list end-->
+                    </div>
+            </div>
+</div>

@@ -1,0 +1,592 @@
+﻿@{
+    string controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Neon Admin Panel" />
+    <meta name="author" content="" />
+
+    <title>@T(sysEntity.SysName) | @T(ViewBag.Title)</title>
+    <link href="~/Theme/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/theme/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/font-icons/entypo/css/entypo.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-forms.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-core.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-theme.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/custom.css">
+    <style>
+        .file-input-wrapper {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+            .file-input-wrapper input[type=file], .file-input-wrapper input[type=file]:focus, .file-input-wrapper input[type=file]:hover {
+                position: absolute;
+                top: 0;
+                left: 0;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+                z-index: 99;
+                outline: 0;
+            }
+
+        .file-input-name {
+            margin-left: 8px;
+        }
+        .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline {
+            color:#666
+        }
+    </style>
+    <script src="/theme/neon/assets/js/jquery-1.11.2.min.js"></script>
+
+    <!--[if lt IE 9]><script src="/assets1/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+<body class="page-body  page-fade">
+
+    @*<div class="page-container @((Request.Url.ToString().ToLower().Contains("/ttc")) ? "sidebar-collapsed" : "")">*@
+        <div class="page-container">
+            <!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+
+            <div class="sidebar-menu">
+
+
+                <header class="logo-env">
+
+                    <!-- logo -->
+                    <div class="logo">
+                        <a style="font-size: 18px; color: #fff; font-family: 微软雅黑" href="/UserCenter/Home">
+                            @T(sysEntity.SysName)
+                        </a>
+                    </div>
+
+                    <!-- logo collapse icon -->
+
+                    <div class="sidebar-collapse">
+                        <a href="#" class="sidebar-collapse-icon with-animation">
+                            <!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+                            <i class="entypo-menu"></i>
+                        </a>
+                    </div>
+
+
+
+                    <!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
+                    <div class="sidebar-mobile-menu visible-xs">
+                        <a href="#" class="with-animation">
+                            <!-- add class "with-animation" to support animation -->
+                            <i class="entypo-menu"></i>
+                        </a>
+                    </div>
+
+                </header>
+
+
+
+
+
+
+                <ul id="main-menu" class="mainmenu">
+                    @{
+                        var navicache = MvcCore.Unity.Get<JN.Data.Service.INavigationService>().ListCache("navigation", x => x.IsShow);
+                        var depth1 = navicache.Where(x => x.ParentID == 0).OrderBy(x => x.Sort).ToList();
+                        foreach (var navi1 in depth1)
+                        {
+                            <li class="@((Request.Url.ToString().ToLower().Contains(navi1.Url.ToLower())) ? "active opened root-level" : "")">
+                                <a href="@(navi1.Child > 0 ? "#" : navi1.Url)">
+                                    <i class="fa @(navi1.Icon)"></i>
+                                    <span>@T(navi1.Title)</span>
+
+                                </a>
+                                @if (navi1.Child > 0)
+                                {
+                                    <ul>
+                                        @{
+                                    var depth2 = navicache.Where(x => x.ParentID == navi1.ID).OrderBy(x => x.Sort).ToList();
+                                    foreach (var navi2 in depth2)
+                                    {
+                                        <li class="@((Request.Url.ToString().ToLower().Contains(navi2.Url.ToLower())) ? "active" : "")"><a href="@navi2.Url"><span>@T(navi2.Title)</span></a></li>
+                                    }
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    }
+                    @*<li style="text-align: center; padding-top: 10px; padding-bottom: 20px">
+                        @T(" 扫我注册")<br /><br />
+                        @{ 
+                            string url = Request.Url.GetLeftPart(UriPartial.Authority) + "/UserCenter/Reg?r=" + Umodel.UserName;
+                        }
+                        <img width="120" height="120" style="border:2px solid #fff" src="@MvcCore.Extensions.QRCodeExtensions.ToQRCode(url, 5, 5).GetImgBase64String(System.Drawing.Imaging.ImageFormat.Png)" />
+                    </li>*@
+
+                    
+                   </ul>
+
+
+
+            </div>
+            <div class="main-content">
+
+                <div class="row" style="background-color: #000 !important; margin:-20px -20px 10px -20px;">
+
+                    <!-- Profile Info and Notifications -->
+                    <div class="col-md-12 col-sm-12 clearfix" style="padding:0 5px;margin-top: 10px;" >
+
+                        <ul class="user-info pull-left pull-none-xsm" style="background:#212121; padding-left:8px; height:30px; line-height:30px; padding-bottom:0px; margin-bottom:10px;" >
+
+                            <!-- Profile Info -->
+                            <li class="profile-info dropdown" style="line-height:30px">
+                                <!-- add class "pull-right" if you want to place this from right -->
+
+                                <a href="#">
+                                    @(T("欢迎您！"))
+                                    @Umodel.UserName @MvcHtmlString.Create(Umodel.IsActivation ? JN.Services.Manager.Users.GetUserLevelImages(Umodel.UserLevel) : "(未激活)")
+                                    @(Umodel.IsLock ? "(受限)" : "")
+                                </a>
+
+
+                            </li>
+                            @{
+                                var msglist = MvcCore.Unity.Get<JN.Data.Service.IMessageService>().List(x => x.UID == Umodel.ID && x.IsRead == false && x.ToUID == Umodel.ID).OrderByDescending(x => x.ID).ToList();
+                            }
+                            <!-- Message Notifications -->
+                            @*<li class="notifications dropdown">
+
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" style="padding: 0 10px;">
+                                    <i class="entypo-mail"></i>
+                                    <span class="badge badge-secondary">@msglist.Count</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <ul class="dropdown-menu-list scroller">
+                                            @{
+
+                                                int i = 0;
+                                                foreach (var infor in msglist)
+                                                {
+                                                    if (i > 3)
+                                                    {
+                                                        break;
+                                                    }
+                                                    <li class="active">
+                                                        <a href="/UserCenter/Mail/Inbox">
+                                                            <span class="image pull-right">
+                                            <img src="/assets1/images/thumb-1.png" alt="" class="img-circle" />
+                                        </span>
+
+                                                            <span class="line">
+                                                                <strong>@infor.FormUserName</strong>
+                                                                - @JN.Services.Tool.DateSpan.Get(infor.CreateTime)
+                                                            </span>
+
+                                                            <span class="line desc small">
+                                                                @infor.Title
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    i++;
+                                                }
+                                            }
+
+
+                                            <li class="external">
+                                                <a href="/UserCenter/Mail/Inbox">@T("查看所有留言")</a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+                            </li>*@
+
+                        </ul>
+                        <ul class="list-inline links-list pull-right" style="padding:0;background: #212121; line-height:30px;padding-left:8px;">
+                            @if (JN.Services.Tool.ConfigHelper.GetConfigBool("MultiLanguage"))
+                            {
+                                <li class="dropdown language-selector">
+                                    @{
+                                        string langname = "zh-CN";
+                                        if (!string.IsNullOrEmpty(Request["lang"]))
+                                        {
+                                            langname = Request["lang"];
+                                        }
+                                        else
+                                        {
+                                            var cookie = System.Web.HttpContext.Current.Request.Cookies["Culture"];
+                                            if (cookie != null)
+                                            {
+                                                langname = cookie.Value;
+                                            }
+                                        }
+                                    }
+                                    @T("语言"): &nbsp;
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true" style="padding:0;">
+                                        <img src="/images/@(langname).png">
+                                    </a>
+
+                                    <ul class="dropdown-menu pull-right">
+                                        @{
+                                            var langlist = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 4000 && x.IsUse).OrderBy(x => x.Sort).ToList();
+                                            if (langlist.Any() && langlist.Count > 0)
+                                            {
+                                                foreach (var param in langlist)
+                                                {
+                                                    <li class="active">
+                                                        <a href="?lang=@param.Value2">
+                                                            <img src="/images/@(param.Value2).png">
+                                                            <span>@param.Value</span>
+                                                        </a>
+                                                    </li>
+                                                }
+                                            }
+                                        }
+                                    </ul>
+
+                                </li>
+                                <li class="sep"></li>
+                                            }
+                                            @*<li>
+                                <a href="#" style="background: #E02222;padding: 8px 10px;color: #fff;">
+                                    账号充值
+                                </a>
+                            </li>*@
+                                            @if (!Umodel.IsActivation)
+                                            {
+                                                <li>
+                                                    <a href="@Url.Action("doPass", "User")" style="background: #E02222;padding: 8px 10px;color: #fff;">
+                                                        @(T("激活帐号"))
+                                                    </a>
+                                                </li>
+                                            }
+                                            <li>
+                                                <a href="/usercenter/home/logout" style="color: #fff;">
+                                                    @T("退出平台") <i class="entypo-logout right"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                        <ul class="user-info pull-left pull-right-xs pull-none-xsm" style="margin-bottom:10px;">
+                            @{
+                                @*int newuser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.IsActivation && x.RefereeID == Umodel.ID).Count();
+                                if (newuser > 0)
+                                {
+                                    <li class="notifications dropdown">
+
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                            <i class="entypo-attention"></i>
+                                            <span class="badge badge-info">@newuser</span>
+                                        </a>
+
+                                        <ul class="dropdown-menu">
+                                            <li class="top">
+                                                <p class="small">
+                                                    <a href="#" class="pull-right">Mark all Read</a>
+                                                    <strong>@(newuser)</strong> @T("条未读信息").
+                                                </p>
+                                            </li>
+
+                                            <li>
+                                                <ul class="dropdown-menu-list scroller">
+                                                    @if (newuser > 0)
+                                                    {
+                                                        <li class="unread notification-success">
+                                                            <a href="/UserCenter/user/unactivation">
+                                                                <i class="entypo-user-add pull-right"></i>
+
+                                                                <span class="line">
+                                                                    <strong>@T("需要激活的的新会员")</strong>
+                                                                </span>
+
+                                                                <span class="line small">
+                                                                    +@newuser
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    }
+                                                   @if (newsubuser > 0)
+    {
+        <li class="unread notification-success">
+            <a href="/UserCenter/user/subaccount">
+                <i class="entypo-user-add pull-right"></i>
+
+                <span class="line">
+                    <strong>@T("需要激活的的子帐号")</strong>
+                </span>
+
+                <span class="line small">
+                    +@newsubuser
+                </span>
+            </a>
+        </li>
+    }
+                                                    @{
+                                                        //系统参数
+                                float PARAM_AGENT_JTGS = JN.Services.Tool.ConfigHelper.StrToInt(JN.BLL.sysparams.GetModel(1801).Value, 0); //成为商务中心所需的直推个数
+                                if (JN.BLL.users.GetRecordCount("RefereeID=" + JN.BLL.users.IsLogin().ID + " and IsActivation=1") >= PARAM_AGENT_JTGS)
+                                {
+                                    if (!JN.BLL.users.IsLogin().IsAgent && String.IsNullOrEmpty(JN.BLL.users.IsLogin().AgentName))
+                                    {
+    <li class="unread notification-secondary">
+        <a href="/UserCenter/agent/applyagent">
+            <i class="entypo-heart pull-right"></i>
+
+            <span class="line">
+                <strong>@T("您可以申请商务中心")</strong>
+            </span>
+        </a>
+    </li>
+                                    }
+                                }
+                                                    }
+                                                </ul>
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+                                }*@
+                            }
+                            @{
+                                decimal stockright = 0;
+                                switch (Umodel.UserLevel)
+                                {
+                                    case 1:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3001).Value2.ToDecimal();
+                                        break;
+                                    case 2:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3002).Value2.ToDecimal();
+                                        break;
+                                    case 3:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3003).Value2.ToDecimal();
+                                        break;
+                                    case 4:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3004).Value2.ToDecimal();
+                                        break;
+                                    case 5:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3005).Value2.ToDecimal();
+                                        break;
+                                    case 6:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3006).Value2.ToDecimal();
+                                        break;
+                                    case 7:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3007).Value2.ToDecimal();
+                                        break;
+                                    case 8:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3008).Value2.ToDecimal();
+                                        break;
+                                    case 9:
+                                        stockright = cacheSysParam.SingleAndInit(x => x.ID == 3009).Value2.ToDecimal();
+                                        break;
+                                    default:
+                                        stockright = 0;
+                                        break;
+                                }
+                            }
+                            <li style="line-height:30px; color:#fff; margin-left:0px;">                 
+                            <span style="margin-right:20px">@(T("X币价格"))：@(JN.Services.Manager.Stocks.getcurrentprice().ToString("F4"))$</span> 
+                            <span style="margin-right:20px">@(T("H币价格"))：@(JN.Services.Manager.CFB.getcurrentprice().ToString("F2"))$</span> 
+                            </li>
+                            <li style="line-height:30px; color:#fff; margin-left:0px;">                               
+                                <span style="margin-right:20px">@(T("分红股权"))：@stockright</span>
+                                <span>@(T("EP钱包"))：@(Umodel.Wallet2002.ToString("F2"))$</span>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                    <!--Raw Links-->
+                    <div class="col-md-4 col-sm-4 clearfix">
+
+                       
+
+                    </div>
+
+                </div>
+
+                @{
+                    string path = "";
+                    switch (controller)
+                    {
+                        case "user":
+                            path = "会员管理";
+                            break;
+                        case "agent":
+                            path = "商务中心";
+                            break;
+                        case "finance":
+                            path = "财务管理";
+                            break;
+                        case "home":
+                            path = "";
+                            break;
+                        case "mail":
+                            path = "邮件中心";
+                            break;
+                        case "market":
+                            path = "交易市场";
+                            break;
+                        case "notice":
+                            path = "会员公告";
+                            break;
+                        default: break;
+                    }
+                }
+                <ol class="breadcrumb bc-3">
+                    <li>
+                        <a href="/usercenter/home"><i class="fa fa-home"></i>@T("首页")</a>
+                    </li>
+                    @if (!string.IsNullOrEmpty(path))
+                    {
+                        <li>
+
+                            <a href="#">@T(path)</a>
+                        </li>
+                    }
+                    <li class="active">
+                        <strong>@T(ViewBag.Title)</strong>
+                    </li>
+                </ol>
+
+                @RenderBody()
+                <!-- Footer -->
+                <footer class="main">
+
+                    @MvcHtmlString.Create(sysEntity.CopyInfo)
+
+
+                </footer>
+            </div>
+
+
+        </div>
+
+   
+    <div class="modal container fade" id="childwindow" style="width: auto;" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="color-line"></div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="childwindowtitle"></h4>
+
+                </div>
+                <section id="childwindowiframe">
+                    <div class="modal-body" style="text-align:center">
+                        <p style="text-align:center">@T("载入中，请稍候...")</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    @{
+        @*if (sysEntity.IsOpenKefu)
+        {
+                <link rel="stylesheet" href="/CSS/kefu.css">
+                <script src="/js/kefu.js"></script>
+                <div id=floatTools class="float0831" style="z-index:9999">
+                    <div class=floatL>
+                        <a id=aFloatTools_Show style="DISPLAY: none" class=btnOpen
+                           title=查看在线客服
+                           onclick="javascript:$('#divFloatToolsView').animate({width: 'show', opacity: 'show'}, 'normal',function(){ $('#divFloatToolsView').show();kf_setCookie('RightFloatShown', 0, '', '/', 'www.qf28.net'); });$('#aFloatTools_Show').attr('style','display:none');$('#aFloatTools_Hide').attr('style','display:block');"
+                           href="javascript:void(0);">展开</a> <a id=aFloatTools_Hide class=btnCtn
+                                                                title=关闭在线客服
+                                                                onclick="javascript:$('#divFloatToolsView').animate({width: 'hide', opacity: 'hide'}, 'normal',function(){ $('#divFloatToolsView').hide();kf_setCookie('RightFloatShown', 1, '', '/', 'www.qf28.net'); });$('#aFloatTools_Show').attr('style','display:block');$('#aFloatTools_Hide').attr('style','display:none');"
+                                                                href="javascript:void(0);">收缩</a>
+                    </div>
+                    <div id=divFloatToolsView class=floatR style="display:">
+                        <div class=tp></div>
+                        <div class=cn>
+                            <ul>
+                                <li class=top>
+                                    <h3 class=titZx style="margin:0">QQ咨询</h3>
+                                </li>
+                                <li><span class=icoZx>在线咨询</span> </li>
+                                @if (!string.IsNullOrEmpty(sysEntity.KefuUrl1))
+                                {
+                                    <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=@(sysEntity.KefuUrl1)&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:@(sysEntity.KefuUrl1):52" alt="点击这里给我发消息" title="点击这里给我发消息" /> @(sysEntity.KefuName1)</a></li>
+                                }
+                                @if (!string.IsNullOrEmpty(sysEntity.KefuUrl2))
+                                {
+                                    <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=@(sysEntity.KefuUrl2)&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:@(sysEntity.KefuUrl2):52" alt="点击这里给我发消息" title="点击这里给我发消息" /> @(sysEntity.KefuName2)</a></li>
+                                }
+                                @if (!string.IsNullOrEmpty(sysEntity.KefuUrl3))
+                                {
+                                    <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=@(sysEntity.KefuUrl3)&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:@(sysEntity.KefuUrl3):52" alt="点击这里给我发消息" title="点击这里给我发消息" /> @(sysEntity.KefuName3)</a></li>
+                                }
+                                @if (!string.IsNullOrEmpty(sysEntity.KefuUrl4))
+                                {
+                                    <li class=bot><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=@(sysEntity.KefuUrl4)&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:@(sysEntity.KefuUrl4):52" alt="点击这里给我发消息" title="点击这里给我发消息" /> @(sysEntity.KefuName4)</a></li>
+                                }
+                                @if (!string.IsNullOrEmpty(sysEntity.KefuUrl5))
+                                {
+                                    <li class=bot><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=@(sysEntity.KefuUrl5)&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:@(sysEntity.KefuUrl5):52" alt="点击这里给我发消息" title="点击这里给我发消息" /> @(sysEntity.KefuName5)</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        }*@
+    }
+    <!-- Bottom Scripts -->
+    <script src="/theme/neon/assets/js/gsap/main-gsap.js"></script>
+    <script src="/theme/neon/assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+    <script src="/theme/neon/assets/js/bootstrap.js"></script>
+    <script src="/theme/neon/assets/js/joinable.js"></script>
+    <script src="/theme/neon/assets/js/resizeable.js"></script>
+    <script src="/theme/neon/assets/js/morris.min.js"></script>
+    <script src="/theme/neon/assets/js/toastr.js"></script>
+    <script src="/theme/neon/assets/js/neon-custom.js"></script>
+    <script src="/theme/neon/assets/js/neon-demo.js"></script>
+    <script src="/theme/neon/assets/js/neon-api.js"></script>
+
+    <link rel="stylesheet" href="/theme/neon/assets/js/daterangepicker/daterangepicker-bs3.css">
+    <script src="/theme/neon/assets/js/daterangepicker/moment.min.js"></script>
+    <script src="/theme/neon/assets/js/daterangepicker/daterangepicker.js"></script>
+    <script src="/theme/neon/assets/js/bootstrap-datepicker.js"></script>
+    <script src="/theme/neon/assets/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/Theme/bootbox.min.js"></script>
+    <script src="/Scripts/jn.js"></script>
+
+
+</body>
+</html>
+
+
+ 
+                    
+
+     
+
+ 
+                   
+ 

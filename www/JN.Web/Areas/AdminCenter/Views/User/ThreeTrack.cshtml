@@ -1,0 +1,185 @@
+﻿@model List<JN.Entity.TUser>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+            @if (!string.IsNullOrEmpty(ViewBag.Brief))
+            {
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    @ViewBag.Brief
+                </small>
+            }   
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="/Admin/User/TreeView/@Model[0].ID" class="btn btn-primary">推荐图谱</a> <a href="/Admin/User/ThreeTrack/@Model[0].ID" class="btn btn-danger">安置图谱</a>
+
+                    <div class="widget-box">
+
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td colspan="27">
+                                    <div class="widget-header header-color-blue2">
+                                        <h4 class="lighter smaller">@Model[0].UserName</h4>
+                                        @*<select id="txtField">
+                <option value="UserID">学员编号</option>
+            </select>
+            <input type="text" id="txtKeyWord" width="90px">
+            <input type="button" id="btnFind" value="查找" />
+            &nbsp;&nbsp;<input type="button" id="btnFind" value="向上" />*@
+                                    </div>
+                                    <br />
+                                    <table width="100%" border="0">
+                                        <tr>
+                                            <td width="33%" align="center"><img src="/assets/images/b6.gif" height="32"><font color="344C99">正式会员</font></td>
+                                            <td width="33%" align="center"><img src="/assets/images/b1.gif" height="32"><font color=344C99>非正式会员</font></td>
+                                            <td width="33%" align="center"><img src="/assets/images/b8.gif" height="32"><font color=344C99>空区</font></td>
+                                        </tr>
+                                    </table>
+                                    <br />
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="27" align="center" valign="middle">
+                                    @{
+    if (Model[0].ID > 0)
+    {
+        <a href="/Admin/User/ThreeTrack/@Model[0].ID"><img src='/assets/images/@(Model[0].IsActivation ? "b6" : "b1").gif' height="32" /><br />@(Model[0].UserName)<br />(@(Model[0].UserLevel)级,@(JN.BLL.users.GetRecordCount("ParentPath like '%," + Model[0].ID + ",%' or ParentID=" + Model[0].ID))人)</a>
+    }
+    else
+    {
+                                            <img src="/assets/images/b8.gif" height="32"><br /><span>（空）</span>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="27"><div align="center"><img src="/assets/images/line1.gif" width="360" height="9"></div></td>
+                            </tr>
+                            <tr>
+                                @for (int i = 1; i <= 3; i++)
+                                {
+                                    <td align="center" colspan="9">
+                                        @{
+                                    if (Model[i].ID > 0)
+                                    {
+                                        <a href="/Admin/User/ThreeTrack/@Model[i].ID"><img src='/assets/images/@(Model[i].IsActivation ? "b6" : "b1").gif' height="32" /><br />@(Model[i].UserName)<br />(@(Model[i].UserLevel)级,@(JN.BLL.users.GetRecordCount("ParentPath like '%," + Model[i].ID + ",%' or ParentID=" + Model[i].ID))人)</a>
+                                    }
+                                    else
+                                    {
+                                        if (Model[i].ParentID > 0 && JN.BLL.users.GetModel(Model[i].ParentID).IsActivation)
+                                        {
+                                         <img src="/assets/images/b8.gif" height="32"><br /><span>（空）</span>
+                                        }
+                                        else
+                                        { 
+                                        <img src="/assets/images/b8.gif" height="32"><br /><span>（空）</span>
+                                        }
+                                    }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="9"><div align="center"><img src="/assets/images/line1.gif"></div></td>
+                                <td align="center" colspan="9"><div align="center"><img src="/assets/images/line1.gif"></div></td>
+                                <td align="center" colspan="9"><div align="center"><img src="/assets/images/line1.gif"></div></td>
+                            </tr>
+                            <tr>
+                                @for (int i = 4; i <= 12; i++)
+{
+    <td align="center" colspan="3">
+        @{
+    if (Model[i].ID > 0)
+    {
+        <a href="/Admin/User/ThreeTrack/@Model[i].ID"><img src='/assets/images/@(Model[i].IsActivation ? "b6" : "b1").gif' height="32" /><br>@(Model[i].UserName)<br />(@(Model[i].UserLevel)级,@(JN.BLL.users.GetRecordCount("ParentPath like '%," + Model[i].ID + ",%' or ParentID=" + Model[i].ID))人)</a>
+    }
+    else
+    {
+        if (Model[i].ParentID > 0 && JN.BLL.users.GetModel(Model[i].ParentID).IsActivation)
+        {
+            <img src="/assets/images/b8.gif" height="32"><br /><span>（空）</span>
+        }
+        else
+        {
+            <img src="/assets/images/b8.gif" height="32"><br /><span>（空）</span>
+        }
+    }
+        }
+    </td>
+}
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                                <td align="center" colspan="3"><div align="center"><img src="/assets/images/line3.gif"></div></td>
+                            </tr>
+                            <tr>
+                                @for (int i = 13; i <= 39; i++)
+                                {
+                                    <td align="center">
+                                        @{
+                                    if (Model[i].ID > 0)
+                                    {
+                                        <a href="/Admin/User/ThreeTrack/@Model[i].ID"><img src='/assets/images/@(Model[i].IsActivation ? "b6" : "b1").gif' height="32" /><br />@(Model[i].UserName)<br />(@(Model[i].UserLevel)级,@(JN.BLL.users.GetRecordCount("ParentPath like '%," + Model[i].ID + ",%' or ParentID=" + Model[i].ID))人)</a>
+                                    }
+                                    else
+                                    {
+                                        if (Model[i].ParentID > 0 && JN.BLL.users.GetModel(Model[i].ParentID).IsActivation)
+                                        {
+                                         <img src="/assets/images/b8.gif" height="32"><br /><span>（空）</span>
+                                        }
+                                        else
+                                        { 
+                                        <img src="/assets/images/b8.gif" height="32"><br /><span>（空）</span>
+                                        }
+                                    }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        </table>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="space"></div>
+
+            <div class="center">
+                <a href="/Admin/Home" class="btn btn-primary">
+                    <i class="icon-dashboard"></i>
+                    返回主界面
+                </a>
+            </div>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>

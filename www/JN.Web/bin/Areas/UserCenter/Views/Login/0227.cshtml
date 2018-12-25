@@ -1,0 +1,87 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+
+    <title></title>
+    <link href="~/Theme/0227/css/login_style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+</head>
+
+<body>
+
+    
+    <div class="login">
+        <div class="logo"></div>
+        <form method="post" id="frmLogin">
+            <ul id="Chinese">
+                <li><label>用户名：</label><input type="text" placeholder="请输入您的用户名" class="input1" name="username" autofocus="autofocus" id="username" /></li>
+                <li><label>密码：</label><input type="password" placeholder="请输入您的用户密码" class="input2" name="password" id="password" /></li>
+                <li>
+                    <label>验证码：</label><input class="codebox" placeholder="请输入验证码" type="text" name="code" /> <p class="code">
+                        <img id="imgCode" src="/UserCenter/Login/GetCodeImage?id=1" onclick="ChangeCheckCode();return false;" />
+                    </p>
+                </li>
+                <li class="btns"><input value="登   录" type="button" id="btnlogin" /><a href="/UserCenter/login/GetPwd" class="forget">忘记密码？</a></li>
+            </ul>
+        </form>
+       </div>
+   </body>
+</html>
+
+
+<script type="text/javascript" async="" src="/theme/mmm/js/_Incapsula_Resource"></script>
+
+
+
+<script src="/theme/mmm/js/jquery-ui.min.js"></script>
+
+<script src="/theme/mmm/js/jquery.slimscroll.min.js"></script>
+
+<script src="/theme/mmm/js/bootstrap.min.js"></script>
+
+<script src="/theme/mmm/js/metisMenu.min.js"></script>
+
+<script src="/theme/mmm/js/icheck.min.js"></script>
+
+<script src="/theme/mmm/js/index.js"></script>
+
+<script src="/theme/mmm/js/toastr.min.js"></script>
+
+<script src="/theme/mmm/js/alert.js"></script>
+
+<script src="/theme/mmm/js/homer.js"></script>
+
+<script src="~/js/jquery.form.js"></script>
+
+<script type="text/javascript">
+    function ChangeCheckCode() {
+        var oldUrl = $('#imgCode').attr("src");
+        $('#imgCode').attr("src", oldUrl + '1');
+    }
+
+    jQuery(function ($) {
+        $("#btnlogin").click(function () {
+            $("#frmLogin").ajaxSubmit({
+                url: "@Url.Action("Index")",
+                type: "post",
+                success: function (data) {
+                    if (data.Status == 200) {
+                        alert("登录成功，即将为您跳转！");
+                        location.href = data.Message;
+                    } else {
+                        alert("登录失败：" + data.Message);
+                       ChangeCheckCode();
+                    }
+                },
+                error: function (data) {
+                   alert(data.message);
+                }
+            });
+        });
+    });
+
+</script>
+

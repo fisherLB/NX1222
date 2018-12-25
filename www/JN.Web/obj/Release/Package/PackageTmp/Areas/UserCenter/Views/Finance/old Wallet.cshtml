@@ -1,0 +1,197 @@
+﻿@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<link rel="stylesheet" href="/css/jquery.dataTables.min.css">
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <h4>@T("奖金明细") </h4>
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T("奖金明细")</a>
+        </div>
+    </div>    
+        <div class="mainlist">
+                        <p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2001).Value + "记录")</p>
+                        <table id="datalist2001" class="display datalist" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>@T("编号")</th>
+                                    <th>@T("日期")</th>
+                                    <th>@T("+收入/-支出")</th>
+                                    <th>@T("新余额")</th>
+                                    <th>@T("备注")</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                           @{
+                            var wlist2001 =MvcCore.Unity.Get<JN.Data.Service.IWalletLogService>().List(x => x.UID == Umodel.ID  && x.CoinID==2001).OrderByDescending(x => x.ID).Take(100).ToList();
+                            foreach (var item in wlist2001)
+                            {
+                                <tr>
+                                    <td>@item.ID</td>
+                                    <td>@item.CreateTime</td>
+                                    <td>@item.ChangeMoney</td>
+                                    <td>@item.Balance</td>
+                                    <td>@item.Description</td>
+                                </tr>
+                            }
+                            }
+                            </tbody>
+                        </table>
+
+                        @*<p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2002).Value + "记录")</p>
+    <table id="datalist2002" class="display datalist" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>@T("编号")</th>
+                <th>@T("日期")</th>
+                <th>@T("+收入/-支出")</th>
+                <th>@T("新余额")</th>
+                <th>@T("备注")</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                var wlist2002 = MvcCore.Unity.Get<JN.Data.Service.IWalletLogService>().List(x => x.UID == Umodel.ID && x.CoinID == 2002).OrderByDescending(x => x.ID).Take(100).ToList();
+                foreach (var item in wlist2002)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.CreateTime</td>
+                        <td>@item.ChangeMoney</td>
+                        <td>@item.Balance</td>
+                        <td>@item.Description</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>*@
+
+
+    <p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2003).Value + "记录")</p>
+    <table id="datalist2003" class="display datalist" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>@T("编号")</th>
+                <th>@T("日期")</th>
+                <th>@T("+收入/-支出")</th>
+                <th>@T("新余额")</th>
+                <th>@T("备注")</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                var wlist2003 = MvcCore.Unity.Get<JN.Data.Service.IWalletLogService>().List(x => x.UID == Umodel.ID && x.CoinID == 2003).OrderByDescending(x => x.ID).Take(100).ToList();
+                foreach (var item in wlist2003)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.CreateTime</td>
+                        <td>@item.ChangeMoney</td>
+                        <td>@item.Balance</td>
+                        <td>@item.Description</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <p>@T(cacheSysParam.SingleAndInit(x => x.ID == 2005).Value + "记录")</p>
+    <table id="datalist2004" class="display datalist" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>@T("编号")</th>
+                <th>@T("日期")</th>
+                <th>@T("+收入/-支出")</th>
+                <th>@T("新余额")</th>
+                <th>@T("备注")</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                var wlist2005 = MvcCore.Unity.Get<JN.Data.Service.IWalletLogService>().List(x => x.UID == Umodel.ID && x.CoinID == 2005).OrderByDescending(x => x.ID).Take(100).ToList();
+                foreach (var item in wlist2005)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.CreateTime</td>
+                        <td>@item.ChangeMoney</td>
+                        <td>@item.Balance</td>
+                        <td>@item.Description</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+                        <p>@T("待结算记录")</p>
+                        <table id="datalistbonus" class="display datalist" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>@T("编号")</th>
+                                    <th>@T("日期")</th>
+                                    <th>@T("类型")</th>
+                                    <th>@T("+收入/-支出")</th>
+                                    <th>@T("备注")</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @{
+                                    var blist = MvcCore.Unity.Get<JN.Data.Service.IBonusDetailService>().List(x => x.UID == Umodel.ID && x.IsBalance == false).OrderByDescending(x => x.ID).Take(100).ToList();
+                                    foreach (var item in blist)
+                                    {
+                                        <tr>
+                                            <td>@item.ID</td>
+                                            <td>@item.CreateTime</td>
+                                            <td>@item.BonusName</td>
+                                            <td>@item.BonusMoney</td>
+                                            <td>@item.Description</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+</div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#datalist2001').DataTable({
+                    "bSort": false, "language": { "url": "/datatable.txt" }
+                });
+                //$('#datalist2002').DataTable({
+                //    "bSort": false, "language": { "url": "/datatable.txt" }
+                //});
+                $('#datalist2003').DataTable({
+                    "bSort": false, "language": { "url": "/datatable.txt" }
+                });
+                $('#datalist2004').DataTable({
+                    "bSort": false, "language": { "url": "/datatable.txt" }
+                });
+                $('#datalistbonus').DataTable({
+                    "bSort": false, "language": { "url": "/datatable.txt" }
+                });
+            });
+        </script>

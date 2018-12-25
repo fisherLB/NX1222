@@ -1,0 +1,124 @@
+﻿@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    JN.Data.User Umodel = JN.Services.UserLoginHelper.CurrentUser();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <div class="row">
+        <div class="col-lg-12">
+            @*<div class="mainoprate">
+                @using (Ajax.BeginForm("BuyPinCode", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost1" }, new { id = "frmBuy", @class = "form-inline" }))
+                {
+                    <div class="form-group">
+                        <label for="pinNum" style="float:left; line-height:31px;">@(T("制作PIN码"))：</label>
+                        <input type="text" name="buyNum" id="buyNum" class="form-control" style="width:50px; margin-left:10px; float:left;" value="1"><span style="font-size:18px; margin-right:10px"> ×@(cacheSysParam.SingleAndInit(x=>x.ID==1001).Value.ToDecimal()) = <em id="buymoney" style="color:#f00">$800</em></span> 
+                        <button type="submit" class="btn btn-success" style="float:right;">@T("马上制作")</button>
+                    </div>
+                   
+                }
+            </div>*@
+@if (Umodel.IsActivation)
+{
+            <div class="mainoprate" style="margin-top:10px">
+                @*<p style="font-weight:bold;color:#ff0000">@T("可用PIN码") [ @(MvcCore.Unity.Get<JN.Data.Service.IPINCodeService>().List(x => (x.OriginUID == Umodel.ID || x.UID == Umodel.ID) && x.IsUsed == false).Count()) ] 个!</p>*@
+                @using (Ajax.BeginForm("TransferPinCode", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost2" }, new { id = "frmTransfer", @class = "form-inline" }))
+                {
+                    <div class="form-group" style="height:31px;">
+                        <label for="pinUser" style="float:left; line-height:31px;">@(T("转让PIN码"))：</label>
+                        <input type="text" name="transferUser" id="transferUser" class="form-control" placeholder="@T("输入用户名")" style="width:150px; float:left;">
+                        <button class="btn btn-default" type="button" onclick="cke()" style="float:right;">@T("检查用户")</button>
+                     </div>
+                    
+                    <div class="form-group"  style="height:31px;">
+                        <label for="pinNum" style="float:left; line-height:31px;">@(T("转让PIN码个数"))：</label>
+                        <input type="text" name="transferNum" id="transferNum" class="form-control" style="width:50px ;float:left;" value="1">
+                        <button type="submit" class="btn btn-success" style="float:right;">@T("提交转让")</button>
+                    </div>
+                   
+                }
+            </div>
+}
+                <table id="pincodelist" class="table table-striped table-bordered table-hover no-margin-bottom" style="margin-top:10px">
+                    <thead>
+                        <tr>
+                            <th>@T("PIN码")</th>
+                            @*<th>@T("来源")</th>*@
+                            @*<th>@T("状态")</th>
+                            <th>@T("创建时间")</th>*@
+                            <th>@T("使用者")</th>
+                            @*<th>@T("共享至")</th>*@
+                            <th>@T("使用时间")</th>
+                            <td>@T("备注")</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var users = MvcCore.Unity.Get<JN.Data.Service.IPINCodeService>().List(x => x.UID == Umodel.ID || x.OriginUID == Umodel.ID).Take(5000).OrderBy(x => x.IsUsed).ThenByDescending(x => x.ID).ToList();
+                            foreach (var item in users)
+                            {
+                                <tr style="@(item.UID != Umodel.ID ? "color:#ccc; text-decoration:line-through;" : "")">
+                                        <td >@item.KeyCode</td>
+                                 
+                                    @*<td>@T(item.IsUsed ? "已使用" : "未使用")</td>*@
+                                    @*<td>
+                                        @item.OriginDescribe
+                                    </td>*@
+                                    @*<td>@item.CreateTime</td>*@
+                                    <td>@item.UseUserName</td>
+                                    <td>@item.UseTime</td>
+                                    <td>
+                                    @if (item.UID != Umodel.ID)
+                                    {
+                                    @T("已转给")@(item.UserName)
+                                    }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+<link rel="stylesheet" href="/css/jquery.dataTables.min.css">
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#pincodelist').DataTable({ "ordering": false, "language": { "url": "/datatable.txt" } });
+            $("#buyNum").on('keyup', function () {
+                $("#buymoney").html("$" + parseInt($("#buyNum").val()) * @(cacheSysParam.SingleAndInit(x=>x.ID==1001).Value));
+            });
+        });
+        function cke() {
+            var username = $("input[name='transferUser']").val();
+            var gourl = "/UserCenter/User/CheckUserInfo";
+            $.post(gourl, { username: username }, function (response) {
+                if (response.result == "ok") {
+                    alert(response.refMsg);
+                } else {
+                    alert(response.refMsg);
+                }
+            });
+        }
+
+        @*function afterPost1(data) {
+            if (data.Status == 200) {
+                alert("制作成功，即将为您跳转页面!");
+                location.href = "@(Url.Action("pincode"))";
+            } else {
+                alert("制作失败：" + data.Message);
+            }
+        }*@
+
+        function afterPost2(data) {
+            if (data.Status == 200) {
+                alert("转让成功，即将为您跳转页面!");
+                location.href = "@(Url.Action("pincode"))";
+            } else {
+                alert("转让失败：" + data.Message);
+            }
+        }
+
+    </script>

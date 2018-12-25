@@ -1,0 +1,252 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.ShopProduct>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="@((action == "product") ? "active" : "")">
+                    <a href="@(Url.Action("Product"))">
+                        销售中的商品
+                    </a>
+                </li>
+                <li class="@(action == "offsales" ? "active" : "")">
+                    <a href="@(Url.Action("OffSales"))">
+                        已下架的商品
+                    </a>
+                </li>
+            </ul>
+            <div class="filter-bar margin-bottom-none">
+                <form method="get">
+
+                    <!-- Filter -->
+                    <div>
+                        <select name="datefiled" style="width: 80px;">
+                            <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="numberfiled" style="width: 80px;">
+                            <option value="Quantity" @(Request["numberfiled"] == "Quantity" ? "selected" : "")>数量</option>
+                            <option value="Price" @(Request["numberfiled"] == "Price" ? "selected" : "")>价格</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberform" class="input-mini" style="width: 30px;" value="@Request["numberform"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberto" class="input-mini" style="width: 30px;" value="@Request["numberto"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="keyfiled" style="width: 80px;">
+                            <option value="ShopName" @(Request["keyfiled"] == "ShopName" ? "selected" : "")>店铺名称</option>
+                            <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>会员编号</option>
+                            <option value="Tel" @(Request["keyfiled"] == "Tel" ? "selected" : "")>手机号码</option>
+                            <option value="Address" @(Request["keyfiled"] == "Address" ? "selected" : "")>店铺地址</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="input-append">
+                            <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <input type="hidden" name="IsAsc" value="0" />
+                        <input type="hidden" name="OrderFiled" value="ID" />
+                        <input type="hidden" name="IsExport" value="0" />
+                        <input type="submit" onclick="$('input[name=\'IsExport\']').val(0)" value="查询" />
+                        <input type="submit" onclick="$('input[name=\'IsExport\']').val(1)" value="导出" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- // Filter END -->
+
+                </form>
+
+            </div>
+
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                        </th>
+                        <th>图片</th>
+                        @*<th>所属店铺</th>*@
+                        <th>所属分类</th>
+                        <th>商品名称</th>
+                        <th>规格</th>
+                        <th>售价</th>
+                        <th>属性</th>
+                        <th>销量</th>
+                        <th>
+                            <i class="icon-time bigger-110 hidden-480"></i>
+                            发布时间
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count > 0)
+                {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+
+                <tr>
+                    <td class="center text-muted">
+                        @(i + 1)
+                    </td>
+                    <td>
+                        <img src="@Model[i].ImageUrl" height="60" />
+                    </td>
+                    @*<td>
+                        @Model[i].ShopName
+                    </td>*@
+                    <td>
+                        @(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().Single(Model[i].ClassId).Name)
+</td>
+                    <td>
+                        @Model[i].ProductName
+                    </td>
+                    <td>
+                        @Model[i].Spec
+                    </td>
+                    <td>
+                        @Model[i].RealPrice.ToString("F2") / @Model[i].Unit
+                    </td>
+                    <td class="hidden-480">
+                        @((Model[i].IsTop ?? false) ? "[置顶]" : "")
+                        @((Model[i].IsElite ?? false) ? "[推荐]" : "")
+                    </td>
+                    <td>
+                        @Model[i].SaleCount
+                    </td>
+                    <td class="hidden-480">@Model[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    <td>
+                        <a href="@(Url.Action("Modify"))/@Model[i].ID" class="btn-action glyphicons edit btn-info" data-rel="tooltip" title="编辑商品">
+                            <i></i>
+                        </a>
+                                    @if (Model[i].IsSales)
+                                    {
+                                <a href="@(Url.Action("ProductCommand", new { id = Model[i].ID, commandtype = "offsales" }))" class="btn-action glyphicons ban btn-info" data-rel="tooltip" title="下架">
+                                    <i></i>
+                                </a>
+                                        if (!(Model[i].IsElite ?? false))
+                                        {
+                                    <a href="@(Url.Action("ProductCommand", new { id = Model[i].ID, commandtype = "elite" }))" class="btn-action glyphicons thumbs_up btn-info" data-rel="tooltip" title="推荐">
+                                        <i></i>
+                                    </a>
+                                        }
+                                        else
+                                        {
+                                    <a href="@(Url.Action("ProductCommand", new { id = Model[i].ID, commandtype = "unelite" }))" class="btn-action glyphicons thumbs_down btn-info" data-rel="tooltip" title="取消推荐">
+                                        <i></i>
+                                    </a>
+                                        }
+                                        if (!(Model[i].IsTop ?? false))
+                                        {
+                                    <a href="@(Url.Action("ProductCommand", new { id = Model[i].ID, commandtype = "ontop" }))" class="btn-action glyphicons up_arrow btn-info" data-rel="tooltip" title="置顶">
+                                        <i></i>
+                                    </a>
+                                        }
+                                        else
+                                        {
+                                    <a href="@(Url.Action("ProductCommand", new { id = Model[i].ID, commandtype = "untop" }))" class="btn-action glyphicons down_arrow btn-info" data-rel="tooltip" title="取消置顶">
+                                        <i></i>
+                                    </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                <a href="@(Url.Action("ProductCommand", new { id = Model[i].ID, commandtype = "onsales" }))" class="btn-action glyphicons ok btn-info" data-rel="tooltip" title="上架">
+                                    <i></i>
+                                </a>
+                                    }
+                        @if (!Model[i].IsSales)
+                                {
+                                <a href="###" data-value="@Model[i].ID" class="btn-action glyphicons delete btn-info del" data-rel="tooltip" title="删除">
+                                    <i></i>
+                                </a>
+                                }
+                    </td>
+                </tr>
+                    }
+                }
+                </tbody>
+            </table>
+
+
+            <div class="separator top form-inline small">
+
+                <!-- Pagination -->
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+                <div class="clearfix"></div>
+                <!-- // Pagination END -->
+
+            </div><!-- /.table-responsive -->
+        </div><!-- /span -->
+    </div><!-- /row -->
+    <!-- PAGE CONTENT ENDS -->
+
+</div><!-- /.page-content -->
+@section scripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(".del").on(ace.click_event, function () {
+                var id = $(this).attr("data-value");
+                bootbox.confirm('您确定要删除该商品吗?', function (result) {
+                    if (result) {
+                        location = '@(Url.Action("Delete"))/' + id;
+                    }
+                });
+            });
+        })
+    </script>
+}

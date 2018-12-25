@@ -1,0 +1,29 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.Matching>
+@{
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+
+    ViewBag.Title = "首页";
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+<script src="~/js/jquery.form.js"></script>
+<script src="~/theme/mmm/js/box.js"></script>
+@{Html.RegisterMvcPagerScriptResource();}
+
+
+<div class="mt10" id="context">
+    <div class="col-md-12 padding0" id="ListContent">
+        @Html.Partial("_PartialMatchList", Model)
+
+    </div>
+</div>
+

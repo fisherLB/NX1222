@@ -1,0 +1,94 @@
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<link rel="stylesheet" href="/assets/css/datepicker.css" />
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+            @if (!string.IsNullOrEmpty(ViewBag.Brief))
+            {
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    @ViewBag.Brief
+                </small>
+            }  
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="alert alert-block alert-success">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="icon-remove"></i>
+                </button>
+               
+                <h4><i class="icon-ok red"></i> 注意：请慎用此功能！</h4>
+                <p>1、变更推荐关系不会产生奖金结算。</p>
+                <p>2、当有新会员进入产生新奖金时，将以新推荐关系产生奖金。</p>
+                <p>3、变更推荐关系出现的奖金断层无法避免，如变更推荐关系后，新安置点用户对移层过来的用户之前产生的奖金不能再重新划拔其帐户。</p>
+            </div>
+            <form class="form-horizontal" id="validation-form" method="post">
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="mainwallet">待变更会员编号:</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="input-group">
+                            <input type="text" name="username" class="form-control" style="width:150px" value="" />&nbsp;@*<a class="btn btn-primary btn-sm">查看业绩</a>*@
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="mainwallet">新推荐会员编号:</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="input-group">
+                            <input type="text" name="newparentuser" class="form-control" style="width:150px" value="" />&nbsp;@*<a class="btn btn-primary btn-sm">查看业绩</a>*@
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="mainwallet">安置方向:</label>
+                    <div class="col-xs-12 col-sm-4">
+                        <select name="childplace" class="form-control">
+                            <option value="1">左</option>
+                            <option value="2">右</option>
+                        </select>
+                    </div>
+                </div>*@
+
+
+                    <div class="hr hr-dotted"></div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                确定
+                            </button>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                重置
+                            </button>
+                        </div>
+                    </div>
+</form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>

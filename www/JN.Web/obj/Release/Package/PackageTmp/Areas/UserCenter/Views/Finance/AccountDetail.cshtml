@@ -1,0 +1,109 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.WalletLog>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+    <!-- PAGE CONTENT BEGINS -->
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    @{
+                        int theCoin = Request["coin"].ToInt();
+                        if (theCoin == 0)
+                        {
+                            theCoin = 2002;
+                        }
+                        var paramList = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 2000 && x.IsUse).OrderBy(x => x.Sort).ToList();
+                        foreach(var param in paramList)
+                        {
+                            <li class="@(theCoin == param.ID ? "active" : "")">
+                                <a href="/UserCenter/Finance/AccountDetail?coin=@param.ID">
+                                    @T(param.Name)
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <div class="tab-content">
+                    <div class="table-responsive">
+                        <div id="sample-table-1_wrapper" class="dataTables_wrapper" role="grid" style="margin-top:8px">
+                            <table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+                                <thead>
+                                    <tr>
+                                        <th class="center">@T("序号")
+                                        </th>
+                                        <th>@T("增加")</th>
+                                        <th>@T("减少")</th>
+                                        <th>@T("帐户余额")</th>
+                                        <th>@T("描述")</th>
+                                        <th>
+                                            <i class="icon-time bigger-110 hidden-480"></i>
+                                            @T("发生时间")
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Count > 0)
+                            {
+                                for (int i = 0; i < Model.Count; i++)
+                                {
+
+                                    <tr>
+                                        <td align="left">
+                                            @(i + 1)
+                                        </td>
+                                        <td>
+                                            @(Model[i].ChangeMoney > 0 ? Model[i].ChangeMoney.ToString("F2") : "")
+                                        </td>
+                                        <td>
+                                            @(Model[i].ChangeMoney < 0 ? Model[i].ChangeMoney.ToString("F2") : "")
+                                        </td>
+                                        <td>
+                                            @Model[i].Balance
+                                        </td>
+                                        <td>
+                                            @Model[i].Description
+                                        </td>
+                                        <td class="hidden-480">@Model[i].CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                    </tr>
+                                }
+                            }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+                        <div class="clearfix"></div>
+                        <!-- // Pagination END -->
+
+                    </div><!-- /.table-responsive -->
+                </div><!-- /span -->
+            </div>
+        </div><!-- /span -->
+            </div><!-- /row -->
+            <!-- PAGE CONTENT ENDS -->
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('table th input:checkbox').on('click', function () {
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+            .each(function () {
+                this.checked = that.checked;
+                $(this).closest('tr').toggleClass('selected');
+            });
+        });
+        $('[data-rel=tooltip]').tooltip({ container: 'body' });
+        bootbox.setDefaults({ locale: "zh_CN" });
+
+    })
+</script>

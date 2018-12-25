@@ -1,0 +1,32 @@
+﻿<!-- 验证/确认付款 -->
+<form id="frmVerifyPay" method="post">
+    <div class="modal-body" style="height:300px;">
+        <input type="radio" class="comfir" value="1" name="comfir">@T("确认收款")<br>
+        <input type="radio" class="comfir" value="2" name="comfir">@T("假的汇款单")<br>
+        <input type="hidden" value="@Request["id"]" name="id">
+    </div>
+    <div class="modal-footer">
+        @*<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>*@
+        <button type="button" class="btn-primary" data-dismiss="modal" id="btnVerifyPay">@T("确认")</button>
+    </div>
+    </form>
+    <script>
+        $("#btnVerifyPay").click(function () {
+            $("#frmVerifyPay").ajaxSubmit({
+                url: "@Url.Action("FinshPay")",
+                type: "post",
+                success: function (data) {
+                    if (data.Status == 200) {
+                        alert("提交成功，即将为您跳转！");
+                        location.href = "@(Url.Action("Index", "Home"))";
+                    } else {
+                        alert("提交失败：" + data.Message);
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        });
+
+    </script>

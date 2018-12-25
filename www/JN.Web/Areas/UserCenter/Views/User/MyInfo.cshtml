@@ -1,0 +1,80 @@
+﻿@model JN.Data.User
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<div class="row">
+    <div class="col-md-4 profile-info">
+        <table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+            <thead>
+                <tr>
+                    <td>@T("报单中心")：</td>
+                    <td>@T(Model.IsAgent ? "是" : "否")</td>
+                </tr>
+                <tr>
+                    <td>@T("推荐人数")：</td>
+                    <td>@(JN.BLL.users.GetRecordCount("IsActivation=1 and RefereeID=" + Model.ID))</td>
+                </tr>
+                @*<tr>
+                        <td>@T("子帐号")：</td>
+                        <td>@(JN.BLL.users.GetRecordCount("IsSubAccount=1 and ReserveInt1=" + Model.ID)) (@T("有效")：@(JN.BLL.users.GetRecordCount("IsActivation=1 and IsSubAccount=1 and ReserveInt1=" + Model.ID)))</td>
+                    </tr>
+                    <tr>
+                        <td>@T("一级子帐号")：</td>
+                        <td>@(JN.BLL.users.GetRecordCount("IsSubAccount=1 and MainAccountID=" + Model.ID))</td>
+                    </tr>*@
+                <tr>
+                    <td>@T("新增帐号")：</td>
+                    <td>@(JN.BLL.users.GetRecordCount("DATEDIFF(d, ActivationTime, GETDATE()) >= 0 and RefereeID=" + Model.ID))</td>
+                </tr>
+                <tr>
+                    <td>@T("银种子币")：</td>
+                    <td>@(Model.Wallet2001)</td>
+                </tr>
+                <tr>
+                    <td>@T("银币")：</td>
+                    <td>@(Model.Wallet2002)</td>
+                </tr>
+                <tr>
+                    <td>@T("金种子币")：</td>
+                    <td>@(Model.Wallet2003)</td>
+                </tr>
+                <tr>
+                    <td>@T("金币")：</td>
+                    <td>@(Model.Wallet2004)</td>
+                </tr>
+                <tr>
+                    <td>@T("注册币")：</td>
+                    <td>@(Model.Wallet2005)</td>
+                </tr>
+                <tr>
+                    <td>@T("购物币")：</td>
+                    <td>@(Model.Wallet2006)</td>
+                </tr>
+                <tr>
+                    <td>@T("累计广告奖")：</td>
+                    <td>@(Model.Addup1102)</td>
+                </tr>
+                <tr>
+                    <td>@T("累计销售奖")：</td>
+                    <td>@(Model.Addup1103)</td>
+                </tr>
+                <tr>
+                    <td>@T("累计管理奖")：</td>
+                    <td>@(Model.Addup1104)</td>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+    <!--end col-md-4-->
+</div>
+
+
+    <!-- /.row -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->

@@ -1,0 +1,216 @@
+﻿@{
+    ViewBag.Title = "首页";
+    Layout = "~/Areas/User/Views/Shared/_Layout" + JN.Common.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+@using Webdiyer.WebControls.Mvc
+@model PagedList<JN.Entity.TMatching>
+
+<script src="~/theme/mmm/js/box.js"></script>
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <b>@T("欢迎页") </b>
+            <br>
+            <span>Present your events in timeline style.</span>
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T(ViewBag.Title)</a>
+        </div>
+    </div>
+    <div class="innerContent">
+        <div id="donationWrap">
+            <div class="row" style="margin-top:20px; margin-bottom:10px">
+                <div class="col-sm-6" id="pdBtn1">
+                    <a class="btn btn-block " href="###" onclick="javascript: winopen('提供帮助', '/usercenter/home/_PartialSubmitSupplyHelp');" id="pdBtn">
+                        <i><img src="/theme/1107/nmmcss/a6_2.png"></i>
+                        @T("善: 提供帮助")
+                    </a>
+                </div>
+                <div class="col-sm-6" id="gdBtn1" style="margin-left:20px">
+                    <a class="btn btn-block " href="###" onclick="javascript: winopen('获取帮助', '/usercenter/home/_PartialSubmitAcceptHelp');" id="gdBtn">
+                        <i><img src="/theme/1107/nmmcss/a6.png"></i>
+                        @T("盈: 获取帮助")
+                    </a>
+                </div>
+            </div>
+            <div class="row" id="context">
+                <div class="col-md-9">
+                    @Html.Partial("_PartialMatchList", Model)
+
+                    <div class="row">
+                        <div class="col-md-12" style="padding:0 0">
+                            <div class="widget">
+                                <div class="widget-head">
+                                    <h4 class="heading">欢迎进入@(JN.BLL.syssettings.GetModel(1).SysName)</h4>
+                                </div>
+                                <div class="widget-body">
+                                    <span>尊敬的@(JN.BLL.users.IsLogin().NickName),恭喜你成为@(JN.BLL.syssettings.GetModel(1).SysName)一员</span><br>
+                                    <span>推荐有效数:<span style="font-size:20px;"> @(JN.BLL.users.GetRecordCount("RefereeID=" + JN.BLL.users.IsLogin().ID + " and AddupSupplyAmount > 0 and IsActivation=1"))</span>人</span><span>
+                                        ，
+                                        累计提供金额:<span style="font-size:20px;">@JN.BLL.supplyhelps.GetFieldValue("ISNULL(SUM(ExchangeAmount),0)", "UID=" + JN.BLL.users.IsLogin().ID + " and Status>0")</span>，
+                                        累计接受金额:<span style="font-size:20px;">@JN.BLL.accepthelps.GetFieldValue("ISNULL(SUM(ExchangeAmount),0)", "UID=" + JN.BLL.users.IsLogin().ID + " and Status>0")</span>，
+                                    </span>
+                                    <span>本月提供单数：<font style="font-size:20px;"> @JN.BLL.supplyhelps.GetFieldValue("COUNT(*)", "UID=" + JN.BLL.users.IsLogin().ID + " and Status>0 and datediff(month,[CreateTime],getdate())=0")</font></span>，
+                                    <span>本月接受单数：<font style="font-size:20px;"> @JN.BLL.accepthelps.GetFieldValue("COUNT(*)", "UID=" + JN.BLL.users.IsLogin().ID + " and Status>0 and datediff(month,[CreateTime],getdate())=0")</font></span>
+                                </div>
+                            </div>
+
+                            <div class="widget">
+                                <div class="widget-head">
+                                    <h4 class="heading">公告</h4>
+                                </div>
+                                <div class="widget-body">
+@{
+    List<JN.Entity.TNotice> notices = JN.BLL.notices.GetModelList("1=1 order by id desc");
+    if (notices.Count >0)
+    { 
+                            foreach (var item in notices)
+                            {
+                                    <div class="media-body innerAnnounce">
+                                        <div class="readMore" data-url="/user/notice/index">
+                                            <h5><a href="/user/notice/index"><strong>[ Admin ]</strong> - @item.Title</a></h5>
+                                            <p class="text-muted">@item.CreateTime</p>
+                                            <p class="margin-none"></p>
+                                        </div>
+                                    </div>
+}
+}
+else
+    {
+                                            <div class="media-body innerAnnounce">
+                                        <div class="readMore" data-url="/user/notice">
+                                            <p class="margin-none">暂无公告信息</p>
+                                        </div>
+                                    </div>
+    }
+}
+
+
+
+                                    <div class="data-footer innerAll half text-right clearfix">
+                                        <div></div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-3" style="background-color:#fff; margin-top:10px">
+                    <div id="notice" class="notice">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li onmouseover="js()" id="js">
+                                <a href="#">@T("申请提供帮助")</a>
+                            </li>
+                            <li onmouseover="tg()" id="tg">
+                                <a href="#">@T("申请接受帮助 ")</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="notice-con" class="notice-con">
+                        <div class="mod2" style="display:block">
+                            @{List<JN.Entity.TSupplyHelp> list = JN.BLL.supplyhelps.GetModelList(8, "Uid=" + JN.BLL.users.IsLogin().ID + "", "IsTop,CreateTime");}
+                            @if (list != null && list.Count > 0)
+                            {
+                                foreach (var item in list)
+                                {
+                                    <div class="col-md-12" style="border-top:#ccc 1px solid;">
+                                        <a class="list-group-item " style="border:none;" href="">
+                                            <h5 class="list-group-item-heading">@T("申请提供帮助")</h5>
+                                        </a>
+                                        <div style="margin-bottom:1em; margin-right:1em;">
+                                            <font>@T("编号"):@item.SupplyNo</font>
+                                            <br>
+                                            <font>@T("参与者"):@item.UserName</font>
+                                            <br>
+                                            <font>@T("金额"):@item.SupplyAmount</font>
+                                            <br>
+                                            <font>@T("剩余金额"):@(item.SupplyAmount - item.HaveMatchingAmount)</font>
+                                            <br>
+                                            <font>@T("日期"):@item.CreateTime</font>
+                                            <br>
+                                            <font>
+                                                @T("状态"): @JN.Common.EnumHelp.GetDescription(typeof(JN.Entity.Enum.HelpStatus), item.Status)
+                                            </font>
+
+                                            @if (item.Status == (int)JN.Entity.Enum.HelpStatus.NoMatching)
+                                            {
+                                                <a href="/usercenter/home/CancelSupplyQueuing/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:right; padding-right:10px">
+                                    <a href="/user/Finance/nopairlist?active=0"> @T("更多")>></a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:center; padding-right:10px">
+                                    没有更多信息
+                                </div>
+                            }
+                        </div>
+
+                        <div class="mod1" style="display:none">
+                            @{List<JN.Entity.TAcceptHelp> listin = JN.BLL.accepthelps.GetModelList(8, "Uid=" + JN.BLL.users.IsLogin().ID + "", " IsTop,CreateTime  asc");}
+                            @if (listin != null && listin.Count > 0)
+                            {
+                                foreach (var item in listin)
+                                {
+                                    <div class="col-md-12" style="border-top:#ccc 1px solid;">
+                                        <a class="list-group-item " style="border:none;" href="">
+                                            <h5 class="list-group-item-heading">@T("申请接受帮助 ")</h5>
+                                        </a>
+
+                                        <div style="margin-bottom:1em; margin-right:1em;">
+                                            <font>@T("编号"):@item.AcceptNo</font>
+                                            <br>
+                                            <font>@T("参与者"):@item.UserName</font>
+                                            <br>
+                                            <font>@T("金额"):@item.AcceptAmount</font>
+                                            <br>
+                                            <font>@T("剩余金额"):@(item.AcceptAmount - item.HaveMatchingAmount)</font>
+                                            <br>
+                                            <font>@T("钱包"):@(JN.BLL.sysparams.GetModel(item.CoinID).Name)钱包</font>
+                                            <br>
+                                            <font>@T("日期"):@item.CreateTime</font>
+                                            <br>
+                                            <font>
+                                                @T("状态"):@JN.Common.EnumHelp.GetDescription(typeof(JN.Entity.Enum.HelpStatus), item.Status)
+                                            </font>
+                                            @if (item.Status == (int)JN.Entity.Enum.HelpStatus.NoMatching)
+                                            {
+                                                <a href="/usercenter/home/CancelAcceptQueuing/@item.ID" class="btn btn-danger btn-xs">@T("取消")</a>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:right; padding-right:10px">
+                                    <a href="/user/Finance/nopairlist?active=1"> @T("更多")>></a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-12" style="border-top:#ccc 1px solid; line-height:25px; text-align:center; padding-right:10px">
+                                    没有更多信息
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--group list end-->
+
+        </div>
+
+    </div>
+</div>

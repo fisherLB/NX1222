@@ -1,0 +1,186 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>@MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SiteTitle</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="/theme/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/theme/metronic/pages/css/login3.css" rel="stylesheet" type="text/css" />
+    <link href="/theme/global/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+    <!--[if !IE]> -->
+    <script src="/assets/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="/assets/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        @*<a href="index.html">
+            <img src="/theme/metronic/img/logo-big.png" alt="" />
+        </a>*@
+        <h2 style="color:#fff">@MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName</h2>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <!-- END SIDEBAR TOGGLER BUTTON -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <div class="login-form">
+            <h3 class="form-title">请输入您的登录信息</h3>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                    Enter any username and password.
+                </span>
+            </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">Username</label>
+                <div class="input-icon">
+                    <i class="fa fa-user"></i>
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="请输入用户名" name="username" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="请输入密码" name="password" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Code</label>
+                <div class="input-group">
+                    <input class="form-control placeholder-no-fix" style="width:120px; margin-right:8px" type="text" autocomplete="off" placeholder="验证码" name="code" />
+                    <img id="imgCode" src="/User/Login/GetCodeImage?id=1" onclick="ChangeCheckCode();return false;" style="border:none; height:32px" />
+                </div>
+            </div>
+            <div class="form-actions">
+                <label class="checkbox">
+                    <input type="checkbox" name="remember" value="1" /> 记住登录状态
+                </label>
+                <button id="btnlogin" class="btn green-haze pull-right">
+                    登 录 <i class="m-icon-swapright m-icon-white"></i>
+                </button>
+            </div>
+
+            @*<div class="forget-password">
+                <h4>Forgot your password ?</h4>
+                <p>
+                    no worries, click <a href="javascript:;" id="forget-password">
+                        here
+                    </a>
+                    to reset your password.
+                </p>
+            </div>*@
+            <div class="create-account">
+                <p>
+                    还没有帐号 ?&nbsp; <a href="javascript:;" id="register-btn">
+                        创建新帐号
+                    </a>
+                </p>
+            </div>
+        </div>
+            <!-- END LOGIN FORM -->
+            <!-- BEGIN FORGOT PASSWORD FORM -->
+            <form class="forget-form" action="index.html" method="post">
+                <h3>Forget Password ?</h3>
+                <p>
+                    Enter your e-mail address below to reset your password.
+                </p>
+                <div class="form-group">
+                    <div class="input-icon">
+                        <i class="fa fa-envelope"></i>
+                        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" />
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="back-btn" class="btn">
+                        <i class="m-icon-swapleft"></i> Back
+                    </button>
+                    <button type="submit" class="btn green-haze pull-right">
+                        Submit <i class="m-icon-swapright m-icon-white"></i>
+                    </button>
+                </div>
+            </form>
+            <!-- END FORGOT PASSWORD FORM -->
+        </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright">
+        @MvcHtmlString.Create(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).CopyInfo)
+    </div>
+
+    <script type="text/javascript">
+        function ChangeCheckCode() {
+            var oldUrl = $('#imgCode').attr("src");
+            $('#imgCode').attr("src", oldUrl + '1');
+        }
+
+        jQuery(function ($) {
+            $('#btnlogin').on('click', function () {
+                loginSubmit();
+            });
+        });
+
+        function loginSubmit() {
+            var name = $("input[name='username']").val();
+            var pwd = $("input[name='password']").val();
+            var lang = $("select[name='lang']").val();
+            var code = $("input[name='code']").val();
+            var gourl = "/User/Login";
+            $.post(gourl, { username: name, password: pwd, lang: lang, code: code }, function (response) {
+                if (response.status == "ok") {
+                    window.location.href = response.data;
+                } else {
+                    if (response.status == "errcode")
+                        ChangeCheckCode();
+                    alert(response.data);
+                }
+            });
+        }
+
+        if (document.addEventListener) {//如果是Firefox
+            document.addEventListener("keypress", fireFoxHandler, true);
+        } else {
+            document.attachEvent("onkeypress", ieHandler);
+        }
+        function fireFoxHandler(evt) {
+            //alert("firefox");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+        function ieHandler(evt) {
+            //alert("IE");
+            if (evt.keyCode == 13) {
+                loginSubmit();
+            }
+        }
+    </script>
+</body>
+<!-- END BODY -->
+</html>

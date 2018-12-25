@@ -1,0 +1,288 @@
+﻿@model JN.Data.User
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+        <li><a class="btn btn-primary newuser" style="font-size:12px;height:20px;padding:0px;">填充一个随机数据(密码一级六个1，二级六个2，三级六个3)</a></li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+
+ @using (Ajax.BeginForm("Modify", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+{
+            <div class="control-group">
+                <label class="control-label" for="username">会员编号：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="hidden" name="ID" value="@Model.ID" />
+                        <input type="text" name="username" class="form-control" value="@Model.UserName" @(Model.ID > 0 ? "readonly" : "") />
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="control-group">
+                    <label class="control-label" for="nickname">昵称：</label>
+                <div class="controls">
+                    <input type="text" name="nickname" class="form-control" value="@Model.NickName" @(Model.ID > 0 ? "readonly" : "") />
+                </div>
+                </div>*@
+
+            <div class="control-group">
+                <label class="control-label" for="realname">真实姓名：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="realname" class="form-control" value="@Model.RealName" />
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="control-group">
+                <label class="control-label">性别：</label>
+
+                <div class="controls">
+                    <div>
+                            <input name="gender" value="男" @(Model.Sex == "男" ? "checked" : "") type="radio" class="ace" />
+                            <span class="lbl"> 男</span>
+                            <input name="gender" value="女" @(Model.Sex == "女" ? "checked" : "") type="radio" class="ace" />
+                            <span class="lbl"> 女</span>
+                    </div>
+                </div>
+            </div>*@
+
+            <div class="control-group">
+                <label class="control-label" for="phone">手机号码：</label>
+                <div class="controls">
+                        <input type="text" name="mobile" class="form-control" value="@Model.Mobile" />
+                </div>
+            </div>
+
+            @*<div class="control-group">
+                <label class="control-label" for="tel">电话：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="tel" name="tel" class="form-control" value="@Model.Tel" />
+                    </div>
+                </div>
+            </div>*@
+
+            <div class="control-group">
+                <label class="control-label" for="email">邮箱：</label>
+
+                <div class="controls">
+                        <input type="email" name="email" class="form-control" value="@Model.Email" />
+                </div>
+            </div>
+     if (Model.ID == 0)
+     { 
+                 <div class="control-group">
+                <label class="control-label" for="email">登录密码：</label>
+
+                <div class="controls">
+                    <input type="password" name="password" class="form-control" value="" />
+                </div>
+            </div>
+     
+                 <div class="control-group">
+                <label class="control-label" for="email">二级密码：</label>
+
+                <div class="controls">
+                    <input type="password" name="password2" class="form-control" value="" />
+                </div>
+            </div>
+     }
+            <div class="hr hr-dotted"></div>
+
+            <div class="control-group">
+                <label class="control-label" for="idcard">身份证号码：</label>
+
+                <div class="controls">
+                        <input type="text" name="idcard" class="form-control" value="@Model.IDCard" />
+                </div>
+            </div>
+
+            @*<div class="control-group">
+                    <label class="control-label" for="url">所在地区：</label>
+
+                    <div class="controls" id="area">
+                        <select id="province"></select><input type="hidden" name="province" id="hidprovince" value="@Model.Province" />
+                        <select id="city"></select><input type="hidden" name="city" id="hidcity" value="@Model.City" />
+                        <select id="county"></select><input type="hidden" name="county" id="hidcounty" value="@Model.County" />
+                    </div>
+                </div>*@
+
+            @*<div class="control-group">
+                <label class="control-label" for="address">联系地址：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="address" class="form-control" value="@Model.Address" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="qq">QQ：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="qq" class="form-control" value="@Model.QQ" />
+                    </div>
+                </div>
+            </div>*@
+
+            @*<div class="hr hr-dotted"></div>
+
+            <div class="control-group">
+                <label class="control-label" for="question">密保问题：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="question" class="form-control" value="@Model.Question" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="answer">密保答案：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="answer" class="form-control" value="@Model.Answer" />
+                    </div>
+                </div>
+            </div>*@
+
+            <div class="hr hr-dotted"></div>
+            <div class="control-group">
+                <label class="control-label" for="address">支付宝帐号：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="alipay" class="form-control" value="@Model.AliPay" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="bankname">银行卡发卡行：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        @Html.DropDownList("roleid", new SelectList(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 5000).OrderBy(x => x.Sort), "Name", "Value", Model.BankName), new { @class = "form-control" })
+                        @*@Html.DropDownList("bankname", new SelectList(JN.BLL.sysparams.GetModelList("PID=5000 order by sort"), "Name", "Value", Model.BankName))*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="bankcard">银行卡号：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="bankcard" class="form-control" value="@Model.BankCard" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="bankofdeposit">开户行：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="bankofdeposit" class="form-control" value="@Model.BankOfDeposit" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="bankuser">银行卡户名：</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="bankuser" class="form-control" value="@Model.BankUser" />
+                    </div>
+                </div>
+            </div>
+     if (Model.ID > 0)
+     {
+         
+        <div class="control-group">
+            <label class="control-label" for="bankuser">重置登陆密码：</label>
+
+            <div class="controls">
+                <div class="clearfix">
+                    <input type="text" name="resetpassowrd" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="bankuser">重置二级密码：</label>
+
+            <div class="controls">
+                <div class="clearfix">
+                    <input type="password" name="resetpassowrd2" class="form-control" />
+                </div>
+            </div>
+        </div>
+     }
+            <div class="hr hr-dotted"></div>
+             <div class="control-group">
+               <label class="control-label">&nbsp;</label>
+                <div class="controls">
+                <button class="btn btn-primary" type="submit">
+                 保 存
+                </button>
+                <a href="javascript:history.go(-1);" class="btn btn-grey">
+                    <i class="icon-arrow-left"></i>
+                    返 回
+                </a>
+             </div>
+    </div>
+     }
+
+        <!-- PAGE CONTENT ENDS -->
+</div><!-- /.row -->
+</div><!-- /.page-content -->
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function afterPost(data) {
+            if (data.Status == 200) {
+                alert("保存成功，即将为您跳转页面!");
+                location.href = "@(Url.Action("List"))";
+            } else {
+                alert("保存失败！错误信息：" + data.Message);
+            }
+        }
+
+        $(".newuser").on('click', function () {
+            eval("var word=" + '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16) + '"');
+            eval("var word2=" + '"\\u' + (Math.round(Math.random() * 20901) + 19968).toString(16) + '"');
+            $("input[name='realname']").val("李" + word + word2);
+            $("input[name='password']").val("111111");
+            $("input[name='confirmpassword']").val("111111");
+            $("input[name='password2']").val("222222");
+            $("input[name='password3']").val("333333");
+            $("input[name='username']").val("" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()));
+            $("input[name='gender']").attr("checked", '男');
+            $("input[name='mobile']").val("186456" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()));
+            $("input[name='email']").val("oemsys" + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + "@@163.com");
+            $("input[name='nickname']").val("李" + word + word2);
+            $("input[name='confirmemail']").val($("input[name='email']").val());
+            $("select[name='bankname']").val("中国银行");
+            $("input[name='bankcard']").val("6217 0033 9700 " + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + parseInt(10 * Math.random()) + " 918");
+            $("input[name='bankofdeposit']").val("广西南宁北郊支行");
+            $("input[name='bankuser']").val($("input[name='realname']").val());
+            getUserID();
+        });
+    </script>
+}

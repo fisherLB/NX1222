@@ -1,0 +1,35 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.BonusDetail>
+@{ Html.RenderPartial("_BonusTable"); }
+<div class="row">
+    <div class="col-xs-8">
+        @Ajax.Pager(Model, new Webdiyer.WebControls.Mvc.PagerOptions
+   {
+       PageIndexParameterName = "BonusDetailPage",
+       FirstPageText = "<<",
+       LastPageText = ">>",
+       NextPageText = ">",
+       PrevPageText = "<",
+       ContainerTagName = "ul",
+       NumericPagerItemCount = 5,
+       CssClass = "pagination",
+       CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"javascript:;\">{0}</a></li>",
+       DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+       PagerItemTemplate = "<li>{0}</li>",
+       PageIndexBoxId = "pageIndexBox5",
+       GoToButtonId = "goToBtn5"
+   },
+                             new MvcAjaxOptions { UpdateTargetId = "_PendBonus", HttpMethod = "Post", DataFormId = "_PendBonusForm" }).Options(o => o.AddRouteValue("target", "PendBonus"))
+    </div>
+@if(Model.Count>0)
+    {
+    <div class="col-xs-4">
+        <div class="input-group" style="margin:20px 0">
+            <span class="input-group-addon">转到第</span>
+            <input type="text" id="pageIndexBox5" class="form-control input-sm" />
+            <span class="input-group-addon">页</span>
+            <span class="input-group-btn"><button class="btn btn-primary btn-sm" id="goToBtn5">跳转</button></span>
+        </div>
+    </div>
+}
+</div>

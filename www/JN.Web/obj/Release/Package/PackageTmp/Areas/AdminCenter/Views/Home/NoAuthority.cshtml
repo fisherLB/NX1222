@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "您没有访问此页面的权限";
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+        <li class=" pull-right" style="margin-top:5px">
+            <a class="btn btn-primary" href="@(Url.Action("ClearAllCache"))">
+                清除所有缓存
+            </a>
+        </li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="alert alert-primary">
+            <strong>提示:</strong><br>
+            提示：您没有访问此页面的权限.
+        </div>
+    </div><!-- /.col -->
+</div><!-- /.row -->
+@section scripts{
+}

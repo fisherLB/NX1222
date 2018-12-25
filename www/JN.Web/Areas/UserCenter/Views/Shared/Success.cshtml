@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "操作成功";
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <div class="error-container">
+                <div class="well">
+                    <h1 class="grey lighter smaller">
+                        <span class="blue bigger-125">
+                            <i class="icon-coffee"></i>
+                            @T("恭喜您")
+                        </span>
+                        ，@T("操作成功")！
+                    </h1>
+
+                    <hr />
+                    <h3 class="lighter smaller">
+                        @T(ViewBag.SuccessMsg)
+                    </h3>
+
+                    <div class="space"></div>
+
+                    <hr />
+                    <div class="space"></div>
+
+                    <div class="center">
+                        @if (!string.IsNullOrEmpty(ViewBag.FormUrl))
+{
+    <a href="@ViewBag.FormUrl" class="btn btn-danger">
+        <i class="icon-arrow-left"></i>
+        @T("返回")
+    </a>
+}
+
+                        <a href="/usercenter/home" class="btn btn-primary">
+                            <i class="icon-dashboard"></i>
+                            @T("返回主界面")
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->

@@ -1,0 +1,133 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.ShopOrder>
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<link href="~/Theme/071701/shop.css" rel="stylesheet" />
+<script src="~/Theme/neon/assets/js/bootbox.min.js"></script>
+<!-- PAGE CONTENT BEGINS -->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <div id="sample-table-1_wrapper" class="dataTables_wrapper" role="grid">
+                <table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+                    <tbody>
+                        @{if (Model.Count > 0)
+                        {
+                            for (int i = 0; i < Model.Count; i++)
+                            {
+
+                                <tr>
+                                    <td class="center text-muted">
+                                        @(i + 1)
+                                    </td>
+                                    <td>
+                                        <h4>订单编号：@Model[i].OrderNumber <span style="float:right; color:#f00">订单总额：@Model[i].TotalPrice @((Model[i].ShipFreight ?? 0) > 0 ? "(含运费" + Model[i].ShipFreight + ")" : "")</span></h4>
+                                        <p> @*店铺名称：@Model[i].ShopName &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*@
+                                            订单状态：@(typeof(JN.Data.Enum.OrderStatus).GetEnumDesc(Model[i].Status))
+                                            @if (Model[i].Status == (int)JN.Data.Enum.OrderStatus.Transaction)
+                                            {
+                                                <span>(@Model[i].Logistics)</span>
+                                            }
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            购买时间：@Model[i].CreateTime
+                                        </p>
+                                        @{
+                                            string ordernumber = Model[i].OrderNumber;
+                                            var lstPur = MvcCore.Unity.Get<JN.Data.Service.IShopOrderDetailService>().List(x => x.OrderNumber== ordernumber).ToList();
+                                            if (lstPur.Count > 0)
+                                            {
+
+                                                    <table class="table table-striped table-bordered table-hover no-margin-bottom">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>@T("商品名称")</th>
+                                                                <th>@T("购买数量")</th>
+                                                                <th>@T("商品规格")</th>
+                                                                <th>@T("单位")</th>
+                                                                <th>@T("商品单价")</th>
+                                                                <th>@T("小计")</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                            @for (int j = 0; j < lstPur.Count; j++)
+                                                            {
+
+                                                                <tr>
+
+                                                                    <td>
+                                                                        @lstPur[j].ProducName
+                                                                    </td>
+                                                                    <td>
+                                                                            @lstPur[j].ByCount
+                                                                        </td>
+                                                                    <td>
+                                                                        @lstPur[j].Spec
+                                                                    </td>
+                                                                    <td>
+                                                                        @lstPur[j].Unit
+                                                                    </td>
+                                                                    <td class="hidden-480">
+                                                                        @lstPur[j].UnitPrice.ToString("F2")
+                                                                    </td>
+                                                                    <td class="hidden-480">@lstPur[j].TotaPrice.ToString("F2")</td>
+                                                                    <td>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                
+                                            }
+                                        }
+                                        <p>
+                                            收货地址：@Model[i].Province @Model[i].City @Model[i].Town @Model[i].RecAddress @Model[i].RecPhone @Model[i].RecLinkMan
+                                            @if (Model[i].Status == (int)JN.Data.Enum.OrderStatus.Transaction)
+{
+    <a href="###" data-value="@Model[i].ID" class="btn btn-primary btn-purple qrsh">
+        @T("确认收货")
+    </a>
+}
+                                        </p>
+                                        </td></tr>
+                        }
+                        }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!--S 翻页页码  -->
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+            <!--E 翻页页码  -->
+
+        </div><!-- /.table-responsive -->
+    </div><!-- /span -->
+</div><!-- /row -->
+<!-- PAGE CONTENT ENDS -->
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('[data-rel=tooltip]').tooltip({ container: 'body' });
+        bootbox.setDefaults({ locale: "zh_CN" });
+        $(".qrsh").on("click", function () {
+            var id = $(this).attr("data-value");
+            alert(id);
+            bootbox.confirm('@T("您确定已收到购买的商品吗，确认后将完成本次交易")?', function (result) {
+                if (result) {
+                    location = '@(Url.Action("FinishBuy"))/' + id;
+                }
+            });
+        });
+    })
+</script>

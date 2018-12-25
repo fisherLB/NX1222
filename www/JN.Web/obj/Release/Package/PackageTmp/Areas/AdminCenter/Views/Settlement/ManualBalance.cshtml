@@ -1,0 +1,104 @@
+﻿@model JN.Data.Settlement
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+        <li></li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+            <form class="form-horizontal" id="validation-form" method="post">
+                <div class="control-group">
+                    <label class="control-label">上次分红时间：</label>
+                    <div class="controls">
+                        @(Model == null ? "从未结算过" : Model.CreateTime.ToString())
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">总期：</label>
+                    <div class="controls">
+                        @(MvcCore.Unity.Get<JN.Data.Service.ISettlementService>().List().Count() > 0 ? MvcCore.Unity.Get<JN.Data.Service.ISettlementService>().List().Max(x => x.Period) + 1 : 1)
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">待发利息条数：</label>
+                    <div class="controls">
+                        @(MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().List(x => x.IsAccruaCount && x.SurplusAccrualDay > 0).Count())
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <button type="button" class="btn btn-icon-stacked btn-block btn-primary glyphicons chevron-right dofh" style="width:260px">
+                            <i></i><span class="strong">开始发放利息</span><span style="font-weight: normal; color: #190B0B">请等待进度条到达100%再刷新本页面</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-xs-12" style="padding:20px 20px">
+                    <h4 id="rwtitle">任务进度(未开始)</h4>
+                    <div class="widget">
+                        <div class="widget-head progress progress-primary" id="widget-progress-bar">
+                            <div class="bar" style="width: 0%;background:#ff6a00;"><strong  class="steps-info"></strong> - <strong class="steps-percent">0%</strong></div>
+                        </div>
+                     </div>
+                    @*<p id="info"></p>*@
+                </div><!-- /span -->
+            </div><!-- /row -->
+            @*<div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <a href="/@(JN.Services.Tool.ConfigHelper.GetConfigString("AdminPath"))/balance/daybalance" class="btn btn-info">
+                            <i class="icon-ok bigger-110"></i>
+                            手动进行日结算（如果系统设定秒结则无需进行日结算）
+                        </a>
+                    </div>
+                </div>*@
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+@section scripts{
+<script type="text/javascript">
+    setTimeout('check()', 1000);
+    function check() {
+        $.getJSON("@(Url.Action("getproc"))", function (data, textStatus, jqXHR) {
+            // data 是该请求返回的数据(可能经过处理)
+            // textStatus 可能是"success"、 "notmodified"等
+            // jqXHR 是经过jQuery封装的XMLHttpRequest对象(保留其本身的所有属性和方法)
+
+            var sc = parseInt(data.data.CurrentRow / data.data.TotalRow * 100);
+            $('#widget-progress-bar .steps-info').html(sc + "% " + data.data.CurrentRow + "/" + data.data.TotalRow);
+            //$(".progress-bar").attr("style", "width:" + sc + "%")
+            $('#widget-progress-bar .steps-percent').html(sc + "%");
+            $('#widget-progress-bar .bar').width(sc + "%");
+            //$("#tbname").html(data.data.CurrentTable);
+            $("#rwtitle").html(data.data.TransInfo);
+            setTimeout('check()', 1000);
+        });
+    };
+
+    $(".dofh").on("click", function () {
+        $(this).attr("disabled", "disabled");
+        $.post('@(Url.Action("doFH"))', { fhje: 0 }, function (data) {
+            if (data == 'ok') 
+            {
+                $("#rwtitle").html("利息发放进行中...　请在进度条达条100%后再退出页面");
+            }
+        });
+
+    });
+</script>
+}

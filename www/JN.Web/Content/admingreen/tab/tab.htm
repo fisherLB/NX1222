@@ -1,0 +1,401 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link rel="stylesheet" href="../css/tab.css" />
+<link rel="stylesheet" href="../css/dialog.css" />
+<script text="text/javaScript" src="js/jquery-1.8.3.min.js"></script>
+<script>
+var  highlightcolor='#d5f4fe';
+//此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
+var  clickcolor='#51b2f6';
+function  changeto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=highlightcolor&&source.id!="nc"&&cs[1].style.backgroundColor!=clickcolor)
+for(i=0;i<cs.length;i++){
+  cs[i].style.backgroundColor=highlightcolor;
+}
+}
+
+function  changeback(){
+if  (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc")
+return
+if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor)
+//source.style.backgroundColor=originalcolor
+for(i=0;i<cs.length;i++){
+  cs[i].style.backgroundColor="";
+}
+}
+
+function  clickto(){
+source=event.srcElement;
+if  (source.tagName=="TR"||source.tagName=="TABLE")
+return;
+while(source.tagName!="TD")
+source=source.parentElement;
+source=source.parentElement;
+cs  =  source.children;
+//alert(cs.length);
+if  (cs[1].style.backgroundColor!=clickcolor&&source.id!="nc")
+for(i=0;i<cs.length;i++){
+  cs[i].style.backgroundColor=clickcolor;
+}
+else
+for(i=0;i<cs.length;i++){
+  cs[i].style.backgroundColor="";
+}
+}
+</script>
+</head>
+
+<body>
+<div id="search_line"><span></span>首页/##3</div>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="30"><img src="images/tab_03.gif" width="15" height="30" /></td>
+        <td background="images/tab_05.gif"><img src="images/311.gif" width="16" height="16" /> <span class="STYLE4">服务器进程配置列表</span></td>
+        <td width="14"><img src="images/tab_07.gif" width="14" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="9" background="images/tab_12.gif">&nbsp;</td>
+        <td bgcolor="e5f1d6"><table width="99%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CECECE" onmouseover="changeto()"  onmouseout="changeback()">
+          <tr>
+            <td width="6%" height="26" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">选择</div></td>
+            <td width="8%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">序号</div></td>
+            <td width="24%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">运行机器ip地址</div></td>
+            <td width="10%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">机器名</div></td>
+            <td width="14%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">节点类型</div></td>
+            <td width="24%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">服务器进程配置</div></td>
+            <td width="7%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">编辑</div></td>
+            <td width="7%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">删除</div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" ><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox2" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox3" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox4" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox5" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox6" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox7" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox8" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox9" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox10" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox11" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox12" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox13" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+          <tr>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+              <input name="checkbox14" type="checkbox" class="STYLE2" value="checkbox" />
+            </div></td>
+            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+          </tr>
+        </table></td>
+        <td width="9" background="images/tab_16.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="29"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="29"><img src="images/tab_20.gif" width="15" height="29" /></td>
+        <td background="images/tab_21.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="21%" height="29"><img src="images/q.gif" width="40" height="19" /> <img src="images/x.gif" width="40" height="19" /> <img src="images/s.gif" width="40" height="19" /></td>
+            <td width="79%" valign="top" class="STYLE1"><div align="right">
+              <table width="352" height="20" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="62" height="22" valign="middle"><div align="right"><img src="images/f_page.gif" width="46" height="20" /></div></td>
+                  <td width="50" height="22" valign="middle"><div align="right"><img src="images/b_page.gif" width="46" height="20" /></div></td>
+                  <td width="54" height="22" valign="middle"><div align="right"><img src="images/n_page.gif" width="46" height="20" /></div></td>
+                  <td width="49" height="22" valign="middle"><div align="right"><img src="images/l_page.gif" width="46" height="20" /></div></td>
+                  <td width="59" height="22" valign="middle"><div align="right">转到第</div></td>
+                  <td width="25" height="22" valign="middle"><span class="STYLE7">
+                    <input name="textfield" type="text" class="STYLE1" style="height:10px; width:25px;" size="5" />
+                  </span></td>
+                  <td width="23" height="22" valign="middle">页</td>
+                  <td width="30" height="22" valign="middle"><img src="images/g_page.gif" width="14" height="14" /></td>
+                </tr>
+              </table>
+            </div></td>
+          </tr>
+        </table></td>
+        <td width="14"><img src="images/tab_22.gif" width="14" height="29" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+
+
+<!--dialog-->
+<div id="gray"></div>
+
+<div class="popup" id="popup">
+
+  <div class="top_nav" id='top_nav'>
+    <div align="center">
+      <i></i>
+      <span>登录账号</span>
+      <a class="guanbi"></a>
+    </div>
+  </div>
+  
+  <div class="min">
+  
+    <div class="tc_login">
+    
+      <div class="left">
+        <h4 align="center">手机扫描，赞助一下</h4>
+        <div align="center"><img src="images/zfb_2yuan.jpg" width="150" height="150" /></div>
+        <dd>
+          <div align="center">自愿赞助我们 <span style="font-family: 'microsoft yahei'; color: #F60; font-size: 18px;">2</span> 元</div>
+        </dd>
+      </div>  
+    
+      <div class="right">
+        <form method="POST" name="form_login" target="_top">
+          <div align="center">
+            <a href="">短信快捷登录</a>
+            <i class="icon-mobile-phone"></i>
+            <input type="text" name="name" id="name" required="required" placeholder="用户名" autocomplete="off" class="input_yh">
+            <input type="password" name="pass" id="pass" required="required" placeholder="密码" autocomplete="off" class="input_mm">
+          </div>
+          <dd>
+            <div align="center"><a href="">遇到登录问题</a></div>
+          </dd>
+          <div align="center">
+            <input type="submit" class="button" title="Sign In" value="登录">
+          </div>
+        </form>   
+        <dd>
+          <div align="center"><a href="#" target="_blank">立即注册</a></div>
+        </dd>
+        <hr align="center" />
+        <div align="center">期待更多功能 </div>
+      </div>
+    
+    </div>
+  
+  </div>
+
+</div>
+ 
+<script type="text/javascript">
+//窗口效果
+//点击登录class为tc 显示
+$(".tc").click(function(){
+  $("#gray").show();
+  $("#popup").show();//查找ID为popup的DIV show()显示#gray
+  tc_center();
+});
+//点击关闭按钮
+$("a.guanbi").click(function(){
+  $("#gray").hide();
+  $("#popup").hide();//查找ID为popup的DIV hide()隐藏
+})
+
+//窗口水平居中
+$(window).resize(function(){
+  tc_center();
+});
+
+function tc_center(){
+  var _top=($(window).height()-$(".popup").height())/2;
+  var _left=($(window).width()-$(".popup").width())/2;
+  
+  $(".popup").css({top:_top,left:_left});
+} 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+
+  $(".top_nav").mousedown(function(e){ 
+    $(this).css("cursor","move");//改变鼠标指针的形状 
+    var offset = $(this).offset();//DIV在页面的位置 
+    var x = e.pageX - offset.left;//获得鼠标指针离DIV元素左边界的距离 
+    var y = e.pageY - offset.top;//获得鼠标指针离DIV元素上边界的距离 
+    $(document).bind("mousemove",function(ev){ //绑定鼠标的移动事件，因为光标在DIV元素外面也要有效果，所以要用doucment的事件，而不用DIV元素的事件 
+    
+      $(".popup").stop();//加上这个之后 
+      
+      var _x = ev.pageX - x;//获得X轴方向移动的值 
+      var _y = ev.pageY - y;//获得Y轴方向移动的值 
+    
+      $(".popup").animate({left:_x+"px",top:_y+"px"},10); 
+    }); 
+
+  }); 
+
+  $(document).mouseup(function() { 
+    $(".popup").css("cursor","default"); 
+    $(this).unbind("mousemove"); 
+  });
+}) 
+</script>
+
+
+
+</body>
+</html>

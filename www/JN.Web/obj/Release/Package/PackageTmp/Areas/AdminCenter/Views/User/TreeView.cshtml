@@ -1,0 +1,117 @@
+﻿@model JN.Data.User
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <div class="innerLR">
+        <div class="tabbable">
+            <a href="@Url.Action("TreeView")/@Model.ID" class="btn btn-primary">推荐图谱</a>
+            @if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "double")
+            {
+                    <a href="@Url.Action("DoubleTrack", new { ID = Model.ID})" class="btn btn-danger">安置图谱</a>
+                }
+
+                @if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "three")
+                {
+                    <a href="/@Url.Action("ThreeTrack", new { ID = Model.ID})" class="btn btn-danger">安置图谱</a>
+                }
+            <div class="widget-box">
+                <div class="widget-header header-color-blue2">
+                    <h4 class="lighter smaller"><a href="/UserCenter/Home/Index?adminloginname=@Model.UserName" target="_blank">@Model.UserName</a> <a href="javascript:void(0);" style="font-size:12px" onclick="javascript: winopen('注册会员', '@(Url.Action("_PartialAddUser", new { parentuser = Model.ParentUser, refereeuser = Model.ParentUser, agentuser = Model.AgentUser, childplace = 1}))', 500);" class="complete comp">注册</a>
+                    <a href="javascript:void(0);" style="font-size:12px" onclick="javascript: winopen('提供帮助(@(Model.UserName))', '@(Url.Action("_PartialSubmitSupplyHelp", new { uid = Model.ID}))', 500);" class="complete comp">提供(@(MvcCore.Unity.Get<JN.Data.Service.ISupplyHelpService>().List(x => x.UID == Model.ID && x.Status > 0).Count()))</a>
+                    <a href="javascript:void(0);" style="font-size:12px" onclick="javascript: winopen('接受帮助(@(Model.UserName))', '@(Url.Action("_PartialSubmitAcceptHelp", new { uid = Model.ID}))', 500);" class="complete comp">接受(@(MvcCore.Unity.Get<JN.Data.Service.IAcceptHelpService>().List(x => x.UID == Model.ID && x.Status > 0).Count()))</a>
+</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="widget-main padding-8">
+                        @{
+                            if (MvcCore.Unity.Get<JN.Data.Service.IUserService>().List(x => x.RefereeID == Model.ID).Count() > 0)
+                            {
+                                <div id="tree1" class="tree"></div>
+                            }
+                            else
+                            {
+                                <span>@(Model.UserName) 下没有推荐用户.</span>
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space"></div>
+
+    <div class="center">
+        <a href="javascript:history.go(-1);" class="btn btn-grey">
+            <i class="icon-arrow-left"></i>
+            返回
+        </a>
+
+        <a href="@Url.Action("Index","Home")" class="btn btn-primary">
+            <i class="icon-dashboard"></i>
+            返回主界面
+        </a>
+    </div>
+
+    <!-- PAGE CONTENT ENDS -->
+</div><!-- /.col -->
+@section scripts{
+    <!-- page specific plugin scripts -->
+<script src="~/js/jquery.form.js"></script>
+    <link href="~/common/theme/scripts/plugins/jstree/dist/themes/default/style.css" rel="stylesheet" />
+    <script src="~/common/theme/scripts/plugins/jstree/dist/jstree.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            //$('#tree1').tree({
+            //    dataSource: new DataSourceTree({ url: '/User/User/GetTreeJson' }),
+            //    multiSelect: false,
+            //    loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+            //    'open-icon': 'icon-minus',
+            //    'close-icon': 'icon-plus',
+            //    'selectable': false
+            //});
+
+            $("#tree1").jstree({
+                "core": {
+                    "themes": {
+                        "responsive": false
+                    },
+                    // so that create works
+                    "check_callback": true,
+                    'data': {
+                        'url': function (node) {
+                            if (node.id > 0)
+                                return '@(Url.Action("GetTreeJson"))?id=' + node.id;
+                            else
+                                return '@(Url.Action("GetTreeJson"))?id=@Model.ID';
+                        },
+                        'data': function (node) {
+                            return { 'parent': node.id };
+                        }
+                    }
+                },
+                //"types" : {
+                //    "default" : {
+                //        "icon" : "fa fa-folder icon-state-warning icon-lg"
+                //    },
+                //    "file" : {
+                //        "icon" : "fa fa-file icon-state-warning icon-lg"
+                //    }
+                //},
+                "state": { "key": "demo3" },
+                "plugins": ["dnd", "state", "types"]
+            });
+
+
+        });
+    </script>
+}

@@ -1,0 +1,60 @@
+﻿@model JN.Data.Message
+@{
+    Layout = null;
+}
+<div class="box-generic widget-chat">
+
+    <!-- Slim Scroll -->
+    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 240px;">
+        <div class="slim-scroll chat-items" data-scroll-height="240px" style="overflow: hidden; width: auto; height: 240px;">
+
+            <!-- Media item -->
+            <div class="media">
+                <div class="media-object pull-left thumb"><img src="http://dummyimage.com/51x51/232323/ffffff&amp;text=photo" alt=""></div>
+                <div class="media-body">
+                    <blockquote>
+                        <small><a href="#" title="" class="strong">@Model.FormUserName</a> <cite>@Model.CreateTime</cite></small>
+                        <h3>@Model.Title</h3>
+                        <p>@MvcHtmlString.Create(Model.Content)</p>
+                    </blockquote>
+                </div>
+            </div>
+            <!-- // Media item END -->
+        @if (Model.IsReply)
+        { 
+            <!-- Media item -->
+            @*<div class="media">
+                <div class="media-object pull-right thumb"><img src="http://dummyimage.com/51x51/232323/ffffff&amp;text=photo" alt=""></div>
+                <div class="media-body right">
+                    <blockquote class="pull-right">
+                        <small><a href="#" title="" class="strong">John Doe</a><cite> 15 seconds ago</cite></small>
+                        <p>In ultricies ante eget tortor euismod vitae molestie eros hendrerit. Cras tristique, orci ac lacinia aliquet, velit risus laoreet lectus, eget sollicitudin metus orci non nulla.</p>
+                    </blockquote>
+                </div>
+            </div>*@
+            <!-- // Media item END -->
+        }
+        </div><div class="slimScrollBar ui-draggable" style="width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 176.687px; background: rgb(0, 0, 0);"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; opacity: 0.2; z-index: 90; right: 1px; background: rgb(51, 51, 51);"></div>
+    </div>
+    <!-- // Slim Scroll END -->
+
+    <div class="chat-controls">
+        <div class="innerLR">
+            <form class="margin-none">
+                <div class="row-fluid">
+                    @*<div class="span10">
+                        <input type="text" name="message" class="input-block-level margin-none" placeholder="Type your message ..">
+                    </div>*@
+                    <div class="span2">
+                        <a href="@(Url.Action("Write"))?r=@Model.ID" class="btn btn-block btn-inverse">回复</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+
+}

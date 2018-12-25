@@ -1,0 +1,315 @@
+﻿@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<script src="/assets/js/jquery.validate.min.js"></script>
+<link href="/Plugin/kindeditor-4.1.9/themes/default/default.css" rel="stylesheet" />
+<link href="/Plugin/kindeditor-4.1.9/plugins/code/prettify.css" rel="stylesheet" />
+<script src="/Plugin/kindeditor-4.1.9/kindeditor.js"></script>
+<script src="/Plugin/kindeditor-4.1.9/lang/zh_CN.js"></script>
+<script src="/Plugin/kindeditor-4.1.9/plugins/code/prettify.js"></script>
+<script type="text/javascript">
+        //绑定售后编辑器
+        var editorSa;
+        KindEditor.ready(function (a) {
+            editorSa = a.create('#Content', {
+                uploadJson: '/PicUpload/UpLoadPic/?dirName=Product&ASPSESSID=' + "@Session.SessionID",
+                allowFileManager: true,
+                width: "650px",
+                height: "350px"
+            });
+        });
+
+        KindEditor.ready(function (K) {
+            var editor = K.editor({
+                uploadJson: '/PicUpload/UpLoadPic/?dirName=Product&ASPSESSID=' + "@Session.SessionID",
+                allowFileManager: true
+            });
+            K('#btnUpManiPic').click(function () {
+                editor.loadPlugin('image', function () {
+                    editor.plugin.imageDialog({
+                        showRemote: false,
+                        imageUrl: K('#UrlMainPic').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            $('#productimg').attr("src", url);
+                            $('#ImageUrl').val(url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+</script>
+<div class="page-content">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+            @if (!string.IsNullOrEmpty(ViewBag.Brief))
+            {
+                <small>
+                    <i class="icon-double-angle-right"></i>
+                    @ViewBag.Brief
+                </small>
+            }
+        </h1>
+    </div><!-- /.page-header -->
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form class="form-horizontal" id="validation-form" method="post">
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right"></label>
+
+                    @*<div class="col-xs-12 col-sm-2">
+                            <div class="clearfix">
+                                <a class="btn btn-primary addnew">填充一个随机数据（测试用，密码6个1，6个2，6个3）</a>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">商品名称</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="clearfix">
+                            <input type="text" name="ProductName" class="form-control" />
+                            <input type="hidden" name="ShopID" value="0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="username">商品分类</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            @Html.DropDownList("ClassId", new SelectList(JN.BLL.sysparams.GetModelList("PID=6000 and IsUse=1 order by sort"), "ID", "Name"), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="realname">产品图片</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="clearfix">
+                            <img src="" id="productimg" height="80" />
+                            <input type="hidden" id="ImageUrl" name="ImageUrl" />
+                            <input type="button" id="btnUpManiPic" value="本地上传图片" class="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">产品规格</label>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="clearfix">
+                            <input type="text" name="Spec" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">售价</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="input-group">
+                            <input type="text" name="RealPrice" style="width:100px" class="form-control" />
+                            /<input type="text" name="Unit" maxlength="5" style="width: 50px" class="form-control" value="件" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">运费</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="input-group">
+                            <input type="text" name="FreightPrice" style="width:100px" class="form-control" />
+                            <span style="line-height:30px; padding-left:10px"> *包邮请填0</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="idcard">库存</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <input type="text" name="Stock" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankcard">商品介绍</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <input type="text" id="Content" name="Content" value="" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-danger" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            保存
+                        </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn btn-info" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    </div>
+@section scripts{
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="/assets/js/excanvas.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        jQuery(function ($) {
+            @*$('#validation-form').validate({
+            errorElement: 'div',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                },
+                //passwordconfirm: {
+                //    required: true,
+                //    minlength: 6,
+                //    equalTo: "#password"
+                //},
+                password2: {
+                    required: true,
+                    minlength: 5
+                },
+                password3: {
+                    required: true,
+                    minlength: 5
+                },
+                //nickname: {
+                //    required: true
+                //},
+                username: {
+                    required: true
+                },
+                phone: {
+                    required: true,
+                    phone: 'required'
+                },
+                realname: {
+                    required: true
+                },
+                bankname: 'required',
+                bankcard: 'required',
+                bankofdeposit: 'required',
+                //bankuser: {
+                //    required: true,
+                //    equalTo: "#realname"
+                //},
+                gender: 'required'
+            },
+
+            messages: {
+                email: {
+                    required: "请输入正确的邮箱地址").",
+                    email: "请输入正确的邮箱地址")."
+                },
+                password: {
+                    required: "请填写密码").",
+                    minlength: "密码不能小于6位数")."
+                },
+                passwordconfirm: {
+                    required: "请填写确认登录密码").",
+                    equalTo: "登录密码及确认密码不相符")",
+                    minlength: "密码不能小于6位数")."
+                },
+                password2: {
+                    required: "填写二级密码").",
+                    minlength: "密码不能小于6位数")."
+                },
+                password3: {
+                    required: "请填写三级录密码").",
+                    minlength: "密码不能小于6位数")."
+                },
+                phone: {
+                    required: "请输入手机号码")."
+                },
+                //nickname: "请输入昵称",
+                username: "请输入会员编号")",
+                realname: "请输入真实姓名")",
+                bankname: "请选择银行卡发卡行")",
+                bankcard: "请填写银行卡号")",
+                bankofdeposit: "请填写银行卡开户行")",
+                //bankuser: "请填写银行卡户名")",
+                gender: "请选择性别")"
+            },
+
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                $('.alert-danger', $('.login-form')).show();
+            },
+
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+            },
+
+            success: function (e) {
+                $(e).closest('.form-group').removeClass('has-error').addClass('has-info');
+                $(e).remove();
+            },
+
+            errorPlacement: function (error, element) {
+                if (element.is(':checkbox') || element.is(':radio')) {
+                    var controls = element.closest('div[class*="col-"]');
+                    if (controls.find(':checkbox,:radio').length > 1) controls.append(error);
+                    else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+                }
+                else if (element.is('.select2')) {
+                    error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+                }
+                else if (element.is('.chosen-select')) {
+                    error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
+                }
+                else error.insertAfter(element.parent());
+            },
+
+            submitHandler: function (form) {
+            },
+            invalidHandler: function (form) {
+            }
+        });*@
+
+
+
+        });
+    </script>
+    }

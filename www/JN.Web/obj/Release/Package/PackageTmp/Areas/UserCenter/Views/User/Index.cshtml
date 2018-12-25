@@ -1,0 +1,121 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.User>
+@{
+    //string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@{Html.RegisterMvcPagerScriptResource();}
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <h4>@T(ViewBag.Title) </h4>
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T(ViewBag.Title) </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="mainoprate">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="table-responsive">
+                            <div id="sample-table-1_wrapper" class="dataTables_wrapper" role="grid">
+                                <form class="form-search form-inline" method="get">
+                                    <div class="row" style="margin-bottom:20px">
+                                        <div class="col-md-5">
+                                                <div class="col-xs-4 no-padding-right">
+                                                    <select name="df" class="form-control">
+                                                        <option value="CreateTime" @(Request["df"] == "CreateTime" ? "selected" : "")>@T("注册时间")</option>
+                                                        <option value="ActivationTime" @(Request["df"] == "ActivationTime" ? "selected" : "")>@T("激活时间")</option>
+                                                    </select>
+                                                </div>
+                                                <div class="input-group col-sm-7 no-padding-left">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar bigger-110"></i>
+                                                    </span>
+                                                    <input class="form-control no-margin-left daterange add-ranges" type="text" name="daterange" value="@Request["dr"]" />
+                                                </div>
+                                            </div>
+                                        <div class="col-md-7">
+                                            <div class="col-xs-4 no-padding-right" style="width:100px">
+                                                <select name="kf" class="form-control">
+                                                    <option value="UserName" @(Request["kf"] == "UserName" ? "selected" : "")>@T("会员编号")</option>
+                                                    <option value="RealName" @(Request["kf"] == "RealName" ? "selected" : "")>@T("真实姓名")</option>
+                                                    <option value="Mobile" @(Request["kf"] == "Mobile" ? "selected" : "")>@T("手机号码")</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group col-sm-8 no-padding-left">
+                                                <input type="text" name="kv" value="@Request["kv"]" clas class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                                                <span class="input-group-btn">
+                                                    <input type="hidden" name="IsAsc" value="0" />
+                                                    <input type="hidden" name="OrderFiled" value="ID" />
+                                                    <button type="submit" class="btn btn-purple btn-sm">
+                                                        @T("查询")
+                                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div id="Activation">
+                                    @Html.Partial("_Activation", Model)
+                                </div>
+                            </div>
+
+                            <!--S 翻页页码  -->
+                            @*@Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })*@
+
+
+                            <!--E 翻页页码  -->
+                        </div><!-- /.table-responsive -->
+                    </div><!-- /span -->
+                </div><!-- /row -->
+                <!-- PAGE CONTENT ENDS -->
+                <script type="text/javascript">
+                    jQuery(function ($) {
+                        $('[data-rel=tooltip]').tooltip({ container: 'body' });
+                        $(".deluser").on("click", function () {
+                            var id = $(this).attr("data-value");
+                           if(confirm("@T("您确定要删除该会员吗?")")){
+                                    location = '@(Url.Action("Delete"))/' + id;
+                            }
+                        });
+
+                        $(".activeuser").on("click", function () {
+                            var id = $(this).attr("data-value");
+                            @*var result = prompt('请输入PIN码：');
+                            if (result) {
+                                $.post('@(Url.Action("doPass"))', { id: id, pincode: result }, function (data) {
+                                    if (data.Status == 200) {
+                                        alert("@T("激活成功,即将为您返回")");
+                                        location.reload();
+                                    }
+                                    else
+                                        alert(data.Message);
+                                });
+                            }*@
+                            if (confirm("@T("激活会员要扣除一个激活币，确定要激活吗？")")) {
+                                $.post('@(Url.Action("doPass"))', { id: id}, function (data) {
+                                    if (data.Status == 200) {
+                                        alert("@T("激活成功,即将为您返回")");
+                                        location.reload();
+                                    }
+                                    else
+                                        alert(data.Message);
+                                });
+                            }
+                        });
+                    })
+                </script>
+            </div>
+        </div>
+        </div></div>

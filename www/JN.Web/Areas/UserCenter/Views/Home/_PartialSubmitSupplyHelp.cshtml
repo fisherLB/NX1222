@@ -1,0 +1,152 @@
+﻿@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    JN.Data.SysParam param = cacheSysParam.Single(x => x.ID == 2101);
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+       
+        if (Umodel.IsAgent == true)
+        {
+            param = cacheSysParam.Single(x => x.ID == 2102);
+            
+        }
+        
+    }
+}
+
+
+
+<!-- 提供帮助 -->
+    <form id="frmSupplyHelp" method="post">
+        <section id="supplyhelp_setp1">
+            <div class="panel-heading">
+                <h3 class="panel-title">提供帮助: 我要帮助他人</h3>
+            </div>
+            <div class="modal-body" style="text-align:center">
+                @*<p class="text-warning" style="text-align:left">@T("申请完成后，请等待系统15-30日随机分配受善需求")</p>*@
+                <label class="col-sm-12 control-label">@T("支付方式")</label>
+                <div class="radio" align="center">
+                    <label> <input type="checkbox" value="银行支付" class="ckbox" name="payway" checked="">@T("银行支付")</label>
+                    <label> <input type="checkbox" value="支付宝" class="ckbox" name="payway" checked="">@T("支付宝")</label><br>
+                    @*<label> <input type="checkbox" value="微信支付" class="ckbox" name="payway" checked="">@T("微信支付")</label><br>*@
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-12 control-label">@T("提供帮助金额")</label>
+
+                    <div class="input-group">
+                      
+                        @*@Html.DropDownList("supplyamount", new SelectList(JN.BLL.sysparams.GetModelList("PID=1000 and IsUse=1 order by sort"), "Value", "Value", "1000"), new { @class = "form-control m-b" })*@
+                        @*@if (cacheSysParam.Where(x => x.PID == 2100 && x.IsUse == true).Count() > 0)
+                        {
+                            @Html.DropDownList("supplyamount", new SelectList(cacheSysParam.Where(x => x.PID == 2100 && x.ID != 2104 && x.IsUse == true).OrderBy(x => x.Sort), "Value", "Value", "1000"), new { @class = "form-control m-b", @style = "width:130px" })
+                        }
+                        else
+                        {*@
+                            <input type="text" id="supplyamount" name="supplyamount" value="@param.Value" class="form-control" style="width:130px" />
+                        @*}*@
+                        <select id="hl" name="hl" class="form-control" style="width: 100px">
+                            <option value="1">人民币</option>
+                            @*<option value="6">美元</option>*@
+                        </select>
+                       
+                    </div>
+                   
+                </div>
+                <div class="form-group">
+                    <font id="lblamount" color="#00FF00">@param.Value</font>×<span class="lblhl">@cacheSysParam.SingleAndInit(x => x.ID == 3801).Value</span>＝<font id="lblexchangemoney" color="#FF0000"></font>
+                    @T("人民币")
+                </div>
+                                <div class="form-group">
+            <h4>
+                <input type="hidden" value="@cacheSysParam.SingleAndInit(x => x.ID == 2104).Value" id="beishu" />
+                <span>提供此单要消耗<strong style="font-weight:bold;color:red;"><font id="pdb" color="#FF0000">0</font></strong>个排单币</span>
+            </h4>
+        </div>
+
+                <div class="icheckbox_square-green checked" style="position: relative;">
+                    <input type="checkbox" class="i-checks" name="i-checks" checked="" required="" style="position: absolute; opacity: 0;">
+                    <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                </div>
+                @*@T("警告，我已完全了解所有风险。我决定参与" + sysEntity.SysName + ",尊重" + sysEntity.SysName + "文化与传统。")*@
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@T("取消")</button>
+                <button type="button" class="btn_next btn-danger btn-sm" id="btnSupplyHelp">@T("提供帮助")</button>
+            </div>
+
+        </section>
+        <section id="supplyhelp_setp2" style="display:none">
+            <div class="modal-body" style="height:300px;">
+                <p><strong><font color="#FF0000" id="amountpay"></font>@T(" RMB  : 人民币")</strong></p>
+                @*<p>@T("增长率为每日1% RMB，最高30%  RMB")</p>*@
+                <p>@T("注意：您的申请如果需要被取消，可以在配对单产生之前提交取消申请。一旦配对单产生了，该施善申请将无法被取消。")</p>
+                <p><strong><font color="#FF0000">@T("注意：请核实交易的资料，一旦完成申请，该交易是不能被取消或更改。")</font></strong></p>
+
+            </div>
+            <div class="modal-footer">
+                <!--
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                -->
+                <button type="button" class="btnSubmitSupplyHelp btn-primary">@T("确认")</button>
+            </div>
+        </section>
+      </form>
+
+<script>
+    $(document).ready(function () {//页面加载时触发
+        $("#lblexchangemoney").text(parseFloat($("#lblamount").text()) * parseFloat($(".lblhl").text()));
+        $("#pdb").text($("#lblexchangemoney").text() * $("#beishu").val());
+    });
+
+    $("#supplyamount").on('keyup', function () {
+        $("#lblamount").text($("#supplyamount").val());
+        $("#lblexchangemoney").text(parseFloat($("#lblamount").text()) * parseFloat($(".lblhl").text()));
+        $("#pdb").text($("#supplyamount").val() * $("#beishu").val());
+    });
+
+    $("#hl").on('change', function () {
+        $(".lblhl").text($("#hl").val())
+        $("#lblamount").text($("#supplyamount").val());
+        $("#lblexchangemoney").text(parseFloat($("#lblamount").text()) * parseFloat($(".lblhl").text()));
+    });
+
+    $("#supplyamount").bind("change", function () {
+        $("#lblamount").text($("#supplyamount").val());
+        $("#lblexchangemoney").text(parseFloat($("#lblamount").text()) * parseFloat($(".lblhl").text()));
+        $("#pdb").text($("#supplyamount").val() * $("#beishu").val());
+    });
+
+
+    $("#btnSupplyHelp").click(function () {
+        $("#supplyhelp_setp1").css("display", "none");
+        $("#supplyhelp_setp2").css("display", "block");
+        $("#amountpay").text($("#lblexchangemoney").text());
+    });
+
+    $(".btnSubmitSupplyHelp").click(function () {
+     
+        $("#frmSupplyHelp").ajaxSubmit({
+            url: "@Url.Action("SupplyHelp")",
+            type: "post",
+            success: function (data) {
+                if (data.Status == 200) {
+                    alert("提交成功，即将为您跳转！");
+                    location.href = "@(Url.Action("Index", "Home"))";
+                } else {
+                    alert("提交失败：" + data.Message);
+                }
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    });
+</script>

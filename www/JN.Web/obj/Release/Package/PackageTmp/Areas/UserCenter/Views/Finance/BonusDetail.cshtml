@@ -1,0 +1,165 @@
+﻿
+@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.BonusDetail>
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@{Html.RegisterMvcPagerScriptResource();}
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <h4>@T("资金流动明细") </h4>
+        </div>
+        <div class="maintitleright">
+            <a href="/user/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T("账号管理")</a>
+            &nbsp;/&nbsp;
+            <a href="#">@T("资金流动明细")</a>
+        </div>
+    </div>
+            <div class="mainoprate">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    
+                    <div class="col-xs-12" style="margin-top:10px;">
+                        <ul class="nav nav-tabs" id="myTab">
+
+                            @{
+                                int bonusid = Request["bonusid"].ToInt();
+    //if (bType == 0)
+    //{
+    //    bType = 1101;
+    //}
+                    <li class="@(bonusid == 0 ? "active" : "")">
+                        <a href="?btype=0">
+                            所有奖金
+                        </a>
+                    </li>
+                                List<JN.Data.SysParam> paramList = ViewBag.ParamList;
+                                foreach (var param in paramList)
+                                {
+                                    <li class="@(bonusid == param.ID ? "active" : "")">
+                                        <a href="?bonusid=@param.ID">
+                                            @param.Name
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        <div class="table-responsive">
+                            <div id="sample-table-1_wrapper" class="dataTables_wrapper" role="grid">
+                                @*<form class="form-search form-inline" method="get">*@
+                                @using (Ajax.BeginForm("BonusDetail", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "BonusDetail", InsertionMode = InsertionMode.Replace, HttpMethod = "Get" }, new RouteValueDictionary { { "id", "searchForm" } }))
+                                {
+                                    <div class="row" style="margin-bottom:20px">
+                                        <div class="col-md-12">
+                                            <div class="col-md-5">
+                                                <div class="col-xs-4 no-padding-right no-padding-left">
+                                                    <select name="df" class="form-control">
+                                                        <option value="CreateTime" @(Request["df"] == "CreateTime" ? "selected" : "")>@T("结算时间")</option>
+                                                    </select>
+                                                </div>
+                                                <div class="input-group col-sm-7 no-padding-left">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar bigger-110"></i>
+                                                    </span>
+                                                    <input class="form-control no-margin-left daterange add-ranges" type="text" name="dr" value="@Request["dr"]" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="col-xs-4 no-padding-right" style="width:130px">
+                                                    <select name="kf" class="form-control">
+                                                        <option value="username" @(Request["kf"] == "username" ? "selected" : "")>@T("会员编号")</option>
+                                                        <option value="bonusname" @(Request["kf"] == "bonusname" ? "selected" : "")>@T("奖金类型")</option>
+                                                        <option value="Description" @(Request["kf"] == "Description" ? "selected" : "")>@T("描述")</option>
+                                                    </select>
+                                                </div>
+                                                <div class="input-group col-sm-8 no-padding-left">
+                                                    <input type="text" name="kv" value="@Request["kv"]" class="form-control search-query" placeholder="@T("请输入要查询的关键字")" />
+                                                    <span class="input-group-btn">
+                                                        <input type="hidden" name="IsAsc" value="0" />
+                                                        <input type="hidden" name="OrderFiled" value="ID" />
+                                                        <button type="submit" class="btn btn-purple btn-sm">
+                                                            @T("查询")
+                                                            <i class="icon-search icon-on-right bigger-110"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <div id="BonusDetail">
+                                    @Html.Partial("_BonusDetail", Model)
+                                </div>
+                                @*<table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+                        <thead>
+                            <tr>
+                                <th class="center">
+                                    @T("序号")
+                                </th>
+
+                                <th>@T("奖金类型")</th>
+                                <th>@T("奖金金额")</th>
+                                <th>@T("描述")</th>
+
+                                <th>
+                                    <i class="icon-time bigger-110 hidden-480"></i>
+                                    @T("结算时间")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count > 0)
+                            {
+                                for (int i = 0; i < Model.Count; i++)
+                                {
+
+                                    <tr>
+                                        <td align="left">
+                                            @(i + 1)
+                                        </td>
+                                        @*<td>
+                                                @Model[i].UserName
+                                            </td>
+                                        <td>
+                                            @Model[i].BonusName
+                                        </td>
+                                        <td>
+                                            @Model[i].BonusMoney.ToString("F2")
+                                        </td>
+                                        <td>
+                                            @Model[i].Description
+                                        </td>
+                                        @*<td>
+                                                @T(Model[i].IsBalance ? "是" : "否")
+                                            </td>
+                                        <td class="hidden-480">@(Model[i].IsBalance ? (Model[i].BalanceTime ?? DateTime.Now).ToString() : "")</td>
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>*@
+                            </div>
+
+                            <!-- Pagination -->
+                            @*@Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })*@
+
+
+                            <div class="clearfix"></div>
+                            <!-- // Pagination END -->
+
+                        </div><!-- /.table-responsive -->
+                    </div><!-- /span -->
+                </div><!-- /row -->
+                <!-- PAGE CONTENT ENDS -->
+
+            </div>
+        </div>

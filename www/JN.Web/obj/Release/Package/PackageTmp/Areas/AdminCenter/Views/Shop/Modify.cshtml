@@ -1,0 +1,149 @@
+﻿@model JN.Data.ShopProduct
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="col-xs-12">
+    <!-- PAGE CONTENT BEGINS -->
+            <form id="validation-form" class="form-horizontal" enctype="multipart/form-data" method="post">
+                <div class="control-group">
+                    <label class="control-label"></label>
+
+                    @*<div class="col-xs-12 col-sm-2">
+                    <div class="clearfix">
+                        <a class="btn btn-primary addnew">填充一个随机数据（测试用，密码6个1，6个2，6个3）</a>
+                    </div>
+                </div>*@
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="username">商品名称</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="ProductName" value="@Model.ProductName" class="form-control" style="width:350px" />
+                            <input type="hidden" name="ID" value="@Model.ID" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="username">商品分类</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            @Html.DropDownList("ClassID", new SelectList(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 6000 && x.IsUse).OrderBy(x => x.Sort).ToList(), "ID", "Name", Model.ClassId))
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="realname">产品图片(JPG/PNG/GIF)</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <img src="@Model.ImageUrl" id="productimg" height="80" />
+                            <input type="file" name="imgurl" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="phone">产品规格</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="Spec" value="@Model.Spec" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="control-group">
+                    <label class="control-label" for="email">售价</label>
+
+                    <div class="controls">
+                        <div class="input-group">
+                            <input type="text" name="RealPrice" style="width:100px" value="@Model.RealPrice" class="form-control" />
+                            元/<input type="text" name="Unit" maxlength="5" style="width:50px" class="form-control" value="@Model.Unit" />（单位）
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="email">运费</label>
+
+                    <div class="controls">
+                        <div class="input-group">
+                            <input type="text" name="FreightPrice" style="width:100px" value="@Model.FreightPrice" class="form-control" />
+                            <span style="line-height:30px; padding-left:10px"> *包邮请填“0”</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="idcard">库存</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <input type="text" name="Stock" value="@Model.Stock" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="control-group">
+                    <label class="control-label" for="bankcard">商品介绍</label>
+
+                    <div class="controls">
+                        <div class="clearfix">
+                            <textarea id="doccontent" name="content" class="wysihtml5 span9" rows="15">@Model.Content</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+                <div class="control-group">
+                    <label class="control-label">&nbsp;</label>
+                    <div class="controls">
+                        <button class="btn btn-primary" type="submit">
+                            保存
+                        </button>
+
+                        <a href="javascript:history.go(-1);" class="btn btn-grey">
+                            <i class="icon-arrow-left"></i>
+                            返 回
+                        </a>
+                    </div>
+                </div>
+           </form>
+</div>
+            </div>
+    </div>
+@section scripts{
+    <!-- page specific plugin styles -->
+    <script type="text/javascript" src="~/Plugin/xhEditor/xheditor.js"></script>
+    <script type="text/javascript" src="~/Plugin/xhEditor/xheditor_lang/zh-cn.js"></script>
+    <script type="text/javascript">
+    $(pageInit);
+    function pageInit() {
+        $.extend(XHEDITOR.settings, { shortcuts: { 'ctrl+enter': submitForm } });
+        $('#doccontent').xheditor({ upLinkUrl: "/PicUpload/Upload?ASPSESSID=" + "@Session.SessionID", upLinkExt: "zip,rar,txt", upImgUrl: "/PicUpload/Upload?ASPSESSID==" + "@Session.SessionID", upImgExt: "jpg,jpeg,gif,png", onUpload: insertUpload });
+    }
+    function insertUpload(arrMsg) {
+    }
+    function submitForm() { $('#validation-form').submit(); }
+
+    </script>
+}

@@ -1,0 +1,195 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+*{padding:0px; margin:0px;}
+li{list-style:none;}
+img{border:none;}
+input{outline:none;}
+
+
+html{
+	height:100%;
+	width:100%;
+	}
+
+body{
+	width:100%;
+	height:100%;
+	background:url(../images/login_bg.jpg) no-repeat fixed;
+	}
+
+form {
+    height:564px;
+    }
+
+.login_box {
+    width: 860px;
+    height: 564px;
+    padding-top: 27px;
+    background:url(../images/login_box.png) no-repeat center center;
+    margin: 0 auto;
+    }
+
+	
+
+.login{
+	width: 315px;
+	margin:0px auto;
+	padding-left: 150px;
+	}
+
+.logo_box {
+    width: 320px;
+    height: 159px;
+    margin: 0px 10px 0 10px;
+    background: url(~/Theme/mmm/images/logo_login.png) no-repeat center center;
+    }
+.logo_box img{ width:250px;}
+
+	
+.login ul{
+    padding-top: 30px;
+ }
+
+
+.login ul li{
+	width: 280px;
+	height: 30px;
+	margin-bottom: 14px;
+	position:relative;
+	}
+
+    .login ul li #dTip0{
+        display:block;
+        position:absolute;
+        width:200px;
+        height:30px;
+        bottom:-32px;
+        left:10px;
+        font-size: 12px;
+    }
+
+.login ul li input{
+	display:block;
+	float:left;
+	outline:none;
+	border-radius: 6px;
+	width: 200px;
+	height: 30px;
+	padding-left: 5px;
+	padding-right: 0px;
+	color:#592e0d;
+	line-height: 30px;
+	font-size:16px;
+	font-family:"微软雅黑";
+	background: transparent;
+	border: 0;
+	filter:alpha(opacity=50);
+	}
+#form1 .login_box .login ul li .input3{ width:95px;}
+input:-moz-placeholder { color:#592e0d; }
+input:-ms-input-placeholder { color:#592e0d; }
+input::-webkit-input-placeholder { color:#592e0d; }
+
+
+
+
+
+
+
+.login ul li .codebox{
+	width:153px;
+	float:left;
+	background:url(/Theme/mmm/images/input_bg2.png) no-repeat center center;
+	}
+
+.login ul li .code{
+	display:block;
+	width:80px;
+	height:34px;
+	float:right;
+	cursor:pointer;
+    background-color: #F34C1F;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 10px;
+    border: 1px solid #D05508;
+	}
+	
+
+.login ul li .code img{
+	width:100%; 
+	height:100%;	
+	}
+
+
+.login ul .btns{background: #1266AE;color: #fff;border-radius: 6px;width: 70px;float: right;height: 30px;border: 0;opacity: 9;    cursor: pointer;}
+
+
+.login ul .btns .btn1{
+	padding: 0px;
+    width: 277px;
+    float: none;
+    text-align: center;
+    background:url(btn1.png) repeat-x center center;
+    font-size: 18px;
+    line-height: 18px;
+    height: 47px;
+    color: #FFFFFF;	
+	}
+
+.login ul .btns input:hover{
+	background:url(/Theme/mmm/images/btn2.png) repeat-x center center;
+	cursor:pointer;
+	}
+
+.login ul .text {
+    margin-bottom:0px;    
+    width: 100%;
+    }
+
+.login ul li .forget,.login ul li .register{
+	display: block;
+    float: left;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    color: #f3ee6a;
+    margin-left: 40px;
+	}
+	
+
+.login ul li .forget:hover{ color:#FFFFFF;}
+.login ul li .register:hover{color:#FFFFFF;}
+
+
+.login .lang_btns{
+    width: 80px;
+    margin:0 auto 0 90px;
+    display: block;
+    padding: 4px 10px;
+    background: #AD6101;
+    border: 1px solid #DACC27;
+    color: #dacc27;
+    text-align: center;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+	}
+
+.login .lang_btns:hover{
+    background: #e99326;
+    border: 1px solid #fff;
+    color: #fff;
+    cursor:pointer;
+}
+
+
+
+
+
+
+
+
+

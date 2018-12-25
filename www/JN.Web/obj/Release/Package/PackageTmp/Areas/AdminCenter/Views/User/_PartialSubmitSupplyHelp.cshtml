@@ -1,0 +1,72 @@
+﻿@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    JN.Data.User Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(Request["uid"].ToInt());
+}
+<!-- 提供帮助 -->
+    <form id="frmSupplyHelp" method="post">
+        <section id="accepthelp_setp1">
+            <div class="modal-body">
+                <div class="control-group">
+                    <label class="control-label">支付方式</label>
+                    <div class="controls">
+                        <input type="checkbox" value="银行支付" class="ckbox" name="payway" checked="checked">银行支付
+                        <input type="checkbox" value="支付宝" class="ckbox" name="payway" checked="checked">支付宝
+                        <input type="checkbox" value="微信支付" class="ckbox" name="payway" checked="checked">微信支付
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">提供帮助金额</label>
+
+                    <div class="controls">
+                        <input type="text" id="supplyamount" name="supplyamount" value="1000" class="form-control" style="width:130px" />
+                        <select id="hl" name="hl" class="form-control" style="width: 100px">
+                            <option value="1">人民币</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <font id="lblamount" color="#00FF00">1000</font> ×<span class="lblhl">@cacheSysParam.SingleAndInit(x => x.ID == 3801).Value</span>＝<font id="lblexchangemoney" color="#FF0000">1000</font>
+                    人民币
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="hidden" name="uid" value="@Umodel.ID" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btnSubmitSupplyHelp btn-warningdialog btn-sm">提供帮助</button>
+            </div>
+
+        </section>
+      </form>
+
+<script>
+    $("#supplyamount").on('keyup', function () {
+        $("#lblamount").text($("#supplyamount").val());
+        $("#lblexchangemoney").text(parseFloat($("#lblamount").text()) * parseFloat($(".lblhl").text()));
+    });
+
+    $("#hl").on('change', function () {
+        $(".lblhl").text($("#hl").val())
+        $("#lblamount").text($("#supplyamount").val());
+        $("#lblexchangemoney").text(parseFloat($("#lblamount").text()) * parseFloat($(".lblhl").text()));
+    });
+
+    $(".btnSubmitSupplyHelp").click(function () {
+        $("#frmSupplyHelp").ajaxSubmit({
+            url: "@Url.Action("_PartialSubmitSupplyHelp")",
+            type: "post",
+            success: function (data) {
+                if (data.Status == 200) {
+                    alert("订单提交成功！");
+                    winclose();
+                } else {
+                    alert("订单提交失败：" + data.Message);
+                }
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    });
+</script>

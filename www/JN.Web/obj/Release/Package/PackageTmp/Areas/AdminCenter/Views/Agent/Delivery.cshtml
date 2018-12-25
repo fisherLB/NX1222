@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+        <li></li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+
+        @using (Ajax.BeginForm("Delivery", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+        {
+            <div class="control-group">
+                <label class="control-label" for="mainwallet">提升经理的会员编号:</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="username" class="form-control" value="" />
+                    </div>
+                </div>
+            </div>
+
+    <div class="control-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="realname">申请等级:</label>
+        <div class="controls">
+            <div class="clearfix">
+                <select name="type" class="form-control">
+                    <option value="1">经理</option>
+                    <option value="2">专业团队</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+            @*<div class="control-group">
+                <label class="control-label" for="mainwallet">经理新编号:</label>
+
+                <div class="controls">
+                    <div class="clearfix">
+                        <input type="text" name="agentname" class="form-control" value="" />
+                    </div>
+                </div>
+            </div>*@
+
+            <div class="control-group">
+                <label class="control-label" for="phone">备注:</label>
+
+                <div class="controls">
+                    <textarea name="remark" class="form-control">系统指派</textarea>
+                </div>
+            </div>
+
+            <div class="hr hr-dotted"></div>
+
+            <div class="control-group">
+                <label class="control-label"></label>
+                <div class="controls">
+                    <button class="btn btn-info" type="reset">
+                        <i class="icon-undo bigger-110"></i>
+                        重置
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    
+                    <button class="btn btn-danger" type="submit">
+                        <i class="icon-ok bigger-110"></i>
+                        派送
+                    </button>
+
+                </div>
+            </div>
+        }
+
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<!-- page specific plugin scripts -->
+@section scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        function afterPost(data) {
+            if (data.Status == 200) {
+                alert("派送成功，即将为您跳转页面!");
+                location.href = document.referrer
+            } else {
+                alert("保存失败！错误信息：" + data.Message);
+            }
+        }
+    </script>
+}

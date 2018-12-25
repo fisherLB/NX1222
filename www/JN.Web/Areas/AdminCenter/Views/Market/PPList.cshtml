@@ -1,0 +1,224 @@
+﻿@{
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+
+@using Webdiyer.WebControls.Mvc
+@model JN.Web.Areas.AdminCenter.Models.CompositeppList
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@{Html.RegisterMvcPagerScriptResource();}
+<!-- PAGE CONTENT BEGINS -->
+<style>
+    tbody th, table.dataTable tbody td {
+        padding: 8px 6px;
+    }
+</style>
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab" style="margin-bottom:10px">
+                <li class="@(action == "pplist" ? "active" : "")">
+                    <a href="@(Url.Action("PPList"))">
+                        预付单匹配
+                    </a>
+                </li>
+                <li class="@(action == "pplist2" ? "active" : "")">
+                    <a href="@(Url.Action("PPList2"))">
+                        全额匹配
+                    </a>
+                </li>
+            </ul>
+            <div class="alert alert-block alert-success">
+                @*<i class="icon-ok green"></i> 当前匹配模式为：
+                    @if ((MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).MatchingMode ?? 0) == 0)
+                    {
+                    <span>手动模式</span><a style="margin-left:10px" href="@Url.Action("ChangeMathingMode")" class="btn btn-xs red">切换到自动模式</a><br />
+                    }
+                    else
+                    {
+                    <span>自动模式(在有提供帮助订单或接受帮助订单提交时触发)</span><a style="margin-left:10px" href="@Url.Action("ChangeMathingMode")" class="btn btn-xs red">切换到手动模式</a><br />
+                    }*@
+                <i class="icon-ok green"></i> 提供帮助订单最少排队时间为：@(cacheSysParam.SingleAndInit(x => x.ID == 3101).Value)分钟，即提供帮助订单创建后@(cacheSysParam.SingleAndInit(x => x.ID == 3101).Value)分钟才可在匹配管理列表展现。<br />
+                <i class="icon-ok green"></i> 重新排队订单优先排队，置顶订单优先排队。<br />
+            </div>
+            <div class="widget finances_summary">
+
+                <!-- Widget heading -->
+                <div class="widget-head">
+                    <h4 class="heading glyphicons retweet"><i></i> 匹配控制台</h4>
+                </div>
+                <!-- // Widget heading END -->
+
+                <div class="widget-body">
+                    <!-- Row -->
+                    <div class="row-fluid">
+
+                        <!-- Column -->
+                        <div class="well span4">
+                            待匹配提供方金额						<strong id="totalsupplyamount">$0</strong>
+                        </div>
+                        <div class="separator bottom center span4">
+                            <span class="glyphicons flash standard"><i></i></span><br /><br />
+                            @if ((MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).MatchingMode ?? 0) == 0)
+                            {
+                                <button type="button" class="btn btn-purple btn-xl blue" id="btnMatching">点击手动匹配</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-purple btn-xl" disabled> 《自动模式》</button>
+                            }
+                        </div>
+                        <div class="well span4">
+                            待匹配接受方金额						<strong id="totalacceptamount">$0</strong>
+                        </div>
+                        <!-- // Column END -->
+
+
+                    </div>
+                    <!-- // Row END -->
+                </div><!-- /span -->
+                <div class="row-fluid">
+                    <div class="span6">
+                        @using (Ajax.BeginForm("PPList", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_SupPPList", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_Form_SupplyHelp" } }))
+                        {
+                            <div class="input-group col-sm-8 no-padding-left" style="float:right;margin-bottom:5px;">
+                                <input type="text" id="SupplyHelps" name="SupplyHelps" style="width:250px" class="form-control search-query" placeholder="请输入要查询的关键字" />
+                                <input type="hidden" name="target" value="SupplyHelp" />
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-purple btn-sm">
+                                        查询
+                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        }
+                        <div id="_SupPPList">
+                            @Html.Partial("_SupPPList", Model.SupplyHelp)
+                        </div>
+                    </div>
+                    <div class="span6">
+                        @using (Ajax.BeginForm("PPList2", new RouteValueDictionary { { "id", "" } }, new AjaxOptions { UpdateTargetId = "_AccPPList", InsertionMode = InsertionMode.Replace, HttpMethod = "get" }, new RouteValueDictionary { { "id", "_Form_AcceptHelp" } }))
+                        {
+                            <div class="input-group col-sm-8 no-padding-left" style="float:right;margin-bottom:5px;">
+                                <input type="text" id="AcceptHelps" name="AcceptHelps" style="width:250px" class="form-control search-query" placeholder="请输入要查询的关键字" />
+                                <input type="hidden" name="target" value="AcceptHelp" />
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-purple btn-sm">
+                                        查询
+                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        }
+                        <div id="_AccPPList">
+                            @Html.Partial("_AccPPList", Model.AcceptHelp)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $('#btnMatching').on('click', function (e) {
+                var ids = "";
+                $("input[name='cksid']").each(function () {
+                    if (this.checked == true) {
+                        ids += "," + $(this).val();
+                    }
+                });
+
+
+                var ida = "";
+                $("input[name='ckaid']").each(function () {
+                    if (this.checked == true) {
+                        ida += "," + $(this).val();
+                    }
+                });
+                if (ids.length <= 0 || ida.length <= 0) alert("请您选择记录！");
+
+                $.post("@(Url.Action("doMatching"))", { ids: ids, ida: ida }, function (data) {
+                    if (data.result == "ok") {
+                        alert(data.refMsg);
+                        location.href = "@(Url.Action("PPList"))";
+                    }
+                });
+            });
+
+
+        })
+
+
+
+        function supply() {
+            //判断apple是否被选中
+            var bischecked = $('#cboxchecked').is(':checked');
+            if (bischecked == false) {
+                var smObj = document.getElementsByName("cksid");
+                for (var i = 0; i < smObj.length; i++)
+                    smObj[i].checked = false;
+            } else {
+                var smObj = document.getElementsByName("cksid");
+                for (var i = 0; i < smObj.length; i++)
+                    smObj[i].checked = true;
+            }
+            supplyamount();
+        }
+        function supplyamount() {
+            var Ivalue = 0;
+            var IsmObj = document.getElementsByName("cksid");
+            for (var i = 0; i < IsmObj.length; i++) {
+                if (IsmObj[i].checked) { //判断复选框是否选中
+                    Ivalue = parseFloat(Ivalue) + parseFloat(IsmObj[i].getAttribute("data-value")); //值的拼凑 .. 具体处理看你的需要,
+                }
+            }
+            $("#totalsupplyamount").html("$" + Ivalue);
+        }
+
+
+        function accept() {
+            //判断apple是否被选中
+            var bischecked = $('#ckaidchecked').is(':checked');
+
+            if (bischecked == false) {
+                var smObj = document.getElementsByName("ckaid");
+                for (var i = 0; i < smObj.length; i++)
+                    smObj[i].checked = false;
+            } else {
+                var smObj = document.getElementsByName("ckaid");
+                for (var i = 0; i < smObj.length; i++)
+                    smObj[i].checked = true;
+            }
+            acceptamount();
+        }
+
+
+        function acceptamount() {
+            var Ivalue = 0;
+            var IsmObj = document.getElementsByName("ckaid");
+            for (var i = 0; i < IsmObj.length; i++) {
+                if (IsmObj[i].checked) { //判断复选框是否选中
+                    Ivalue = parseFloat(Ivalue) + parseFloat(IsmObj[i].getAttribute("data-value")); //值的拼凑 .. 具体处理看你的需要,
+                }
+            }
+            $("#totalacceptamount").html("$" + Ivalue);
+        }
+
+    </script>
+}

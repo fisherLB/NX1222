@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- page specific plugin styles -->
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form id="validation-form" class="form-horizontal" enctype="multipart/form-data" method="post">
+                <div class="control-group">
+                    <label class="control-label" for="form-field-recipient">收件人：</label>
+
+                    <div class="controls">
+                        <span class="input-icon">
+                            <input type="text" name="recipient" value="@ViewBag.recipient" />
+                            <i class="icon-user"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="form-field-subject">主题：</label>
+
+                    <div class="controls">
+                        <div class="input-icon block col-xs-12 no-padding">
+                            <input maxlength="100" type="text" class="span8" name="subject" value="@ViewBag.subject" />
+                            <i class="icon-comment-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="form-field-subject">邮件类型：</label>
+
+                    <div class="controls">
+                        <select name="messagetype">
+                            @{ var paramlist = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 5100).OrderBy(x => x.Sort).ToList();
+                                if (paramlist.Count > 0)
+                                {
+                                    foreach (var param in paramlist)
+                                    {
+                                        <option value="@param.Name" @(ViewBag.messagetype == param.Name ? "selected" : "")>@param.Name</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="inline space-24 hidden-480"></span>
+                        内容:
+                    </label>
+
+                    <div class="controls">
+                        <textarea name="content" class="span8" rows="10">@ViewBag.content</textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <span class="inline space-24 hidden-480"></span>
+                        附件:
+                    </label>
+                    <div class="controls">
+                        <input type="file" name="imgurl" class="col-xs-6" />
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="clearfix form-actions">
+                    <label class="control-label">
+                        <span class="inline space-24 hidden-480"></span>
+
+                    </label>
+                    <div class="controls">
+                        <button class="btn btn-danger" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            发送
+                        </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btnb tn-info" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+<!-- page specific plugin scripts -->
+@section scripts{}

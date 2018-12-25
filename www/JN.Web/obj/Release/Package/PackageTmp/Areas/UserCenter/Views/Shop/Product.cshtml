@@ -1,0 +1,66 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.ShopProduct>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<link href="~/Theme/071701/shop.css" rel="stylesheet" />
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+<div class="row">
+    <div class="col-xs-12">
+        <div class="tab-pane" id="tab_2">
+            <!-- BEGIN FILTER -->
+            <div class="filter-v1 margin-top-10">
+                <ul class="mix-filter">
+@{
+    var paramList = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 6000 && x.IsUse).OrderBy(x => x.Sort).ToList();
+    foreach (var param in paramList)
+    {
+
+                    <li class="filter" data-filter="all">
+                        <a href="@Url.Action("Product", new { c = param.ID })">@param.Name</a>
+                    </li>
+        }
+    }
+                </ul>
+                <div class="row thumbnails">
+                @if (Model.Count > 0)
+{
+    for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="col-md-3 col-sm-6 mix category_1">
+            <div class="mix-inner">
+                <a href="@(Url.Action("Detail", new {  ID = Model[i].ID}))"><img class="img-responsive" src="@Model[i].ImageUrl"></a>
+                <div class="mix-details">
+                    <h5>@Model[i].ProductName</h5>
+                    <p>
+                        售价：<span>@Model[i].RealPrice.ToString("F2")</span><br />
+                        <a href="@(Url.Action("Detail", new {  ID = Model[i].ID}))" class="btn btn-primary btn-sm red" data-rel="tooltip" title="@T("立即购买")">
+                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                            @T("立即购买")
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    }
+}
+                </div>
+                <!--S 翻页页码  -->
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+                <!--E 翻页页码  -->
+            </div>
+            <!-- END FILTER -->
+        </div>
+        
+    </div><!-- /.col -->
+</div><!-- /.row -->
+

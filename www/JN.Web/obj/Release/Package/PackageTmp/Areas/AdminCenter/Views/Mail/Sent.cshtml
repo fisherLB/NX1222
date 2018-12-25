@@ -1,0 +1,310 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.Message>
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="li-new-mail pull-right">
+                    <a href="@Url.Action("write")" class="btn-new-mail">
+                        <span class="btn bt1n-small btn-purple no-border">
+                            <i class="icon-envelope bigger-130"></i>
+                            <span class="bigger-110">写邮件</span>
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("inbox")" data-target="inbox">
+                        <i class="blue icon-inbox bigger-130"></i>
+                        <span class="bigger-110">收件箱</span>
+                    </a>
+                </li>
+
+                <li class="active">
+                    <a href="@Url.Action("sent")" data-target="sent">
+                        <i class="orange icon-inbox bigger-130 "></i>
+                        <span class="bigger-110">发件箱</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="filter-bar margin-bottom-none">
+                <form method="get">
+
+                    <!-- Filter -->
+                    <div>
+                        <select name="datefiled" style="width: 80px;">
+                            <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                            <span class="add-on glyphicons calendar"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="numberfiled" style="width: 80px;">
+                            <option value="ID" @(Request["numberfiled"] == "ID" ? "selected" : "")>ID</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>从:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberform" class="input-mini" style="width: 30px;" value="@Request["numberform"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <label>到:</label>
+                        <div class="input-append">
+                            <input type="text" name="numberto" class="input-mini" style="width: 30px;" value="@Request["numberto"]" />
+                            <span class="add-on glyphicons euro"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div style="margin-left:10px">
+                        <select name="keyfiled" style="width: 80px;">
+                            <option value="FormUserName" @(Request["keyfiled"] == "FormUserName" ? "selected" : "")>发件人</option>
+                        </select>
+                    </div>
+                    <div>
+                        <div class="input-append">
+                            <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                            <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                        </div>
+                    </div>
+                    <!-- // Filter END -->
+                    <!-- Filter -->
+                    <div>
+                        <input type="hidden" name="IsAsc" value="0" />
+                        <input type="hidden" name="OrderFiled" value="ID" />
+                        <input type="submit" value="查询" />
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- // Filter END -->
+
+                </form>
+            </div>
+
+            <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                            <label>
+                                <input type="checkbox" class="ace" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th>收件人</th>
+                        <th>邮件类型</th>
+                        <th>邮件标题</th>
+                        <th>附件</th>
+                        <th>已读</th>
+                        <th>
+                            <i class="icon-time bigger-110 hidden-480"></i>
+                            时间
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Count > 0)
+                    {
+                        for (int i = 0; i < Model.Count; i++)
+                        {
+
+                            <tr>
+                                <td class="center">
+                                    <label>
+                                        <input type="checkbox" class="ace" name="ckid" value="@Model[i].ID" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td>
+                                    @Model[i].ToUserName
+                                </td>
+                                <td>
+                                    @Model[i].MessageType
+                                </td>
+                                <td>
+                                    <a href="###" onclick="javascript: winopen('详细内容', '@(Url.Action("SubMailContent"))?id=@Model[i].ID', 700);">@Model[i].Title</a>
+                                </td>
+                                <td>
+                                    @*@Model[i].Attachment*@
+                                    @if (!string.IsNullOrEmpty(Model[i].Attachment))
+                                    {
+                                        <a href="@Model[i].Attachment" target="_blank" class="no-js">
+                                            <span class="btn-action glyphicons btn-info picture">
+                                                <i></i>
+                                            </span>
+                                        </a>
+                                    }
+                                </td>
+                                <td>@(Model[i].IsRead ? "已读" : "未读")</td>
+                                <td class="hidden-480">@Model[i].CreateTime</td>
+                            </tr>
+
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="12" align="center" style="color:#999; line-height:50px">很抱歉，没有任何记录。</td></tr>
+                    }
+                </tbody>
+            </table>
+
+            <!-- // Table END -->
+            <!-- Options -->
+            <div class="separator top form-inline small">
+                <!-- With selected actions -->
+                <div class="pull-left checkboxs_actions ">
+                    <button id="multidelete" class="btn btn-primary">删除</button>
+                </div>
+                <!-- // With selected actions END -->
+                <!-- Pagination -->
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+                <div class="clearfix"></div>
+                <!-- // Pagination END -->
+
+            </div>
+            <!-- // Options END -->
+        </div>
+    </div><!-- /.row -->
+</div><!-- /.page-content -->
+
+<div class="modal container fade" id="childwindow" style="width: auto;" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="color-line"></div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="childwindowtitle"></h4>
+
+            </div>
+            <section id="childwindowiframe">
+                <div class="modal-body" style="text-align:center">
+                    <p style="text-align:center">载入中，请稍候...</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- page specific plugin scripts -->
+@section scripts{
+
+    <script>
+    function winopen(title, url, width) {
+        if (width != "") $('.modal-dialog').width(width);
+        $('#childwindowiframe').load(url);
+        $("#childwindowtitle").html(title);
+        $("#childwindow").modal();
+    }
+    function winclose() {
+        $("#childwindow").modal('hide');
+    }
+    jQuery(function ($) {
+        $('table th input:checkbox').on('click', function () {
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+            .each(function () {
+                this.checked = that.checked;
+                $(this).closest('tr').toggleClass('selected');
+            });
+        });
+        //select all
+        $('#makeread').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeRead"))", { ids: ids }, function (data) {
+                if (data == "ok") location.reload();
+            });
+        });
+
+        $('#makeunread').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeUnRead"))", { ids: ids }, function (data) {
+                if (data == "ok") location.reload();
+            });
+        });
+
+        $('#makeflag').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeFlag"))", { ids: ids }, function (data) {
+                if (data == "ok") location.reload();
+            });
+        });
+
+        $('#makeunflag').on('click', function (e) {
+            var ids = "";
+            $("input[name='ckid']").each(function () {
+                if (this.checked == true) {
+                    ids += "," + $(this).val();
+                }
+            });
+            $.post("@(Url.Action("MakeUnFlag"))", { ids: ids }, function (data) {
+                    if (data == "ok") location.reload();
+                });
+            });
+
+            $('#multidelete').on('click', function (e) {
+                var ids = "";
+                $("input[name='ckid']").each(function () {
+                    if (this.checked == true) {
+                        ids += "," + $(this).val();
+                    }
+                });
+                bootbox.confirm('您确定要删除这些邮件吗?', function (result) {
+                    if (result) {
+                        $.post("@(Url.Action("MultiDelete"))", { ids: ids }, function (data) {
+                            if (data == "ok") location.reload();
+                        });
+                    }
+                });
+            });
+    });
+    </script>
+}

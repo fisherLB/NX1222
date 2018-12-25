@@ -1,0 +1,132 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8, IE=9" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="~/Theme/16042302/style/index.css" rel="stylesheet" />
+    <script type="text/javascript" charset="utf-8" src="~/Theme/16042302/js/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" href="/theme/mmm/css/sweet-alert.css">
+    <script src="/theme/mmm/js/sweet-alert.min.js"></script>
+    <!--[if Ite IE 9]>
+    <script type="text/javascript" charset="utf-8" src="js/html5.js"></script>
+    <![endif]-->
+    <title>@(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName)</title>
+</head>
+<body class="Dloginbox">
+    <section>
+        <h1 class="loginlogo"><img style="width:300px;" src="@(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).LogoImage)" /></h1>
+        <div class="Dlogin">
+            <div class="Dloginmag">
+                <div class="login_t"><h2>@(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).SysName)安全入口</h2><div class="clear"></div></div>
+                <form action="/user/login/logins" method="post">
+                    <ul class="logininfo">
+                        <li>
+                            <div class="textbox">
+                                <em class="logins1"></em>
+                                <input type="text" class="username" name="username" placeholder="账号" />
+                                <div class="clear"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="textbox">
+                                <em class="logins2"></em>
+                                <input type="password" name="password" class="username" placeholder="密码" />
+                                <div class="clear"></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="textbox textbox50">
+                                <em class="logins3"></em>
+                                <input type="text" class="corders" name="code" placeholder="验证码" />
+                                <div class="clear"></div>
+                            </div>
+                            <img id="imgCode" src="/User/Login/GetCodeImage?id=1" onclick="ChangeCheckCode();return false;" style="border:none;" />
+                        </li>
+                        <li><input type="button" onclick="loginSubmit()" value="立即登录" class="loginbtn f" /><a href="/user/login/getpwd" target="_self" class="lgreg">忘记密码</a></li>
+                    </ul>
+                </form>
+                    <div class="loinreg">
+                        @*还没通行证？<a href="/user/Reg/index1022">立即注册</a><div>*@
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="loginfoot">
+      @(MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1).CopyInfo)
+    </footer>
+</body>
+</html>
+<script type="text/javascript">
+    function ChangeCheckCode() {
+        var oldUrl = $('#imgCode').attr("src");
+        $('#imgCode').attr("src", oldUrl + '1');
+    }
+
+    jQuery(function ($) {
+        $('#btnlogin').on('click', function () {
+            loginSubmit();
+        });
+
+
+    });
+
+    function loginSubmit() {
+        var name = $("input[name='username']").val();
+        var pwd = $("input[name='password']").val();
+        var code = $("input[name='code']").val();
+        var gourl = "/User/Login";
+        $.post(gourl, { username: name, password: pwd, code: code }, function (response) {
+
+            if (response.status == "ok") {
+                swal(
+                {
+                    title: "登录成功!",
+                    text: "2秒后为您跳转.",
+                    type: "success",
+                    timer: 2000,
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    //confirmButtonColor: "#DD6B55",
+                    //confirmButtonText: "再发布新文章",
+                    //cancelButtonText: "跳到列表页",
+                    closeOnConfirm: true
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        location.href = response.data;
+                    }
+                    else {
+                        location.href = response.data;
+                    }
+                });
+                return;
+            } else {
+                if (response.status == "errcode") ChangeCheckCode();
+                swal("操作被拒绝", response.data, "error");
+
+            }
+        })
+    }
+
+    if (document.addEventListener) {//如果是Firefox
+        document.addEventListener("keypress", fireFoxHandler, true);
+    } else {
+        document.attachEvent("onkeypress", ieHandler);
+    }
+    function fireFoxHandler(evt) {
+        //alert("firefox");
+        if (evt.keyCode == 13) {
+            loginSubmit();
+        }
+    }
+    function ieHandler(evt) {
+        //alert("IE");
+        if (evt.keyCode == 13) {
+            loginSubmit();
+        }
+    }
+</script>

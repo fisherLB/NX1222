@@ -1,0 +1,93 @@
+﻿@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    JN.Data.User Umodel = JN.Services.UserLoginHelper.CurrentUser();
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+}
+<link rel="stylesheet" href="/css/jquery.dataTables.min.css">
+<script src="~/Scripts/jquery.dataTables.min.js"></script>
+                    <div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <b>@T("抢单区") </b>
+          
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="">@T("抢单区")  </a>
+        </div>
+    </div>        
+                        <div class="row" style="margin-top:20px;">
+        <div class="col-lg-12">
+            <div class="mainlist">
+                <p style="font-weight:bold;">@T("匹配订单")</p>
+                <table id="datalistAccept" class="display datalist" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                             <th>@T("序号")</th>
+                            <th>@T("匹配单号")</th>
+                            <th>@T("订单金额")</th>
+                            <th>@T("预计可得利息")</th>
+                            <th>@T("付款方式")</th>
+                            <th>@T("匹配时间")</th>
+                            @*<th>@T("电话")</th>
+                            <th>@T("推荐人")</th>
+                            <th>@T("推荐人电话")</th>*@
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var i = 1;
+                            var matchlist = MvcCore.Unity.Get<JN.Data.Service.IMatchingService>().List(x => (x.IsOpenBuying ?? false) && x.Status == (int)JN.Data.Enum.MatchingStatus.UnPaid).OrderBy(x => x.ID).ToList();
+                            foreach (var item in matchlist)
+                            {
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.MatchingNo</td>
+                                        <td>@(item.MatchAmount.ToString("F2"))</td>
+                                        <td>@((item.MatchAmount * cacheSysParam.SingleAndInit(x => x.ID == 3007).Value.ToDecimal()).ToString("F2"))</td>
+                                        <td></td>
+                                        <td>@item.CreateTime</td>
+                                        @*<td>@onUser.Mobile</td>
+                                        <td>@onUser.RefereeUser</td>
+                                        <td>@(JN.BLL.users.GetModel(onUser.RefereeID) != null ? JN.BLL.users.GetModel(onUser.RefereeID).Mobile : "")</td>*@
+                                        <td>
+                                            <a class="btn btn-minier btn-primary activeuser" onclick="greabsingle(@item.ID)"  data-rel="tooltip" title="@T("我要抢单")">
+                                                @T("我要抢单")
+                                            </a>
+                                    </td>
+                                    </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            </div></div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(
+				function () {
+				    var tblistAccept = $('#datalistAccept').DataTable({ "ordering": false, "language": { "url": "/datatable.txt" } });
+				}
+			);
+
+            function greabsingle(id)
+            {
+                if(confirm("@T("您确定要抢这条订单吗?")")){
+                    $.post("@Url.Action("GrabSingle")", { mid: id }, function (data) {
+                        if (data.Status == 200) {
+                            alert("抢单成功，即将为您跳转！");
+                            location.reload();
+                        }
+                        else
+                            alert(data.Message);
+                    })
+                }
+            }
+
+        </script>
+

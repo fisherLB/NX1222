@@ -1,0 +1,292 @@
+﻿@model List<JN.Data.User>
+@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + sysEntity.Theme + ".cshtml";
+    var UserService = MvcCore.Unity.Get<JN.Data.Service.IUserService>();
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="@Url.Action("TreeView")" class="btn btn-primary">推荐图谱</a>
+                    @if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "double")
+            {
+                        <a href="@Url.Action("DoubleTrack")" class="btn btn-danger">安置图谱</a>
+                    }
+
+                    @if (JN.Services.Tool.ConfigHelper.GetConfigString("MemberAtlas") == "three")
+            {
+                        <a href="@Url.Action("ThreeTrack")" class="btn btn-danger">安置图谱</a>
+                    }
+                    <div class="widget-box">
+                        <table width="50%" border="0" align="center">
+                            <tr>
+                                <td><br /><br>
+                                        <form class="form-search form-inline" method="post">
+                                            <div class="row" style="margin-bottom:20px">
+                                                <div class="input-group col-md-8">
+                                                    <div class="no-padding-right" style="width:130px">
+                                                        <select name="kf" class="form-control">
+                                                            <option value="username">会员编号</option>
+                                                            <option value="mobile">手机号码</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="no-padding-left">
+                                                        <input type="text" name="kv" class="form-control search-query" placeholder="请输入要查询的关键字">
+                                                        <span class="input-group-btn">
+                                                            <button type="submit" class="btn btn-purple btn-sm">
+                                                                查询
+                                                                <i class="icon-search icon-on-right bigger-110"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                </td>
+                            </tr>
+                        </table>
+                        <br />
+                        <table width="100%" border="0">
+                            <tr>
+                                <td width="33%" align="center"><img src="/images/activation.png" height="32"><font color="344C99">@T("正式会员")</font></td>
+                                <td width="33%" align="center"><img src="/images/unactivation.png" height="32"><font color=344C99>@T("非正式会员")</font></td>
+                                <td width="33%" align="center"><img src="/images/empty.png" height="32"><font color=344C99>@T("空区")</font></td>
+                            </tr>
+                        </table>
+                        <br />
+                        <br />
+                        <br />
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                            
+                            <tr>
+                                <td colspan="16" align="center" valign="middle">
+                                    @{
+                                        if (Model[0].ID > 0)
+                                        {
+                                            int leftcount = 0;
+                                            int _parentid = Model[0].ID;
+                                            var leftchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 1 && x.IsActivation);
+
+                                            if (leftchilduser != null)
+                                            {
+                                                leftcount = UserService.List(x => (x.ParentPath.Contains("," + leftchilduser.ID + ",") || x.ParentID == leftchilduser.ID) && x.IsActivation).Count() + 1;
+                                            }
+
+                                            int rightcount = 0;
+                                            var rightchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 2 && x.IsActivation);
+                                            if (rightchilduser != null)
+                                            {
+                                                rightcount = UserService.List(x => (x.ParentPath.Contains("," + rightchilduser.ID + ",") || x.ParentID == rightchilduser.ID) && x.IsActivation).Count() + 1;
+                                            }
+                                            <a href="?parentid=@Model[0].ID" data-rel="tooltip" title="@T("左区业绩")：@(leftcount)  @T("右区业绩")：@(rightcount)"><img src='/images/@(Model[0].IsActivation ? "activation" : "unactivation").png' height="32" /><br>@MvcHtmlString.Create((Model[0].IsAgent ?? false) ? "<font style='color:#ff6a00'>" + (Model[0].ChildPlace == 1 ? "(左)" : "(右)") + Model[0].UserName + "</font>" : Model[0].UserName)</a>
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（@T("空")）</span>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="16"><div align="center"><img src="/images/line1.gif" width="360" height="9"></div></td>
+                            </tr>
+                            <tr>
+                                @for (int i = 1; i <= 2; i++)
+                                {
+                                    <td align="center" colspan="8">
+                                        @{
+                                            if (Model[i].ID > 0)
+                                            {
+                                                int leftcount = 0;
+                                                int _parentid = Model[i].ID;
+                                                var leftchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 1 && x.IsActivation);
+                                                if (leftchilduser != null)
+                                                {
+                                                    leftcount = UserService.List(x => (x.ParentPath.Contains("," + leftchilduser.ID + ",") || x.ParentID == leftchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+
+                                                int rightcount = 0;
+                                                var rightchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 2 && x.IsActivation);
+                                                if (rightchilduser != null)
+                                                {
+                                                    rightcount = UserService.List(x => (x.ParentPath.Contains("," + rightchilduser.ID + ",") || x.ParentID == rightchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+
+                                        <a href="?parentid=@Model[i].ID" data-rel="tooltip" title="@T("左区业绩")：@(leftcount)  @T("右区业绩")：@(rightcount)"><img src='/images/@(Model[i].IsActivation ? "activation" : "unactivation").png' height="32" /><br>@MvcHtmlString.Create((Model[i].IsAgent ?? false) ? "<font style='color:#ff6a00'>" + (Model[i].ChildPlace == 1 ? "(左)" : "(右)") + Model[i].UserName + "</font>" : Model[i].UserName)</a>
+                                    }
+                                    else
+                                    {
+                                        if (Model[i].ParentID > 0 && UserService.Single(Model[i].ParentID).IsActivation)
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（<a href="/UserCenter/User/Add?ParentID=@Model[i].ParentID&ChildPlace=@i">@T("注册")</a>）</span>
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（@T("空")）</span>
+                                        }
+                                    }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="8"><div align="center"><img src="/images/line2.gif"></div></td>
+                                <td align="center" colspan="8"><div align="center"><img src="/images/line2.gif"></div></td>
+                            </tr>
+                            <tr>
+                                @for (int i = 3; i <= 6; i++)
+                                {
+                                    <td align="center" colspan="4">
+                                        @{
+                                            if (Model[i].ID > 0)
+                                            {
+                                                int leftcount = 0;
+                                                int _parentid = Model[i].ID;
+                                                var leftchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 1 && x.IsActivation);
+                                                if (leftchilduser != null)
+                                                {
+                                                    leftcount = UserService.List(x => (x.ParentPath.Contains("," + leftchilduser.ID + ",") || x.ParentID == leftchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+
+                                                int rightcount = 0;
+                                                var rightchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 2 && x.IsActivation);
+                                                if (rightchilduser != null)
+                                                {
+                                                    rightcount = UserService.List(x => (x.ParentPath.Contains("," + rightchilduser.ID + ",") || x.ParentID == rightchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+                                        <a href="?parentid=@Model[i].ID" data-rel="tooltip" title="@T("左区业绩")：@(leftcount)  @T("右区业绩")：@(rightcount)"><img src='/images/@(Model[i].IsActivation ? "activation" : "unactivation").png' height="32" /><br>@MvcHtmlString.Create((Model[i].IsAgent ?? false) ? "<font style='color:#ff6a00'>" + (Model[i].ChildPlace == 1 ? "(左)" : "(右)") + Model[i].UserName + "</font>" : Model[i].UserName)</a>
+                                    }
+                                    else
+                                    {
+                                        if (Model[i].ParentID > 0 && UserService.Single(Model[i].ParentID).IsActivation)
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（<a href="/UserCenter/User/Add?ParentID=@Model[i].ParentID&ChildPlace=@(i % 2 == 0 ? "2" : "1")">@T("注册")</a>）</span>
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（@T("空")）</span>
+                                        }
+                                    }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="4"><div align="center"><img src="/images/line3.gif"></div></td>
+                                <td align="center" colspan="4"><div align="center"><img src="/images/line3.gif"></div></td>
+                                <td align="center" colspan="4"><div align="center"><img src="/images/line3.gif"></div></td>
+                                <td align="center" colspan="4"><div align="center"><img src="/images/line3.gif"></div></td>
+                            </tr>
+                            <tr>
+                                @for (int i = 7; i <= 14; i++)
+                                {
+                                    <td align="center" colspan="2">
+                                        @{
+                                            if (Model[i].ID > 0)
+                                            {
+                                                int leftcount = 0;
+                                                int _parentid = Model[i].ID;
+                                                var leftchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 1 && x.IsActivation);
+                                                if (leftchilduser != null)
+                                                {
+                                                    leftcount = UserService.List(x => (x.ParentPath.Contains("," + leftchilduser.ID + ",") || x.ParentID == leftchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+
+                                                int rightcount = 0;
+                                                var rightchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 2 && x.IsActivation);
+                                                if (rightchilduser != null)
+                                                {
+                                                    rightcount = UserService.List(x => (x.ParentPath.Contains("," + rightchilduser.ID + ",") || x.ParentID == rightchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+                                        <a href="?parentid=@Model[i].ID" data-rel="tooltip" title="@T("左区业绩")：@(leftcount)  @T("右区业绩")：@(rightcount)"><img src='/images/@(Model[i].IsActivation ? "activation" : "unactivation").png' height="32" /><br>@MvcHtmlString.Create((Model[i].IsAgent ?? false) ? "<font style='color:#ff6a00'>" + (Model[i].ChildPlace == 1 ? "(左)" : "(右)") + Model[i].UserName + "</font>" : Model[i].UserName)</a>
+                                    }
+                                    else
+                                    {
+                                        if (Model[i].ParentID > 0 && UserService.Single(Model[i].ParentID).IsActivation)
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（<a href="/UserCenter/User/Add?ParentID=@Model[i].ParentID&ChildPlace=@(i % 2 == 0 ? "2" : "1")">@T("注册")</a>）</span>
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（@T("空")）</span>
+                                        }
+                                    }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                            <tr>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                                <td align="center" colspan="2"><div align="center"><img src="/images/line4.gif"></div></td>
+                            </tr>
+                            <tr>
+                                @for (int i = 15; i <= 30; i++)
+                                {
+                                    <td align="center">
+                                        @{
+                                            if (Model[i].ID > 0)
+                                            {
+                                                int leftcount = 0;
+                                                int _parentid = Model[i].ID;
+                                                var leftchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 1 && x.IsActivation);
+                                                if (leftchilduser != null)
+                                                {
+                                                    leftcount = UserService.List(x => (x.ParentPath.Contains("," + leftchilduser.ID + ",") || x.ParentID == leftchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+
+                                                int rightcount = 0;
+                                                var rightchilduser = UserService.Single(x => x.ParentID == _parentid && x.ChildPlace == 2 && x.IsActivation);
+                                                if (rightchilduser != null)
+                                                {
+                                                    rightcount = UserService.List(x => (x.ParentPath.Contains("," + rightchilduser.ID + ",") || x.ParentID == rightchilduser.ID) && x.IsActivation).Count() + 1;
+                                                }
+                                        <a href="?parentid=@Model[i].ID" data-rel="tooltip" title="@T("左区业绩")：@(leftcount)  @T("右区业绩")：@(rightcount)"><img src='/images/@(Model[i].IsActivation ? "activation" : "unactivation").png' height="32" /><br>@MvcHtmlString.Create((Model[i].IsAgent ?? false) ? "<font style='color:#ff6a00'>" + (Model[i].ChildPlace == 1 ? "(左)" : "(右)") + Model[i].UserName + "</font>" : Model[i].UserName)</a>
+                                    }
+                                    else
+                                    {
+                                        if (Model[i].ParentID > 0 && UserService.Single(Model[i].ParentID).IsActivation)
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（<a href="/UserCenter/User/Add?ParentID=@Model[i].ParentID&ChildPlace=@(i % 2 == 0 ? "2" : "1")">@T("注册")</a>）</span>
+                                        }
+                                        else
+                                        {
+                                            <img src="/images/empty.png" height="32"><br /><span>（@T("空")）</span>
+                                        }
+                                    }
+                                        }
+                                    </td>
+                                }
+                            </tr>
+                        </table>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('[data-rel=tooltip]').tooltip({ container: 'body' });
+    })
+</script>

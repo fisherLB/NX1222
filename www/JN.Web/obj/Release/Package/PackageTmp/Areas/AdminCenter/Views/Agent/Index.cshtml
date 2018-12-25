@@ -1,0 +1,194 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.User>
+@{
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <!-- PAGE CONTENT BEGINS -->
+        <div class="filter-bar margin-bottom-none">
+            <form method="get">
+
+                <!-- Filter -->
+                <div>
+                    <select name="datefiled" style="width: 80px;">
+                        <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                        <option value="ActivationTime" @(Request["datefiled"] == "ActivationTime" ? "selected" : "")>激活时间</option>
+                    </select>
+                </div>
+                <div>
+                    <label>从:</label>
+                    <div class="input-append">
+                        <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                        <span class="add-on glyphicons calendar"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div>
+                    <label>到:</label>
+                    <div class="input-append">
+                        <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                        <span class="add-on glyphicons calendar"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div style="margin-left:10px">
+                    <select name="numberfiled" style="width: 80px;">
+                        <option value="ID" @(Request["numberfiled"] == "ID" ? "selected" : "")>ID</option>
+                    </select>
+                </div>
+                <div>
+                    <label>从:</label>
+                    <div class="input-append">
+                        <input type="text" name="numberform" class="input-mini" style="width: 30px;" value="@Request["numberform"]" />
+                        <span class="add-on glyphicons euro"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div>
+                    <label>到:</label>
+                    <div class="input-append">
+                        <input type="text" name="numberto" class="input-mini" style="width: 30px;" value="@Request["numberto"]" />
+                        <span class="add-on glyphicons euro"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div style="margin-left:10px">
+                    <select name="keyfiled" style="width: 80px;">
+                        <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>用户名</option>
+                        <option value="Mobile" @(Request["keyfiled"] == "Mobile" ? "selected" : "")>手机</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="input-append">
+                        <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                        <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div>
+                    <input type="hidden" name="IsAsc" value="0" />
+                    <input type="hidden" name="OrderFiled" value="ID" />
+                    <input type="hidden" name="IsExport" value="0" />
+                    <input type="submit" onclick="$('input[name=\'IsExport\']').val(0)" value="查询" />
+                    <input type="submit" onclick="$('input[name=\'IsExport\']').val(1)" value="导出" />
+                </div>
+                <div class="clearfix"></div>
+                <!-- // Filter END -->
+
+            </form>
+        </div>
+        <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center">
+                    </th>
+                    <th>经理编号</th>
+                    <th>原会员编号</th>
+                    <th>真实姓名</th>
+                    @*<th>性别</th>*@
+                    <th>手机号码</th>
+                    <th>级别</th>
+                    <th>专业团队</th>
+                    @*<th>报单人数</th>*@
+                    @*<th>累计津贴</th>*@
+                    <th>状态</th>
+                    <th>
+                        <i class="icon-time bigger-110 hidden-480"></i>
+                        升级时间
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count > 0)
+                {
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+
+                        <tr>
+                            <td class="center text-muted">@(i + 1)</td>
+                            <td>@Model[i].AgentName</td>
+                            <td>@Model[i].UserName</td>
+                            <td>@Model[i].RealName</td>
+                            @*<td>@Model[i].Sex</td>*@
+                            <td>@Model[i].Mobile</td>
+                            <td>@(Model[i].IsAgent == true ? "经理" : "会员")@*@(typeof(JN.Data.Enum.AgentLevel).GetEnumDesc(Model[i].AgentLevel))*@</td>
+                            <td>@(Model[i].IsProTeam == true ? "是" : "否")@*@(typeof(JN.Data.Enum.AgentLevel).GetEnumDesc(Model[i].AgentLevel))*@</td>
+                            @*<td>@{
+                                    int userid = Model[i].ID;
+                                }
+                                @(MvcCore.Unity.Get<JN.Data.Service.UserService>().List(x => x.AgentID == userid && x.IsActivation).Count()))
+                            </td>*@
+                            @*<td>@Model[i].Addup1802</td>*@
+                            <td class="hidden-480">@(Model[i].IsLock ? "已冻结" : (Model[i].IsActivation ? "已激活" : "待审核"))</td>
+                            <td class="hidden-480">@Model[i].ApplyAgentTime</td>
+                            <td>
+                                <div class="btn-group">
+                                    @*<a href="###" class="btn-action glyphicons remove btn-info" data-value="@Model[i].ID" data-rel="tooltip" title="取消单中心资格">
+                                        <i></i>
+                                    </a>*@
+
+                                    @*@if (JN.Services.Tool.ConfigHelper.GetConfigInt("Agent_MaxLevel") > 0)
+                                        {
+                                            <a href="###" class="btn btn-xs btn-danger chagentlevel" data-value="@Model[i].ID" data-rel="tooltip" title="设置会员级别">
+                                                <i class="icon-exchange bigger-120"></i>
+                                            </a>
+                                        }*@
+                                </div>
+                            </td>
+                        </tr>
+
+                                        }
+                                    }
+            </tbody>
+        </table>
+        <div class="separator top form-inline small">
+            <!-- Pagination -->
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+            <div class="clearfix"></div>
+            <!-- // Pagination END -->
+        </div>
+    </div><!-- /.table-responsive -->
+</div><!-- /.page-content -->
+@section scripts{
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(".remove").on("click", function () {
+                var id = $(this).attr("data-value");
+                bootbox.confirm('您确定要取消该商务中心资格吗?', function (result) {
+                    if (result) {
+                        location = '@(Url.Action("doCancel"))/' + id;
+                    }
+                });
+            });
+            $(".chagentlevel").on("click", function () {
+                var id = $(this).attr("data-value");
+                bootbox.prompt('请输入商务中心级别：', function (result) {
+                    if (result)
+                        $.post('@(Url.Action("MakeLevel"))', { id: id, level: result }, function (data) {
+                            if (data == 'ok') location.reload();
+                        });
+                });
+            });
+        })
+    </script>
+}

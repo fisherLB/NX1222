@@ -1,0 +1,137 @@
+﻿@model JN.Data.User
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+
+<div class="mainarea" id="mainarea">
+    <div class="maintitle">
+        <div class="maintitleleft">
+            <b>@T("激活币转账") </b>
+
+        </div>
+        <div class="maintitleright">
+            <a href="/usercenter/home">@T("首页")</a>
+            &nbsp;/&nbsp;
+            <a href="">@T("激活币转账")  </a>
+        </div>
+    </div>
+    <div class="mainoprate">
+        <div class="row" style="margin-top:20px;">
+            <div class="col-xs-12">
+
+
+                @using (Ajax.BeginForm("JihuoTransfer", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+                {
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="poundage">@T("转账会员"):</label>
+
+                        <div class="col-xs-12 col-sm-2">
+                            <input type="text" id="tousername" name="tousername" class="form-control" />
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="mainwallet">@T("当前" + cacheSysParam.Single(x => x.ID == 2004).Name + "余额"):</label>
+                        @*@{
+                            decimal fromWallet = 0;
+                            if (ViewBag.fromCoin == 2001)
+                            {
+                                fromWallet = Model.Wallet2001;
+                            }
+                            else if (ViewBag.fromCoin == 2002)
+                            {
+                                fromWallet = Model.Wallet2002;
+                            }
+                                }*@
+                        <div class="col-xs-12 col-sm-2">
+                            <div class="clearfix">
+                                <input type="text" name="mainwallet" class="form-control" value="@Model.Wallet2004.ToString()" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="poundage">@T("兑换手续费率"):</label>
+
+                            <div class="col-xs-12 col-sm-2">
+                                <input type="text" id="poundage" class="form-control" value="@ViewBag.Poundage" readonly="readonly" />
+                            </div>
+                        </div>*@
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="drawmoney">@T("转账数量"):</label>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="input-group">
+                                <input type="text" id="takenumber" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:100px" value="0" />
+                                <input type="text" style="width: 70px" readonly class="form-control" value="×@(ViewBag.Beisu) = " />
+                                <input type="text" name="drawmoney" style="width:100px" class="form-control" value="0" readonly="readonly" />
+                                <input type="hidden" id="takemultiple" value="@ViewBag.Beisu">
+
+                            </div>
+                            @*<span style="color:#f00; line-height:25px">@T("数量必须为" + ViewBag.Beisu + "的倍数")</span>*@
+
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="actualdrawmoney">@T("兑换数量"):</label>
+
+                            <div class="col-xs-12 col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="icon-usd"></i>
+                                    </span>
+
+                                    <input type="text" name="actualdrawmoney" class="form-control" value="0" style="width:123px" readonly="readonly" />
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="hr hr-dotted"></div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="reset">
+                                <i class="icon-undo bigger-110"></i>
+                                @T("重置")
+                            </button>
+
+                            &nbsp; &nbsp; &nbsp;
+                            <button class="btn btn-danger" type="submit" id="btn">
+                                <i class="icon-ok bigger-110"></i>
+                                @T("转账")
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.table-responsive -->
+        </div><!-- /span -->
+    </div>
+</div>
+<!-- PAGE CONTENT ENDS -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    function afterPost(data) {
+        $('#btn').attr('disabled', "true");
+        if (data.Status == 200) {
+            alert("转账成功，即将为您跳转页面!");
+            location.reload();
+        } else {
+            alert("转账失败！错误信息：" + data.Message);
+            $('#btn').removeAttr("disabled");
+        }
+    }
+    jQuery(function ($) {
+        $("#takenumber").on('keyup', function () {
+            $("input[name='drawmoney']").val(parseInt($("#takenumber").val()) * parseInt($("#takemultiple").val()));
+            //$("input[name='actualdrawmoney']").val(parseFloat($("#takenumber").val()) * parseFloat($("#takemultiple").val()) * (1 - parseFloat($("#poundage").val())));
+        });
+    });
+</script>

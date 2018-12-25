@@ -1,0 +1,186 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Author" contect="http://www.webqin.net" />
+    <title>@T("官网")</title>
+    <link type="text/css" href="/css/css.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/jquery.fullPage.css" />
+    <link href="/css/theme.css" rel="stylesheet" />
+    <link href="/css/font-awesome.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/js.js"></script>
+    <script src="/js/jquery.fullPage.min.js"></script>
+    <script>
+$(function(){
+	$('#dowebok').fullpage({
+		anchors: ['page1', 'page2', 'page3', 'page4','page5','page6',],
+		menu: '#menu',
+		/*'navigation': true,
+        'navigationPosition': 'right',*/
+		//小点导航颜色
+		afterLoad: function(anchorLink, index){
+			if(index == 1){
+				$("#fp-nav li a span").css("background","#B0B0B0");
+				$("#fp-nav li a").removeClass("active")
+				$("#fp-nav li:eq(0) a").addClass("active");
+				$("#fp-nav li a.active span").css("background","#7BF1FE");
+				$(".navFixed .nav li strong").css("color","#fff")
+				$(".navFixed .navClick").css("background-color","inherit")
+			}
+			if(index == 2){
+				$("#fp-nav li a span").css("background","#B0B0B0");
+				$("#fp-nav li a").removeClass("active")
+				$("#fp-nav li:eq(1) a").addClass("active");
+				$("#fp-nav li a.active span").css("background","#FDC806");
+				$(".navFixed .nav li strong").css("color","#fff")
+				$(".navFixed .navClick").css("background-color","#FDC806")
+			}
+			if(index == 3){
+				$("#fp-nav li a span").css("background","#B0B0B0");
+				$("#fp-nav li a").removeClass("active")
+				$("#fp-nav li:eq(2) a").addClass("active");
+				$("#fp-nav li a.active span").css("background","#ED6E47");
+				$(".navFixed .nav li strong").css("color","#000")
+				$(".navFixed .navClick").css("background-color","#ED6E47")
+			}
+			if(index == 4){
+				$("#fp-nav li a span").css("background","#B0B0B0");
+				$("#fp-nav li a").removeClass("active")
+				$("#fp-nav li:eq(3) a").addClass("active");
+				$("#fp-nav li a.active span").css("background","#46CCDB");
+				$(".navFixed .nav li strong").css("color","#fff")
+				$(".navFixed .navClick").css("background-color","#46CCDB")
+			}
+			if(index == 5){
+				$("#fp-nav li a span").css("background","#B0B0B0");
+				$("#fp-nav li a").removeClass("active")
+				$("#fp-nav li:eq(4) a").addClass("active");
+				$("#fp-nav li a.active span").css("background","#000");
+				$(".navFixed .nav li strong").css("color","#000")
+				$(".navFixed .navClick").css("background-color","#000")
+			}
+			if(index == 6){
+				$("#fp-nav li a span").css("background","#B0B0B0");
+				$("#fp-nav li a").removeClass("active")
+				$("#fp-nav li:eq(5) a").addClass("active");
+				$("#fp-nav li a.active span").css("background","#173D86");
+				$(".navFixed .nav li strong").css("color","#fff")
+				$(".navFixed .navClick").css("background-color","#173D86")
+			}
+
+		}
+
+	});
+});
+    </script>
+
+</head>
+
+<body>
+
+
+    <div id="dowebok">
+        <!--内容1-->
+        <div class="section">
+            <div class="headerbg">
+                <div class="widths">
+                    <!--语言选择-->
+                    <h1 class="logo">
+                        <select style="background:#009be1;border:#009be1 2px solid;width:117px;height:36px;line-height:36px;color: #fff; font-size:16px;text-align:center; border-radius:6px;display:none" onchange="location.href='?lang=' + this.options[this.options.selectedIndex].value">
+                            <option style="color:#000;" value="zh-CN" @(Request["lang"] == "zh-CN" ? "selected" : "")>@T("中文")</option>
+                            <option style="color:#000;" value="en-US" @(Request["lang"] == "en-US" ? "selected" : "")>@T("英文")</option>
+                        </select>
+                    </h1>
+                    <div class="clears"></div>
+                </div><!--widths/-->
+                <div class="widths">
+                    <h1 class="logo_pic"><a href="#"><img src="/images/logo1.png" /></a></h1>
+                    <div class="clears"></div>
+                </div>
+                <div class="headPosition">
+                </div><!--headPosition/-->
+                <div class="headText">
+                    <div class="hdtx1">Double Star <span style="color: #07F9FA;">@T("双子星")</span>@T("是采用目前全球最前沿的金融投资理念'众筹+模式'")</div>
+                    <div class="hdtx2">@T("结合虚拟币的交易平台形式，创造出来当今最前端的双币循环交易平台")</div>
+                </div><!--headText/-->
+            </div><!--headerbg/-->
+        </div>
+        <!--内容2-->
+        <div class="section newbg">
+            <div class="title"><img src="/images/6.png" width="550" height="350" /></div>
+            <div class="Article">
+                <div class="alignCenter" style="width: 700px;margin: 20px auto;font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@T("根据世界银行发布的最新众筹报告，世界银行预测到2025年，世界众筹规模将达到3000亿美元，中国众筹规模将达到500亿美元，将成为全球最大的众筹市场。")</div>
+                <br /><br />
+                <div class="alignCenter"><img src="/images/about1.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/about2.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/about3.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/about4.jpg" /></div>
+            </div>
+        </div>
+        <!--内容3-->
+        <div class="section">
+            <div class="title"><img src="/images/7.png" width="650" height="350" /></div><br /><br />
+            <div class="alignCenter"><img src="/images/3.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/4.jpg" /></div>
+        </div>
+        <!--内容4-->
+        <div class="section mediaBg">
+            <div class="title"><img src="/images/8.png" width="650" height="350" /></div><br /><br />
+            <div class="alignCenter" style="width: 700px;margin: 0 auto; font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@T("Double Star里有两种币，X币和H币。根据市场行情和价格走势资金在双币间循环流通，一笔资金双向投资双层收益，从而收益最大化")
+</div><br /><br />
+            <div class="alignCenter"><img src="/images/5.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/6.jpg" /></div>
+        </div>
+        <!--内容5-->
+        <div class="section" id="productboxs">
+            <div class="alignCenter"><img src="/images/7.jpg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/8.jpg" /></div>
+        </div>
+        <!--内容6-->
+        <div class="section mediaBg">
+            <div class="title"><img src="/images/9.png" width="700" height="200" style="margin-top:-120px;" /></div>
+            <div class="alignCenter" style="position: relative;top: -30px;"><img src="/images/10.png" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/11.png" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/12.png" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/13.png" /></div>
+            <div class="cta" style="height:150px">
+                <h2 style="font-size:25px;margin: 20px auto 20px;font-weight: 100;text-transform: uppercase;letter-spacing: 1px;">@T("通往") <span class="highlight">@T("财富成功")</span>@T("之路")</h2>
+                <p style="margin-bottom:0px;"><a href="/usercenter/login" class="btn btn-primary" role="button">@T("现在登录")</a><a id="trigger - overlay" class="btn btn - empty" href="/usercenter/reg">@T("立即注册")</a></p>
+
+                <a href="#page1" class="backTop"><img src="/images/backtop5.png" width="42" height="42" style="right: 20pt;position: absolute;bottom: 35px;"background: #091754;"
+ /></a>
+            </div>
+            <footer id="contact" class="footer">
+                <div class="container" style="width:700px;margin: 0 auto;">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="copy">
+                                <p>© 2014 Template by <a href="#" target="_blank"> @T("双子星网站")</a></p>
+                            </div>
+                            <div class="social">
+                                <ul style="padding:0;">
+                                    <li class="facebook"><a class="icon bicon1" href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="twitter"><a class="icon bicon2" href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="rss"><a class="icon bicon3" href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="google"><a class="icon bicon4" href="#" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+
+    </div>
+
+    <!--滚动的小圆点-->
+    <div id="fp-nav" style="color: rgb(0, 0, 0); margin-top: -83.5px;" class="right">
+        <ul>
+            <li><a href="#page1" class="active"><span></span></a></li>
+            <li><a href="#page2"><span></span></a></li>
+            <li><a href="#page3"><span></span></a></li>
+            <li><a href="#page4"><span></span></a></li>
+            <li><a href="#page5"><span></span></a></li>
+            <li><a href="#page6"><span></span></a></li>
+        </ul>
+    </div>
+
+</body>
+</html>

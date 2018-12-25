@@ -1,0 +1,33 @@
+﻿@model Webdiyer.WebControls.Mvc.PagedList<JN.Data.WalletLog>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th></th>
+        <th>@T("编号")</th>
+        <th>@T("+收入/-支出")</th>
+        <th>@T("新余额")</th>
+        <th>@T("备注")</th>
+        <th>@T("日期")</th>
+    </tr>
+    @{ int i = 0;}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(Model.StartItemIndex + i++)</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChangeMoney)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+        </tr>
+    }
+</table>

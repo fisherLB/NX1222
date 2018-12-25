@@ -1,0 +1,3253 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcCore</name>
+    </assembly>
+    <members>
+        <member name="M:MvcCore.UnityHelper.RequestEnd``1">
+            <summary>
+            释放数据工厂
+            </summary>
+            <typeparam name="TIDatabaseFactory">数据工厂类型</typeparam>
+        </member>
+        <member name="M:MvcCore.UnityHelper.Bind``2(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>
+            绑定接口与实现类
+            </summary>
+            <typeparam name="TFrom">接口类型</typeparam>
+            <typeparam name="TTo">接口的实现类型</typeparam>
+            <param name="container">Unity 绑定对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.UnityHelper.Bind(Microsoft.Practices.Unity.IUnityContainer,System.Type,System.Type)">
+            <summary>
+            绑定接口与实现类
+            </summary>
+            <param name="container">Unity 绑定对象</param>
+            <param name="InterfaceType">接口类型</param>
+            <param name="classType">实现类类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.UnityHelper.LoadAssemblyAndBind(Microsoft.Practices.Unity.IUnityContainer,System.String,System.String[])">
+            <summary>
+            读取DLL并且绑定实现接口
+            </summary>
+            <param name="container">Unity 绑定对象</param>
+            <param name="assemblyString">DLL文件信息</param>
+            <param name="namespances">接口所在的命名空间</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Controls.DatePickerInput.DatePicker``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Object,System.Boolean)">
+            <summary>
+            带时间的日期输入框
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <param name="readOnly"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MvcCore.Controls.ReturnResult.Status">
+            <summary>
+            返回状态码，与 HttpStatusCode 一致
+            </summary>
+        </member>
+        <member name="T:MvcCore.Enum.MessageType">
+            <summary>
+            弹出框类型
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.SuccessNone">
+             <summary>
+            成功，仅显示，不执行任何动作
+             </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.FailNone">
+            <summary>
+            失败，仅显示，不执行任何动作
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.RefreshSelf">
+             <summary>
+            成功，并刷新当前页面
+             </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.Return">
+             <summary>
+            成功，并点击当前页面的返回按钮
+             </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.Close">
+            <summary>
+            成功并关闭弹出窗
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.RedirectSelf">
+            <summary>
+            成功并导航到指定页面
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.RefreshFather">
+             <summary>
+            成功，并刷新父页面
+             </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.RedirectFather">
+            <summary>
+            成功并将父页面导航到指定页面
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.LoadFatherAllAjax">
+            <summary>
+            成功并重新加载父页面ajax
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.LoadFatherCustomAjax">
+            <summary>
+            成功并重新加载指定父页面ajax
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.LoadAjax">
+            <summary>
+            成功并重新加载指定ajax
+            </summary>
+        </member>
+        <member name="F:MvcCore.Enum.MessageType.CallBack">
+            <summary>
+            成功并执行回调函数
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.Result.IsSuccess">
+            <summary>
+            成功状态
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.Result.Info">
+            <summary>
+            自定义信息
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.Result.OutTradeNo">
+            <summary>
+            商户订单号
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.Result.TradeNo">
+            <summary>
+            支付宝订单号
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.Partner">
+            <summary>
+            合作身份者ID，以2088开头由16位纯数字组成的字符串
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:MvcCore.Extensions.Alipay.AlipayConfig.Key" -->
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.SellerAccountName">
+            <summary>
+            卖家支付宝账户
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.RequestID">
+            <summary>
+            请求号,必填，须保证每次请求都是唯一
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.OutTradeNO">
+            <summary>
+            商户网站订单系统中唯一订单号
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.Subject">
+            <summary>
+            订单名称，最长50
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.TotalFee">
+            <summary>
+            付款总金额
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.NotifyURL">
+            <summary>
+            服务器异步通知页面路径
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.CallBackURL">
+            <summary>
+            页面跳转同步通知页面路径
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.MerchantURL">
+            <summary>
+            操作中断返回地址
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Alipay.AlipayConfig.requestDataToken">
+            <summary>
+            请求业务参数
+            </summary>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.BuildPayment">
+            <summary>
+            构建支付提交，action return Content(Result);
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.NotifyUrl">
+            <summary>
+            支付宝服务器返回异步通知
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.CallBackUrl">
+            <summary>
+            页面跳转同步通知页面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.BuildRequest(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            建立请求，以模拟远程HTTP的POST请求方式构造并获取支付宝的处理结果
+            </summary>
+            <param name="GATEWAY_NEW">支付宝网关地址</param>
+            <param name="sParaTemp">请求参数数组</param>
+            <returns>支付宝处理结果</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.GetReturnPost">
+            <summary>
+            获取支付宝POST过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.BuildRequestParaToString(System.Collections.Generic.Dictionary{System.String,System.String},System.Text.Encoding)">
+            <summary>
+            生成要请求给支付宝的参数数组
+            </summary>
+            <param name="sParaTemp">请求前的参数数组</param>
+            <param name="code">字符编码</param>
+            <returns>要请求的参数数组字符串</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.BuildRequestPara(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            生成要请求给支付宝的参数数组
+            </summary>
+            <param name="sParaTemp">请求前的参数数组</param>
+            <returns>要请求的参数数组</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.FilterPara(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            除去数组中的空值和签名参数
+            </summary>
+            <param name="dicArrayPre">过滤前的参数组</param>
+            <returns>过滤后的参数组</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.SortPara(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            根据字母a到z的顺序把参数排序
+            </summary>
+            <param name="dicArrayPre">排序前的参数组</param>
+            <returns>排序后的参数组</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcCore.Extensions.Alipay.CreateLinkString(System.Collections.Generic.Dictionary{System.String,System.String})" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcCore.Extensions.Alipay.CreateLinkStringUrlencode(System.Collections.Generic.Dictionary{System.String,System.String},System.Text.Encoding)" -->
+        <member name="M:MvcCore.Extensions.Alipay.VerifyMD5(System.String,System.String)">
+            <summary>
+            验证签名
+            </summary>
+            <param name="prestr">需要签名的字符串</param>
+            <param name="sign">签名结果</param>
+            <param name="key">密钥</param>
+            <param name="_input_charset">编码格式</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.SignMD5(System.String)">
+            <summary>
+            签名字符串
+            </summary>
+            <param name="prestr">需要签名的字符串</param>
+            <param name="key">密钥</param>
+            <param name="_input_charset">编码格式</param>
+            <returns>签名结果</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.VerifyNotify(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+             验证消息是否是支付宝发出的合法消息，验证服务器异步通知
+            </summary>
+            <param name="inputPara">通知返回参数数组</param>
+            <param name="sign">支付宝生成的签名结果</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.GetResponseTxt(System.String)">
+            <summary>
+            获取是否是支付宝服务器发来的请求的验证结果
+            </summary>
+            <param name="notify_id">通知验证ID</param>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.Get_Http(System.String,System.Int32)">
+            <summary>
+            获取远程服务器ATN结果
+            </summary>
+            <param name="strUrl">指定URL路径地址</param>
+            <param name="timeout">超时时间设置</param>
+            <returns>服务器ATN结果</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.GetSignVeryfy(System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Boolean)">
+            <summary>
+            获取返回时的签名验证结果
+            </summary>
+            <param name="inputPara">通知返回参数数组</param>
+            <param name="sign">对比的签名结果</param>
+            <param name="isSort">是否对待签名数组排序</param>
+            <returns>签名验证结果</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.SortNotifyPara(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            异步通知时，对参数做固定排序
+            </summary>
+            <param name="dicArrayPre">排序前的参数组</param>
+            <returns>排序后的参数组</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.Alipay.GetRequestGet">
+            <summary>
+            获取支付宝GET过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.BaiDuApi.Distance(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            根据坐标计算距离
+            </summary>
+            <param name="latitude1"></param>
+            <param name="longitude1"></param>
+            <param name="latitude2"></param>
+            <param name="longitude2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.Extensions.CacheTimeType">
+            <summary>
+            缓存的时间类别
+            </summary>
+        </member>
+        <member name="F:MvcCore.Extensions.CacheTimeType.ByMinutes">
+            <summary>
+            按照分钟模式
+            </summary>
+        </member>
+        <member name="F:MvcCore.Extensions.CacheTimeType.ByHours">
+            <summary>
+            按照小时模式
+            </summary>
+        </member>
+        <member name="F:MvcCore.Extensions.CacheTimeType.ByDays">
+            <summary>
+            按照天模式
+            </summary>
+        </member>
+        <member name="F:MvcCore.Extensions.CacheTimeType.ByYears">
+            <summary>
+            按照年模式
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.CacheEnumAttribe.CacheTimeType">
+            <summary>
+            缓存时间类别
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.CacheEnumAttribe.CacheValue">
+            <summary>
+            缓存时间值
+            </summary>
+        </member>
+        <member name="M:MvcCore.Extensions.CacheExtensions.CheckCache(System.String)">
+            <summary>
+            检查缓存名是否存在，如果存在则返回True
+            </summary>
+            <param name="cacheName">缓存的枚举类</param>
+        </member>
+        <member name="M:MvcCore.Extensions.CacheExtensions.GetCache``1(System.String)">
+            <summary>
+            获取缓存，未做校验，每次取缓存的时候需要判断缓存是否存在
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cacheName"></param>
+            <param name="varName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.CacheExtensions.GetCacheList``1(System.String)">
+            <summary>
+            获取缓存集合，未做校验，每次取缓存的时候需要判断缓存是否存在
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="cacheName"></param>
+            <param name="varName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.CacheExtensions.SetCache(System.String,System.Object,MvcCore.Extensions.CacheTimeType,System.Int32)">
+            <summary>
+            设置缓存
+            </summary>
+            <param name="cacheName"></param>
+            <param name="value"></param>
+            <param name="cacheTimeType"></param>
+            <param name="cacheTime"></param>
+        </member>
+        <member name="M:MvcCore.Extensions.CacheExtensions.ClearCache(System.String)">
+            <summary>
+            清除指定缓存
+            </summary>
+            <param name="cacheName"></param>
+        </member>
+        <member name="M:MvcCore.Extensions.CacheExtensions.RestCache(System.String,System.Object)">
+            <summary>
+            重置缓存
+            </summary>
+            <param name="cacheName"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:MvcCore.Extensions.CookieExtensions.WriteCookie(System.String,System.String)">
+            <summary>
+            写cookie值
+            </summary>
+            <param name="strName">名称</param>
+            <param name="strValue">值</param>
+        </member>
+        <member name="M:MvcCore.Extensions.CookieExtensions.WriteCookie(System.String,System.String,System.Int32)">
+            <summary>
+            写cookie值
+            </summary>
+            <param name="strName">名称</param>
+            <param name="strValue">值</param>
+            <param name="strValue">过期时间(分钟)</param>
+        </member>
+        <member name="M:MvcCore.Extensions.CookieExtensions.GetCookie(System.String)">
+            <summary>
+            读cookie值
+            </summary>
+            <param name="strName">名称</param>
+            <returns>cookie值</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.CookieExtensions.CheckCookie(System.String)">
+            <summary>
+            检查Cookie,如果存在则为true
+            </summary>
+            <param name="strName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.CookieExtensions.RemoveCookie(System.String)">
+            <summary>
+            删除Cookie
+            </summary>
+            <param name="strName"></param>
+        </member>
+        <member name="T:MvcCore.Extensions.CustomMap`1">
+            <summary>
+            自定义哈希表
+            字符串为键，不区分大小写
+            </summary>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelDictionary`1.AddProperty(System.String,System.Func{`0,System.Object})">
+            <summary>
+            添加额外属性
+            若已存在该属性，则原属性的值将会被此属性替换
+            </summary>
+            <param name="name"></param>
+            <param name="proMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.Extensions.Custom.GetListParam">
+            <summary>
+            获取列表的参数
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Custom.GetListParam.Parameters">
+            <summary>
+            查询参数
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Custom.GetListParam.PageIndex">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Custom.GetListParam.PageSize">
+            <summary>
+            单页显示条数
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.Custom.GetListParam.OrderByInfos">
+            <summary>
+            排序信息
+            Ture:OrderByASC
+            False:OrderByDESC
+            </summary>
+        </member>
+        <member name="M:MvcCore.Extensions.Custom.GetListParam`1.AddOrderBy``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},MvcCore.Extensions.OrderByStatus)">
+            <summary>
+            添加 OrderBy 信息
+            True:asc
+            False:desc
+            </summary>
+            <typeparam name="TProperty">属性类型</typeparam>
+            <param name="propertyExperssion">属性值</param>
+            <param name="orderByAsc">排序方式，True：asc，False：desc</param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.Extensions.ExcelFormat`1">
+            <summary>
+            格式化列表
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:MvcCore.Extensions.ExcelFormat`1.Add(System.String,System.Func{`0,System.String})">
+            <summary>
+            添加列格式化显示
+            </summary>
+            <param name="columnName">列名，显示在Excel列头</param>
+            <param name="format">格式化</param>
+        </member>
+        <member name="P:MvcCore.Extensions.ExcelFormat`1.FormatList">
+            <summary>
+            格式化列表
+            </summary>
+        </member>
+        <member name="T:MvcCore.Extensions.ExcelHelperV2">
+            <summary>
+            Excel 辅助第二版
+            </summary>
+        </member>
+        <member name="M:MvcCore.Extensions.ExcelHelperV2.ToExcel``1(System.Collections.Generic.List{``0})">
+            <summary>
+            生成
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.Extensions.ModelToExcel`1">
+            <summary>
+            实体类导 Excel 属性映射配置
+            </summary>
+            <typeparam name="TModel"></typeparam>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelToExcel`1.#ctor(System.Collections.Generic.List{`0})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="List"></param>
+        </member>
+        <member name="P:MvcCore.Extensions.ModelToExcel`1.ColumnsMap">
+            <summary>
+            属性映射信息
+            </summary>
+        </member>
+        <member name="P:MvcCore.Extensions.ModelToExcel`1.List">
+            <summary>
+            要转换的列表
+            </summary>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelToExcel`1.AddColumnMap``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String,System.Func{``0,System.String})">
+            <summary>
+            添加属性映射
+            </summary>
+            <typeparam name="TProperty">要映射的属性类型</typeparam>
+            <param name="expression">实体属性访问表达式</param>
+            <param name="displayName">表头显示名</param>
+            <param name="format">格式化输出</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelToExcel`1.AddColumnMap``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Func{``0,System.String})">
+            <summary>
+            添加属性映射
+            </summary>
+            <typeparam name="TProperty">要映射的属性类型</typeparam>
+            <param name="expression">实体属性访问表达式</param>
+            <param name="format">格式化输出</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelToExcel`1.AddColumnMap``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.String)">
+            <summary>
+            添加属性映射
+            </summary>
+            <typeparam name="TProperty">要映射的属性类型</typeparam>
+            <param name="expression">实体属性访问表达式</param>
+            <param name="displayName">表头显示名</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelToExcel`1.AddColumnMap``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            添加属性映射
+            </summary>
+            <typeparam name="TProperty">要映射的属性类型</typeparam>
+            <param name="expression">实体属性访问表达式</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelToExcel`1.SaveToExcel(System.String)">
+            <summary>
+            将 Excel 保存到文件
+            <para>Excel 的格式为 97-03 的 .xls 格式</para>
+            </summary>
+            <param name="fileName">文件地址</param>
+        </member>
+        <member name="M:MvcCore.Extensions.ModelToExcel`1.SaveToExcel(System.IO.Stream)">
+            <summary>
+            将 Excel 保存到流中
+            <para>Excel 的格式为 97-03 的 .xls 格式</para>
+            </summary>
+            <param name="stream">要存放 Excel 的流</param>
+        </member>
+        <member name="T:MvcCore.Extensions.IPropertyMap`1">
+            <summary>
+            调用自定义映射
+            </summary>
+            <typeparam name="TModel">要做映射规则的实体</typeparam>
+        </member>
+        <member name="M:MvcCore.Extensions.IPropertyMap`1.GetValue(`0)">
+            <summary>
+            转换数据
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="P:MvcCore.Extensions.IPropertyMap`1.DisplayName">
+            <summary>
+            显示名称
+            </summary>
+        </member>
+        <member name="T:MvcCore.Extensions.PropertyMap`2">
+            <summary>
+            实体表头及格式映射
+            </summary>
+        </member>
+        <member name="T:MvcCore.Extensions.PropertyMap`1">
+            <summary>
+            反射映射
+            </summary>
+            <typeparam name="TModel"></typeparam>
+        </member>
+        <member name="T:MvcCore.Extensions.QRCodeExtensions">
+            <summary>
+            二维码工具
+            </summary>
+        </member>
+        <member name="M:MvcCore.Extensions.QRCodeExtensions.ToQRCode(System.String,System.Int16,System.Int16)">
+            <summary>
+            将字符串转成二维码
+            默认字符串、低码
+            </summary>
+            <param name="comment">要转换的内容</param>
+            <param name="version">版本级数(二维码密集度)</param>
+            <param name="size">尺寸(二维码大小)</param>
+            <returns>二维码流</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.QRCodeExtensions.ToQRCode(System.String,ThoughtWorks.QRCode.Codec.QRCodeEncoder.ERROR_CORRECTION,System.Int16,System.Int16)">
+            <summary>
+            将字符串转换成二维码
+            默认字符串
+            </summary>
+            <param name="comment">字符串</param>
+            <param name="level">转换码图级别(L,M,Q,H)</param>
+            <param name="version">版本级数(二维码密集度)</param>
+            <param name="size">尺寸(二维码大小)</param>
+            <returns>二维码流</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.QRCodeExtensions.ToQRCode(System.String,ThoughtWorks.QRCode.Codec.QRCodeEncoder.ENCODE_MODE,ThoughtWorks.QRCode.Codec.QRCodeEncoder.ERROR_CORRECTION,System.Int16,System.Int16)">
+            <summary>
+            将字符串转换成二维码
+            </summary>
+            <param name="comment">字符串</param>
+            <param name="encode">转换内容类型(数字,字母与数字,字符串)</param>
+            <param name="level">转换码图级别(L,M,Q,H)</param>
+            <param name="version">版本级数(二维码密集度)</param>
+            <param name="size">尺寸(二维码大小)</param>
+            <returns>二维码流</returns>
+        </member>
+        <member name="M:MvcCore.Extensions.QRCodeExtensions.QRDescode(System.Byte[])">
+            <summary>
+            解码二维码
+            </summary>
+            <param name="QRCode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.SoftInfo">
+            <summary>
+            系统信息
+            </summary>
+        </member>
+        <member name="P:MvcCore.SoftInfo.FrameWorkName">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="P:MvcCore.SoftInfo.SoftName">
+            <summary>
+            软件名称
+            <para>值取自 AppSettings 中的 SoftName </para>
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.SystemRunTime">
+            <summary>
+            系统运行时间
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.ServerOS">
+            <summary>
+            获取服务器操作系统
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.AppRunMemony">
+            <summary>
+            程序的物理内存
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.AppRunVirtualMemony">
+            <summary>
+            程序的虚拟内存
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.IISVersion">
+            <summary>
+            IIS版本号
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.PhysicalApplicationPath">
+            <summary>
+            服务器上物理路径
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.SystemPath">
+            <summary>
+            系统路径
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.TimeOut">
+            <summary>
+            脚本超时时间
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.Language">
+            <summary>
+            服务器语言种类
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.AspnetVer">
+            <summary>
+            AspnetVer
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.CpuNum">
+            <summary>
+            CPU数量
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.CpuType">
+            <summary>
+            CPU类型
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.MemoryNet">
+            <summary>
+             Asp.net所占内存
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.CpuNet">
+            <summary>
+            CPU所占内存
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.SessionNum">
+            <summary>
+            Session数量
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.SessionID">
+            <summary>
+            当前SessionID
+            </summary>
+        </member>
+        <member name="P:MvcCore.ServerInfo.SystemUser">
+            <summary>
+            系统用户名
+            </summary>
+        </member>
+        <member name="T:MvcCore.Infrastructure.IDatabaseFactory">
+            <summary>
+            数据上下文工厂
+            </summary>
+        </member>
+        <member name="T:MvcCore.Infrastructure.DatabaseFactory`1">
+            <summary>
+            数据上下文工厂
+            </summary>
+            <typeparam name="TContext"></typeparam>
+        </member>
+        <member name="M:MvcCore.Infrastructure.DatabaseFactory`1.Get">
+            <summary>
+            获取 DbContext 对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.Infrastructure.IRelationshipMapping`1">
+            <summary>
+            关系映射接口
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IRelationshipMapping`1.Mapping(System.Data.Entity.ModelConfiguration.EntityTypeConfiguration{`0})">
+            <summary>
+            映射关系
+            </summary>
+            <param name="Entity"></param>
+        </member>
+        <member name="T:MvcCore.Infrastructure.IServiceBase`1">
+            <summary>
+            EF 通用操作接口
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Save(`0,System.Object[])">
+            <summary>
+            保存
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Add(`0)">
+            <summary>
+            添加
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Add(System.Collections.Generic.List{`0})">
+            <summary>
+            批量添加
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Update(`0)">
+            <summary>
+            单个更新
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Update(`0,System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+            批量更新
+            </summary>
+            <param name="entity"></param>
+            <param name="updateKey"></param>
+            <param name="where"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Delete(System.Object[])">
+            <summary>
+            根据主键删除
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.DeleteAndLog(System.Object[])">
+            <summary>
+            根据主键删除，并返回删除日志
+            </summary>
+            <param name="id"></param>
+            <param name="logInfo"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Delete(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件删除
+            </summary>
+            <param name="where"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.DeleteAndLogs(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件删除，并返回日志数组
+            </summary>
+            <param name="where"></param>
+            <param name="logInfo"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Single(System.Object[])">
+            <summary>
+            返回单个实体，如果为空，则返回Null
+            </summary>
+            <param name="id">主键，若是联合主键则传入所有主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.SingleAndInit(System.Object[])">
+            <summary>
+            返回单个实体，如果为空，则根据实体类初始化
+            </summary>
+            <param name="id">主键，若是联合主键则传入所有主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Single(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件返回单个，如果为空，则返回Null
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.SingleAndInit(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件返回单个，如果为空，则根据实体类初始化
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListCache(System.String)">
+            <summary>
+            缓存所有
+            </summary>
+            <param name="cacheName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListCache(System.String,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件缓存
+            </summary>
+            <param name="cacheName"></param>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.List">
+            <summary>
+            返回所有
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.Where(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            通过页面控件动态构建查询
+            </summary>
+            <param name="nameValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.List(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件返回所有
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListWithTracking">
+            <summary>
+            返回所有，并跟踪状态，用于批量更新、删除的动作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListWithTracking(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            返回所有，并跟踪状态，用于批量更新、删除的动作
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListInclude(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            贪婪加载
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListIncludeWithTracking(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            贪婪加载
+            </summary>
+            <param name="path"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListInclude(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            贪婪加载
+            </summary>
+            <param name="path"></param>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListIncludeWithTracking(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+            <summary>
+            贪婪加载
+            </summary>
+            <param name="path"></param>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListCache(System.String,MvcCore.Extensions.CacheTimeType,System.Int32)">
+            <summary>
+            缓存所有
+            </summary>
+            <param name="cacheName"></param>
+            <param name="cacheTimeType"></param>
+            <param name="cacheTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListCache(System.String,MvcCore.Extensions.CacheTimeType,System.Int32,System.Int32)">
+            <summary>
+            缓存头几条
+            </summary>
+            <param name="cacheName"></param>
+            <param name="cacheTimeType"></param>
+            <param name="cacheTime"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListCache(System.String,MvcCore.Extensions.CacheTimeType,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件缓存所有
+            </summary>
+            <param name="cacheName"></param>
+            <param name="cacheTimeType"></param>
+            <param name="cacheTime"></param>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.IServiceBase`1.ListCache(System.String,MvcCore.Extensions.CacheTimeType,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32)">
+            <summary>
+            根据条件缓存头几条
+            </summary>
+            <param name="cacheName"></param>
+            <param name="cacheTimeType"></param>
+            <param name="cacheTime"></param>
+            <param name="where"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.Infrastructure.ServiceBase`1">
+            <summary>
+            EF 通用操作基类
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:MvcCore.Infrastructure.ServiceBase`1.DatabaseFactory">
+            <summary>
+            数据上下文工厂
+            </summary>
+        </member>
+        <member name="P:MvcCore.Infrastructure.ServiceBase`1.DataContext">
+            <summary>
+            数据库上下文
+            </summary>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.RemoveEntity(`0)">
+            <summary>
+            移除数据对象
+            </summary>
+            <param name="entity"></param>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.Single(System.Object[])">
+            <summary>
+            返回单个实体，如果为空，则返回Null
+            </summary>
+            <param name="id">主键，若是联合主键则传入所有主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.SingleAndInit(System.Object[])">
+            <summary>
+            返回单个实体，如果为空，则根据实体类初始化
+            </summary>
+            <param name="id">主键，若是联合主键则传入所有主键</param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.Single(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件返回单个，如果为空，则返回Null
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.SingleAndInit(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            根据条件返回单个，如果为空，则根据实体类初始化
+            </summary>
+            <param name="where"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.Where(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            通过页面控件动态构建查询
+            </summary>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.GetExpressoinBody(System.Linq.Expressions.ParameterExpression,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            构建查询条件表达式
+            </summary>
+        </member>
+        <member name="M:MvcCore.Infrastructure.ServiceBase`1.Sort(System.Linq.IQueryable{`0},System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            通过页面控件动态构建排序
+            </summary>
+        </member>
+        <member name="T:MvcCore.Service.IDBTool">
+            <summary>
+            数据库扩展工具支持 ADO.NET 操作
+            </summary>
+        </member>
+        <member name="M:MvcCore.Service.IDBTool.Execute``1(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            执行 T-SQL 语句，并接受列表数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="storedProcedure"></param>
+            <param name="sqlParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Service.IDBTool.ExecuteSQL(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            执行数据库语句并接收受影响行数
+            </summary>
+            <param name="sql"></param>
+            <param name="sqlParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Service.IDBTool.Commit">
+            <summary>
+            保存所做修改
+            </summary>
+        </member>
+        <member name="M:MvcCore.Service.IDBTool.GetConnection">
+            <summary>
+            获取数据库链接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MvcCore.Service.DBTool">
+            <summary>
+            数据库扩展工具实现类
+            </summary>
+        </member>
+        <member name="F:MvcCore.Service.DBTool.databaseFactory">
+            <summary>
+            数据工厂
+            </summary>
+        </member>
+        <member name="F:MvcCore.Service.DBTool.dataContext">
+            <summary>
+            数据库上下文
+            </summary>
+        </member>
+        <member name="M:MvcCore.Service.DBTool.#ctor(MvcCore.Infrastructure.IDatabaseFactory)">
+            <summary>
+            实例化
+            </summary>
+            <param name="databaseFactory">数据库上下文工厂</param>
+        </member>
+        <member name="P:MvcCore.Service.DBTool.DataContext">
+            <summary>
+            数据库上下文
+            </summary>
+        </member>
+        <member name="M:MvcCore.Service.DBTool.Execute``1(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            执行 T-SQL 语句，并接受列表数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="storedProcedure"></param>
+            <param name="sqlParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Service.DBTool.ExecuteSQL(System.String,System.Data.Common.DbParameter[])">
+            <summary>
+            执行数据库语句并接收受影响行数
+            </summary>
+            <param name="sql"></param>
+            <param name="sqlParameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.Service.DBTool.Commit">
+            <summary>
+            保存所做修改
+            </summary>
+        </member>
+        <member name="M:MvcCore.Service.DBTool.GetConnection">
+            <summary>
+            获取数据库链接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcCore.FrameworkContextHelper.Mapping(System.Data.Entity.DbModelBuilder,System.String,System.String)">
+            <summary>
+            映射实体关系
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:MvcCore.IoC.HttpContextLifetimeManager`1">
+            <summary>
+            生存时间管理
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:MvcCore.Unity">
+            <summary>
+            IoC 控制类
+            </summary>
+        </member>
+        <member name="M:System.Web.Mvc.ButtonBaseExtensions.SubmitButton(System.Web.Mvc.HtmlHelper,System.String,System.String,System.Boolean)">
+            <summary>
+            提交按钮
+            </summary>
+            <param name="helper"></param>
+            <param name="name">按钮名称</param>
+            <param name="value">按钮的显示值</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.ButtonBaseExtensions.DeleteButton(System.Web.Mvc.HtmlHelper,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            删除按钮
+            </summary>
+            <param name="helper"></param>
+            <param name="value"></param>
+            <param name="id">参数</param>
+            <param name="title">标题</param>
+            <param name="info">删除信息</param>
+            <param name="url">网址，不写则默认为delete.aspx</param>
+            <param name="buttonType"></param>
+            <param name="buttonSize"></param>
+            <param name="display"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.ButtonBaseExtensions.Button(System.Web.Mvc.HtmlHelper,System.String,System.String,System.Boolean)">
+            <summary>
+            仿按钮类型的权限验证的超级链接
+            </summary>
+            <param name="helper"></param>
+            <param name="value"></param>
+            <param name="enumPermission"></param>
+            <param name="href"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.ButtonBaseExtensions.Return(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            返回按钮
+            </summary>
+            <param name="helper"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.ButtonBaseExtensions.ClearSearch(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            清除搜索框
+            </summary>
+            <param name="helper"></param>
+            <param name="Text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.ButtonBaseExtensions.OpenWindow(System.Web.Mvc.HtmlHelper,System.String,System.String,System.String)">
+            <summary>
+            打开新窗口
+            </summary>
+            <param name="helper"></param>
+            <param name="value"></param>
+            <param name="title">弹出框标题</param>
+            <param name="url">弹出框网址</param>
+            <param name="buttonType"></param>
+            <param name="buttonSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.DatePickerInput.DatePicker``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Boolean,System.Object,System.Boolean)">
+            <summary>
+            日期输入框
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <param name="readOnly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.FormExtensions.FormStart(System.Web.Mvc.HtmlHelper,System.String,System.Web.Mvc.FormMethod)">
+            <summary>
+            表单开始
+            </summary>
+            <param name="helper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.FormExtensions.FormEnd(System.Web.Mvc.HtmlHelper)">
+            <summary>
+            表单结束
+            </summary>
+            <param name="helper"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.InputHelper.Hidden``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Hidden框
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.InputHelper.Hidden``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object)">
+            <summary>
+            Hidden框
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="htmlHelper"></param>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.Mvc.PagerBuilder.#ctor(System.Web.Mvc.HtmlHelper,System.Web.Mvc.PagerOptions,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            used when PagedList is null
+            </summary>
+        </member>
+        <member name="M:System.Web.Mvc.PagerBuilder.GenerateUrl(System.Int32)">
+            <summary>
+            generate paging url
+            </summary>
+            <param name="pageIndex">page index to generate navigate url</param>
+            <returns>navigated url for pager item</returns>
+        </member>
+        <member name="M:System.Web.Mvc.PagerBuilder.RenderPager">
+            <summary>
+            render paging control
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.PageIndexOutOfRangeErrorMessage">
+            <summary>
+            PageIndexOutOfRangeErrorMessage
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.InvalidPageIndexErrorMessage">
+            <summary>
+            InvalidPageIndexErrorMessage
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.PageIndexParameterName">
+            <summary>
+            page index parameter name in url
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.MaximumPageIndexItems">
+            <summary>
+            Maximum page index items listed in dropdownlist
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.PageNumberFormatString">
+            <summary>
+            numeric pager item format string
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ContainerTagName">
+            <summary>
+            html tag name when control rendered
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ContainerTagClass">
+            <summary>
+            html tag class
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.PagerItemWrapperFormatString">
+            <summary>
+            all pageritem wrapper format string
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.CurrentPageNumberFormatString">
+            <summary>
+            current pager item format string
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.NumericPagerItemWrapperFormatString">
+            <summary>
+            NumericPager Item Wrapper Format String
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.NavigationPagerItemWrapperFormatString">
+            <summary>
+            NavigationPager Item Wrapper Format String
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.MorePagerItemWrapperFormatString">
+            <summary>
+            MorePagerItem Wrapper Format String
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.AlwaysShowFirstLastPageNumber">
+            <summary>
+            whether or not show first and last numeric page number
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.NumericPagerItemCount">
+            <summary>
+            numeric pager items count
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ShowPrevNext">
+            <summary>
+            whether or not show previous and next pager items
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.PrevPageText">
+            <summary>
+            previous page text
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.NextPageText">
+            <summary>
+            next page text
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ShowNumericPagerItems">
+            <summary>
+            whether or not show numeric pager items
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ShowFirstLast">
+            <summary>
+            whether or not show first and last pager items
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.FirstPageText">
+            <summary>
+            first page text
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.LastPageText">
+            <summary>
+            last page text
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ShowMorePagerItems">
+            <summary>
+            whethor or not show more pager items
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.MorePageText">
+            <summary>
+            more page text
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.Id">
+            <summary>
+            client id of paging control container
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ShowDisabledPagerItems">
+            <summary>
+            whether or not show disabled pager items
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.CurrentPageItemClass">
+            <summary>
+            分页子项 当前页样式
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.ActivePageItemClass">
+            <summary>
+            分页子项 可用页样式
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.PagerOptions.DisabledPageItemClass">
+            <summary>
+            分页子项 禁用页样式
+            </summary>
+        </member>
+        <member name="T:System.Web.Mvc.ResultMessage">
+            <summary>
+            默认属性为失败，并不返回任何操作，只是显示
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.ResultMessage.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.ResultMessage.Message">
+            <summary>
+            信息
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.ResultMessage.MessageType">
+            <summary>
+            信息类型
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.ResultMessage.ShowConfirm">
+            <summary>
+            是否显示操作成功，默认显示
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.ResultMessage.DoAction">
+            <summary>
+            自定义回调函数网址或AjaxID
+            </summary>
+        </member>
+        <member name="P:System.Web.Mvc.ResultMessage.Script">
+            <summary>
+            执行脚本
+            </summary>
+        </member>
+        <member name="T:System.Web.RouteModel">
+            <summary>
+            路由信息
+            </summary>
+        </member>
+        <member name="P:System.Web.RouteModel.ControllerDescriptor">
+            <summary>
+            控制器描述
+            </summary>
+        </member>
+        <member name="P:System.Web.RouteModel.ActionDescriptor">
+            <summary>
+            Action描述
+            </summary>
+        </member>
+        <member name="T:System.Web.BaiduShortURLExtensions">
+            <summary>
+            百度短网址工具
+            </summary>
+        </member>
+        <member name="M:System.Web.BaiduShortURLExtensions.EncodeURL(System.String)">
+            <summary>
+            生成短网址
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.BaiduShortURLExtensions.DescodeURL(System.String)">
+            <summary>
+            解压短网址
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.BaiduShortURLExtensions.EncodeURLModel(System.String)">
+            <summary>
+            获取生成短网址对象
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Web.BaiduShortURLExtensions.DescodeURLModel(System.String)">
+            <summary>
+            获取解压短网址对象
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.Web.BaiduShortURLExtensions.ShortURLModel">
+            <summary>
+            短网址对象
+            </summary>
+        </member>
+        <member name="P:System.Web.BaiduShortURLExtensions.ShortURLModel.tinyurl">
+            <summary>
+            短网址
+            </summary>
+        </member>
+        <member name="P:System.Web.BaiduShortURLExtensions.ShortURLModel.status">
+            <summary>
+            状态码，只要不是 0 ，都是出错
+            </summary>
+        </member>
+        <member name="P:System.Web.BaiduShortURLExtensions.ShortURLModel.longurl">
+            <summary>
+            原网址
+            </summary>
+        </member>
+        <member name="P:System.Web.BaiduShortURLExtensions.ShortURLModel.err_msg">
+            <summary>
+            异常信息
+            </summary>
+        </member>
+        <member name="F:System.AntiXss.EmptyStringVBS">
+            ---------------------------------------------------------------------
+             <summary>
+                 Empty string for Visual Basic Script contextes
+             </summary>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="F:System.AntiXss.EmptyStringJavaScript">
+            ---------------------------------------------------------------------
+             <summary>
+                 Empty string for Java Script contextes
+             </summary>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="F:System.AntiXss.WhitelistCodes">
+            <summary>
+            Initializes character Html encoding array
+            </summary>
+        </member>
+        <member name="M:System.AntiXss.HtmlEncode(System.String)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in HTML.
+             </summary>
+             <param name="input">String to be encoded</param>
+             <returns>
+                 Encoded string for use in HTML.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are encoded using the &amp;#DECIMAL; notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>,</term><description>Comma</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Space</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS Attack&#33;&#39;&#41;&#59;</description></item>
+             <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross Site Scripting Library</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.HtmlAttributeEncode(System.String)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in HTML attributes.
+             </summary>
+             <param name="input">String to be encoded</param>
+             <returns>
+                 Encoded string for use in HTML attributes.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are encoded using the &amp;#DECIMAL; notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>,</term><description>Comma</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS&#32;Attack&#33;&#39;&#41;&#59;</description></item>
+             <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross&#32;Site&#32;Scripting&#32;Library</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.UrlEncode(System.String)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in universal resource locators (URLs).
+             </summary>
+             <param name="input">String to be encoded</param>
+             <returns>
+                 Encoded string for use in URLs.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are encoded using the %SINGLE_BYTE_HEX and %uDOUBLE_BYTE_HEX notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>alert%28%27XSS%20Attack%21%27%29%3b</description></item>
+             <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross%20Site%20Scripting%20Library</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.UrlEncode(System.String,System.Int32)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in universal resource locators (URLs).
+             </summary>
+             <param name="input">Input string</param>
+             <param name="codepage">Codepage number of the input</param>
+             <returns>
+                 Encoded string for use in URLs.
+             </returns>
+             <remarks>
+             This function will encodes the output as per the encoding parameter (codepage) passed to it. It will encode all but known safe characters.  Encoded characters are encoded using the %SINGLE_BYTE_HEX and %DOUBLE_BYTE_HEX notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSSあAttack!');</term><description>alert%28%27XSS%82%a0Attack%21%27%29%3b</description></item>
+             <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross%20Site%20Scripting%20Library</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.XmlEncode(System.String)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in XML.
+             </summary>
+             <param name="input">String to be encoded</param>
+             <returns>
+                 Encoded string for use in XML.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are encoded using the &amp;#DECIMAL; notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>,</term><description>Comma</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Space</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS Attack&#33;&#39;&#41;&#59;</description></item>
+             <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross Site Scripting Library</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.XmlAttributeEncode(System.String)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in XML attributes.
+             </summary>
+             <param name="input">String to be encoded</param>
+             <returns>
+                 Encoded string for use in XML attributes.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are encoded using the &amp;#DECIMAL; notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>,</term><description>Comma</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS&#32;Attack&#33;&#39;&#41;&#59;</description></item>
+             <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross&#32;Site&#32;Scripting&#32;Library</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.JavaScriptEncode(System.String)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in JavaScript.
+             </summary>
+             <param name="input">String to be encoded</param>
+             <returns>
+                 Encoded string for use in JavaScript.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are encoded using the \xSINGLE_BYTE_HEX and \uDOUBLE_BYTE_HEX notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>,</term><description>Comma</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Space</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>'alert\x28\x27XSS Attack\x21\x27\x29\x3b'</description></item>
+             <item><term>user@contoso.com</term><description>'user\x40contoso.com'</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>'Anti-Cross Site Scripting Library'</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.JavaScriptEncode(System.String,System.Boolean)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in JavaScript.
+             </summary>
+             <param name="input">String to be encoded</param>
+             /// <param name="flagforQuote">bool flag to determin to emit quote or not. true - emit quote. false = no quote.</param>
+             <returns>
+                 Encoded string for use in JavaScript and does not return the output with en quotes.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are encoded using the \xSINGLE_BYTE_HEX and \uDOUBLE_BYTE_HEX notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>,</term><description>Comma</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Space</description></item>
+             <item><term> </term><description>Other International character ranges</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>'alert\x28\x27XSS Attack\x21\x27\x29\x3b'</description></item>
+             <item><term>user@contoso.com</term><description>'user\x40contoso.com'</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>'Anti-Cross Site Scripting Library'</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.AntiXss.VisualBasicScriptEncode(System.String)">
+            ---------------------------------------------------------------------
+             <summary>
+             Encodes input strings for use in Visual Basic Script.
+             </summary>
+             <param name="input">String to be encoded</param>
+             <returns>
+                 Encoded string for use in Visual Basic Script.
+             </returns>
+             <remarks>
+             This function will encode all but known safe characters.  Encoded characters are 
+             encoded using the &#38;chrw(DECIMAL) notation.
+             <newpara/>
+             Safe characters include:
+             <list type="table">
+             <item><term>a-z</term><description>Lower case alphabet</description></item>
+             <item><term>A-Z</term><description>Upper case alphabet</description></item>
+             <item><term>0-9</term><description>Numbers</description></item>
+             <item><term>,</term><description>Comma</description></item>
+             <item><term>.</term><description>Period</description></item>
+             <item><term>-</term><description>Dash</description></item>
+             <item><term>_</term><description>Underscore</description></item>
+             <item><term> </term><description>Space</description></item>
+             </list>
+             <newpara/>
+             Example inputs and encoded outputs:
+             <list type="table">
+             <item><term>alert('XSS Attack!');</term><description>"alert"&#38;chrw(40)&#38;chrw(39)&#38;"XSS Attack"&#38;chrw(33)&#38;chrw(39)&#38;chrw(41)&#38;chrw(59)</description></item>
+             <item><term>user@contoso.com</term><description>"user"&#38;chrw(64)&#38;"contoso.com"</description></item>
+             <item><term>Anti-Cross Site Scripting Library</term><description>"Anti-Cross Site Scripting Library"</description></item>
+             </list></remarks>
+            ---------------------------------------------------------------------
+        </member>
+        <member name="M:System.BaseEncoding.EncryptBase64(System.String)">
+            <summary>  
+            Base64位加密  
+            </summary>  
+            <param name="val"></param>
+            <returns></returns>  
+        </member>
+        <member name="M:System.BaseEncoding.DecryptBase64(System.String)">
+            <summary>
+            Base64位解密  
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.BaseEncoding.EncryptBase64AndMD5(System.String)">
+            <summary>  
+            BASE64位(MD5加密)[标准,非MD5加密再BASE64位加密]  
+            </summary>  
+            <param name="val">原始字符串</param>
+            <returns>MD5结果</returns>  
+        </member>
+        <member name="M:System.BooleanExtensions.CheckRoles(System.Object,System.Object)">
+            <summary>
+            判断是否包含权限
+            </summary>
+            <param name="value1"></param>
+            <param name="value2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.BooleanExtensions.ToChinese(System.Nullable{System.Boolean},System.String,System.String)">
+            <summary>
+            自定义转换成中文
+            </summary>
+            <param name="value"></param>
+            <param name="trueString"></param>
+            <param name="falseString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.BooleanExtensions.ToShiFou(System.Nullable{System.Boolean})">
+            <summary>
+            转换成是/否
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.BooleanExtensions.ToYouWu(System.Nullable{System.Boolean})">
+            <summary>
+            转换成有/无
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.BooleanExtensions.ToZhenJia(System.Nullable{System.Boolean})">
+            <summary>
+            转换成真/假
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.ChineseCalendarException">
+            <summary>
+            中国日历异常处理
+            </summary>
+        </member>
+        <member name="T:System.ChineseCalendar">
+            <summary>
+            中国农历类 版本V1.0 支持 1900.1.31日起至 2049.12.31日止的数据
+            </summary>
+            <remarks>
+            本程序使用数据来源于网上的万年历查询，并综合了一些其它数据
+            </remarks>
+        </member>
+        <member name="F:System.ChineseCalendar.LunarDateArray">
+             <summary>
+             来源于网上的农历数据
+             </summary>
+             <remarks>
+             数据结构如下，共使用17位数据
+             第17位：表示闰月天数，0表示29天   1表示30天
+             第16位-第5位（共12位）表示12个月，其中第16位表示第一月，如果该月为30天则为1，29天为0
+             第4位-第1位（共4位）表示闰月是哪个月，如果当年没有闰月，则置0
+            </remarks>
+        </member>
+        <member name="M:System.ChineseCalendar.#ctor(System.DateTime)">
+            <summary>
+            用一个标准的公历日期来初使化
+            </summary>
+            <param name="dt"></param>
+        </member>
+        <member name="M:System.ChineseCalendar.#ctor(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            用农历的日期来初使化
+            </summary>
+            <param name="cy">农历年</param>
+            <param name="cm">农历月</param>
+            <param name="cd">农历日</param>
+            <param name="LeapFlag">闰月标志</param>
+        </member>
+        <member name="M:System.ChineseCalendar.GetChineseYearDays(System.Int32)">
+            <summary>
+            取农历年一年的天数
+            </summary>
+            <param name="year"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ChineseCalendar.GetChineseHour(System.DateTime)">
+            <summary>
+            获得当前时间的时辰
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:System.ChineseCalendar.CheckDateLimit(System.DateTime)">
+            <summary>
+            检查公历日期是否符合要求
+            </summary>
+            <param name="dt"></param>
+        </member>
+        <member name="M:System.ChineseCalendar.CheckChineseDateLimit(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            检查农历日期是否合理
+            </summary>
+            <param name="year"></param>
+            <param name="month"></param>
+            <param name="day"></param>
+            <param name="leapMonth"></param>
+        </member>
+        <member name="M:System.ChineseCalendar.ConvertNumToChineseNum(System.Char)">
+            <summary>
+            将0-9转成汉字形式
+            </summary>
+            <param name="n"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ChineseCalendar.BitTest32(System.Int32,System.Int32)">
+            <summary>
+            测试某位是否为真
+            </summary>
+            <param name="num"></param>
+            <param name="bitpostion"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ChineseCalendar.ConvertDayOfWeek(System.DayOfWeek)">
+            <summary>
+            将星期几转成数字表示
+            </summary>
+            <param name="dayOfWeek"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ChineseCalendar.CompareWeekDayHoliday(System.DateTime,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            比较当天是不是指定的第周几
+            </summary>
+            <param name="date"></param>
+            <param name="month"></param>
+            <param name="week"></param>
+            <param name="day"></param>
+            <returns></returns>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseCalendarHoliday">
+            <summary>
+            计算中国农历节日
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.WeekDayHoliday">
+            <summary>
+            按某月第几周第几日计算的节日
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.DateHoliday">
+            <summary>
+            按公历日计算的节日
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.Date">
+            <summary>
+            取对应的公历日期
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.WeekDay">
+            <summary>
+            取星期几
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.WeekDayStr">
+            <summary>
+            周几的字符
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.DateString">
+            <summary>
+            公历日期中文表示法 如一九九七年七月一日
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.IsLeapYear">
+            <summary>
+            当前是否公历闰年
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseConstellation">
+            <summary>
+            28星宿计算
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseHour">
+            <summary>
+            时辰
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.IsChineseLeapMonth">
+            <summary>
+            是否闰月
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.IsChineseLeapYear">
+            <summary>
+            当年是否有闰月
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseDay">
+            <summary>
+            农历日
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseDayString">
+            <summary>
+            农历日中文表示
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseMonth">
+            <summary>
+            农历的月份
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseMonthString">
+            <summary>
+            农历月份字符串
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseYear">
+            <summary>
+            取农历年份
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseYearString">
+            <summary>
+            取农历年字符串如，一九九七年
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseDateString">
+            <summary>
+            取农历日期表示法：农历一九九七年正月初五
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseTwentyFourDay">
+            <summary>
+            定气法计算二十四节气,二十四节气是按地球公转来计算的，并非是阴历计算的
+            </summary>
+            <remarks>
+            节气的定法有两种。古代历法采用的称为"恒气"，即按时间把一年等分为24份，
+            每一节气平均得15天有余，所以又称"平气"。现代农历采用的称为"定气"，即
+            按地球在轨道上的位置为标准，一周360°，两节气之间相隔15°。由于冬至时地
+            球位于近日点附近，运动速度较快，因而太阳在黄道上移动15°的时间不到15天。
+            夏至前后的情况正好相反，太阳在黄道上移动较慢，一个节气达16天之多。采用
+            定气时可以保证春、秋两分必然在昼夜平分的那两天。
+            </remarks>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseTwentyFourPrevDay">
+            <summary>
+            当前日期前一个最近节气
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.ChineseTwentyFourNextDay">
+            <summary>
+            当前日期后一个最近节气
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.Constellation">
+            <summary>
+            计算指定日期的星座序号 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:System.ChineseCalendar.Animal">
+            <summary>
+            计算属相的索引，注意虽然属相是以农历年来区别的，但是目前在实际使用中是按公历来计算的
+            鼠年为1,其它类推
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.AnimalString">
+            <summary>
+            取属相字符串
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.GanZhiYearString">
+            <summary>
+            取农历年的干支表示法如 乙丑年
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.GanZhiMonthString">
+            <summary>
+            取干支的月表示字符串，注意农历的闰月不记干支
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.GanZhiDayString">
+            <summary>
+            取干支日表示法
+            </summary>
+        </member>
+        <member name="P:System.ChineseCalendar.GanZhiDateString">
+            <summary>
+            取当前日期的干支表示法如 甲子年乙丑月丙庚日
+            </summary>
+        </member>
+        <member name="M:System.ChineseCalendar.NextDay">
+            <summary>
+            取下一天
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.ChineseCalendar.PervDay">
+            <summary>
+            取前一天
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.ClassExtensions`1.GetDisplayAttribute(System.String)">
+            <summary>
+            返回字段的Disaplay[name=""]等这些
+            </summary>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ClassExtensions`1.GetDisplayAttribute``1(System.String)">
+            <summary>
+            通用，返回类的字段的各种属性
+            </summary>
+            <typeparam name="TSource"></typeparam>
+            <param name="propertyName"></param>
+            <param name="attribute"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:System.ClassExtensions`1.GetPropertyName(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})" -->
+        <member name="F:System.ExtPermission.extPermissionCacheKey">
+            <summary>
+            全局权限缓存值
+            </summary>
+        </member>
+        <member name="M:System.ExtPermission.GetExtPermission">
+            <summary>
+            获取扩展权限-缓存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtPermission.ClearExtPermission">
+            <summary>
+            删除扩展权限缓存
+            </summary>
+        </member>
+        <member name="T:System.ExtPermission.ExtPermissionValue">
+            <summary>
+            权限
+            </summary>
+        </member>
+        <member name="T:System.IExtPermission">
+            <summary>
+            扩展权限属性
+            </summary>
+        </member>
+        <member name="M:System.CMYcurDD.ToCmycurDD(System.Decimal)">
+            <summary> 
+            转换人民币大小金额 
+            </summary> 
+            <param name="num">金额</param> 
+            <returns>返回大写形式</returns> 
+        </member>
+        <member name="M:System.CMYcurDD.CmycurD(System.String)">
+            <summary> 
+            一个重载，将字符串先转换成数字在调用CmycurD(decimal num) 
+            </summary> 
+            <param name="num">用户输入的金额，字符串形式未转成decimal</param> 
+            <returns></returns> 
+        </member>
+        <member name="T:System.Configuration.ConfigurationExtensions">
+            <summary>
+            设置 App.Config 或者 Web.Config 的工具类
+            </summary>
+        </member>
+        <member name="M:System.Configuration.ConfigurationExtensions.SetAppSettings(System.String,System.String)">
+            <summary>
+            设置 AppSettings 的值
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:System.Configuration.ConfigurationExtensions.RemoveAppSettings(System.String)">
+            <summary>
+            设置 AppSettings 的值
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:System.Configuration.ConfigurationExtensions.SetConnectionString(System.String,System.String,System.String)">
+            <summary>
+            设置 ConnectionStrings 的值
+            </summary>
+            <param name="name"></param>
+            <param name="connectionString"></param>
+            <param name="providerName"></param>
+        </member>
+        <member name="M:System.Configuration.ConfigurationExtensions.RemoveConnectionString(System.String)">
+            <summary>
+            设置 ConnectionStrings 的值
+            </summary>
+            <param name="name"></param>
+            <param name="connectionString"></param>
+            <param name="providerName"></param>
+        </member>
+        <member name="T:System.DateInterval">
+            <summary>
+            时间间隔类型
+            </summary>
+        </member>
+        <member name="M:System.DateTimeExtensions.DateDiff(System.DateTime,System.DateInterval,System.DateTime)">
+            <summary>
+            计算结束时间与开始时间的间隔(扩展方法)
+            </summary>
+            <param name="endDate">结束时间</param>
+            <param name="interval">时间间隔类型</param>
+            <param name="startDate">起始时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.DateDiff(System.DateInterval,System.DateTime,System.DateTime)">
+            <summary>
+            计算结束时间与开始时间的间隔
+            </summary>
+            <remarks>该方法主要是为了与SQL中计算时间间隔的DateDiff方法提供一致的调用</remarks>
+            <param name="interval">时间间隔类型</param>
+            <param name="startDate">起始时间</param>
+            <param name="endDate">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.DateTimeExtensions.ToSafeFormat(System.Nullable{System.DateTime},System.String)">
+            <summary>
+            针对可为空的date日期格式化
+            </summary>
+            <param name="date"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.DictionaryExtensions.Concat``3(``0,System.Collections.Generic.IDictionary{``1,``2})">
+            <summary>
+            将目标字典的全部元素累复制入源字典中
+            </summary>
+            <typeparam name="TDictionary">源字典类型</typeparam>
+            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TValue">值类型</typeparam>
+            <param name="source">源字典</param>
+            <param name="copy">目标字典</param>
+            <returns>复制了新元素的源字典</returns>
+        </member>
+        <member name="M:System.DictionaryExtensions.Concat``3(``0,System.Collections.Generic.IDictionary{``1,``2},System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            将目标字典的指定元素累复制入源字典中
+            </summary>
+            <typeparam name="TDictionary">源字典类型</typeparam>
+            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TValue">值类型</typeparam>
+            <param name="source">源字典</param>
+            <param name="copy">目标字典</param>
+            <param name="keys">要复制的元素的键集合</param>
+            <returns>复制了新元素的源字典</returns>
+        </member>
+        <member name="M:System.DictionaryExtensions.RemoveKeys``3(``0,System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            将目标字典的全部元素累从源字典中移除
+            </summary>
+            <typeparam name="TDictionary">源字典类型</typeparam>
+            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TValue">值类型</typeparam>
+            <param name="source">源字典</param>
+            <param name="copy">目标字典</param>
+            <returns>移除了元素的源字典</returns>
+        </member>
+        <member name="M:System.DictionaryExtensions.RemoveKeys``2(System.Collections.Generic.IDictionary{``0,``1},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            将目标字典的指定元素累从源字典中移除
+            </summary>
+            <typeparam name="TDictionary">源字典类型</typeparam>
+            <typeparam name="TKey">键类型</typeparam>
+            <typeparam name="TValue">值类型</typeparam>
+            <param name="source">源字典</param>
+            <param name="copy">目标字典</param>
+            <param name="keys">要移除的元素的键集合</param>
+            <returns>移除了元素的源字典</returns>
+        </member>
+        <member name="M:System.EnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            对枚举器的每个元素执行指定的操作
+            </summary>
+            <typeparam name="T">枚举器类型参数</typeparam>
+            <param name="source">枚举器</param>
+            <param name="action">要对枚举器的每个元素执行的委托</param>
+        </member>
+        <member name="M:System.EnumerableExtensions.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            指示指定的枚举器是null还是没有任何元素
+            </summary>
+            <typeparam name="T">枚举器类型参数</typeparam>
+            <param name="source">要测试的枚举器</param>
+            <returns>true:枚举器是null或者没有任何元素 false:枚举器不为null并且包含至少一个元素</returns>
+        </member>
+        <member name="M:System.EnumExtensions.GetEnumDesc(System.Type,System.String)">
+            <summary>
+            根据字段名得到中文备注
+            </summary>
+            <param name="e"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.EnumExtensions.GetEnumDesc(System.Type,System.Nullable{System.Int32})">
+            <summary>
+            根据值得到中文备注
+            </summary>
+            <param name="e"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.EnumExtensions.ListItem(System.Type)">
+            <summary>
+            将指定枚举转化成SelectListItem
+            </summary>
+            <param name="e"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.EnumExtensions.EnumItem">
+            <summary>
+            枚举子项实体
+            </summary>
+        </member>
+        <member name="P:System.EnumExtensions.EnumItem.Name">
+            <summary>
+            子项名称
+            </summary>
+        </member>
+        <member name="P:System.EnumExtensions.EnumItem.Description">
+            <summary>
+            子项描述标注
+            </summary>
+        </member>
+        <member name="P:System.EnumExtensions.EnumItem.IntValue">
+            <summary>
+            子项 int 值
+            </summary>
+        </member>
+        <member name="P:System.EnumExtensions.EnumItem`1.Attribute">
+            <summary>
+            自定义扩展
+            </summary>
+        </member>
+        <member name="M:System.EnumExtensions.GetEnumListItem(System.Type)">
+            <summary>
+            获取枚举子项列表
+            </summary>
+            <param name="enumType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.EnumExtensions.GetEnumFileInfo(System.Enum,System.String@,System.String@)">
+            <summary>
+            获取枚举项的基础数据
+            </summary>
+            <param name="e">枚举中的单项</param>
+            <param name="EnumName">枚举名称</param>
+            <param name="FieldName">单项名称</param>
+            <returns>枚举 int 值
+            </returns>
+        </member>
+        <member name="F:System.FileExtensions.b">
+            <summary>
+            
+            </summary>
+            <param name="srcdir">源文件夹</param>
+            <param name="desdir">目标文件夹</param>
+        </member>
+        <member name="M:System.HtmlRegex.RegexHtmls(System.String,System.String,System.String)">
+            <summary>
+            返回匹配多个的集合值
+            </summary>
+            <param name="start">开始html tag</param>
+            <param name="end">结束html tag</param>
+            <param name="html">html</param>
+            <returns></returns>
+        </member>
+        <member name="T:System.HttpHelper">
+            <summary>
+            Http帮助类
+            模拟POST GET 请求并取得返回结果
+            </summary>
+        </member>
+        <member name="P:System.HttpHelper.Result`1.HttpData">
+            <summary>
+            返回数据
+            </summary>
+        </member>
+        <member name="P:System.HttpHelper.Result`1.ErrorMessage">
+            <summary>
+            返回错误信息
+            </summary>
+        </member>
+        <member name="P:System.HttpHelper.Result`1.IsSucceed">
+            <summary>
+            业务逻辑是否正确,默认为不正确
+            </summary>
+        </member>
+        <member name="P:System.HttpHelper.Result`1.HttpStatusCode">
+            <summary>
+            Http状态
+            </summary>
+        </member>
+        <member name="M:System.HttpHeader.Get(System.Net.Http.HttpRequestMessage,System.String)">
+            <summary>
+            返回头部的第一个值，校验，如果头部值不存在，则返回String.Empty
+            </summary>
+            <param name="message"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.HttpHeader.Get``1(System.Net.Http.HttpRequestMessage,System.String)">
+            <summary>
+            根据Key返回实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="message"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.HttpHelperV2">
+            <summary>
+            HttpClient
+            </summary>
+        </member>
+        <member name="M:System.HttpHelperV2.DeleteResponse(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.Net.IWebProxy)">
+            <summary>
+            发送 DELETE 请求，并获取 响应 对象
+            </summary>
+            <param name="url">URL</param>
+            <param name="userAgent">浏览器标识</param>
+            <param name="param">发送参数</param>
+            <param name="head">发送包头部数据</param>
+            <param name="Proxy">代理信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.HttpHelperV2.CreateClient(System.Net.IWebProxy,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            创建链接对象
+            </summary>
+            <param name="Proxy">代理信息</param>
+            <param name="userAgent">浏览器标识</param>
+            <param name="head">发送包头部信息</param>
+            <returns></returns>
+        </member>
+        <member name="F:System.HttpCoreHelper.UserAgents">
+            <summary>
+            浏览器标识
+            0：手机，1:IE
+            </summary>
+        </member>
+        <member name="M:System.HttpCoreHelper.ParamInsertToURL(System.Collections.Generic.Dictionary{System.String,System.String},System.String)">
+            <summary>
+            将参数拼接到 URL 之后
+            </summary>
+            <param name="param"></param>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.HttpCoreHelper.paramToURL(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            键值对参数转成 URL 拼接字符串，Value 将做 UrlEncode 处理
+            </summary>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.IPExtensions.GetIPAddress">
+            <summary>
+            获取用户IP地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.IPExtensions.HidenLastIp(System.String)">
+            <summary>
+            隐藏IP地址最后一位用*号代替
+            </summary>
+            <param name="Ipaddress">IP地址:192.168.34.23</param>
+            <returns></returns>
+        </member>
+        <member name="P:System.IPExtensions.GetServerIp">
+            <summary>
+            获取服务器IP
+            </summary>
+        </member>
+        <member name="M:System.IPExtensions.IpToInt(System.String)">
+            <summary>
+            将IP转换成Int数字，方便比较
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.SinaIPToAddressHelper">
+            <summary>
+            新浪IP转地址辅助工具
+            </summary>
+        </member>
+        <member name="M:System.SinaIPToAddressHelper.GetIPAddressBySina(System.String)">
+            <summary>
+            获取IP地址
+            </summary>
+            <param name="IP"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.SinaIPToAddressHelper.SinaIPModel">
+            <summary>
+            新浪 IP 实体
+            </summary>
+        </member>
+        <member name="P:System.SinaIPToAddressHelper.SinaIPModel.country">
+            <summary>
+            国家
+            </summary>
+        </member>
+        <member name="P:System.SinaIPToAddressHelper.SinaIPModel.province">
+            <summary>
+            省份
+            </summary>
+        </member>
+        <member name="P:System.SinaIPToAddressHelper.SinaIPModel.city">
+            <summary>
+            城市
+            </summary>
+        </member>
+        <member name="P:System.SinaIPToAddressHelper.SinaIPModel.district">
+            <summary>
+            行政区
+            </summary>
+        </member>
+        <member name="P:System.SinaIPToAddressHelper.SinaIPModel.desc">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:System.JsonExtensions.FromJson``1(System.String)" -->
+        <member name="M:System.JsonExtensions.ToJson(System.Object)">
+            <summary>
+            将序列类合并成Json字符串
+            </summary>
+            <param name="jsonObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Linq.LinqExtensions.SingleAndInit``1(System.Collections.Generic.List{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            自动初始化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Linq.LinqExtensions.AutoInit``1(``0)">
+            <summary>
+            自动初始化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Linq.OrderByExtensions.ContainsOrderBy``1(System.Linq.IQueryable{``0})">
+            <summary>
+            判断里面是否已经调用过 OrderBy、OrderByDescending 这两个函数否，
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Linq.OrderByExtensions.FindIOrderedQueryable(System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+            递归子项找到 OrderBy、OrderByDescending 这两个函数的调用，
+            其中一个子项有，就返回 True，都没有的话，就返回 False
+            </summary>
+            <param name="Expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Linq.OrderByExtensions.IQueryableOrderBy``1(System.Linq.IQueryable{``0},System.String,System.String)">
+            <summary>
+            追加 OrderBy,OrderByDescending,ThenBy,ThenByDescending
+            </summary>
+            <typeparam name="T">列表对象</typeparam>
+            <param name="list">列表</param>
+            <param name="propertyName">属性名</param>
+            <param name="orderByMethodName">排序函数</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Linq.OrderByExtensions.OrderInfo``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.Dictionary{System.String,MvcCore.Extensions.OrderByStatus})">
+            <summary>
+            根据排序信息排序
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <param name="orderInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.MemberShip.GenerateSalt">
+            <summary>
+            得到密码的密匙
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:System.MemberShip.GenerateSalt(System.Int32)">
+            <summary>
+            自定义密匙的长度
+            </summary>
+            <param name="saltLength"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.MemberShip.EncodePassword(System.String,System.String)">
+            <summary>
+            把当前字符串转换成为密码格式
+            </summary>
+            <param name="password"></param>
+            <param name="passwordSalt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.MemberShip.MakePassword(System.Int32)">
+            <summary>
+            随机生成密码
+            </summary>
+            <param name="pwdlen"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ModelErrors.GetValidError``1(``0)">
+            <summary>
+            获取实体类实例化后验证的失败信息
+            <para>若无失败信息则为验证成功</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ModelExtensions.DeepClone(System.Object)">
+            <summary>
+            深度克隆
+            </summary>
+            <param name="source">源对象</param>
+            <returns>新对象</returns>
+        </member>
+        <member name="M:System.ModelExtensions.ToModel``1(System.Object)">
+            <summary>
+            创建一个新的类型的对象，并将现有对象的属性值赋给新对象相同名称的属性
+            </summary>
+            <typeparam name="T">新对象的类型</typeparam>
+            <param name="source">现有对象</param>
+            <returns>新的对象</returns>
+        </member>
+        <member name="M:System.ModelExtensions.UpdateFrom``1(``0,System.Object)">
+            <summary>
+            将源对象的属性值赋给目标对象相同名称的属性
+            </summary>
+            <typeparam name="T">目标类型</typeparam>
+            <param name="target">目标对象</param>
+            <param name="source">源对象</param>
+            <returns>目标类型</returns>
+        </member>
+        <member name="M:System.ModelHelper.GetSign``1(``0)">
+            <summary>
+            获取当前实体类签名
+            </summary>
+            <typeparam name="T">实体类类型</typeparam>
+            <param name="model">实例化过的实体类</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ModelHelper.GetSign(System.String)">
+            <summary>
+            获取字符串签名
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ModelHelper.GetSignMD5(System.String)">
+            <summary>
+            获取字符串的MD5签名，并转成 Guid
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ModelHelper.GetTypeByDLL(System.String,System.String)">
+            <summary>
+            根据类全名获取类名
+            </summary>
+            <param name="ClassFullName"></param>
+            <param name="dllName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.RequestExtensions.ToEnumPermission(System.String)">
+            <summary>
+            把获取到的值转换成权限模式保存到数据库
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.RequestExtensions.ToCheckListString(System.Object)">
+            <summary>
+            专门为checklistbox组做的获取模式
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.RequestExtensions.ToRequestList(System.Object)">
+            <summary>
+            把checklistbox组的获取变成List数组
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.SafeInputExtensions.ToShort(System.Object)">
+            <summary>
+            将字符串转换成Int类型，如果出错则返回0
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.SafeInputExtensions.ToInt(System.Object)">
+            <summary>
+            将字符串转换成Int类型，如果出错则返回0
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.SafeInputExtensions.ToDouble(System.Object)">
+            <summary>
+            将字符串转换成decimal类型，如果出错则返回0
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.SafeInputExtensions.ToBool(System.Object)">
+            <summary>
+            将字符串转换成真假
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.SafeInputExtensions.ToGuid(System.Object)">
+            <summary>
+            将字符串转换成GUID，出错则为Guid.NewGuid()
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ShortUrlExtensions.EnShortUrl(System.Int64)">
+            <summary> 
+            压缩ID标识 
+            </summary> 
+            <param name="n"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:System.ShortUrlExtensions.UnShortUrl(System.String)">
+            <summary> 
+            还原ID标识 
+            </summary> 
+            <param name="s"></param> 
+            <returns></returns> 
+        </member>
+        <member name="T:System.StringExtensions">
+            <summary>
+            字符串扩展函数工具类
+            </summary>
+        </member>
+        <member name="M:System.StringExtensions.ToSafeBR(System.String)">
+            <summary>
+            将\r\n替换成BR
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.GetDepartmentFatherID(System.String)">
+            <summary>
+            得到父部门的ID
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.Substr(System.String,System.Int32)">
+            <summary>
+            截取字符串，超过部分用...代替
+            </summary>
+            <param name="source"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.Substr(System.String,System.Int32,System.String)">
+            <summary>
+            截取字符串，超过部分用自定义代替
+            </summary>
+            <param name="source"></param>
+            <param name="len"></param>
+            <param name="att"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.RemoveHtml(System.String)">
+            <summary>
+            移除掉所有的Html代码
+            </summary>
+            <param name="strHtml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.RndNum(System.Int32)">
+            <summary>
+            生成0-9随机数
+            </summary>
+            <param name="VcodeNum">生成长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.MaskStar(System.Collections.Generic.Dictionary{System.String,System.String},System.Boolean)">
+            <summary>
+            返回星号的加密
+            </summary>
+            <param name="items"></param>
+            <param name="mask"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.ToAutoComplate(System.String,System.String)">
+            <summary>
+            给自动填充使用
+            </summary>
+            <param name="str1"></param>
+            <param name="str2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.ToRedColor(System.Int32)">
+            <summary>
+            返回红色字体
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.ToSafeString(System.Object)">
+            <summary>
+            返回安全的字符串类型如果为NULL则返回空
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.GB2Unicode(System.String)">
+            <summary>
+            将中文转换成Unicode编码，主要用在URL传递中文
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.ToMD5(System.String)">
+            <summary>
+            将字符串转换成为大写的MD5
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.ByteSizeToString(System.Int64)">
+            <summary>
+            字节码长度转可读字符串 00000000 bytes 0.0GB
+            </summary>
+            <param name="KSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.GetImgBase64String(System.Byte[],System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            将图片的字节码数组转成 base64 字符串
+            </summary>
+            <param name="img"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.GetMD5Code(System.String)">
+            <summary>
+            将字符串转换成为大写的MD5
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.EncodeShortString(System.String,System.ShortStringVersion)">
+            <summary>
+            转码成短字符串
+            </summary>
+            <param name="str">源字符串</param>
+            <param name="version">制码版本</param>
+            <returns>短码数组</returns>
+        </member>
+        <member name="M:System.StringExtensions.EncodeShortString(System.String)">
+            <summary>
+            转码成短字符串
+            </summary>
+            <param name="str">源字符串</param>
+            <returns>短码数组</returns>
+        </member>
+        <member name="M:System.StringExtensions.StringCombinationsResult(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            获取字符串二维数组的排列组合
+            </summary>
+            <param name="source">字符串二维数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.StringCombinationsResult(System.Collections.Generic.List{System.Collections.Generic.List{System.String}})">
+            <summary>
+            获取字符串二维数组的排列组合
+            </summary>
+            <param name="source">字符串二维数组</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.FirstWordUpper(System.String)">
+            <summary>
+            将首字母转换为大写
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.IsChineseWord(System.Char)">
+            <summary>
+            判断是否是汉字
+            </summary>
+            <param name="word"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.GetWordPinYins(System.Char,System.Boolean)">
+            <summary>
+            获取单个汉字的拼音
+            </summary>
+            <param name="word"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.GetWordPinYinShorts(System.Char)">
+            <summary>
+            获取单个汉字的拼音首字母
+            </summary>
+            <param name="word"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.PinYinFull(System.String,System.Boolean)">
+            <summary>
+            获取全拼
+            </summary>
+            <param name="source">汉字字符串</param>
+            <param name="FirstWordUpper">首字母是否为大写，默认 false</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.PinYinShort(System.String)">
+            <summary>
+            获取拼音首字母
+            </summary>
+            <param name="source">汉字字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.StringExtensions.PinYinModel(System.String,System.Boolean)">
+            <summary>
+            获取拼音详细信息
+            </summary>
+            <param name="source">源字符串</param>
+            <param name="FirstWordUpper">首字母是否大写</param>
+            <returns></returns>
+        </member>
+        <member name="T:System.ShortStringVersion">
+            <summary>
+            短字符串版本
+            </summary>
+        </member>
+        <member name="F:System.ShortStringVersion.Version_1">
+            <summary>
+            版本1
+            </summary>
+        </member>
+        <member name="F:System.ShortStringVersion.Version_2">
+            <summary>
+            版本2
+            </summary>
+        </member>
+        <member name="F:System.ShortStringVersion.Version_3">
+            <summary>
+            版本3
+            </summary>
+        </member>
+        <member name="F:System.ShortStringVersion.Version_4">
+            <summary>
+            版本4
+            </summary>
+        </member>
+        <member name="F:System.ShortStringVersion.Version_5">
+            <summary>
+            版本5
+            </summary>
+        </member>
+        <member name="T:System.ChineseSpallInfo">
+            <summary>
+            拼音详细信息
+            </summary>
+        </member>
+        <member name="P:System.ChineseSpallInfo.ShortWords">
+            <summary>
+            拼音首字母
+            </summary>
+        </member>
+        <member name="P:System.ChineseSpallInfo.PinYins">
+            <summary>
+            以首字母开头的拼音数组
+            </summary>
+        </member>
+        <member name="M:System.UploadImg.ThumbnailImage(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            高质量压缩，不包含水印
+            </summary>
+            <param name="sourceFile">原始图片</param>
+            <param name="targetFile">目标图片</param>
+            <param name="targetImgWidth">目标宽度</param>
+            <param name="targetImgHeight">目标高度</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.UploadImg.ThumbnailImage(System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            高质量压缩，包含水印
+            </summary>
+            <param name="sourceFile">原始图片</param>
+            <param name="targetFile">目标图片</param>
+            <param name="targetImgWidth">目标宽度</param>
+            <param name="targetImgHeight">目标高度</param>
+            <param name="offsetX">X偏移</param>
+            <param name="offsetY">Y偏移</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.UploadImg.ThumbnailImage(System.String,System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            高质量压缩，包含水印
+            </summary>
+            <param name="sourceFile">原始图片</param>
+            <param name="targetFile">目标图片</param>
+            <param name="targetImgWidth">目标宽度</param>
+            <param name="targetImgHeight">目标高度</param>
+            <param name="offsetX">X偏移</param>
+            <param name="offsetY">Y偏移</param>
+            <param name="watermark">水印路径，如果没有则调用默认的</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.UploadImg.ThumbnailImage(System.String,System.String,System.Int32,System.Int32,System.Boolean,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            无损压缩图片
+            </summary>
+            <param name="sFile">原图片</param>
+            <param name="dFile">压缩后保存位置</param>
+            <param name="targetImgHeight">高度</param>
+            <param name="targetImgWidth"></param>
+            <param name="quality">压缩质量(数字越小压缩率越高，越模糊) 1-100</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.UrlExtensions.CheckPostUrl(System.Web.HttpContext)">
+            <summary>
+            检测用户提交页面
+            </summary>
+            <param name="rq"></param>
+        </member>
+        <member name="M:System.UrlExtensions.CheckRefurbish(System.Int32,System.Web.SessionState.HttpSessionState)">
+            <summary>
+            防刷新检测
+            </summary>
+            <param name="Second">访问间隔秒</param>
+            <param name="UserSession"></param>
+        </member>
+        <member name="M:System.UrlExtensions.UrlEncode(System.Object)">
+            <summary>
+            URL编码
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.UrlExtensions.UrlDecode(System.Object)">
+            <summary>
+            URL解码
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ValidateCode.CreateValidateGraphic(System.String)">
+            <summary>
+            创建验证码的图片
+            </summary>
+            <param name="containsPage">要输出到的page对象</param>
+            <param name="validateNum">验证码</param>
+        </member>
+        <member name="T:System.ValidateWhiteBlackImgCode">
+            <summary>
+            黑白图验证码
+            </summary>
+        </member>
+        <member name="M:System.ValidateWhiteBlackImgCode.CodeImg(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            取黑白码
+            </summary>
+            <param name="code">字符串码</param>
+            <param name="width">图片宽度</param>
+            <param name="height">图片高度</param>
+            <param name="txtWhite">是白字，否黑字</param>
+            <returns></returns>
+        </member>
+        <member name="T:System.IO.ZIPExtensions">
+            <summary>
+            ZIP 压缩包处理工具
+            </summary>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.Encode(System.Collections.Generic.Dictionary{System.String,System.IO.Stream})">
+            <summary>
+            压缩
+            </summary>
+            <param name="files">要压缩的流</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.Encode(System.String)">
+            <summary>
+            压缩文件夹
+            </summary>
+            <param name="path">文件夹地址</param>
+            <returns>ZIP保存地址</returns>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.Encode(System.String,System.String)">
+            <summary>
+            压缩文件夹
+            </summary>
+            <param name="path">文件夹地址</param>
+            <param name="saveFile">ZIP保存地址</param>
+            <returns>ZIP保存地址</returns>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.Descode(System.IO.Stream)">
+            <summary>
+            解压缩
+            </summary>
+            <param name="source">ZIP 流</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.Descode(System.String)">
+            <summary>
+            解压缩 ZIP 文件
+            </summary>
+            <param name="fileName">ZIP文件</param>
+            <returns>解压后的保存地址</returns>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.Descode(System.String,System.String)">
+            <summary>
+            解压缩 ZIP 文件
+            </summary>
+            <param name="fileName">ZIP文件</param>
+            <param name="dirName">解压后的保存地址</param>
+            <returns>解压后的保存地址</returns>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.FileNames(System.String)">
+            <summary>
+            获取给定路径下的所有文件，包含子路径的文件，文件名为全路径地址
+            </summary>
+            <param name="path">要获取文件的路径名</param>
+            <returns>该路径下的所有文件</returns>
+        </member>
+        <member name="M:System.IO.ZIPExtensions.Clone(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            复制流
+            </summary>
+            <param name="source">源流</param>
+            <param name="target">目标流</param>
+        </member>
+        <member name="T:Newtonsoft.Json.Converters.ChinaDateConverter">
+            <summary>
+            Newtonsoft.Json 的日期转换扩展
+            </summary>
+        </member>
+        <member name="F:Newtonsoft.Json.Converters.ChinaDateConverter.dtConverter">
+            <summary>
+            这里定义转换格式
+            </summary>
+        </member>
+    </members>
+</doc>
