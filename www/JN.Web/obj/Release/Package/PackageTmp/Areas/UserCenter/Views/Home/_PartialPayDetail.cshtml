@@ -20,7 +20,7 @@
             <p><strong>受益人银行账户号码: <font id="bank_number">@acceptUser.BankCard</font></strong></p>
             <p><strong>受益人微信号: <font id="wechat">@acceptUser.WeiXin</font></strong></p>
             <p><strong>受益人支付宝: <font id="alipay">@acceptUser.AliPay</font></strong></p>
-            <p>发送者的附加信息：为了更快速的确认，请在转账后发送 <font class="receiver_phone" color="#0000FF">@acceptUser.Mobile</font></p>
+            @*<p>发送者的附加信息：为了更快速的确认，请在转账后发送 <font class="receiver_phone" color="#0000FF">@acceptUser.Mobile</font></p>*@
             <p>---------------------</p>
             <p><font color="#FF0000">警告!</font>当转账时，请注意付款的用途，有的银行在转账时是要求指定的账号或者用户卡的。这是由于这笔货币会先转到代理银行中，之后再转到客户账户上。这种情况，你不可以人工翻译！请注意收件人的建议！</p>
         </div>
@@ -28,7 +28,10 @@
         <p>在收到资金之前不要确认支付，因为确认了就不能撤销了，系统会默认你已经收到钱了！</p>
         <p><font color="#FF0000">注意!</font>由于一些银行希望我们要求你不能提及到关于@(sysEntity.SysName)的支付目的，使用非标准的方式来表达即可！</p>
         <p>应一些参与者有效使用自己银行账号用于个人用途的要求，我们要求你增加订单总额最后两个数字，使你的转账身份识别更简单。例如订单R1230012转账7000.000，你可以转账7000.012人民币。谢谢。</p>
-        <p><strong>接收者:<font id="receiver_lid">@acceptUser.RealName</font>, 手机号:<font class="receiver_phone">@acceptUser.Mobile</font>,联系微信:<font class="receiver_wechat_contact">@acceptUser.WeiXin</font></strong></p>
+        <p><strong>接收者:<font id="receiver_lid">@acceptUser.RealName</font>
+            @*, 手机号:<font class="receiver_phone">@acceptUser.Mobile</font>*@
+            ,
+            联系微信:<font class="receiver_wechat_contact">@acceptUser.WeiXin</font></strong></p>
         @if (acceptRefereeUser != null)
     {
             <p><strong>接收者推荐人:<font id="receiver_manager_lid">@acceptRefereeUser.RealName</font>,接收者推荐人手机号:<font id="receiver_manager_phone">@acceptRefereeUser.Mobile</font>,联系微信:<font class="receiver_manager_wechat_contact">@acceptRefereeUser.WeiXin</font></strong></p>
@@ -36,7 +39,9 @@
         <p><strong>发送者:<font id="sender_lid">@supplyUser.RealName</font>, 手机号:<font id="sender_phone">@supplyUser.Mobile</font>,联系微信:<font id="sender_wechat_contact">@supplyUser.WeiXin</font></strong></p>
         @if (supplyRefereeUser != null)
     {
-            <p><strong>发送者推荐人:<font id="sender_manager_lid">@supplyRefereeUser.RealName</font>,接收者推荐人手机号:<font id="sender_manager_phone">@supplyRefereeUser.Mobile</font>,联系微信:<font id="sender_manager_wechat_contact">@supplyRefereeUser.WeiXin</font></strong></p>
+            <p><strong>发送者推荐人:<font id="sender_manager_lid">@supplyRefereeUser.RealName</font>
+                @*,接收者推荐人手机号:<font id="sender_manager_phone">@supplyRefereeUser.Mobile</font>*@
+                ,联系微信:<font id="sender_manager_wechat_contact">@supplyRefereeUser.WeiXin</font></strong></p>
     }
         <p><font color="#FF0000">注意！</font></p>
         <p>1)发送者必须提供指定的帮助金额</p>

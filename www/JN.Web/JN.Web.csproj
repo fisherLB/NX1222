@@ -3289,6 +3289,7 @@
     <Content Include="Theme\052401\nmmcss\jquery.cookie.js" />
     <Content Include="Theme\052401\nmmcss\jquery.js" />
     <Content Include="Theme\052401\nmmcss\LOGO.png" />
+    <Content Include="Theme\052401\nmmcss\LOGO02.png" />
     <Content Include="Theme\052401\nmmcss\logo_text.png" />
     <Content Include="Theme\052401\nmmcss\logo_white.png" />
     <Content Include="Theme\052401\nmmcss\main.css" />

@@ -76,3 +76,15 @@ E:\projectplace\NX1222\www\JN.Data\bin\Release\Microsoft.Web.Infrastructure.xml
 E:\projectplace\NX1222\www\JN.Data\obj\Release\JN.Data.csprojResolveAssemblyReference.cache
 E:\projectplace\NX1222\www\JN.Data\obj\Release\JN.Data.dll
 E:\projectplace\NX1222\www\JN.Data\obj\Release\JN.Data.pdb
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\JN.Data.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\JN.Data.pdb
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\EntityFramework.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\MvcCore.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\System.Web.Mvc.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\MvcCore.xml
+E:\projectplace\NXX1222\www\JN.Data\bin\Release\Microsoft.Web.Infrastructure.xml
+E:\projectplace\NXX1222\www\JN.Data\obj\Release\JN.Data.csprojResolveAssemblyReference.cache
+E:\projectplace\NXX1222\www\JN.Data\obj\Release\JN.Data.dll
+E:\projectplace\NXX1222\www\JN.Data\obj\Release\JN.Data.pdb

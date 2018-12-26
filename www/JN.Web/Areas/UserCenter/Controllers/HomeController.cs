@@ -420,8 +420,10 @@ namespace JN.Web.Areas.UserCenter.Controllers
                 else if (CoinID == 2002)
                 {
                     minmoney = cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[0].ToDecimal();
-                    maxmoney = cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[1].ToDecimal();
-                    if (ExchangeAmount < minmoney || ExchangeAmount > maxmoney) throw new Exception("接受金额需在" + minmoney + "~" + maxmoney + "之间！");
+                    //maxmoney = cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[1].ToDecimal();
+                    maxmoney= (cacheSysParam.SingleAndInit(x => x.ID == 3003).Value2.ToDecimal())*Umodel.Wallet2002;
+                    if (ExchangeAmount < minmoney ) throw new Exception("接受金额不能小于" + minmoney + "");
+                    if (ExchangeAmount > maxmoney) throw new Exception("接受金额不能大于当前动态钱包的50%，不能大于"+maxmoney+"，且必须为100的整数！");
                 }
                
 

@@ -111,7 +111,7 @@
                 $(".balance").val(@Umodel.Wallet2002);
                 $(".sell").val(@Umodel.Wallet2002);
                 $(".min").val(@cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[0]);
-                $(".max").val(@cacheSysParam.SingleAndInit(x => x.ID == 3003).Value.Split('-')[1]);
+                $(".max").val("动态钱包卖出金额不能大于当前金额的50%且为100的倍数");
 
             } else if (val == 2003) {
                 $(".balance").val(@Umodel.Wallet2003);
