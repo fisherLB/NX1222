@@ -103,3 +103,12 @@ E:\互助项目\无止境\WL16081201\www\JN.Data\obj\Debug\JN.Data.dll
 E:\互助项目\无止境\WL16081201\www\JN.Data\obj\Debug\JN.Data.pdb
 E:\互助项目\无止境\WL16081201\www\JN.Data\bin\Debug\Microsoft.Web.Infrastructure.dll
 E:\互助项目\无止境\WL16081201\www\JN.Data\bin\Debug\Microsoft.Web.Infrastructure.xml
+E:\projectplace\NXX1222\www\JN.Data\bin\Debug\JN.Data.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Debug\JN.Data.pdb
+E:\projectplace\NXX1222\www\JN.Data\bin\Debug\MvcCore.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Debug\Microsoft.Web.Infrastructure.dll
+E:\projectplace\NXX1222\www\JN.Data\bin\Debug\MvcCore.xml
+E:\projectplace\NXX1222\www\JN.Data\bin\Debug\Microsoft.Web.Infrastructure.xml
+E:\projectplace\NXX1222\www\JN.Data\obj\Debug\JN.Data.csprojResolveAssemblyReference.cache
+E:\projectplace\NXX1222\www\JN.Data\obj\Debug\JN.Data.dll
+E:\projectplace\NXX1222\www\JN.Data\obj\Debug\JN.Data.pdb

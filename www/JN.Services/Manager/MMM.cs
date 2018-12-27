@@ -267,7 +267,7 @@ namespace JN.Services.Manager
         {
             List<Data.SysParam> cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.ID < 4000).ToList();
 
-            int PARAM_PAYENDHOUR = cacheSysParam.SingleAndInit(x => x.ID == 3106).Value.ToInt(); //付款时限参数 48小时
+            int PARAM_PAYENDHOUR = cacheSysParam.SingleAndInit(x => x.ID == 1323).Value.ToInt(); //付款时限参数 48小时
 
             int PARAM_QD = cacheSysParam.SingleAndInit(x => x.ID == 3813).Value.ToInt();  //抢单之后的付款时限
             int PARAM_PAYENDHOUR_DELAYED = cacheSysParam.SingleAndInit(x => x.ID == 3106).Value2.ToInt(); //付款延时参数 48小时
@@ -275,240 +275,39 @@ namespace JN.Services.Manager
             var matchlist = MvcCore.Unity.Get<IMatchingService>().List(x => (x.Status == (int)Data.Enum.MatchingStatus.UnPaid && SqlFunctions.DateDiff("minute", x.CreateTime, DateTime.Now) > PARAM_PAYENDHOUR) || (x.Status == (int)Data.Enum.MatchingStatus.Delayed && SqlFunctions.DateDiff("minute", x.CreateTime, DateTime.Now) > (PARAM_PAYENDHOUR + PARAM_PAYENDHOUR_DELAYED)) || (x.Status == (int)Data.Enum.MatchingStatus.UnPaid && SqlFunctions.DateDiff("minute", x.CreateTime, DateTime.Now) > PARAM_QD)).ToList();
             foreach (var item in matchlist)
             {
-                if ((item.FromUID ?? 0) == 0) //订单没转移过
+                CancelMatching(item, "提供方超时未付款", true);
+              
+
+
+                //删除奖金，保留本单利息
+                var sup = MvcCore.Unity.Get<ISupplyHelpService>().Single(x => x.SupplyNo == item.SupplyNo);
+                var otherSup = MvcCore.Unity.Get<ISupplyHelpService>().List(x => x.ReserveStr2 == sup.ReserveStr2 && x.SupplyNo != sup.SupplyNo).FirstOrDefault();
+                if (otherSup != null)
                 {
-                    var onUser = MvcCore.Unity.Get<IUserService>().Single(item.SupplyUID);
-                    if (onUser != null)
+                    if (otherSup.Status == 1)//分单的第二单没有匹配，取消
                     {
-                        #region 订单转移到推荐人（产生新的提供单和匹配单）
-                        if (onUser.RefereeID > 0)
-                        {
-                            ////同时生成一个提供单才可计算利息
-                            //var model = new Data.SupplyHelp();
-                            //model.UID = onUser.RefereeID;
-                            //model.UserName = onUser.RefereeUser;
-                            //model.SupplyAmount = item.MatchAmount; //申请金额
-                            //model.ExchangeAmount = item.MatchAmount; //汇率金额
-                            //model.CreateTime = DateTime.Now;
-                            //model.Status = (int)Data.Enum.HelpStatus.AllMatching;  //状态
-                            //model.IsTop = false;  //是否置顶
-                            //model.IsRepeatQueuing = false; //是否重新排队
-                            //model.HaveMatchingAmount = item.MatchAmount; //已匹配数量
-                            //model.HaveAcceptAmount = 0; //
-                            //model.PayWay = "";  //付款方式
-                            //model.EndTime = DateTime.Now.AddMinutes(cacheSysParam.SingleAndInit(x => x.ID == 3103).Value.ToInt());  //订单到期时间
-                            //model.SupplyNo = SupplyHelps.GetSupplyNo();  //单号
-                            //model.AccrualDay = 0; //已结算利息天数
-                            //model.SurplusAccrualDay = cacheSysParam.SingleAndInit(x => x.ID == 1102).Value.ToInt(); //(天)
-                            //model.AccrualMoney = 0; //已产生的利息
-                            //model.IsAccrualEffective = false; //利息是否生效（匹配并验证付款后才生效）
-                            //model.IsAccruaCount = true; //是否还计算利息 (超过30天或有接受订单产生后不再计算利息)
-                            //model.TotalMoney = model.ExchangeAmount; //本单总额（含利息）
-                            //model.AccruaRate = cacheSysParam.SingleAndInit(x => x.ID == 1102).Value2.ToDecimal();  //基础利息
-                            //model.OrderType = 1;
-                            //model.OrderMoney = item.MatchAmount;
-                            //model.ReserveDate2 = DateTime.Now.AddMinutes(cacheSysParam.SingleAndInit(x => x.ID == 3809).Value.ToInt());//在hl16070401中作为解冻本金和利息的时间
-                            //MvcCore.Unity.Get<ISupplyHelpService>().Add(model);
-                            //MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                            var newMatchItem = item.ToModel<Data.Matching>();
-                            newMatchItem.SupplyUID = onUser.RefereeID;
-                            newMatchItem.SupplyUserName = onUser.RefereeUser;
-                            newMatchItem.SupplyNo = item.SupplyNo;
-                            newMatchItem.MatchingNo = Matchings.GetOrderNumber();
-                            newMatchItem.CreateTime = DateTime.Now;
-                            newMatchItem.PayEndTime = DateTime.Now.AddMinutes(cacheSysParam.SingleAndInit(x => x.ID == 3106).Value.ToInt()); //付款截止时间
-                            newMatchItem.Status = (int)Data.Enum.MatchingStatus.UnPaid; //未付款
-                            newMatchItem.Remark = "来自“" + item.SupplyUserName + "”的未付款订单转移，原单号：" + item.MatchingNo;
-                            newMatchItem.FromUID = item.SupplyUID;
-                            newMatchItem.FromUserName = item.SupplyUserName;
-                            MvcCore.Unity.Get<IMatchingService>().Add(newMatchItem);
-                            MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                            var mModel = MvcCore.Unity.Get<IMatchingService>().Single(item.ID);
-                            mModel.Status = (int)JN.Data.Enum.MatchingStatus.Cancel;
-                            mModel.CancelTime = DateTime.Now;
-                            mModel.CanceReason = "超时未进行付款,订单转移到推荐人“" + onUser.RefereeUser + "”，新单号：" + newMatchItem.MatchingNo;
-                            MvcCore.Unity.Get<IMatchingService>().Update(mModel);
-                            MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                            //供单处理给推荐人
-                            var sup = MvcCore.Unity.Get<ISupplyHelpService>().Single(x => x.SupplyNo == item.SupplyNo);
-                            sup.UID = onUser.RefereeID;
-                            sup.UserName = onUser.RefereeUser;
-                            sup.CreateTime = DateTime.Now;
-                            sup.Remark = "订单转移给推荐人";
-                            sup.ReserveDate2 = DateTime.Now.AddMinutes(cacheSysParam.SingleAndInit(x => x.ID == 3809).Value.ToInt());//在hl16070401中作为解冻本金和利息的时间
-                            sup.EndTime = DateTime.Now.AddMinutes(cacheSysParam.SingleAndInit(x => x.ID == 3103).Value.ToInt());  //订单到期时间
-                            MvcCore.Unity.Get<ISupplyHelpService>().Update(sup);
-                            MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-
-                            //利息转移给推荐人
-                            //var lxlist = MvcCore.Unity.Get<IBonusDetailService>().List(x=>x.SupplyNo==sup.SupplyNo);
-                            //foreach (var itm in lxlist)
-                            //{
-                            //    itm.UID = onUser.RefereeID;
-                            //    MvcCore.Unity.Get<IBonusDetailService>().Update(itm);
-                            //    MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                            //}
-                         
-
-                            //删除奖金，保留本单利息
-                            MvcCore.Unity.Get<IBonusDetailService>().Delete(x => x.SupplyNo == sup.ReserveStr2);
-                            MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                            var otherSup=MvcCore.Unity.Get<ISupplyHelpService>().List(x => x.ReserveStr2==sup.ReserveStr2 && x.SupplyNo !=sup.SupplyNo).FirstOrDefault();
-                            if (otherSup != null)
-                            {
-                                if (otherSup.Status == 1)//分单的第二单没有匹配，取消
-                                {
-                                    otherSup.Status = (int)JN.Data.Enum.HelpStatus.Cancel;
-                                    MvcCore.Unity.Get<ISupplyHelpService>().Update(otherSup);
-                                    MvcCore.Unity.Get<ISysDBTool>().Commit();
-                                    
-                                }
-                            }
-
-                            Dictionary<string, string> updateParam = new Dictionary<string, string>();
-                            updateParam.Add("UID", onUser.RefereeID.ToString());
-                            updateParam.Add("UserName", onUser.RefereeUser.ToString());
-                            MvcCore.Unity.Get<IBonusDetailService>().Update(new Data.BonusDetail(), updateParam, "SupplyNo='" + sup.SupplyNo + "' and BonusID=1102");
-                            MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                            //对供单用户帐号冻结处理
-                            onUser.IsLock = true;
-                            onUser.LockTime = DateTime.Now;
-                            onUser.LockReason = "超时未付款触发冻结，单号：" + item.MatchingNo + "";
-                            MvcCore.Unity.Get<IUserService>().Update(onUser);
-                            MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                            if (MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4508).Value == "1")
-                                SMSHelper.WebChineseMSM(onUser.Mobile, MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4508).Value2.Replace("{SUPPLYNO}", item.SupplyNo));
-
-                            var RefereeUser = MvcCore.Unity.Get<IUserService>().Single(onUser.RefereeID);
-                            if (MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4509).Value == "1")
-                                SMSHelper.WebChineseMSM(RefereeUser.Mobile, MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4509).Value2.Replace("{SUPPLYNO}", item.SupplyNo));
-                        }
-                        #endregion
+                        otherSup.Status = (int)JN.Data.Enum.HelpStatus.Cancel;
+                        MvcCore.Unity.Get<ISupplyHelpService>().Update(otherSup);
+                        MvcCore.Unity.Get<ISysDBTool>().Commit();
 
                     }
                 }
-                else //进入抢单池
-                {
-                        var newMatchItem = MvcCore.Unity.Get<IMatchingService>().Single(item.ID);
-                        if (newMatchItem.Remark != "来自会员抢单后创建的新单")
-                        {
-                            //对推荐人扣除100元
-                            decimal kqje = cacheSysParam.SingleAndInit(x => x.ID == 3811).Value.ToDecimal();
+                MvcCore.Unity.Get<IBonusDetailService>().Delete(x => x.SupplyNo == sup.ReserveStr2);
+                MvcCore.Unity.Get<ISysDBTool>().Commit();
+                var onUser = MvcCore.Unity.Get<IUserService>().Single(item.SupplyUID);
+                //对供单用户帐号冻结处理
+                onUser.IsLock = true;
+                onUser.LockTime = DateTime.Now;
+                onUser.LockReason = "超时未付款触发冻结，单号：" + item.MatchingNo + "";
+                MvcCore.Unity.Get<IUserService>().Update(onUser);
+                MvcCore.Unity.Get<ISysDBTool>().Commit();
 
-                            Wallets.changeWallet(item.SupplyUID, 0 - kqje, 2003, "下属会员转移的订单“" + item.SupplyNo + "”未在限时内付款");
+                if (MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4508).Value == "1")
+                    SMSHelper.WebChineseMSM(onUser.Mobile, MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4508).Value2.Replace("{SUPPLYNO}", item.SupplyNo));
 
-                            //var newMatchItem = MvcCore.Unity.Get<IMatchingService>().Single(item.ID);
-                            newMatchItem.Remark = "下属会员“" + newMatchItem.FromUserName + "”转移的订单“" + newMatchItem.MatchingNo + "”未在限时内付款，扣除奖金并进入抢单池";
-                            newMatchItem.Status = 1;
-                            newMatchItem.IsOpenBuying = true;
-                            MvcCore.Unity.Get<IMatchingService>().Update(newMatchItem);
-                            MvcCore.Unity.Get<ISysDBTool>().Commit();
-                        }
-                    else //惩罚抢单人
-                    {
-                        //配单取消
-                        var mModel = MvcCore.Unity.Get<IMatchingService>().Single(item.ID);
-                        mModel.Status = (int)JN.Data.Enum.MatchingStatus.Cancel;
-                        mModel.CancelTime = DateTime.Now;
-                        mModel.CanceReason = "抢单成功“" + item.SupplyNo + "”未在限时内付款";
-                        MvcCore.Unity.Get<IMatchingService>().Update(mModel);
-                        MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                        //供单退回处理
-                        var sup = MvcCore.Unity.Get<ISupplyHelpService>().Single(x => x.SupplyNo == item.SupplyNo);
-                        sup.HaveMatchingAmount = sup.HaveMatchingAmount - item.MatchAmount;  //减掉已匹配的金额
-                        //重新修正状态
-                        //if (sup.HaveMatchingAmount == 0)
-                        //    sup.Status = (int)JN.Entity.Enum.HelpStatus.NoMatching;
-                        //else if (sup.HaveMatchingAmount > 0 && sup.HaveMatchingAmount < sup.ExchangeAmount)
-                        //    sup.Status = (int)JN.Entity.Enum.HelpStatus.PartOfMatching;
-                        //else
-                        //    throw new ArgumentOutOfRangeException("取消匹配与提供订单信息不相符");
-                        sup.CancelTime = DateTime.Now;
-                        sup.Status = (int)JN.Data.Enum.HelpStatus.Cancel;
-                        sup.ReserveStr1 = "抢单超时未付款，已取消订单";
-                        MvcCore.Unity.Get<ISupplyHelpService>().Update(sup);
-                        MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                        //删除利息,奖金
-                        MvcCore.Unity.Get<IBonusDetailService>().Delete(x => x.SupplyNo == item.SupplyNo && x.IsBalance == false);
-                        MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                        //受单退回处理
-                        var acc = MvcCore.Unity.Get<IAcceptHelpService>().Single(x => x.AcceptNo == item.AcceptNo);
-                        acc.HaveMatchingAmount = acc.HaveMatchingAmount - item.MatchAmount;
-                        //重新修正状态
-                        if (acc.HaveMatchingAmount == 0)
-                            acc.Status = (int)JN.Data.Enum.HelpStatus.NoMatching;
-                        else if (acc.HaveMatchingAmount > 0 && acc.HaveMatchingAmount < acc.ExchangeAmount)
-                            acc.Status = (int)JN.Data.Enum.HelpStatus.PartOfMatching;
-                        else
-                            acc.Status = (int)JN.Data.Enum.HelpStatus.Cancel;
-                        MvcCore.Unity.Get<IAcceptHelpService>().Update(acc);
-                        MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                        //对推荐人扣除100元
-                        decimal kqje = cacheSysParam.SingleAndInit(x => x.ID == 3812).Value.ToDecimal();
-                      
-                        Wallets.changeWallet(item.SupplyUID, 0 - kqje, 2002, "抢单成功“" + item.SupplyNo + "”未在限时内付款");
-                    }
-                }
-                //else //惩罚推荐人
-                //{
-                //    //配单取消
-                //    var mModel = MvcCore.Unity.Get<IMatchingService>().Single(item.ID);
-                //    mModel.Status = (int)JN.Data.Enum.MatchingStatus.Cancel;
-                //    mModel.CancelTime = DateTime.Now;
-                //    mModel.CanceReason = "下属会员转移的订单“" + item.SupplyNo + "”未在限时内付款";
-                //    MvcCore.Unity.Get<IMatchingService>().Update(mModel);
-                //    MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                //    //供单退回处理
-                //    var sup = MvcCore.Unity.Get<ISupplyHelpService>().Single(x => x.SupplyNo == item.SupplyNo);
-                //    sup.HaveMatchingAmount = sup.HaveMatchingAmount - item.MatchAmount;  //减掉已匹配的金额
-                //    //重新修正状态
-                //    //if (sup.HaveMatchingAmount == 0)
-                //    //    sup.Status = (int)JN.Entity.Enum.HelpStatus.NoMatching;
-                //    //else if (sup.HaveMatchingAmount > 0 && sup.HaveMatchingAmount < sup.ExchangeAmount)
-                //    //    sup.Status = (int)JN.Entity.Enum.HelpStatus.PartOfMatching;
-                //    //else
-                //    //    throw new ArgumentOutOfRangeException("取消匹配与提供订单信息不相符");
-                //    sup.CancelTime = DateTime.Now;
-                //    sup.Status = (int)JN.Data.Enum.HelpStatus.Cancel;
-                //    sup.ReserveStr1 = "超时未付款，已取消订单";
-                //    MvcCore.Unity.Get<ISupplyHelpService>().Update(sup);
-                //    MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                //    //删除利息,奖金
-                //    MvcCore.Unity.Get<IBonusDetailService>().Delete(x => x.SupplyNo == item.SupplyNo && x.IsBalance == false);
-                //    MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                //    //受单退回处理
-                //    var acc = MvcCore.Unity.Get<IAcceptHelpService>().Single(x => x.AcceptNo == item.AcceptNo);
-                //    acc.HaveMatchingAmount = acc.HaveMatchingAmount - item.MatchAmount;
-                //    //重新修正状态
-                //    if (acc.HaveMatchingAmount == 0)
-                //        acc.Status = (int)JN.Data.Enum.HelpStatus.NoMatching;
-                //    else if (acc.HaveMatchingAmount > 0 && acc.HaveMatchingAmount < acc.ExchangeAmount)
-                //        acc.Status = (int)JN.Data.Enum.HelpStatus.PartOfMatching;
-                //    else
-                //        acc.Status = (int)JN.Data.Enum.HelpStatus.Cancel;
-                //    MvcCore.Unity.Get<IAcceptHelpService>().Update(acc);
-                //    MvcCore.Unity.Get<ISysDBTool>().Commit();
-
-                //    //对推荐人扣除100元
-                //    decimal kqje = cacheSysParam.SingleAndInit(x => x.ID == 3106).Value3.ToDecimal();
-                //    //kqje = Math.Min(kqje, item.MatchAmount * Convert.ToDecimal(0.05));
-                //    Wallets.changeWallet(item.SupplyUID, 0 - kqje, 2002, "下属会员转移的订单“" + item.SupplyNo + "”未在限时内付款");
-                //}
+                var RefereeUser = MvcCore.Unity.Get<IUserService>().Single(onUser.RefereeID);
+                if (MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4509).Value == "1")
+                    SMSHelper.WebChineseMSM(RefereeUser.Mobile, MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4509).Value2.Replace("{SUPPLYNO}", item.SupplyNo));
             }
         }
 

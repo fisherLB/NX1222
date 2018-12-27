@@ -62,7 +62,7 @@ namespace JN.Web.Areas.UserCenter.Controllers
         public ActionResult Index(int? page)
         {
             //Bonus.ExpireBonus(Umodel); //到期的一些奖金(有冻结期的)
-           
+            MMM.CheckPayEndTime();
 
             int hideminute = cacheSysParam.SingleAndInit(x => x.ID == 3804).Value.ToInt(); //交易成功后隐藏记录参数
             var list = MatchingService.List(x => (x.SupplyUID == Umodel.ID || x.AcceptUID == Umodel.ID) && (x.IsOpenBuying ?? false) == false).WhereDynamic(FormatQueryString(HttpUtility.ParseQueryString(Request.Url.Query))).OrderByDescending(x => x.ID).ToList().ToPagedList(page ?? 1, 20);
@@ -164,19 +164,19 @@ namespace JN.Web.Areas.UserCenter.Controllers
                     throw new Exception("您还未填写任何一个收款帐号（银行卡、支付宝），请到“帐号管理”处修改个人资料！");
                 if (string.IsNullOrEmpty(PayWay)) throw new Exception("请选择付款方式！");
                 if (SupplyAmount.ToDecimal() <= 0) throw new Exception("请您填写提供帮助的金额！");
-                if (SupplyHelpService.List(x => x.UID == Umodel.ID && x.Status < (int)Data.Enum.HelpStatus.AllDeal && x.Status > 0).Count() > 0)
-                    throw new Exception("对不起，你有一单提供帮助没有完成，无法提供帮助！");
+                //if (SupplyHelpService.List(x => x.UID == Umodel.ID && x.Status < (int)Data.Enum.HelpStatus.AllDeal && x.Status > 0).Count() > 0)
+                //    throw new Exception("对不起，你有一单提供帮助没有完成，无法提供帮助！");
 
                 //排单间隔3110
-               //var SupolyModel= MvcCore.Unity.Get<Data.Service.ISupplyHelpService>().List(x => x.UID == Umodel.ID && x.Status > 0).OrderByDescending(x => x.ID).SingleOrDefault();//查找上一单
+                var SupolyModel = MvcCore.Unity.Get<Data.Service.ISupplyHelpService>().List(x => x.UID == Umodel.ID && x.Status > 0).OrderByDescending(x => x.ID).SingleOrDefault();//查找上一单
 
-               //if (SupolyModel != null)
-               //{
-               //   if(SupolyModel.CreateTime.AddMinutes(cacheSysParam.SingleAndInit(x=>x.ID==3110).Value.ToInt())>DateTime.Now)
-               //   {
-               //       throw new Exception("对不起，排单时间要与上一单间隔" + cacheSysParam.SingleAndInit(x => x.ID == 3110).Value.ToInt() + "分钟,请于【" + SupolyModel.CreateTime.AddMinutes(cacheSysParam.SingleAndInit(x => x.ID == 3110).Value.ToInt()) + "】进行排单");
-               //   }
-               //}
+                if (SupolyModel != null)
+                {
+                    if (SupolyModel.CreateTime.AddMinutes(cacheSysParam.SingleAndInit(x => x.ID == 3110).Value.ToInt()) > DateTime.Now)
+                    {
+                        throw new Exception("对不起，排单时间要与上一单间隔" + cacheSysParam.SingleAndInit(x => x.ID == 3110).Value.ToInt() + "小时,请于【" + SupolyModel.CreateTime.AddHours(cacheSysParam.SingleAndInit(x => x.ID == 3110).Value.ToInt()) + "】进行排单");
+                    }
+                }
 
                 decimal rate= cacheSysParam.SingleAndInit(x => x.ID == 3801).Value.ToDecimal();
                 decimal ExchangeAmount = SupplyAmount.ToDecimal() * rate;　//汇率参数
@@ -657,15 +657,8 @@ namespace JN.Web.Areas.UserCenter.Controllers
                     SysDBTool.Commit();
 
                     //6小时内付款有奖励
-                    //Bonus.Bonus1105(mModel);
-                    ////if (mModel.Remark == "来自会员抢单后创建的新单")
-                    ////{
-
-                    ////    Data.SysParam param = cacheSysParam.SingleAndInit(x => x.ID == 1109);
-                    ////    decimal bmoney = mModel.MatchAmount * param.Value.ToDecimal();
-                    ////    if(bmoney>0)
-                    ////        Bonus.UpdateUserWallet(bmoney, mModel.SupplyNo, 1109, param.Name,"抢单成功获得排单币奖励", mModel.SupplyUID, mModel.SupplyUID, "Addup1009", false, false, DateTime.Now);
-                    ////}
+                    Bonus.Bonus1105(mModel);
+                 
 
 
                     if (MvcCore.Unity.Get<ISysParamService>().SingleAndInit(x => x.ID == 4505).Value == "1") //付款成功是否通知接受单会员

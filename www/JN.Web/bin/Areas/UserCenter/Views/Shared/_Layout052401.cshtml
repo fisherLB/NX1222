@@ -332,20 +332,27 @@
                                 <strong class="wallet-color">@(((Umodel.Wallet2004 ?? 0).ToString("0")))个</strong>
                             </span>
                         </li>
+                        <li class="clearfix area area-y w22">
+                            <img src="/theme/052401/nmmcss/i-wallet.png" alt="" class="img">
+                            <span class="wallet">
+                                @T(cacheSysParam.SingleAndInit(x => x.ID == 2005).Value)<br>
+                                <strong class="wallet-color">@(((Umodel.Wallet2005 ?? 0).ToString("0")))个</strong>
+                            </span>
+                        </li>
                     </ul>
                     <div class="swit-area">
-                        <div class="area area-d w22"><img src="/theme/052401/nmmcss/t-record.png" alt="" class="img"><a href="/usercenter/finance/supplylist">打款记录</a></div>
-                        <div class="area area-e w22"><img src="/theme/052401/nmmcss/p-price.png" alt="" class="img"><a href="/usercenter/finance/acceptlist">收款记录</a></div>
+                        <div class="area area-d w23"><img src="/theme/052401/nmmcss/t-record.png" alt="" class="img"><a href="/usercenter/finance/supplylist">打款记录</a></div>
+                        <div class="area area-e w23"><img src="/theme/052401/nmmcss/p-price.png" alt="" class="img"><a href="/usercenter/finance/acceptlist">收款记录</a></div>
                         <div class="innerContent">
                             <div id="donationWrap">
 
-                                <div class="col-sm-6 padding0 w28">
+                                <div class="col-sm-6 padding0 w23">
                                     <a class="btn btn-block pdBtn area area-x" id="pdBtn">
                                         <i><img src="~/Theme/052401/nmmcss/a6_2.png" class="img" /></i>
                                         @T("买入法国红酒")
                                     </a>
                                 </div>
-                                <div class="col-sm-6 padding0 w28">
+                                <div class="col-sm-6 padding0 w23">
                                     <a class="btn btn-block area area-z" id="gdBtn">
                                         <i><img src="/theme/052401/nmmcss/a6.png" class="img" /></i>
                                         @T("卖出法国红酒")

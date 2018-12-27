@@ -351,18 +351,25 @@ namespace JN.Services.Manager
 
             //if (MvcCore.Unity.Get<Data.Service.IBonusDetailService>().List(x => x.SupplyNo == mModel.SupplyNo && x.BonusID == 1105).Count() <= 0)
             //{
-            var param = cacheSysParam.SingleAndInit(x => x.ID == 1105);
-            int sec = DateTimeDiff.DateDiff_Sec(mModel.CreateTime, DateTime.Now); //秒
+            var paramBonu= cacheSysParam.SingleAndInit(x => x.ID == 1105);
+            var param = cacheSysParam.SingleAndInit(x => x.ID == 1321);
+            int hour = DateTimeDiff.DateDiff(mModel.CreateTime, DateTime.Now,"h"); //小时
             var sModel = MvcCore.Unity.Get<Data.Service.ISupplyHelpService>().Single(x => x.SupplyNo == mModel.SupplyNo);
-            decimal PARAM_JJBL = param.Value.ToDecimal();
-            int PARAM_PAYSEC = param.Value2.ToInt();
-            if (sec <= PARAM_PAYSEC * 60)
+            decimal PARAM_JJBL = param.Value2.ToDecimal();
+            int PARAM_PAYHOUR = param.Value.ToInt();
+            if (hour <= PARAM_PAYHOUR)
             {
-                decimal bonusMoney = mModel.MatchAmount * PARAM_JJBL;
-                string bonusDesc = "来自【" + sModel.UserName + "】提供帮助订单【" + sModel.SupplyNo + "】的" + param.Name + "(" + mModel.MatchAmount + "×" + PARAM_JJBL + ")";
-                UpdateUserWallet(bonusMoney, sModel.SupplyNo, param.ID, param.Name, bonusDesc, mModel.SupplyUID, mModel.SupplyUID, "Addup1105", false, true, DateTime.Now);
+                //decimal bonusMoney = mModel.MatchAmount * PARAM_JJBL;
+                //string bonusDesc = "来自【" + sModel.UserName + "】提供帮助订单【" + sModel.SupplyNo + "】的" + param.Name + "";
+                //UpdateUserWallet(bonusMoney, sModel.SupplyNo, param.ID, param.Name, bonusDesc, mModel.SupplyUID, mModel.SupplyUID, "Addup1105", false, true, DateTime.Now);
+                Wallets.changeWallet(mModel.SupplyUID, PARAM_JJBL, 2005, "在时限内付款，获得匹配订单【" + mModel.MatchingNo + "】理金奖励");
             }
-            //}
+            var param1322 = cacheSysParam.SingleAndInit(x => x.ID == 1322);
+            if (hour > param1322.Value.ToInt() || hour <= param1322.Value.ToInt())
+            {
+                var money = param1322.Value3.ToDecimal();
+                Wallets.changeWallet(mModel.SupplyUID, -money, 2001, "匹配订单【" + mModel.MatchingNo + "】未在及时完成扣除金额");
+            }
 
         }
         #endregion
