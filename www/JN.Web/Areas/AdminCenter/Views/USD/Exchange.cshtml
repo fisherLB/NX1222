@@ -1,0 +1,48 @@
+﻿@{
+    var sysEntity = MvcCore.Unity.Get<JN.Data.Service.ISysSettingService>().Single(1);
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+                <div class="control-group">
+            <label class="control-label"></label>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="mainwallet"></label>
+
+            <div class="controls">
+                @if (sysEntity.IsOpenEP ?? false)
+                {
+                    <span style="font-size:20px; color:#009900">当前EP交易大厅开放中...</span><br /><br />
+                    <a class="btn btn-primary" href="@Url.Action("ExchangeCommand", new { commandtype = "close"})" >关闭交易大厅</a>
+                }
+                else
+                {
+                    <span style="font-size:20px; color:#FF0000">当前EP交易大厅已交闭！ </span><br /><br />
+                    <a class="btn btn-green" href="@Url.Action("ExchangeCommand", new { commandtype = "open"})">开启交易大厅</a>
+                }
+
+            </div>
+        </div>
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    <!-- page specific plugin scripts -->
+    <!--[if lte IE 8]>
+      <script src="/assets/js/excanvas.min.js"></script>
+    <![endif]-->
+
+</div>
+@section scripts{
+}

@@ -1815,7 +1815,6 @@ E:\projectplace\NXX1222\www\JN.Web\bin\System.Web.WebPages.Deployment.dll
 E:\projectplace\NXX1222\www\JN.Web\bin\System.Web.WebPages.dll
 E:\projectplace\NXX1222\www\JN.Web\bin\System.Web.WebPages.Razor.dll
 E:\projectplace\NXX1222\www\JN.Web\bin\WebGrease.dll
-E:\projectplace\NXX1222\www\JN.Web\bin\ThoughtWorks.QRCode.dll
 E:\projectplace\NXX1222\www\JN.Web\bin\JN.Data.pdb
 E:\projectplace\NXX1222\www\JN.Web\bin\JN.Services.pdb
 E:\projectplace\NXX1222\www\JN.Web\bin\EntityFramework.xml
@@ -1840,7 +1839,6 @@ E:\projectplace\NXX1222\www\JN.Web\bin\System.Web.WebPages.Deployment.xml
 E:\projectplace\NXX1222\www\JN.Web\bin\System.Web.WebPages.Razor.xml
 E:\projectplace\NXX1222\www\JN.Web\bin\Antlr3.Runtime.pdb
 E:\projectplace\NXX1222\www\JN.Web\bin\zh-Hans\EntityFramework.resources.dll
-E:\projectplace\NXX1222\www\JN.Web\bin\zh-Hans\EntityFramework.SqlServer.resources.dll
 E:\projectplace\NXX1222\www\JN.Web\bin\zh-Hans\System.Web.Helpers.resources.dll
 E:\projectplace\NXX1222\www\JN.Web\bin\zh-Hans\System.Web.Mvc.resources.dll
 E:\projectplace\NXX1222\www\JN.Web\bin\zh-Hans\System.Web.Optimization.resources.dll

@@ -1,0 +1,314 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<JN.Data.USDSeek>
+@{
+    string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+    Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
+}
+<!-- Content -->
+<div id="content">
+    <!-- Breadcrumb -->
+    <ul class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")" class="glyphicons home"><i></i> 首页</a></li>
+        <li class="divider"></li>
+        <li>@ViewBag.Title</li>
+    </ul>
+    <div class="separator bottom"></div>
+    <!-- // Breadcrumb END -->
+    <div class="innerLR">
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="@(Request["status"].ToInt() == 0 ? "active" : "")">
+                <a href="@(Url.Action("Seek"))">
+                    所有求购单
+                </a>
+            </li>
+            <li class="@(Request["status"].ToInt() == 1 ? "active" : "")">
+                <a href="?status=1">
+                   未交易的求购单
+                </a>
+            </li>
+            <li class="@(Request["status"].ToInt() == 2 ? "active" : "")">
+                <a href="?status=2">
+                    交易中的求购单
+                </a>
+            </li>
+            <li class="@(Request["status"].ToInt() == 3 ? "active" : "")">
+                <a href="?status=3">
+                    已完成的求购单
+                </a>
+            </li>
+            <li class="@(Request["status"].ToInt() == -1 ? "active" : "")">
+                <a href="?status=-1">
+                    已取消的求购单
+                </a>
+            </li>
+            <li class="@(Request["status"].ToInt() == -2 ? "active" : "")">
+                <a href="?status=-2">
+                    被投诉的求购单
+                </a>
+            </li>
+        </ul>
+        <div class="filter-bar margin-bottom-none">
+
+            <form method="get">
+
+                <!-- Filter -->
+                <div>
+                    <select name="datefiled" style="width: 80px;">
+                        <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                    </select>
+                </div>
+                <div>
+                    <label>从:</label>
+                    <div class="input-append">
+                        <input type="text" name="dateform" class="input-mini datepicker" value="@Request["dateform"]" style="width: 63px;" />
+                        <span class="add-on glyphicons calendar"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div>
+                    <label>到:</label>
+                    <div class="input-append">
+                        <input type="text" name="dateto" class="input-mini datepicker" value="@Request["dateto"]" style="width: 63px;" />
+                        <span class="add-on glyphicons calendar"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div style="margin-left:10px">
+                    <select name="numberfiled" style="width: 80px;">
+                        <option value="PutAmount" @(Request["numberfiled"] == "PutAmount" ? "selected" : "")>金额</option>
+                    </select>
+                </div>
+                <div>
+                    <label>从:</label>
+                    <div class="input-append">
+                        <input type="text" name="numberform" class="input-mini" style="width: 30px;" value="@Request["numberform"]" />
+                        <span class="add-on glyphicons euro"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div>
+                    <label>到:</label>
+                    <div class="input-append">
+                        <input type="text" name="numberto" class="input-mini" style="width: 30px;" value="@Request["numberto"]" />
+                        <span class="add-on glyphicons euro"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                @*<div style="margin-left:10px">
+                    <select name="status" style="width: 80px;">
+                        <option value="" @(string.IsNullOrEmpty(Request["status"]) ? "selected" : "")>所有订单</option>
+                        <option value="1" @(Request["status"] == "1" ? "selected" : "")>挂单中</option>
+                        <option value="2" @(Request["status"] == "2" ? "selected" : "")>交易中</option>
+                        <option value="3" @(Request["status"] == "3" ? "selected" : "")>已成交</option>
+                        <option value="-1" @(Request["status"] == "-1" ? "selected" : "")>已取消</option>
+                        <option value="-2" @(Request["status"] == "-2" ? "selected" : "")>投诉纠纷</option>
+                    </select>
+                </div>*@
+                <div style="margin-left:10px">
+                    <select name="keyfiled" style="width: 80px;">
+                        <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>会员编号</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="input-append">
+                        <input type="text" name="keyword" class="input-mini" style="width: 150px;" value="@Request["keyword"]" placeholder="请输入查询关键词" />
+                        <span style="margin: 0;" class="btn-action single glyphicons circle_question_mark" data-toggle="tooltip" data-placement="top" data-original-title="使用模糊查询可在关键字前后加上“%”"><i></i></span>
+                    </div>
+                </div>
+                <!-- // Filter END -->
+                <!-- Filter -->
+                <div>
+                    <input type="hidden" name="IsAsc" value="0" />
+                    <input type="hidden" name="OrderFiled" value="ID" />
+                    <input type="hidden" name="IsExport" value="0" />
+                    <input type="submit" onclick="$('input[name=\'IsExport\']').val(0)" value="查询" />
+                    <input type="submit" onclick="$('input[name=\'IsExport\']').val(1)" value="导出" />
+                </div>
+                <div class="clearfix"></div>
+                <!-- // Filter END -->
+
+            </form>
+
+        </div>
+        <table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+            <thead>
+                <tr>
+                    <th class="center">
+                        序号
+                    </th>
+                    <th>订单编号</th>
+                    <th>买家名称</th>
+                    <th>计息天数</th>
+                    <th>求购金额</th>
+                    <th>剩余金额</th>
+                    <th>已匹配金额</th>
+                    <th>获得利息</th>
+                    <th>付款方式</th>
+                    <th>状态</th>
+                    <th>
+                        <i class="icon-time bigger-110 hidden-480"></i>
+                        发布时间
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count > 0)
+                {
+                    decimal totalmoney = 0;
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        totalmoney += Model[i].SeekMoney;
+                        <tr class="@(Model[i].Status == -1 ? "cancel" : "")">
+                            <td class="center text-muted">
+                                @(i + 1)
+                            </td>
+                            <td>@Model[i].SeekNumber</td>
+                            <td>
+                                @Model[i].UserName
+                            </td>
+                            <td>
+                                @if (Model[i].Status == (int)JN.Data.Enum.USDStatus.Sales)
+                                {
+                                    @JN.Services.Tool.DateTimeDiff.DateDiff(Model[i].CreateTime, DateTime.Now, "d")
+                                }
+                                else
+                                {
+                                    <span>--</span>
+                                }
+                            </td>
+                            <td>
+                                @Model[i].SeekMoney.ToString("F0")
+                            </td>
+                            <td>@(Model[i].SeekMoney - (Model[i].HaveDeal ?? 0))</td>
+                            <td>
+                     
+                                <table class="table table-striped table-bordered no-margin-bottom" style="margin-bottom:5px">
+                                    @{
+                                        int _seekid = Model[i].ID;
+                                        var mchs = MvcCore.Unity.Get<JN.Data.Service.IUSDPurchaseService>().List(x => x.SeekID == _seekid);
+                                        decimal _matchmoney = 0;
+                                        foreach (var item in mchs)
+                                        {
+                                            <tr class="@(item.Status == -1 ? "cancel" : "")"><td style="padding: 2px 2px; color: #999">@item.SellUserName</td><td style="padding: 2px 2px; color: #999; ">@item.BuyMoney.ToString("F2")</td><td style="padding: 2px 2px; color: #999; ">@item.CreateTime.ToString("MM-dd HH:mm:ss")</td><td style="padding: 2px 2px; color: #999; ">@typeof(JN.Data.Enum.USDStatus).GetEnumDesc(item.Status)</td><td>
+                                                @if (item.Status == 2 || item.Status == -2)
+                                            {
+                                                <a href="@(Url.Action("doFinishBuy"))/@item.ID" class="btn btn-mini btn-success">
+                                                    确认
+                                                </a>
+                                            }
+                                            @if (item.Status == 1 || item.Status == -2)
+                                            {
+                                                <a href="@(Url.Action("CancelPurchase"))/@item.ID" class="btn btn-mini btn-primary">
+                                                    取消
+                                                </a>
+                                            }
+                                                </td></tr>
+
+                                                if (item.Status != -1)
+                                                {
+                                                    _matchmoney += item.BuyMoney;
+                                                }
+                                            }
+                                        }
+                                </table>
+                                @if (_matchmoney > 0)
+                                {
+                                    if (_matchmoney > Model[i].HaveDeal || _matchmoney > Model[i].SeekMoney)
+                                    {
+                                        <span class="label label-primary">订单金额异常，已匹配：@(_matchmoney)/@( Model[i].HaveDeal)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-success">已匹配：@(_matchmoney)</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @((Model[i].ReserveDecamal ?? 0).ToString("F0"))
+                            </td>
+                            <td>
+                                @Model[i].PayType
+                            </td>
+                            <td class="hidden-480">
+                                @(typeof(JN.Data.Enum.USDStatus).GetEnumDesc(Model[i].Status))
+                            </td>
+                            <td class="hidden-480">@Model[i].CreateTime</td>
+                            <td>
+                                @if (Model[i].Status <= 2 && Model[i].Status >= 0)
+                                {
+                                    <a href="@(Url.Action("CancelSeek"))/@Model[i].ID" class="btn btn-minier">
+                                        取消交易
+                                    </a>
+                                    if (Model[i].Status == 1 || Model[i].Status == 2)
+                                    {
+                                        <a href="javascript:void(0);" onclick="javascript: winopen('指定购买', '@(Url.Action("_PutOn", new { seekid = Model[i].ID}))', 800);" class="btn btn-minier">
+                                            指定购买
+                                        </a>
+                                    }
+                                }
+
+
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td class="center text-muted"></td>
+                        <td></td>
+                        <td align="right">
+                            本页小计：
+                        </td>
+
+                        <td>
+                            @totalmoney
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="hidden-480"></td>
+                        <td class="hidden-480"></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class="center text-muted"></td>
+                    <td></td>
+                    <td align="right">
+                        总计：
+                    </td>
+
+                    <td>
+                        @ViewBag.TotalMoney
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="hidden-480"></td>
+                    <td class="hidden-480"></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="separator top form-inline small">
+            <!-- Pagination -->
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action(ViewContext.RouteData.Values["action"].ToString(),
+                       JN.Services.Tool.StringHelp.GetQueryString(HttpUtility.ParseQueryString(Request.Url.Query), page)), new PagedListRenderOptions() { ContainerDivClasses = new string[] { "pagination pagination-small pull-right" } })
+
+
+            <div class="clearfix"></div>
+            <!-- // Pagination END -->
+        </div>
+        <!--E 翻页页码  -->
+
+    </div><!-- /row -->
+    <!-- PAGE CONTENT ENDS -->
+</div><!-- /.page-content -->
+@section scripts{
+}
+
+

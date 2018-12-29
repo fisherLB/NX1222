@@ -360,3 +360,8 @@ F:\覃明健\项目管理\WL16081201\www\JN.WindowsService\obj\Debug\JN.WindowsS
 F:\覃明健\项目管理\WL16081201\www\JN.WindowsService\obj\Debug\JN.WindowsService.exe
 F:\覃明健\项目管理\WL16081201\www\JN.WindowsService\obj\Debug\JN.WindowsService.pdb
 F:\覃明健\项目管理\WL16081201\www\JN.WindowsService\obj\Debug\JN.WindowsService.csprojResolveAssemblyReference.cache
+E:\projectplace\NXX1222\www\JN.WindowsService\obj\Debug\JN.WindowsService.csprojResolveAssemblyReference.cache
+E:\projectplace\NXX1222\www\JN.WindowsService\obj\Debug\JN.WindowsService.ProjectInstaller.resources
+E:\projectplace\NXX1222\www\JN.WindowsService\obj\Debug\JN.WindowsService.csproj.GenerateResource.Cache
+E:\projectplace\NXX1222\www\JN.WindowsService\obj\Debug\JN.WindowsService.exe
+E:\projectplace\NXX1222\www\JN.WindowsService\obj\Debug\JN.WindowsService.pdb

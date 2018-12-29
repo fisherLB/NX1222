@@ -69,6 +69,8 @@
     <Compile Include="Enum\MemberStatus.cs" />
     <Compile Include="Enum\OrderStatus.cs" />
     <Compile Include="Enum\PayStatus.cs" />
+    <Compile Include="Enum\PurchaseStatus.cs" />
+    <Compile Include="Enum\USDStatus.cs" />
     <Compile Include="Enum\UserLeve.cs" />
     <Compile Include="Extensions\USDOrders.cs" />
     <Compile Include="Extensions\CellOrders.cs" />
@@ -77,12 +79,30 @@
     <Compile Include="Extensions\NodeParameters.cs" />
     <Compile Include="Extensions\Theme.cs" />
     <Compile Include="Extensions\TreeNode.cs" />
+    <Compile Include="Extensions\USDPurchase.cs" />
+    <Compile Include="Extensions\USDPutOn.cs" />
+    <Compile Include="Extensions\USDSeek.cs" />
     <Compile Include="Extensions\View_Statistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TT\AcceptHelp.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AcceptHelp.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TT\USDPutOn.cs">
+      <DependentUpon>USDPutOn.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TT\USDSeek.cs">
+      <DependentUpon>USDSeek.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="TT\USDPurchase.cs">
+      <DependentUpon>USDPurchase.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="TT\WarningLog.cs">
       <DependentUpon>WarningLog.tt</DependentUpon>
@@ -223,6 +243,18 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AcceptHelp.cs</LastGenOutput>
     </Content>
+    <None Include="TT\USDPutOn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>USDPutOn.cs</LastGenOutput>
+    </None>
+    <None Include="TT\USDSeek.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>USDSeek.cs</LastGenOutput>
+    </None>
+    <None Include="TT\USDPurchase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>USDPurchase.cs</LastGenOutput>
+    </None>
     <None Include="TT\WarningLog.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>WarningLog.cs</LastGenOutput>

@@ -1,0 +1,234 @@
+﻿@model JN.Data.User
+@{
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+<!-- page specific plugin styles -->
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+@using (Ajax.BeginForm("ApplyPutOn", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost1" }, new { id = "frmsell", @class = "form-horizontal" }))
+{
+                @*@if (JN.BLL.syssettings.GetModel(1).AdminOneSelf)
+                {*@
+                @*<div class="alert alert-block alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                    </button>
+                    @{
+                        decimal total = 0;
+                        var allputons = MvcCore.Unity.Get<JN.Data.Service.IUSDPutOnService>().List(x => x.Status < 3);
+                        if (allputons.Count() > 0)
+                        {
+                            total = allputons.Sum(x => x.PutAmount - x.DealAmount);
+                        }
+                    }
+                    <i class="icon-ok green"></i>
+                    @T("交易市场开放中，市场挂牌交易总量为")：@(total) 
+                </div>*@
+
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("帐户余额"):</label>
+        <div class="col-xs-12 col-sm-3">
+            <div class="clearfix">
+                <input type="hidden" name="seekid" value="@ViewBag.SeekID" />
+                <input type="text" name="mainwallet" class="form-control" value="@Model.Wallet2002.ToString("F2")" readonly="readonly" />
+            </div>
+        </div>
+    </div>
+                @*<div class="form-group" style="display:">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="realname">@T("交易手续费"):</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <input type="text" id="poundage" class="form-control" value="@(cacheSysParam.Single(x => x.ID == 2202).Value.ToDouble() * 100)%" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("求购金额"):</label>
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="clearfix">
+                            <input type="text" name="seekmoney" class="form-control" value="@ViewBag.SeekMoney" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="drawmoney">@T("卖出金额"):</label>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="input-group">
+                          
+                            <input type="text" id="takenumber" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:100px" value="0" @(ViewBag.SeekAmount > 0 ? "readonly" : "") /><input type="text" style="width: 80px" readonly class="form-control" value="×@(cacheSysParam.Single(x => x.ID == 2201).Value2) = " /><input type="text" name="putonnumber" style="width:100px" class="form-control" value="0" readonly="readonly" />
+                            <input type="hidden" id="takemultiple" value="@cacheSysParam.Single(x => x.ID == 2201).Value2">
+                        </div>
+                        <span style="color:#f00; line-height:25px">* @T("卖出金额不能低于" + cacheSysParam.Single(x => x.ID == 2201).Value + "，必须是" + cacheSysParam.Single(x => x.ID == 2201).Value + "及以上的" + cacheSysParam.Single(x => x.ID == 2201).Value2 + "整数")</span>
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">扣除手续费后实际交易:</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-usd"></i>
+                            </span>
+
+                            <input type="text" name="actualnumber" class=" form-control" value="" style="width:123px" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>*@
+
+
+                @*<div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("卖出单价"):</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                            <input type="text" name="putunitprice" class="form-control" onkeyup="this.value = this.value.replace(/[^\d.]/g, '')" value="@ViewBag.SeekUnitPrice" @(ViewBag.SeekMoney>0 ? "readonly" : "") style="width:100px" readonly />
+                            @Html.DropDownList("moneytype", new SelectList(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID==5200 && x.IsUse).OrderByDescending(x => x.Sort).ToList(), "Name", "Name"), new { @class = "form-control", @style = "width:100px" })
+                        </div>
+                    </div>
+                </div>*@
+
+
+
+            <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankcard">@T("收款方式"):</label>
+
+                <div class="col-xs-12 col-sm-3">
+                    <div class="clearfix">
+                        @Html.DropDownList("paytype", new SelectList(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 5300 && x.IsUse).OrderByDescending(x => x.Sort).ToList(), "Name", "Name"), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="hr hr-dotted"></div>
+            <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankname">@T("银行卡发卡行"):</label>
+
+                <div class="col-xs-12 col-sm-3">
+                    <div class="clearfix">
+                        <input type="text" name="bankname" class="form-control" value="@Model.BankName" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankcard">@T("银行卡号"):</label>
+
+                <div class="col-xs-12 col-sm-3">
+                    <div class="clearfix">
+                        <input type="text" name="bankcard" class="form-control" value="@Model.BankCard" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankofdeposit">@T("开户行"):</label>
+
+                <div class="col-xs-12 col-sm-3">
+                    <div class="clearfix">
+                        <input type="text" name="bankofdeposit" class="form-control" value="@Model.BankOfDeposit" readonly />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankuser">@T("银行卡户名"):</label>
+
+                <div class="col-xs-12 col-sm-2">
+                    <div class="clearfix">
+                        <input type="text" name="bankuser" class="form-control" value="@Model.BankUser" readonly />
+                    </div>
+                </div>
+            </div>*@
+
+    <div class="form-group" style="display:none">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankcard">@T("备注"):</label>
+
+        <div class="col-xs-12 col-sm-3">
+            <div class="clearfix">
+                <textarea rows="4" cols="50" name="remark" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" style="display:none">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankuser">@T("联系方式"):</label>
+
+        <div class="col-xs-12 col-sm-3">
+            <div class="clearfix">
+                <input type="text" name="phone" maxlength="15" value="@Umodel.Mobile" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankcard">@T("二级密码"):</label>
+
+        <div class="col-xs-12 col-sm-3">
+            <div class="clearfix">
+                <input type="password" name="tradeoutPassword" class="form-control" value="" />
+            </div>
+        </div>
+    </div>
+                <div class="hr hr-dotted"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            @T("卖出EP")
+                        </button>
+                    </div>
+                </div>
+                @*}
+            else
+            {
+            <div class="alert alert-block alert-success">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="icon-remove"></i>
+                </button>
+
+                <i class="icon-ok green"></i>
+                @T("市场交易未开放").
+            </div>
+            }*@
+                }
+
+                <!-- PAGE CONTENT ENDS -->
+            </div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#takenumber").on('keyup', function () {
+            $("input[name='putonnumber']").val(parseFloat($("#takenumber").val()) * parseFloat($("#takemultiple").val()));
+            //$("input[name='putonmoney']").val(parseFloat($("input[name='putonnumber']").val()) * parseFloat($("input[name='putunitprice']").val()));
+        });
+        //$("input[name='putunitprice']").on('keyup', function () {
+        //    $("input[name='putonmoney']").val(parseFloat($("input[name='putonnumber']").val()) * parseFloat($(this).val()));
+        //});
+    });
+
+    function afterPost1(data) {
+        if (data.Status == 200) {
+            alert("@T("卖出成功，即将为您跳转页面!")");
+            location.href = "@(Url.Action("ttc"))";
+        } else {
+            alert("@T("卖出失败：")" + data.Message);
+        }
+    }
+</script>

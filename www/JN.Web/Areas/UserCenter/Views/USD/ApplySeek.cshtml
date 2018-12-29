@@ -1,0 +1,137 @@
+﻿@model JN.Data.User
+@{
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+            <form class="form-horizontal" id="validation-form" method="post">
+                @*@if (JN.BLL.syssettings.GetModel(1).AdminOneSelf)
+{*@
+                <div class="alert alert-block alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                    </button>
+                    @{
+                        decimal total = 0;
+                        var allputons = MvcCore.Unity.Get<JN.Data.Service.IUSDPutOnService>().List(x => x.Status < 3);
+                        if (allputons.Count() > 0)
+                        {
+                            total = allputons.Sum(x => x.PutAmount - x.DealAmount);
+                        }
+                    }
+                    <i class="icon-ok green"></i>
+                    @T("交易市场开放中，市场挂牌交易总量为")：@(total)
+                </div>
+
+                
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("您的帐户余额"):</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <input type="text" name="mainwallet" class="form-control" value="@Model.Wallet2002" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("求购数量"):</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="icon-usd"></i>
+                            </span>
+
+                            <input type="text" name="seeknumber" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" value="" style="width:123px" />
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("一口价"):</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                            <input type="text" name="seekmoney" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" value="" style="width:123px" />
+                            @Html.DropDownList("moneytype", new SelectList(MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().List(x => x.PID == 5200 && x.IsUse).OrderByDescending(x => x.Sort).ToList(), "Name", "Name"), new { @class = "form-control", @style = "width:100px" })
+                        </div>
+                    </div>
+                </div>
+                    
+                                    <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("付款方式"):</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="clearfix">
+                            <input type="text" name="paytype" maxlength="10" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                    
+                                    <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("联系方式"):</label>
+
+                                        <div class="col-xs-12 col-sm-3">
+                                            <div class="clearfix">
+                                                <input type="text" name="phone" maxlength="15" class="form-control"  />
+                                            </div>
+                                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="bankofdeposit">@T("备注"):</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="clearfix">
+                            <textarea name="remark" rows="4" cols="50" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr hr-dotted"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            @T("保存")
+                        </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            @T("重置")
+                        </button>
+                    </div>
+                </div>
+                @*}
+                else
+                {
+                <div class="alert alert-block alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                    </button>
+
+                    <i class="icon-ok green"></i>
+
+                    @T("市场交易未开放").
+                </div>
+                }*@
+            </form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("input[name='putonnumber']").on('keyup', function () {
+            $("input[name='actualnumber']").val(parseFloat($(this).val()) * (1 - parseFloat($("#poundage").val())));
+        });
+    });
+</script>

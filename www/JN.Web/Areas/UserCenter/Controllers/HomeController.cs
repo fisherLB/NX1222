@@ -191,7 +191,7 @@ namespace JN.Web.Areas.UserCenter.Controllers
                 var maxmessage = "对不起，提供帮助金额不能大于" + maxmoney + "";
                 if (supplycount == 0)
                 {
-                    maxmoney = cacheSysParam.Single(x => x.ID == 2101).Value.ToDecimal();
+                    maxmoney = cacheSysParam.Single(x => x.ID == 2102).Value.ToDecimal();
                     maxmessage = "对不起，首次提供帮助金额不能大于" + maxmoney + "";
 
                 }

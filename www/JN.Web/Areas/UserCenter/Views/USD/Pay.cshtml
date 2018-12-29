@@ -1,0 +1,190 @@
+﻿@model JN.Data.USDPurchase
+@{
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+<!-- page specific plugin styles -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <form id="formPay" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    @Html.AntiForgeryToken();
+                    @*<div class="alert alert-block alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                    </button>
+
+                    <i class="icon-ok green"></i>
+                    @T("购买成功后请联系对方核实帐号并汇款")。
+                </div>*@
+                    @*<div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("购买数量"):</label>
+
+                    <div class="col-xs-12 col-sm-2">
+                        <div class="clearfix">
+                            <input type="text" name="buyamount" class="form-control" value="@Model.BuyAmount" readonly="readonly" />
+
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("购买激活币数量"):</label>
+
+                    <div class="col-xs-12 col-sm-5">
+                        <div class="input-group">
+                            <input type="text" name="buymoney" class="form-control" style="width:100px" value="@(Model.BuyAmount)" readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("付款金额"):</label>
+
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="input-group">
+                                <input type="hidden" name="purid" value="@Model.ID" />
+                                <input type="text" name="buymoney" class="form-control" style="width:100px" value="@(Model.BuyMoney)" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display:none">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="realname">@T("卖家联系电话"):</label>
+
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="clearfix">
+                                <input type="text" name="phone" class="form-control" value="@ViewBag.Phone" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="realname">@T("付款信息"):</label>
+                        @{ 
+                            var mjUser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(Model.SellUID);
+                        }
+                        <div class="col-xs-12 col-sm-8">
+                            <div class="clearfix">
+                                <table id="sample-table-1" class="table table-bordered table-hover no-margin-bottom">
+                                    <tr>
+                                        <td>@T("联系方式：")</td>
+                                        <td>@ViewBag.Phone</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@T("联系人：")</td>
+                                        <td>@mjUser.RealName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>@T("付款方式：")</td>
+                                        <td>
+                                            @ViewBag.PayType<br />
+
+                                        @{
+
+                                            string str = "<br> " + T("支付宝帐号：") + mjUser.AliPay + "<br><br> " + T("银行帐号：") + "<br>";
+                                            str += mjUser.BankName + "<br>" + mjUser.BankCard + "<br>" + mjUser.BankUser + "(" + T("开户行：") + mjUser.BankOfDeposit + ")";
+                                        }
+                                        @MvcHtmlString.Create(str)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@T("备注信息：")</td>
+                                    <td>@ViewBag.Remark</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("汇款时间"):</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+
+                            <input type="text" name="paytime" class="form-control" value="@DateTime.Now.ToString("MM/dd/yyyy")" style="width:123px" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">
+                        <span class="inline space-24 hidden-480"></span>
+                        @T("付款截图"):
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="file" name="imgurl" class="col-xs-6" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="tradeinPassword">@T("二级密码"):</label>
+
+                    <div class="col-xs-12 col-sm-3">
+                        <div class="input-group">
+                            <input type="password" name="tradeinPassword" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                @*<div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("付款备注"):</label>
+
+                <div class="col-xs-12 col-sm-5">
+                    <textarea name="payremark" class="form-control"></textarea>
+                </div>
+            </div>*@
+
+                                            <div class="hr hr-dotted"></div>
+
+                                            <div class="clearfix form-actions">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button class="btn btn-info" type="button" id="btnSubmit">
+                                                        <i class="icon-ok bigger-110"></i>
+                                                        @T("已付款，提交审核")
+                                                    </button>
+                                                </div>
+                                            </div>
+</form>
+
+                <!-- PAGE CONTENT ENDS -->
+</div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<script src="~/js/jquery.form.js"></script>
+
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<script type="text/javascript">
+    $("#btnSubmit").click(function () {
+        $("#formPay").ajaxSubmit({
+            url: "@Url.Action("Pay")",
+            type: "post",
+        success: function (data) {
+            if (data.Status == 200) {
+                alert("@T("您已成功提交付款信息，请等待卖家审核！")");
+                location.href = "@(Url.Action("ttc"))";
+            } else {
+                alert("@T("付款失败：")" + data.Message);
+            }
+        },
+        error: function (aa) {
+            alert(aa);
+        }
+    });
+    });
+</script>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('input[name=paytime]').datepicker().prev().on("click", function () {
+            $(this).next().focus();
+        });
+    });
+</script>

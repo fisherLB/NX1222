@@ -16,13 +16,13 @@
         public static readonly string DbContext="SysDbContext";
         public static readonly string DbFactory="ISysDbFactory";
         //服务器
-        public static readonly string DbServer=@".";
+        public static readonly string DbServer=@"120.79.27.118";
         //数据库名
-        public static readonly string DbDatabase="WL16081201_SYS";
+        public static readonly string DbDatabase="NX1222";
         //登录名
         public static readonly string LoginName="sa";
         //密码
-        public static readonly string LoginPwd="123456";
+        public static readonly string LoginPwd="123";
         //数据连接
         public static readonly string ConnectionString=string.Format(@"Data Source={0};Initial Catalog={1};uid={2};pwd={3}",DbServer,DbDatabase,LoginName,LoginPwd);
 		

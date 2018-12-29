@@ -240,12 +240,14 @@
                                 </ul>
                             </li>*@
                         @*<li class=""><a href="/usercenter/Finance/LuckDraw">@T("幸运抽奖")</a></li>*@
-                        @if (Umodel.IsProTeam == true)
+                        @*@if (Umodel.IsProTeam == true)
                         {
                             <li class=""><a href="/usercenter/Finance/GrabSingle"><i class="glyphicon glyphicon-shopping-cart margin-r8"></i>@T("抢单区")</a></li>
-                        }
+                        }*@
                         <li class=""><a href="/usercenter/mail/write" class="glyphicons user"><i class="glyphicon glyphicon-envelope margin-r8"></i>@T("邮件中心")</a></li>
-
+                        <li class="">
+                            <a href="/usercenter/usd/ttc" class="glyphicons home"><i class="glyphicon glyphicon-bell margin-r8"></i>@T("交易中心")</a>
+                        </li>
                         <li class="">
                             <a href="/usercenter/notice" class="glyphicons home"><i class="glyphicon glyphicon-bell margin-r8"></i>@T("最新公告")</a>
                         </li>

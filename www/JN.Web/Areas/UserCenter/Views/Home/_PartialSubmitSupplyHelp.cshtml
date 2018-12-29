@@ -10,13 +10,13 @@
     else
     {
         Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
-       
-        if (Umodel.IsAgent == true)
-        {
-            param = cacheSysParam.Single(x => x.ID == 2102);
-            
-        }
-        
+
+        //if (Umodel.IsAgent == true)
+        //{
+        //    param = cacheSysParam.Single(x => x.ID == 2102);
+
+        //}
+
     }
 }
 

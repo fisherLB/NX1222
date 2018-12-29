@@ -1,0 +1,144 @@
+﻿@model JN.Data.User
+@{
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            <a href="@Url.Action("Purchase")" class="btn btn-success">@T("我买入的订单")</a>
+
+            <a href="@Url.Action("ApplyPutOn")" class="btn btn-red">@T("卖出EP")</a>
+            <a href="@Url.Action("PutOn")" class="btn btn-success">@T("我卖出的订单")</a>
+            <a href="@Url.Action("ApplySeek")" class="btn btn-blue">@T("求购EP")</a>
+            <a href="@Url.Action("Seek")" class="btn btn-success">@T("我求购的订单")</a>
+            <form class="form-horizontal" id="validation-form" method="post">
+@*@if (JN.BLL.syssettings.GetModel(1).AdminOneSelf)
+{*@
+    <table width="100%" border="0">
+        <tr><td><h3>@T("最新挂单交易")</h3></td><td><h3>@T("最新求购信息")</h3></td></tr>
+        <tr>
+            <td width="50%" style="padding-right:5px;">
+                <table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+                    <thead>
+                        <tr>
+                            <th class="center">@T("时间")
+                            </th>
+                            <th>@T("卖出数量")</th>
+                            <th>@T("卖出金额")</th>
+                            <th>@T("交易方式")</th>
+                            <th>@T("卖出会员")</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+@{
+    var putonLst = MvcCore.Unity.Get<JN.Data.Service.IUSDPutOnService>().List(x => x.Status == 1).OrderByDescending(x => x.ID).ToList();
+                    if (putonLst.Count > 0)
+        {
+            foreach (var puton in putonLst)
+                                            {
+
+                                <tr>
+                                    <td class="hidden-480">@puton.CreateTime.ToString("MM/dd")</td>
+                                    <td>
+                                        @puton.PutAmount
+                                    </td>
+                                    <td>
+                                        @puton.PutMoney @(puton.MoneyType)
+                                    </td>
+                                    <td>
+                                        @puton.PayType
+                                    </td>
+                                    <td>
+                                        @puton.UserName
+                                    </td>
+                                    
+                                    <td>
+                                        <a href="/UserCenter/USD/Buy/@puton.ID" class="btn btn-primary btn-purple">
+                                            @T("购买")
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        }
+                    </tbody>
+                </table>
+
+            </td>
+            <td style="padding-left:5px">
+                <table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
+                    <thead>
+                        <tr>
+                            <th class="center">@T("时间")
+                            </th>
+
+                            <th>@T("求购数量")</th>
+                            <th>@T("金额")</th>
+                            <th>@T("付款方式")</th>
+                            <th>@T("求购会员")</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var putonLst2 = MvcCore.Unity.Get<JN.Data.Service.IUSDSeekService>().List(x => x.Status == 1).OrderByDescending(x => x.ID).ToList();
+                    if (putonLst2.Count > 0)
+                    {
+                        foreach (var seek in putonLst2)
+                        {
+
+                            <tr>
+                                <td class="hidden-480">@seek.CreateTime.ToString("MM/dd")</td>
+                                
+                                <td>
+                                    @seek.SeekAmount
+                                </td>
+                                <td>
+                                    @seek.SeekMoney @seek.MoneyType
+                                </td>
+                                <td>
+                                    @seek.PayType
+                                </td>
+                                <td>
+                                    @seek.UserName
+                                </td>
+                                <td>
+                                    <a href="/UserCenter/USD/ApplyPutOn?seekid=@seek.ID" class="btn btn-primary btn-purple">
+                                        @T("交易")
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                        }
+                    </tbody>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+                    @*}
+                else
+                {
+                <div class="alert alert-block alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="icon-remove"></i>
+                    </button>
+
+                    <i class="icon-ok green"></i>
+
+                    @T("市场交易未开放").
+                </div>
+                }*@
+</form>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<!--[if lte IE 8]>
+  <script src="/assets/js/excanvas.min.js"></script>
+<![endif]-->

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseControll\UserBaseController.cs" />
+    <Compile Include="CustomException\CustomException.cs" />
     <Compile Include="Extensions\LinqExtensions.cs" />
     <Compile Include="LoginHelper.cs" />
     <Compile Include="Filters\ActLogAttribute.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Manager\Users.cs" />
     <Compile Include="Manager\Bonus.cs" />
     <Compile Include="Manager\Wallets.cs" />
+    <Compile Include="Resource\ResourceProvider.cs" />
     <Compile Include="Tool\CodeRend.cs" />
     <Compile Include="Tool\ConfigHelper.cs" />
     <Compile Include="Tool\CookieHelper.cs" />

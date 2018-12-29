@@ -148,6 +148,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\packages\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="Webdiyer.MvcPager">
       <HintPath>F:\资料库\工具\MvcPager-3.0.1\MvcPager\bin\Debug\Webdiyer.MvcPager.dll</HintPath>
     </Reference>
@@ -182,6 +185,7 @@
     <Compile Include="Areas\AdminCenter\Controllers\NoticeController.cs" />
     <Compile Include="Areas\AdminCenter\Controllers\ShopController.cs" />
     <Compile Include="Areas\AdminCenter\Controllers\SysParamController.cs" />
+    <Compile Include="Areas\AdminCenter\Controllers\USDController.cs" />
     <Compile Include="Areas\AdminCenter\Controllers\UserController.cs" />
     <Compile Include="Areas\AdminCenter\Models\CompositeppList.cs" />
     <Compile Include="Areas\UserCenter\Controllers\AgentController.cs" />
@@ -194,6 +198,7 @@
     <Compile Include="Areas\UserCenter\Controllers\NoticeController.cs" />
     <Compile Include="Areas\UserCenter\Controllers\RegController.cs" />
     <Compile Include="Areas\UserCenter\Controllers\ShopController.cs" />
+    <Compile Include="Areas\UserCenter\Controllers\USDController.cs" />
     <Compile Include="Areas\UserCenter\Controllers\UserController.cs" />
     <Compile Include="Areas\UserCenter\Models\CompositeWalletLog.cs" />
     <Compile Include="Areas\UserCenter\UserCenterAreaRegistration.cs" />
@@ -3052,6 +3057,17 @@
     <Content Include="Areas\UserCenter\Views\Login\0227.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\UserCenter\Views\USD\AllPutOn.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\ApplyPutOn.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\ApplySeek.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\Buy.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\HPurchase.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\Pay.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\Purchase.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\PutOn.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\Seek.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\TTC.cshtml" />
+    <Content Include="Areas\UserCenter\Views\USD\TTC2.cshtml" />
     <None Include="Properties\PublishProfiles\LJ160227.pubxml" />
     <None Include="Properties\PublishProfiles\Q160214.pubxml" />
     <None Include="Properties\PublishProfiles\wl16071701.pubxml" />
@@ -4078,6 +4094,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\AdminCenter\Views\USD\" />
     <Folder Include="common\theme\scripts\plugins\forms\plupload\examples\uploads\" />
     <Folder Include="common\theme\scripts\plugins\other\excanvas\examples\.svn\props\" />
     <Folder Include="common\theme\scripts\plugins\other\excanvas\examples\.svn\tmp\prop-base\" />

@@ -1,0 +1,119 @@
+﻿@model JN.Data.USDPutOn
+@{
+    JN.Data.User Umodel = null;
+    if (JN.Services.UserLoginHelper.CurrentUser() == null)
+    {
+        Response.Redirect(Url.Action("Index", "Login"));
+    }
+    else
+    {
+        Umodel = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(JN.Services.UserLoginHelper.CurrentUser().ID);
+    }
+    var cacheSysParam = MvcCore.Unity.Get<JN.Data.Service.ISysParamService>().ListCache("sysparams", x => x.ID < 4000);
+
+    Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
+}
+<!-- page specific plugin styles -->
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+
+@using (Ajax.BeginForm("Buy", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
+{
+                    @*<div class="alert alert-block alert-success">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <i class="icon-remove"></i>
+                        </button>
+
+                        <i class="icon-info-sign green"></i>
+
+                        购买现金币后请到“我买入的交易”中进行付款，付款完成后请等待卖方审核，审核后现金币才进行结算。
+                    </div>*@
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("当前激活币余额"):</label>
+
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="clearfix">
+                                <input type="text" name="mainwallet" class="form-control" value="@((Umodel.Wallet2004??0).ToString("F2"))" readonly="readonly" />
+                                <input type="hidden" name="pid" value="@Model.ID" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("卖家帐号"):</label>
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="clearfix">
+                                <input type="text" name="selluser" class="form-control" value="@JN.Services.Tool.StringHelp.UserNameHid(Model.UserName)" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("购买数量"):</label>
+
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="input-group">
+                                <input type="text" name="buynumber" class="form-control" readonly="readonly" value="@Model.PutAmount" style="width:123px" />
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("购买激活币数量"):</label>
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="input-group">
+                               <input type="text" name="buynumber" class="form-control" readonly="readonly"  value="@(Model.PutAmount)" />
+                              
+                            </div>
+                        </div>
+                    </div>
+                                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("您的联系方式"):</label>
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="clearfix">
+                                <input type="text" name="phone" value="@Umodel.Mobile" class="form-control" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="actualdrawmoney">@T("二级密码"):</label>
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="clearfix">
+                                <input type="password" name="tradeinPassword" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hr hr-dotted"></div>
+
+                    <div class="clearfix form-actions">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button class="btn btn-info" type="submit">
+                                <i class="icon-ok bigger-110"></i>
+                                @T("买入激活币")
+                            </button>
+
+                         
+                        </div>
+                    </div>
+}
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+<!-- page specific plugin scripts -->
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript">
+    function afterPost(data) {
+        if (data.Status == 200) {
+            @*alert("@T("恭喜您，买入成功！请您在")@(cacheSysParam.SingleAndInit(x => x.ID== 2202).Value.ToInt()/60)@T("小时内进行付款，否则您的帐号将会被冻结！")");*@
+            alert("@T("恭喜您，买入成功！请及时付款！")");
+            location.href = "@(Url.Action("ttc"))";
+        } else {
+            alert("@T("买入失败：")" + data.Message);
+        }
+    }
+</script>
