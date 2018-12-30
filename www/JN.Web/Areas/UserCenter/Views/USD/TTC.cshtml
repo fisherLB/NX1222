@@ -25,118 +25,122 @@
     <!--END MAIN top -->
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <table width="100%" border="0">
-                <tr>
-                    <td><h3 style="padding-left:10px">@T("卖出信息")</h3></td>
+            <div style="width:100%;overflow-x:auto">
+                <table width="100%" border="0">
+                    <tr>
+                        <td><h3 style="padding-left:10px">@T("卖出信息")</h3></td>
 
-                </tr>
-                <tr>
-                    <td width="50%" height="auto" style="padding-right:5px;" valign="top">
-                        <table id="selllist" class="table table-striped table-bordered table-hover" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>@T("卖出会员")</th>
-                                    <th>@T("卖出金额")</th>
-                                    <th>@T("交易方式")</th>
-                                    <th>@T("卖出时间")</th>
-                                    <th>@T("操作")</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    var putonLst = MvcCore.Unity.Get<JN.Data.Service.IUSDPutOnService>().List(x => x.Status == 1).OrderByDescending(x => (x.IsTop ?? false)).ThenBy(x => x.ID).Take(200).ToList();
-                                    if (putonLst.Count > 0)
-                                    {
-                                        foreach (var puton in putonLst)
+                    </tr>
+                    <tr>
+                        <td width="50%" height="auto" style="padding-right:5px;" valign="top">
+                            <table id="selllist" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>@T("卖出会员")</th>
+                                        <th>@T("卖出金额")</th>
+                                        <th>@T("交易方式")</th>
+                                        <th>@T("卖出时间")</th>
+                                        <th>@T("操作")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var putonLst = MvcCore.Unity.Get<JN.Data.Service.IUSDPutOnService>().List(x => x.Status == 1).OrderByDescending(x => (x.IsTop ?? false)).ThenBy(x => x.ID).Take(200).ToList();
+                                        if (putonLst.Count > 0)
                                         {
+                                            foreach (var puton in putonLst)
+                                            {
 
-                                            <tr>
-                                                <td>
-                                                    @JN.Services.Tool.StringHelp.UserNameHid(puton.UserName)
-                                                </td>
-                                                <td>
-                                                    @puton.PutMoney
-                                                </td>
-                                                <td>
-                                                    @puton.PayType
-                                                </td>
-                                                <td>
-                                                    @puton.CreateTime.ToString("yyyy-MM-dd")
-                                                </td>
-                                                <td>
-                                                    <a href="/UserCenter/USD/Buy/@puton.ID" class="btn btn-primary btn-xs">
-                                                        @T("购买")
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td>
+                                                        @JN.Services.Tool.StringHelp.UserNameHid(puton.UserName)
+                                                    </td>
+                                                    <td>
+                                                        @puton.PutMoney
+                                                    </td>
+                                                    <td>
+                                                        @puton.PayType
+                                                    </td>
+                                                    <td>
+                                                        @puton.CreateTime.ToString("yyyy-MM-dd")
+                                                    </td>
+                                                    <td>
+                                                        <a href="/UserCenter/USD/Buy/@puton.ID" class="btn btn-primary btn-xs">
+                                                            @T("购买")
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
                                         }
                                     }
-                                }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
 
-            </table>
-        </div>
+                </table>
+                </div>
+            </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <table width="100%" border="0">
-                <tr><td><h3 style="padding-left:10px">@T("购买信息")</h3></td></tr>
-                <tr>
+            <div style="width:100%;overflow-x:auto">
+                <table border="0">
+                    <tr><td><h3 style="padding-left:10px">@T("购买信息")</h3></td></tr>
+                    <tr>
 
-                    <td style="padding-left:5px" valign="top">
-                        <table id="buylist" class="table table-striped table-bordered table-hover" width="100%">
-                            <thead>
+                        <td style="padding-left:5px" valign="top">
+                            <table id="buylist" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+
+                                        <th>@T("会员编号")</th>
+                                        <th>@T("求购金额")</th>
+                                        <th>@T("剩余金额")</th>
+                                        <th>@T("交易方式")</th>
+                                        <th>@T("求购时间")</th>
+                                        <th>@T("操作")</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                       var putonLst2 = MvcCore.Unity.Get<JN.Data.Service.IUSDSeekService>().List(x => x.Status < 3 && x.Status > 0 && (x.SeekMoney - (x.HaveDeal ?? 0)) > 0).OrderByDescending(x => (x.ReserveInt ?? 0)).ThenBy(x => x.ID).Take(200).ToList();
+                                       if (putonLst2.Count > 0)
+                                       {
+                                           foreach (var seek in putonLst2)
+                                           {
+
                                 <tr>
+                                    <td>@JN.Services.Tool.StringHelp.UserNameHid(seek.UserName)</td>
 
-                                    <th>@T("会员编号")</th>
-                                    <th>@T("求购金额")</th>
-                                    <th>@T("剩余金额")</th>
-                                    <th>@T("交易方式")</th>
-                                    <th>@T("求购时间")</th>
-                                    <th>@T("操作")</th>
+                                    <td>
+                                        @seek.SeekMoney
+                                    </td>
+                                    <td>
+                                        @(seek.SeekMoney - (seek.HaveDeal ?? 0))
+                                    </td>
+                                    <td>
+                                        @seek.PayType
+                                    </td>
+                                    <td>
+                                        @seek.CreateTime.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td>
+                                        <a href="/UserCenter/USD/ApplyPutOn?seekid=@seek.ID" class="btn btn-primary btn-xs">
+                                            @T("卖出")
+                                        </a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @{
-                                    var putonLst2 = MvcCore.Unity.Get<JN.Data.Service.IUSDSeekService>().List(x => x.Status<3 && x.Status>0 && (x.SeekMoney - (x.HaveDeal ?? 0)) > 0).OrderByDescending(x => (x.ReserveInt ?? 0)).ThenBy(x => x.ID).Take(200).ToList();
-                                    if (putonLst2.Count > 0)
-                                    {
-                                        foreach (var seek in putonLst2)
-                                        {
-
-                                            <tr>
-                                                <td>@JN.Services.Tool.StringHelp.UserNameHid(seek.UserName)</td>
-
-                                                <td>
-                                                    @seek.SeekMoney
-                                                </td>
-                                                <td>
-                                                    @(seek.SeekMoney - (seek.HaveDeal ?? 0))
-                                                </td>
-                                                <td>
-                                                    @seek.PayType
-                                                </td>
-                                                <td>
-                                                    @seek.CreateTime.ToString("yyyy-MM-dd")
-                                                </td>
-                                                <td>
-                                                    <a href="/UserCenter/USD/ApplyPutOn?seekid=@seek.ID" class="btn btn-primary btn-xs">
-                                                        @T("卖出")
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        }
+                                           }
+                                       }
                                     }
-                                }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
 
-                    </td>
-                </tr>
-            </table>
-        </div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </div>
     </div>
     <hr />
     <style>
@@ -147,8 +151,8 @@
     </style>
     <div class="row">
         <!--买入、卖出、买卖盘S-->
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="trade_area trade_sub_border col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height:300px">
+        <div class="col-lg-12 col-md-12 col-sm-12" style="padding:0px 15px">
+            <div class="trade_area trade_sub_border col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height:300px;padding:0px">
                 <div class="trade_title blue">@T("卖出EP")</div>
 @using (Ajax.BeginForm("ApplyPutOn", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost1" }, new { id = "frmsell", @class = "" }))
 {
@@ -183,22 +187,21 @@
                     </ul>
                 }
             </div>
-            <div class="trade_area trade_sub_border col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height:300px">
+            <div class="trade_area trade_sub_border col-lg-6 col-md-6 col-sm-6 col-xs-12" style="height:300px;padding:0px">
                 <div class="trade_title blue">@T("购买EP")</div>
                 @using (Ajax.BeginForm("ApplySeek", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost2" }, new { id = "frmsell", @class = "" }))
                 {
                     <ul style="margin-left:15px;">
                         <li><span>@T("激活币余额")：</span> <span>@((Umodel.Wallet2004??0).ToString("F2")) $</span></li>
-                        <li style="height:auto;">
+                        <li>
                             <span> @T("挂单买入")：</span> <span>
                                 <input type="text" id="takenumber2" onkeyup="this.value=this.value.replace(/\D/g,'')" style="width:110px" value="0" /><input type="text" style="width:70px" readonly value="×@(cacheSysParam.Single(x => x.ID == 1331).Value)倍 = " /><input type="text" name="putoutnumber" style="width:70px" value="0" readonly="readonly" />
                                 <input type="hidden" id="takemultiple2" value="@cacheSysParam.Single(x => x.ID == 1331).Value">
                             </span>
                         </li>
-                        <div style="clear:both"></div>
                         <li>
-                            <span> @T("消耗金额")：</span> <span>
-                                <input type="text" class="fr input" value="0" id="seekmoney" name="seekmoney" readonly />&nbsp;<input type="text" style="width: 70px" readonly value="×@(cacheSysParam.Single(x => x.ID == 1333).Value)汇率 = " /><input type="text" class="fr input" value="0" id="rmb2" name="rmb2" style="width:70px" readonly /><font style="color:#f00">人民币</font>
+                            <span> @T("消耗金额")：</span> <span style="float:none">
+                                <input type="text" class="fr input" value="0" id="seekmoney" name="seekmoney" readonly style="width:75px"/>&nbsp;<input type="text" style="width: 70px" readonly value="×@(cacheSysParam.Single(x => x.ID == 1333).Value)汇率 = " /><input type="text" class="fr input" value="0" id="rmb2" name="rmb2" style="width:70px" readonly /><font style="color:#f00">人民币</font>
                             </span>
                         </li>
                         <li>
@@ -224,68 +227,71 @@
         <!--买入、卖出、买卖盘E-->
     </div>
     <hr />
-    <table class="bordered table table-striped table-bordered table-hover">
-        <caption class="blue">@T("当前交易")</caption>
-        <tr>
-            <th width="15%">
-                <i class="icon-time bigger-110 hidden-480"></i>
-                @T("时间")
-            </th>
-            <th width="8%">@T("类型")</th>
-            <th width="8%">@T("金额")</th>
-            <th>@T("交易会员")</th>
-            <th width="10%">@T("电话")</th>
-            <th>@T("推荐人")</th>
-            <th width="10%">@T("推荐人电话")</th>
-            <th>@T("付款截图")</th>
-            <th width="10%">@T("操作")</th>
-        </tr>
-        <tbody>
-            @{
-                var purchases = MvcCore.Unity.Get<JN.Data.Service.IUSDPurchaseService>().List(x => (x.UID == Umodel.ID || x.SellUID == Umodel.ID) && (x.Status == 1 || x.Status == 2 || x.Status == -2)).OrderByDescending(x => x.ID).ToList();
-                if (purchases.Count > 0)
-                {
-                    foreach (var item in purchases)
+    <div style="width:100%;overflow-x:auto;margin-bottom:3px">
+        <table class="bordered table table-striped table-bordered table-hover">
+            <caption class="blue">@T("当前交易")</caption>
+            <tr>
+                <th width="15%">
+                    <i class="icon-time bigger-110 hidden-480"></i>
+                    @T("时间")
+                </th>
+                <th width="8%">@T("类型")</th>
+                <th width="8%">@T("金额")</th>
+                <th>@T("交易会员")</th>
+                <th width="10%">@T("电话")</th>
+                <th>@T("推荐人")</th>
+                <th width="10%">@T("推荐人电话")</th>
+                <th>@T("付款截图")</th>
+                <th width="10%">@T("操作")</th>
+            </tr>
+            <tbody>
+                @{
+                    var purchases = MvcCore.Unity.Get<JN.Data.Service.IUSDPurchaseService>().List(x => (x.UID == Umodel.ID || x.SellUID == Umodel.ID) && (x.Status == 1 || x.Status == 2 || x.Status == -2)).OrderByDescending(x => x.ID).ToList();
+                    if (purchases.Count > 0)
                     {
-                        if (item.UID == Umodel.ID)
+                        foreach (var item in purchases)
                         {
-                            string sellrealname = "";
-                            string sellmobile = "";
-                            string tjrusername = "";
-                            string tjrmobile = "";
-                            var sellUser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(item.SellUID);
-                            if (sellUser != null)
+                            if (item.UID == Umodel.ID)
                             {
-                                sellrealname = sellUser.RealName;
-                                sellmobile = sellUser.Mobile;
-                                tjrusername = sellUser.RefereeUser;
-                                var tjruser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(sellUser.RefereeID);
-                                if (tjruser != null)
+                                string sellrealname = "";
+                                string sellmobile = "";
+                                string tjrusername = "";
+                                string tjrmobile = "";
+                                var sellUser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(item.SellUID);
+                                if (sellUser != null)
                                 {
-                                    tjrmobile = tjruser.Mobile;
-                                }
-                            }
-                            <tr>
-                                <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                                <td>买入</td>
-                                <td>
-                                    @String.Format("{0:F2}", item.BuyMoney)
-                                </td>
-                                <td>@(sellrealname)(@(item.SellUserName))</td>
-                                <td>@sellmobile</td>
-                                <td>@tjrusername</td>
-                                <td>@tjrmobile</td>
-                                <td>@{
-                                    if (!string.IsNullOrEmpty(item.PayImg))
+                                    sellrealname = sellUser.RealName;
+                                    sellmobile = sellUser.Mobile;
+                                    tjrusername = sellUser.RefereeUser;
+                                    var tjruser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(sellUser.RefereeID);
+                                    if (tjruser != null)
                                     {
-                                        <a href="@item.PayImg" class="entypo-picture " style="font-size:16px" target="_blank">
-                                            <i></i>
-                                        </a>
+                                        tjrmobile = tjruser.Mobile;
                                     }
-                                }</td>
+                                }
+                                <tr>
+                                    <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                    <td>买入</td>
+                                    <td>
+                                        @String.Format("{0:F2}", item.BuyMoney)
+                                    </td>
+                                    <td>@(sellrealname)(@(item.SellUserName))</td>
+                                    <td>@sellmobile</td>
+                                    <td>@tjrusername</td>
+                                    <td>@tjrmobile</td>
+                                    <td>
+                                        @{
+                                        if (!string.IsNullOrEmpty(item.PayImg))
+                                        {
+                                            <a href="@item.PayImg" class="entypo-picture " style="font-size:16px" target="_blank">
+                                                <i></i>
+                                            </a>
+                                        }
+                                    }
+                                </td>
                                 @*<td class="hidden-480">
-                                        @typeof(JN.Data.Enum.PurchaseStatus).GetEnumDesc(item.Status)
-                                    </td>*@
+                                    @typeof(JN.Data.Enum.PurchaseStatus).GetEnumDesc(item.Status)
+                                </td>*@
                                 <td>
                                     @if (item.Status == 1)
                                     {
@@ -306,74 +312,75 @@
                                     }
                                 </td>
                             </tr>
-                                    }
-                                    else
-                                    {
-                                        string buyrealname = "";
-                                        string buymobile = "";
-                                        string tjrusername = "";
-                                        string tjrmobile = "";
-                                        var buyUser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(item.UID);
-                                        if (buyUser != null)
-                                        {
-                                            buyrealname = buyUser.RealName;
-                                            buymobile = buyUser.Mobile;
-                                            tjrusername = buyUser.RefereeUser;
-                                            var tjruser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(buyUser.RefereeID);
-                                            if (tjruser != null)
-                                            {
-                                                tjrmobile = tjruser.Mobile;
-                                            }
                                         }
-                            <tr>
-                                <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                                <td>卖出</td>
-                                <td>
-                                    @String.Format("{0:F2}", item.BuyMoney)
-                                </td>
-                                <td>@(buyrealname)(@(item.UserName))</td>
-                                <td>@buymobile</td>
-                                <td>@tjrusername</td>
-                                <td>@tjrmobile</td>
-                                <td>
-                                    @{
-                                    if (!string.IsNullOrEmpty(item.PayImg))
-                                    {
-                                        <a href="@item.PayImg" class="entypo-picture " style="font-size:16px" target="_blank">
-                                            <i></i>
-                                        </a>
-                                    }
-                                }
-                            </td>
-                                @*<td class="hidden-480">
-                                        @typeof(JN.Data.Enum.PurchaseStatus).GetEnumDesc(item.Status)
-                                    </td>*@
-                                <td>
-                                    @if (item.Status == 2)
-                                    {
-                                        <a href="###" data-value="@item.ID" class="btn btn-primary btn-purple btn-red qrfk">
-                                            @T("确认")
-                                        </a>
-                                        <a href="###" data-value="@item.ID" class="btn btn-minier btn-primary jyts" style="background-color:#7c0b0b">
-                                            @T("投诉")
-                                        </a>
-                                    }
-                                    else if (item.Status == 1)
-                                    {
-                                        <span>收款中</span>
-                                    }
-                                    else if (item.Status == -2)
-                                    {
-                                        <span>系统审查中</span>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    }
+                                        else
+                                        {
+                                            string buyrealname = "";
+                                            string buymobile = "";
+                                            string tjrusername = "";
+                                            string tjrmobile = "";
+                                            var buyUser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(item.UID);
+                                            if (buyUser != null)
+                                            {
+                                                buyrealname = buyUser.RealName;
+                                                buymobile = buyUser.Mobile;
+                                                tjrusername = buyUser.RefereeUser;
+                                                var tjruser = MvcCore.Unity.Get<JN.Data.Service.IUserService>().Single(buyUser.RefereeID);
+                                                if (tjruser != null)
+                                                {
+                                                    tjrmobile = tjruser.Mobile;
+                                                }
+                                            }
+                                            <tr>
+                                                <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                                <td>卖出</td>
+                                                <td>
+                                                    @String.Format("{0:F2}", item.BuyMoney)
+                                                </td>
+                                                <td>@(buyrealname)(@(item.UserName))</td>
+                                                <td>@buymobile</td>
+                                                <td>@tjrusername</td>
+                                                <td>@tjrmobile</td>
+                                                <td>
+                                                    @{
+                                                        if (!string.IsNullOrEmpty(item.PayImg))
+                                                        {
+                                                            <a href="@item.PayImg" class="entypo-picture " style="font-size:16px" target="_blank">
+                                                                <i></i>
+                                                            </a>
+                                                        }
+                                                    }
+                                                </td>
+                                                @*<td class="hidden-480">
+                                                    @typeof(JN.Data.Enum.PurchaseStatus).GetEnumDesc(item.Status)
+                                                </td>*@
+                                                <td>
+                                                    @if (item.Status == 2)
+                                                    {
+                                                        <a href="###" data-value="@item.ID" class="btn btn-primary btn-purple btn-red qrfk">
+                                                            @T("确认")
+                                                        </a>
+                                                        <a href="###" data-value="@item.ID" class="btn btn-minier btn-primary jyts" style="background-color:#7c0b0b">
+                                                            @T("投诉")
+                                                        </a>
+                                                    }
+                                                    else if (item.Status == 1)
+                                                    {
+                                                        <span>收款中</span>
+                                                    }
+                                                    else if (item.Status == -2)
+                                                    {
+                                                        <span>系统审查中</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                                                }
+                                                            }
+                                                        }
                 }
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     <!--当前委托-->
     @{
         List<JN.Data.Extensions.USDOrders> orders = new List<JN.Data.Extensions.USDOrders>();
@@ -384,102 +391,107 @@
 
 
     }
-    <table class="bordered table table-striped table-bordered table-hover">
-        <caption class="blue">@T("当前委托")</caption>
-        <tr>
+    <div style="width:100%;overflow-x:auto;margin-bottom:3px">
+        <table class="bordered table table-striped table-bordered table-hover">
+            <caption class="blue">@T("当前委托")</caption>
+            <tr>
 
-            <th width="30%">@T("时间")</th>
-            <th width="15%">@T("类型")</th>
-            <th width="15%">@T("金额")</th>
-            <th></th>
-            <th width="20%">
-                @T("操作")
-            </th>
-        </tr>
-        <tbody>
-            @{
-                var lst2 = orders.OrderByDescending(x => x.CreateTime).ToList();
-                if (lst2.Count > 0)
-                {
-                    foreach (var item in lst2)
+                <th width="30%">@T("时间")</th>
+                <th width="15%">@T("类型")</th>
+                <th width="15%">@T("金额")</th>
+                <th></th>
+                <th width="20%">
+                    @T("操作")
+                </th>
+            </tr>
+            <tbody>
+                @{
+                    var lst2 = orders.OrderByDescending(x => x.CreateTime).ToList();
+                    if (lst2.Count > 0)
                     {
-
-                        <tr>
-                            <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                            <td>@item.OrderType</td>
-                            <td>
-                                @String.Format("{0:F2}", item.Money)
-                            </td>
-                            <td></td>
-                            <td class="hidden-480">
-                                @*@if (item.OrderType == "卖出")
-                                {
-                                    <a href="###" data-value="@item.ID" class="btn btn-primary btn-purple qxjy">
-                                        @T("撤消")
-                                    </a>
-                                }
-                                else
-                                {
-                                    <a href="###" data-value="@item.ID" class="btn btn-primary btn-purple delseek">
-                                        @T("撤消")
-                                    </a>
-                                }*@
-                            </td>
-                        </tr>
-
-                    }
-                }
-            }
-        </tbody>
-    </table>
-    <table class="bordered table table-striped table-bordered table-hover">
-        <caption class="blue">@T("我的交易记录")<div style="float:right; font-weight:normal;font-size:12px;"><a href="@Url.Action("HPurchase")" style="color:#ffffff">more</a></div></caption>
-        <tr>
-            <th width="30%">
-                <i class="icon-time bigger-110 hidden-480"></i>
-                @T("时间")
-            </th>
-            <th width="15%">@T("类型")</th>
-            <th width="15%">@T("金额")</th>
-            <th>@T("交易会员")</th>
-            <th></th>
-        </tr>
-        <tbody>
-            @{
-                var lst3 = MvcCore.Unity.Get<JN.Data.Service.IUSDPurchaseService>().List(x => (x.UID == Umodel.ID || x.SellUID == Umodel.ID) && x.Status == 3).OrderByDescending(x => x.ID).Take(5).ToList();
-                if (lst3.Count > 0)
-                {
-                    foreach (var item in lst3)
-                    {
-                        if (item.UID == Umodel.ID)
+                        foreach (var item in lst2)
                         {
+
                             <tr>
                                 <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                                <td>买入</td>
+                                <td>@item.OrderType</td>
                                 <td>
-                                    @String.Format("{0:F2}", item.BuyMoney)
+                                    @String.Format("{0:F2}", item.Money)
                                 </td>
-                                <td>@item.SellUserName</td>
                                 <td></td>
-                            </tr>
-                        }
-                        else
-                        {
-                            <tr>
-                                <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                                <td>卖出</td>
-                                <td>
-                                    @String.Format("{0:F2}", item.BuyMoney)
+                                <td class="hidden-480">
+                                    @*@if (item.OrderType == "卖出")
+                                    {
+                                        <a href="###" data-value="@item.ID" class="btn btn-primary btn-purple qxjy">
+                                            @T("撤消")
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="###" data-value="@item.ID" class="btn btn-primary btn-purple delseek">
+                                            @T("撤消")
+                                        </a>
+                                    }*@
                                 </td>
-                                <td>@item.UserName</td>
                             </tr>
+
                         }
                     }
                 }
-            }
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+    <div style="width:100%;overflow-x:auto;margin-bottom:3px">
+        <table class="bordered table table-striped table-bordered table-hover">
+            <caption class="blue">@T("我的交易记录")<div style="float:right; font-weight:normal;font-size:12px;"><a href="@Url.Action("HPurchase")" style="color:#ffffff">more</a></div></caption>
+            <tr>
+                <th width="30%">
+                    <i class="icon-time bigger-110 hidden-480"></i>
+                    @T("时间")
+                </th>
+                <th width="15%">@T("类型")</th>
+                <th width="15%">@T("金额")</th>
+                <th>@T("交易会员")</th>
+                <th></th>
+            </tr>
+            <tbody>
+                @{
+                    var lst3 = MvcCore.Unity.Get<JN.Data.Service.IUSDPurchaseService>().List(x => (x.UID == Umodel.ID || x.SellUID == Umodel.ID) && x.Status == 3).OrderByDescending(x => x.ID).Take(5).ToList();
+                    if (lst3.Count > 0)
+                    {
+                        foreach (var item in lst3)
+                        {
+                            if (item.UID == Umodel.ID)
+                            {
+                                <tr>
+                                    <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                    <td>买入</td>
+                                    <td>
+                                        @String.Format("{0:F2}", item.BuyMoney)
+                                    </td>
+                                    <td>@item.SellUserName</td>
+                                    <td></td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td class="hidden-480">@item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                    <td>卖出</td>
+                                    <td>
+                                        @String.Format("{0:F2}", item.BuyMoney)
+                                    </td>
+                                    <td>@item.UserName</td>
+                                </tr>
+                            }
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+        
+    </div>
 <script src="~/js/jquery.dataTables.min.js"></script>
 <script src="~/js/dataTables.bootstrap.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
