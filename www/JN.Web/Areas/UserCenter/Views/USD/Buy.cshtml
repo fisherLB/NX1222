@@ -14,9 +14,20 @@
     Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
 }
 <!-- page specific plugin styles -->
+<style>
+    .form-horizontal {
+        background: #fff;
+        padding: 15px;
+    }
+
+        .form-horizontal .control-label {
+            min-width: 0px !important;
+            padding-right: 0px !important;
+        }
+</style>
 <link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.custom.min.css" />
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12" style="padding:15px">
             <!-- PAGE CONTENT BEGINS -->
 
 @using (Ajax.BeginForm("Buy", new { }, new AjaxOptions() { HttpMethod = "Post", OnSuccess = "afterPost" }, new { id = "saveForm", @class = "form-horizontal" }))
@@ -31,9 +42,9 @@
                         购买现金币后请到“我买入的交易”中进行付款，付款完成后请等待卖方审核，审核后现金币才进行结算。
                     </div>*@
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("当前激活币余额"):</label>
+                        <label class="control-label col-xs-4 col-sm-3 no-padding-right" for="adminname">@T("当前激活币余额"):</label>
 
-                        <div class="col-xs-12 col-sm-3">
+                        <div class="col-xs-8 col-sm-3" style="padding-left:0px">
                             <div class="clearfix">
                                 <input type="text" name="mainwallet" class="form-control" value="@((Umodel.Wallet2004??0).ToString("F2"))" readonly="readonly" />
                                 <input type="hidden" name="pid" value="@Model.ID" />
@@ -42,8 +53,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="adminname">@T("卖家帐号"):</label>
-                        <div class="col-xs-12 col-sm-3">
+                        <label class="control-label col-xs-4 col-sm-3 no-padding-right" for="adminname">@T("卖家帐号"):</label>
+                        <div class="col-xs-8 col-sm-3" style="padding-left:0px">
                             <div class="clearfix">
                                 <input type="text" name="selluser" class="form-control" value="@JN.Services.Tool.StringHelp.UserNameHid(Model.UserName)" readonly="readonly" />
                             </div>
@@ -61,8 +72,8 @@
                     </div>*@
 
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("购买激活币数量"):</label>
-                        <div class="col-xs-12 col-sm-5">
+                        <label class="control-label col-xs-4 col-sm-3 no-padding-right" for="phone">@T("购买激活币数量"):</label>
+                        <div class="col-xs-8 col-sm-5" style="padding-left:0px">
                             <div class="input-group">
                                <input type="text" name="buynumber" class="form-control" readonly="readonly"  value="@(Model.PutAmount)" />
                               
@@ -70,8 +81,8 @@
                         </div>
                     </div>
                                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">@T("您的联系方式"):</label>
-                        <div class="col-xs-12 col-sm-3">
+                        <label class="control-label col-xs-4 col-sm-3 no-padding-right" for="phone">@T("您的联系方式"):</label>
+                        <div class="col-xs-8 col-sm-3" style="padding-left:0px">
                             <div class="clearfix">
                                 <input type="text" name="phone" value="@Umodel.Mobile" class="form-control" readonly />
                             </div>
@@ -79,8 +90,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="actualdrawmoney">@T("二级密码"):</label>
-                        <div class="col-xs-12 col-sm-3">
+                        <label class="control-label col-xs-4 col-sm-3 no-padding-right" for="actualdrawmoney">@T("二级密码"):</label>
+                        <div class="col-xs-8 col-sm-3" style="padding-left:0px">
                             <div class="clearfix">
                                 <input type="password" name="tradeinPassword" class="form-control" />
                             </div>
@@ -89,8 +100,8 @@
 
                     <div class="hr hr-dotted"></div>
 
-                    <div class="clearfix form-actions">
-                        <div class="col-md-offset-3 col-md-9">
+                    <div class="clearfix">
+                        <div class="col-md-offset-3 col-md-9" style="text-align: center;">
                             <button class="btn btn-info" type="submit">
                                 <i class="icon-ok bigger-110"></i>
                                 @T("买入激活币")
