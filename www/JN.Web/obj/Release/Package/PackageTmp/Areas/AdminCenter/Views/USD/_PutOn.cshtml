@@ -1,0 +1,129 @@
+﻿<div style="padding:20px 20px">
+    <table id="selllist" class="table table-striped table-bordered table-hover" width="100%">
+        <thead>
+            <tr>
+                <th>
+                        <input type="checkbox" class="ace" />
+                </th>
+                <th>卖出单号</th>
+                <th>卖出会员</th>
+                <th>卖出金额</th>
+                <th>交易方式</th>
+                <th>卖出时间</th>
+                @*<th>操作</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int seekid = Request["seekid"].ToInt();
+                if (seekid <= 0)
+                {
+                    Response.Write("错误的参数");
+                    Response.End();
+                }
+
+                var seek = MvcCore.Unity.Get<JN.Data.Service.IUSDSeekService>().Single(x => x.ID == seekid);
+                if (seek == null)
+                {
+                    Response.Write("错误的参数");
+                    Response.End();
+                }
+
+                //decimal seekmoney = seek.SeekMoney;
+                var putonLst = MvcCore.Unity.Get<JN.Data.Service.IUSDPutOnService>().List(x => x.Status == 1).OrderByDescending(x => (x.IsTop ?? false)).ThenBy(x => x.ID).Take(300).ToList();
+                if (putonLst.Count > 0)
+                {
+                    foreach (var puton in putonLst)
+                    {
+
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="ace" name="ckid" data-value="@(puton.PutMoney)" value="@puton.ID" />
+                            </td>
+                            <td>@puton.PutonNumber</td>
+                            <td>
+                                @puton.UserName
+                            </td>
+                            <td>
+                                @puton.PutMoney
+                            </td>
+                            <td>
+                                @puton.PayType
+                            </td>
+                            <td>
+                                @puton.CreateTime.ToString("yyyy-MM-dd")
+                            </td>
+                            @*<td>
+                                <a href="@Url.Action("EPMatch")?pID=@puton.ID&sID=@seekid" class="btn btn-primary btn-xs">
+                                    指定购买
+                                </a>
+                            </td>*@
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+    <div class="pull-left checkboxs_actions ">
+
+        可匹配金额：@(seek.SeekMoney - (seek.HaveDeal ?? 0))，已选择金额：<strong id="totalamount" style="font-size:18px; color:#f00">$0</strong>
+        <button id="multimatch" class="btn btn-primary">指定购买</button>
+        <br /><br />
+    </div>
+</div>
+
+<script src="~/js/jquery.dataTables.min.js"></script>
+<script>
+    jQuery(function ($) {
+        var tblist = $('#selllist').DataTable({ "ordering": false, "searching": true, "info": false, "lengthChange": false, "language": { "url": "/datatable.txt" } });
+
+        $('table th input:checkbox').on('click', function () {
+            var that = this;
+            var samount = 0;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+            .each(function () {
+                this.checked = that.checked;
+                if (this.checked) samount += parseFloat(this.getAttribute("data-value"));
+                $(this).closest('tr').toggleClass('selected');
+            });
+            $("#totalamount").html("$" + samount);
+        });
+
+        $('table td input:checkbox').on('click', function () {
+            var samount = 0;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+            .each(function () {
+                if (this.checked) samount += parseFloat(this.getAttribute("data-value"));
+                $(this).closest('tr').toggleClass('selected');
+            });
+            $("#totalamount").html("$" + samount);
+        });
+    });
+
+    $('#multimatch').on('click', function (e) {
+        var ids = "";
+        $("input[name='ckid']").each(function () {
+            if (this.checked == true) {
+                ids += "," + $(this).val();
+            }
+        });
+
+        if (parseInt($("#totalamount").html().replace("$","")) > (@(seek.SeekMoney - (seek.HaveDeal ?? 0))))
+        {
+            alert("匹配金额已超出可购买金额");
+        }
+        else
+        {
+            bootbox.confirm('是否要指定购买所选定的卖出订单?', function (result) {
+                if (result) {
+                    $.post("@(Url.Action("MultiEPMatch"))", { ids: ids , seekid: @(seekid) }, function (data) {
+                        if (data == "ok")
+                            location.reload();
+                        else
+                            alert(data);
+                    });
+                }
+            });
+        }
+    });
+</script>

@@ -30,6 +30,15 @@
     <link rel="stylesheet" href="/theme/mmm/css/bootstrap.css">
     <link rel="stylesheet" href="/theme/mmm/css/toastr.min.css">
     <link rel="stylesheet" href="/theme/mmm/css/default.css">
+
+    <link rel="stylesheet" href="/theme/neon/assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/font-icons/entypo/css/entypo.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-forms.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-core.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/neon-theme.css">
+    <link rel="stylesheet" href="/theme/neon/assets/css/custom.css">
+
     <!-- App styles -->
     <script src="/Scripts/jquery-1.10.2.min.js"></script>
     <script src="/theme/mmm/js/jquery-ui.min.js"></script>
@@ -115,7 +124,7 @@
             }*/
     </style>
 </head>
-<body id="body" onload="init()">
+<body id="body" class="page-body loaded" style="height:100%;overflow:auto">
 
     <div id="header">
         <div id="wrapper-1">
@@ -240,12 +249,14 @@
                                 </ul>
                             </li>*@
                         @*<li class=""><a href="/usercenter/Finance/LuckDraw">@T("幸运抽奖")</a></li>*@
-                        @if (Umodel.IsProTeam == true)
+                        @*@if (Umodel.IsProTeam == true)
                         {
                             <li class=""><a href="/usercenter/Finance/GrabSingle"><i class="glyphicon glyphicon-shopping-cart margin-r8"></i>@T("抢单区")</a></li>
-                        }
+                        }*@
                         <li class=""><a href="/usercenter/mail/write" class="glyphicons user"><i class="glyphicon glyphicon-envelope margin-r8"></i>@T("邮件中心")</a></li>
-
+                        <li class="">
+                            <a href="/usercenter/usd/ttc" class="glyphicons home"><i class="glyphicon glyphicon-bell margin-r8"></i>@T("交易中心")</a>
+                        </li>
                         <li class="">
                             <a href="/usercenter/notice" class="glyphicons home"><i class="glyphicon glyphicon-bell margin-r8"></i>@T("最新公告")</a>
                         </li>
@@ -281,7 +292,7 @@
         </aside>
     </div>
 
-    <div id="wrapper">
+    <div id="wrapper" class="page-container">
         <div class="col-md-12">
             <div class="row mm15">
                 <div class="col-md-9">

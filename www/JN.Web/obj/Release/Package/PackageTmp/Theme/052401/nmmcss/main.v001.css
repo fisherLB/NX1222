@@ -113,7 +113,7 @@ ul.maintenanceList{
 	
 
 /* Button ============== */
-.btn{border-radius:5px; text-shadow: none;}
+.btn{border-radius:5px; text-shadow: none;min-width: 50px;}
 .btn-green{
 	background: #fff;
 	color: #35c319;

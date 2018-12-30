@@ -332,6 +332,38 @@
                                                 </td>
                                             </tr>
 
+                                            <tr>
+                                                <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu4" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick=" showsubmenu(4)" onmouseout=" this.className='menu_title' ;" style="cursor:hand">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="left_subbtn">
+                                                        <tr>
+                                                            <td width="18%">&nbsp;</td>
+                                                            <td width="82%" class="STYLE1">交易中心管理</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="submenu5">
+                                                    <div class="sec_menu">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tr>
+                                                                <td class="td_bord">
+                                                                    <ul class="STYLE3  @(curl.Contains("/usd/") ? "in" : "")" id="menu_market">
+                                                                        <li class="@(curl.Contains("/usd/puton") ? "active" : "")"><a href="@Url.Action("puton", "usd")"><span>出售中的交易</span></a></li>
+                                                                        <li class="@(curl.Contains("/puton?status=-2") ? "active" : "")"><a href="@Url.Action("PutOn", "USD", new { status = -2})"><span>投诉纠纷的交易</span></a></li>
+                                                                        <li class="@(curl.Contains("/purchase") ? "active" : "")"><a href="@Url.Action("Purchase", "USD")"><span>已卖出交易明细</span></a></li>
+                                                                        <li class="@(curl.Contains("/seek") ? "active" : "")"><a href="@Url.Action("Seek", "USD")"><span>求购明细</span></a></li>
+                                                                      
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                            <tr></tr>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                         
 
                                             <tr>
                                                 <td height="23" background="/Content/admingreen/images/left_sub.gif" id="imgmenu6" class="menu_title" onmouseover="this.className = 'menu_title2';" onclick="    showsubmenu(6)" onmouseout="    this.className = 'menu_title';" style="cursor:hand">

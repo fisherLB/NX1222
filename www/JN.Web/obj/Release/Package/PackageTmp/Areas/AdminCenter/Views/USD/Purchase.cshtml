@@ -1,6 +1,6 @@
 ﻿@using PagedList.Mvc;
 @using PagedList;
-@model PagedList.PagedList<JN.Data.USDSeek>
+@model PagedList.PagedList<JN.Data.USDPurchase>
 @{
     string action = ViewContext.RouteData.Values["action"].ToString().ToLower();
     Layout = "~/Areas/AdminCenter/Views/Shared/_Layout.cshtml";
@@ -16,38 +16,6 @@
     <div class="separator bottom"></div>
     <!-- // Breadcrumb END -->
     <div class="innerLR">
-        <ul class="nav nav-tabs" id="myTab">
-            <li class="@(Request["status"].ToInt() == 0 ? "active" : "")">
-                <a href="@(Url.Action("Seek"))">
-                    所有求购单
-                </a>
-            </li>
-            <li class="@(Request["status"].ToInt() == 1 ? "active" : "")">
-                <a href="?status=1">
-                   未交易的求购单
-                </a>
-            </li>
-            <li class="@(Request["status"].ToInt() == 2 ? "active" : "")">
-                <a href="?status=2">
-                    交易中的求购单
-                </a>
-            </li>
-            <li class="@(Request["status"].ToInt() == 3 ? "active" : "")">
-                <a href="?status=3">
-                    已完成的求购单
-                </a>
-            </li>
-            <li class="@(Request["status"].ToInt() == -1 ? "active" : "")">
-                <a href="?status=-1">
-                    已取消的求购单
-                </a>
-            </li>
-            <li class="@(Request["status"].ToInt() == -2 ? "active" : "")">
-                <a href="?status=-2">
-                    被投诉的求购单
-                </a>
-            </li>
-        </ul>
         <div class="filter-bar margin-bottom-none">
 
             <form method="get">
@@ -56,6 +24,8 @@
                 <div>
                     <select name="datefiled" style="width: 80px;">
                         <option value="CreateTime" @(Request["datefiled"] == "CreateTime" ? "selected" : "")>创建时间</option>
+                        <option value="PayTime" @(Request["datefiled"] == "PayTime" ? "selected" : "")>付款时间</option>
+                        <option value="ReserveDate" @(Request["datefiled"] == "ReserveDate" ? "selected" : "")>确认时间</option>
                     </select>
                 </div>
                 <div>
@@ -99,7 +69,7 @@
                 </div>
                 <!-- // Filter END -->
                 <!-- Filter -->
-                @*<div style="margin-left:10px">
+                <div style="margin-left:10px">
                     <select name="status" style="width: 80px;">
                         <option value="" @(string.IsNullOrEmpty(Request["status"]) ? "selected" : "")>所有订单</option>
                         <option value="1" @(Request["status"] == "1" ? "selected" : "")>挂单中</option>
@@ -108,10 +78,11 @@
                         <option value="-1" @(Request["status"] == "-1" ? "selected" : "")>已取消</option>
                         <option value="-2" @(Request["status"] == "-2" ? "selected" : "")>投诉纠纷</option>
                     </select>
-                </div>*@
+                </div>
                 <div style="margin-left:10px">
-                    <select name="keyfiled" style="width: 80px;">
-                        <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>会员编号</option>
+                    <select name="keyfiled" style="width: 110px;">
+                        <option value="UserName" @(Request["keyfiled"] == "UserName" ? "selected" : "")>买家会员编号</option>
+                        <option value="SellUserName" @(Request["keyfiled"] == "SellUserName" ? "selected" : "")>卖家会员编号</option>                
                     </select>
                 </div>
                 <div>
@@ -138,21 +109,24 @@
         <table id="sample-table-1" class="table table-striped table-bordered table-hover no-margin-bottom">
             <thead>
                 <tr>
-                    <th class="center">
-                        序号
+                    <th class="center">序号
                     </th>
-                    <th>订单编号</th>
+                    <th>交易单号</th>
                     <th>买家名称</th>
-                    @*<th>计息天数</th>*@
-                    <th>求购数量</th>
-                    <th>剩余数量</th>
-                    <th>已成交数量</th>
-                    @*<th>获得利息</th>*@
-                    <th>付款方式</th>
+                    <th>买家手机号码</th>
+                    <th>买家商务中心</th>
+                    <th>购买金额</th>
+                    <th>卖家名称</th>
+                    <th>卖家手机号码</th>
+                    @*<th>银行名称</th>
+                        <th>银行帐号</th>
+                        <th>银行户名</th>*@
+                    <th>付款时间</th>
+                    <th>确认时间</th>
                     <th>状态</th>
                     <th>
                         <i class="icon-time bigger-110 hidden-480"></i>
-                        发布时间
+                        提交时间
                     </th>
                     <th></th>
                 </tr>
@@ -163,136 +137,98 @@
                     decimal totalmoney = 0;
                     for (int i = 0; i < Model.Count; i++)
                     {
-                        totalmoney += Model[i].SeekMoney;
+                        var buyUser = MvcCore.Unity.Get<JN.Data.Service.UserService>().Single(Model[i].ID);
+                        totalmoney += Model[i].BuyMoney;
                         <tr class="@(Model[i].Status == -1 ? "cancel" : "")">
                             <td class="center text-muted">
                                 @(i + 1)
                             </td>
-                            <td>@Model[i].SeekNumber</td>
+                            <td>@Model[i].OrderNumber</td>
                             <td>
                                 @Model[i].UserName
                             </td>
-                            @*<td>
-                                @if (Model[i].Status == (int)JN.Data.Enum.USDStatus.Sales)
-                                {
-                                    @JN.Services.Tool.DateTimeDiff.DateDiff(Model[i].CreateTime, DateTime.Now, "d")
-                                }
-                                else
-                                {
-                                    <span>--</span>
-                                }
-                            </td>*@
                             <td>
-                                @Model[i].SeekAmount.ToString("F0")
+                                @{
+                                    if (buyUser != null)
+                                    {
+                                        <span>@buyUser.Mobile</span>
+                    }
+                }
                             </td>
-                            <td>@(Model[i].SeekAmount - (Model[i].HaveDeal ?? 0))</td>
+                            <td>@{
+                           
+                                    <span>@Model[i].AgentUser</span>
+                            }</td>
                             <td>
-                     
-                                <table class="table table-striped table-bordered no-margin-bottom" style="margin-bottom:5px">
-                                    @{
-                                        int _seekid = Model[i].ID;
-                                        var mchs = MvcCore.Unity.Get<JN.Data.Service.IUSDPurchaseService>().List(x => x.SeekID == _seekid);
-                                        decimal _matchmoney = 0;
-                                        foreach (var item in mchs)
-                                        {
-                                            <tr class="@(item.Status == -1 ? "cancel" : "")"><td style="padding: 2px 2px; color: #999">@item.SellUserName</td><td style="padding: 2px 2px; color: #999; ">@item.BuyMoney.ToString("F2")</td><td style="padding: 2px 2px; color: #999; ">@item.CreateTime.ToString("MM-dd HH:mm:ss")</td><td style="padding: 2px 2px; color: #999; ">@typeof(JN.Data.Enum.USDStatus).GetEnumDesc(item.Status)</td><td>
-                                                @if (item.Status == 2 || item.Status == -2)
-                                            {
-                                                <a href="@(Url.Action("doFinishBuy"))/@item.ID" class="btn btn-mini btn-success">
-                                                    确认
-                                                </a>
-                                            }
-                                            @if (item.Status == 1 || item.Status == -2)
-                                            {
-                                                <a href="@(Url.Action("CancelPurchase"))/@item.ID" class="btn btn-mini btn-primary">
-                                                    取消
-                                                </a>
-                                            }
-                                                </td></tr>
-
-                                                if (item.Status != -1)
-                                                {
-                                                    _matchmoney += item.BuyMoney;
-                                                }
-                                            }
-                                        }
-                                </table>
-                                @if (_matchmoney > 0)
-                                {
-                                    if (_matchmoney > Model[i].HaveDeal || _matchmoney > Model[i].SeekMoney)
+                                @Model[i].BuyMoney.ToString("F0")
+                            </td>
+                            <td>@Model[i].SellUserName</td>
+                            <td>
+                                @{
+                                    var sellUser = MvcCore.Unity.Get<JN.Data.Service.UserService>().Single(Model[i].SellUID);
+                                    if (sellUser != null)
                                     {
-                                        <span class="label label-primary">订单金额异常，已匹配：@(_matchmoney)/@( Model[i].HaveDeal)</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="label label-success">已匹配：@(_matchmoney)</span>
+                                        <span>@sellUser.Mobile</span>
                                     }
                                 }
                             </td>
                             @*<td>
-                                @((Model[i].ReserveDecamal ?? 0).ToString("F0"))
-                            </td>*@
-                            <td>
-                                @Model[i].PayType
-                            </td>
+                                    @Model[i].BankName
+                                </td>
+                                <td>
+                                    @Model[i].BankCard
+                                </td>
+                                <td>
+                                    @Model[i].BankUser
+                                </td>*@
+                            <td>@Model[i].PayTime</td>
+                            <td>@Model[i].</td>
                             <td class="hidden-480">
-                                @(typeof(JN.Data.Enum.USDStatus).GetEnumDesc(Model[i].Status))
+                                @typeof(JN.Data.Enum.PurchaseStatus).GetEnumDesc(Model[i].Status)
                             </td>
                             <td class="hidden-480">@Model[i].CreateTime</td>
-                            <td>
-                                @if (Model[i].Status <= 2 && Model[i].Status >= 0)
-                                {
-                                    @*<a href="@(Url.Action("CancelSeek"))/@Model[i].ID" class="btn btn-minier">
-                                        取消交易
-                                    </a>*@
-                                    @*if (Model[i].Status == 1 || Model[i].Status == 2)
-                                    {
-                                        <a href="javascript:void(0);" onclick="javascript: winopen('指定购买', '@(Url.Action("_PutOn", new { seekid = Model[i].ID}))', 800);" class="btn btn-minier">
-                                            指定购买
-                                        </a>
-                                    }*@
-                                }
-
-
-                            </td>
+                            <td></td>
                         </tr>
-                    }
-                    @*<tr>
-                        <td class="center text-muted"></td>
-                        <td></td>
-                        <td align="right">
-                            本页小计：
-                        </td>
+                                    }
+                                    <tr>
+                                        <td class="center text-muted"></td>
+                                        <td></td>
+                                        <td align="right">
+                                            本页小计：
+                                        </td>
+                                        <td>
+                                            @totalmoney
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="hidden-480"></td>
+                                    <td class="hidden-480"></td>
+                                    <td class="hidden-480"></td>
+                                    <td></td>
 
-                        <td>
-                            @totalmoney
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="hidden-480"></td>
-                        <td class="hidden-480"></td>
-                    </tr>*@
-                }
+                                </tr>
+   
+                                    }
             </tbody>
-            @*<tfoot>
+            <tfoot>
                 <tr>
                     <td class="center text-muted"></td>
                     <td></td>
                     <td align="right">
                         总计：
                     </td>
-
                     <td>
                         @ViewBag.TotalMoney
                     </td>
                     <td></td>
                     <td></td>
+                    <td class="hidden-480"></td>
+                    <td class="hidden-480"></td>
+                    <td class="hidden-480"></td>
                     <td></td>
-                    <td class="hidden-480"></td>
-                    <td class="hidden-480"></td>
+
                 </tr>
-            </tfoot>*@
+            </tfoot>
         </table>
         <div class="separator top form-inline small">
             <!-- Pagination -->
@@ -306,7 +242,7 @@
         <!--E 翻页页码  -->
 
     </div><!-- /row -->
-    <!-- PAGE CONTENT ENDS -->
+<!-- PAGE CONTENT ENDS -->
 </div><!-- /.page-content -->
 @section scripts{
 }

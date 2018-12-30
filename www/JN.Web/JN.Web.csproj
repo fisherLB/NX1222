@@ -3068,6 +3068,11 @@
     <Content Include="Areas\UserCenter\Views\USD\Seek.cshtml" />
     <Content Include="Areas\UserCenter\Views\USD\TTC.cshtml" />
     <Content Include="Areas\UserCenter\Views\USD\TTC2.cshtml" />
+    <Content Include="Areas\AdminCenter\Views\USD\Exchange.cshtml" />
+    <Content Include="Areas\AdminCenter\Views\USD\Purchase.cshtml" />
+    <Content Include="Areas\AdminCenter\Views\USD\PutOn.cshtml" />
+    <Content Include="Areas\AdminCenter\Views\USD\Seek.cshtml" />
+    <Content Include="Areas\AdminCenter\Views\USD\_PutOn.cshtml" />
     <None Include="Properties\PublishProfiles\LJ160227.pubxml" />
     <None Include="Properties\PublishProfiles\Q160214.pubxml" />
     <None Include="Properties\PublishProfiles\wl16071701.pubxml" />
@@ -4094,7 +4099,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\AdminCenter\Views\USD\" />
     <Folder Include="common\theme\scripts\plugins\forms\plupload\examples\uploads\" />
     <Folder Include="common\theme\scripts\plugins\other\excanvas\examples\.svn\props\" />
     <Folder Include="common\theme\scripts\plugins\other\excanvas\examples\.svn\tmp\prop-base\" />

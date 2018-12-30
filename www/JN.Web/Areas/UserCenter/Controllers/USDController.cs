@@ -75,6 +75,7 @@ namespace JN.Web.Areas.UserCenter.Controllers
             try
             {
                 string buynumber = form["buynumber"];
+                string money = form["money"];
                 string phone = form["phone"];
                 string pid = form["pid"];
                 if (buynumber.ToDecimal() <= 0) throw new CustomException("交易数量不正确");
@@ -203,8 +204,8 @@ namespace JN.Web.Areas.UserCenter.Controllers
                     ViewBag.Title = "挂单卖出";
                     ViewBag.Path = "交易市场";
                     ViewBag.SeekID = seekid;
-                    ViewBag.SeekAmount = seek.SeekAmount;
-                    ViewBag.SeekMoney = (seek.SeekMoney - (seek.HaveDeal ?? 0));
+                    ViewBag.SeekAmount = (seek.SeekAmount - (seek.HaveDeal ?? 0));
+                    ViewBag.SeekMoney = seek.SeekMoney;
                     ViewBag.SeekUnitPrice = seek.SeekUnitPrice;
                     ViewBag.MoneyType = seek.MoneyType;
                     ViewBag.PayType = seek.PayType;
@@ -357,7 +358,7 @@ namespace JN.Web.Areas.UserCenter.Controllers
             try
             {
                 string putoutnumber = form["putoutnumber"];  //数量
-                string seekmoney = form["seekmoney"]; 
+                string seekmoney = form["rmb2"]; 
                 string moneytype = form["moneytype"];
                 string paytype = form["paytype"];
                 //string phone = form["phone"];
@@ -689,81 +690,25 @@ namespace JN.Web.Areas.UserCenter.Controllers
                     if (USDPutOnService.Single(model.PutOnID).UID == Umodel.ID)
                     {
                         decimal ChangeMoney = model.BuyAmount;
-                        string description = "EP交易入帐,来自“" + model.SellUserName + "”的确认收款";
+                        string description = "激活币交易入帐,来自“" + model.SellUserName + "”的确认收款";
                         var onUser = UserService.Single(model.UID);
                         if (onUser != null)
                         {
 
-                            Wallets.changeWallet(onUser.ID, model.BuyAmount, 2002, description);
+                            Wallets.changeWallet(onUser.ID, model.BuyAmount, 2004, description);
                             if ((model.ReserveDecamal ?? 0) > 0) Wallets.changeWallet(onUser.ID, (model.ReserveDecamal ?? 0), 2001, "求购等候利息");
 
                             var newSeek = USDSeekService.Single(model.SeekID ?? 0);
                             if (newSeek != null)
                             {
-                                if (newSeek.SeekMoney == (newSeek.HaveDeal ?? 0))
+                                if (newSeek.SeekAmount == (newSeek.HaveDeal ?? 0))
                                 {
                                     newSeek.Status = (int)Data.Enum.USDStatus.Deal;
                                     USDSeekService.Update(newSeek);
                                 }
                             }
 
-                            //非首次交易时
-                            if (USDPurchaseService.List(x => x.UID == onUser.ID && x.Status == (int)Data.Enum.USDStatus.Deal).Count() > 0)
-                            {
-                                //用户升级
-                                //Users.UpdateLevel(onUser.ID);
-
-                                //更新整线会员的对碰余量（双轨时）
-                                decimal addmoney = model.BuyAmount;
-                                if (!string.IsNullOrEmpty(onUser.ParentPath))
-                                {
-                                    string[] ids_dp = onUser.ParentPath.Split(',');
-                                    /*
-                                     * TODO:这里的 List() 函数可以换成 ListWithTracking 函数，在 foreach 的时候就不用再次去 Single 出来了，可以直接用循环的子项来操作与保存
-                                     * 
-                                     * var lst_DPUser = MvcCore.Unity.Get<IUserService>().ListWithTracking(x => ids_dp.Contains(x.ID.ToString())).OrderBy(x => x.Depth).ThenBy(x => x.ChildPlace).ToList();
-                                     * 
-                                     */
-
-                                    var lst_DPUser = MvcCore.Unity.Get<IUserService>().List(x => ids_dp.Contains(x.ID.ToString())).OrderBy(x => x.Depth).ThenBy(x => x.ChildPlace).ToList();
-                                    foreach (var dpUser in lst_DPUser)
-                                    {
-                                        Data.User updateUser = MvcCore.Unity.Get<IUserService>().Single(dpUser.ID);
-                                        if (onUser.Depth - dpUser.Depth == 1)
-                                        {
-                                            if (onUser.ChildPlace == 1)
-                                            {
-                                                updateUser.LeftDpMargin = (updateUser.LeftDpMargin ?? 0) + addmoney;
-                                                updateUser.LeftAchievement = (updateUser.LeftAchievement ?? 0) + addmoney;
-                                            }
-                                            else
-                                            {
-                                                updateUser.RightDpMargin = (updateUser.RightDpMargin ?? 0) + addmoney;
-                                                updateUser.RightAchievement = (updateUser.RightAchievement ?? 0) + addmoney;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            //左区安置点
-                                            var leftchild = MvcCore.Unity.Get<IUserService>().Single(x => x.ParentID == dpUser.ID && x.ChildPlace == 1);
-                                            //如果出现在左区安置点
-                                            if (leftchild != null && (onUser.ParentPath + ",").Contains("," + leftchild.ID + ","))
-                                            {
-                                                updateUser.LeftDpMargin = (updateUser.LeftDpMargin ?? 0) + addmoney;
-                                                updateUser.LeftAchievement = (updateUser.LeftAchievement ?? 0) + addmoney;
-                                            }
-                                            else
-                                            {
-                                                updateUser.RightDpMargin = (updateUser.RightDpMargin ?? 0) + addmoney;
-                                                updateUser.RightAchievement = (updateUser.RightAchievement ?? 0) + addmoney;
-                                            }
-                                        }
-                                        MvcCore.Unity.Get<IUserService>().Update(updateUser);
-                                    }
-                                    MvcCore.Unity.Get<ISysDBTool>().Commit();
-                                }
-                                //Bonus.Bonus1104(onUser);
-                            }
+                           
 
                             model.Status = (int)Data.Enum.USDStatus.Deal;
                             model.ReserveDate = DateTime.Now;
