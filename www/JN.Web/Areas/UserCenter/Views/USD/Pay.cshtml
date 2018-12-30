@@ -12,7 +12,12 @@
     Layout = "~/Areas/UserCenter/Views/Shared/_Layout" + JN.Services.Tool.ConfigHelper.GetConfigString("Theme") + ".cshtml";
 }
 <!-- page specific plugin styles -->
-
+<style>
+    .form-horizontal {
+        background: #fff;
+        padding: 15px;
+    }
+</style>
     <div class="row">
         <div class="col-xs-12">
             <!-- PAGE CONTENT BEGINS -->

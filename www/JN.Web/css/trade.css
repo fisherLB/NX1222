@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 
@@ -179,6 +179,7 @@ table {
 	line-height:38px;
 	font-size:14px;
 	font-weight:bold;
+    padding:0px
 }
 
 .bordered tr:hover {
